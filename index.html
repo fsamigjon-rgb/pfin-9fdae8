@@ -68,6 +68,8 @@ svg.curve{width:100%;height:120px;display:block}
 .trbusy{position:fixed;bottom:74px;left:50%;transform:translateX(-50%);background:var(--acc);color:#fff;padding:6px 14px;border-radius:16px;font-size:12px;z-index:20;display:none}
 .art img{width:100%;max-height:260px;object-fit:cover;border-radius:14px;display:block;margin:12px 0}
 .art h1{font-size:23px;line-height:1.25;margin:8px 0}.art .sum{font-size:16px;line-height:1.55;margin:12px 0}
+.tvbox{border-radius:14px;overflow:hidden;border:1px solid var(--line);margin:10px 0;background:var(--card)}
+.mk{cursor:pointer}
 .mstate{padding:8px 16px 0;font-size:13px;font-weight:700}.mstate span{color:var(--mut);font-weight:400}
 .mk{flex:0 0 auto;min-width:118px;padding:6px 12px 6px 0;margin-right:4px;border-right:1px solid var(--line)}
 .mk .n{color:var(--acc2);font-weight:700;font-size:13px;white-space:nowrap}.mk .v{font-size:14px;font-weight:600;margin-top:2px;white-space:nowrap}
@@ -131,9 +133,10 @@ function mstate(){if(!D)return;const ic={open:"🟢",pre:"🌅",post:"🌙",clos
 function strip(){
   const fmt=v=>v==null?"—":v.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:v<10?4:2});
   const src=(D.markets&&D.markets.length)?D.markets:(D.index||[]).map(x=>({n:x.t,p:x.p,c:x.c}));
-  const it=src.map(x=>`<div class="mk"><div class="n">${esc(x.n)}</div><div class="v">${fmt(x.p)} <span class="${cls(x.c)}">${pct(x.c)}</span></div></div>`);
+  const it=src.map(x=>`<div class="mk" data-mk="${esc(x.s||x.n)}" data-mn="${esc(x.n)}"><div class="n">${esc(x.n)}</div><div class="v">${fmt(x.p)} <span class="${cls(x.c)}">${pct(x.c)}</span></div></div>`);
   if(D.fear)it.push(`<div class="mk"><div class="n">😨 Qo'rquv indeksi</div><div class="v">${Math.round(D.fear.score)}/100 <span class="mut">${esc(D.fear.label)}</span></div></div>`);
   $("#strip").innerHTML=it.join("");
+  document.querySelectorAll("[data-mk]").forEach(e=>e.onclick=()=>openSymbol(TVMAP[e.dataset.mk]||e.dataset.mk,e.dataset.mn,true));
 }
 function sigCard(s){
   const p=s.price||s.entry,lo=s.stop,hi=s.target,pos=Math.max(0,Math.min(100,(p-lo)/(hi-lo)*100));
@@ -148,8 +151,11 @@ function render(){
   if(!D){load();return}
   document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",b.dataset.tab===TAB));
   const m=$("#main");let h="";
-  if(Q){const q=Q.toUpperCase();const r=(D.quotes||[]).filter(x=>x.t.startsWith(q)).slice(0,30);
-    h+=`<h2>Qidiruv: ${esc(q)}</h2>`+(r.length?quoteTable(r):`<div class="empty">Topilmadi. Botga tikerni yozib to'liq tahlil oling.</div>`);m.innerHTML=h;bind();return}
+  if(Q){const q=Q.toUpperCase().replace(/^\$/,"");const r=(D.quotes||[]).filter(x=>x.t.startsWith(q)).slice(0,30);
+    h+=`<h2>Qidiruv: ${esc(q)}</h2>`;
+    if(/^[A-Z][A-Z0-9.\-]{0,9}(:[A-Z0-9.!\-]+)?$/.test(q))h+=`<div class="card sig" id="opensym"><div class="row"><div><div class="tk notr">${esc(q)}</div><div class="mut" style="font-size:12px">📈 Grafik, narx va texnik ko'rsatkichlar</div></div><div style="font-size:22px">›</div></div></div>`;
+    if(r.length)h+=`<h2 style="font-size:14px">Bot skaneridagi aksiyalar</h2>`+quoteTable(r);
+    m.innerHTML=h;bind();const o=$("#opensym");if(o)o.onclick=()=>openDetail(q);return}
   if(TAB==="sig"){
     const all=D.signals||[];const L=SF==="open"?all.filter(s=>s.status==="open"):all.filter(s=>s.status!=="open");
     h+=`<h2>Bot signallari</h2><div class="seg"><button data-sf="open" class="${SF==="open"?"on":""}">Faol (${all.filter(s=>s.status==="open").length})</button><button data-sf="closed" class="${SF==="closed"?"on":""}">Yopilgan</button><button data-sf="res" class="${SF==="res"?"on":""}">🏆 Natijalar</button></div>`;
@@ -287,18 +293,38 @@ function results(){
   if(D.fear)h+=`<h2>Qo'rquv indeksi (VIX)</h2><div class="card fear"><div class="gauge" style="background:conic-gradient(${D.fear.score>=65?"var(--dn)":D.fear.score>=45?"var(--warn)":"var(--up)"} ${D.fear.score*3.6}deg,var(--card2) 0)"><div style="background:var(--card);width:66px;height:66px;border-radius:50%;display:grid;place-items:center">${Math.round(D.fear.score)}</div></div><div><b>${esc(D.fear.label)}</b><div class="mut" style="font-size:12px;margin-top:4px">${esc(D.fear.regime_name||"")}<br>VIX ${D.fear.vix?D.fear.vix.toFixed(1):"—"}</div></div></div>`;
   return h;
 }
-function tvSym(t){const x=(D.quotes||[]).find(q=>q.t===t);return (x&&x.ex?x.ex+":":"")+t}
-function openDetail(t){
-  const q=(D.quotes||[]).find(x=>x.t===t)||{t};const s=(D.signals||[]).find(x=>x.t===t&&x.status==="open")||(D.signals||[]).find(x=>x.t===t);
-  const hl=(D.halal||[]).find(x=>x.t===t);const theme=document.documentElement.dataset.theme==="light"?"light":"dark";
-  let h=`<div class="top"><button class="back">←</button><div><div class="tk">${esc(t)}</div><div class="mut" style="font-size:12px">${esc(q.n||"")}</div></div><div style="margin-left:auto;text-align:right"><div class="px">${money(q.p)}</div><div class="${cls(q.c)}" style="font-weight:700">${pct(q.c)}</div></div></div><div style="padding:0 16px">`;
-  h+=`<div class="chart"><iframe src="https://s.tradingview.com/widgetembed/?symbol=${encodeURIComponent(tvSym(t))}&interval=D&hidesidetoolbar=1&symboledit=0&saveimage=0&toolbarbg=f1f3f6&studies=%5B%5D&theme=${theme}&style=1&timezone=Asia%2FSeoul&locale=en" allowtransparency="true"></iframe></div>`;
-  h+=`<div class="card grid2"><div><span class="mut">Narx</span><b>${money(q.p)}</b></div><div><span class="mut">Kun</span><b class="${cls(q.c)}">${pct(q.c)}</b></div><div><span class="mut">20 kun</span><b class="${cls(q.r20)}">${pct(q.r20)}</b></div><div><span class="mut">RSI</span><b>${q.rsi==null?"—":Math.round(q.rsi)}</b></div><div><span class="mut">Hajm</span><b>${q.vr==null?"—":q.vr.toFixed(1)+"x"}</b></div><div><span class="mut">Halol</span><b>${hl?esc(hl.v):"—"}</b></div></div>`;
-  if(s)h+=`<h2>Bot signali</h2>`+sigCard(s)+(s.src?`<div class="card pre">${esc(s.src)}</div>`:"");
-  if(hl)h+=`<h2>☪️ Halollik</h2><div class="card"><span class="b ${HB[hl.v]}">${esc(hl.v)}</span><div style="margin-top:8px;font-size:13px">${esc(hl.r)}</div></div>`;
-  h+=`<div class="disc">Batafsil tahlil uchun botga <b>${esc(t)}</b> deb yozing.<br>⚠️ Daromad kafolati emas.</div></div>`;
+const TVMAP={"ES=F":"CME_MINI:ES1!","YM=F":"CBOT_MINI:YM1!","NQ=F":"CME_MINI:NQ1!","RTY=F":"CME_MINI:RTY1!","^TNX":"TVC:TNX","^VIX":"TVC:VIX","GC=F":"COMEX:GC1!","CL=F":"NYMEX:CL1!","BTC-USD":"BITSTAMP:BTCUSD","SPY":"AMEX:SPY","QQQ":"NASDAQ:QQQ","IWM":"AMEX:IWM","DIA":"AMEX:DIA"};
+function tvLoc(){return {ru:"ru",uz:"ru",kk:"ru",ky:"ru",tg:"ru",tr:"tr",ko:"kr",ja:"ja",de:"de_DE",ar:"ar_AE","zh-CN":"zh_CN"}[LANG]||"en"}
+function tvTheme(){return document.documentElement.dataset.theme==="light"?"light":"dark"}
+function tvWidget(el,name,cfg,hgt){
+  const w=document.createElement("div");w.className="tvbox notr tradingview-widget-container";if(hgt)w.style.height=hgt+"px";
+  const inner=document.createElement("div");inner.className="tradingview-widget-container__widget";if(hgt)inner.style.height="100%";w.appendChild(inner);
+  const s=document.createElement("script");s.src="https://s3.tradingview.com/external-embedding/embed-widget-"+name+".js";s.async=true;
+  s.textContent=JSON.stringify(Object.assign({colorTheme:tvTheme(),isTransparent:true,locale:tvLoc()},cfg));w.appendChild(s);el.appendChild(w);
+}
+function tvSym(t){return TVMAP[t]||t}
+function openSymbol(sym,name,isIndex){
+  const theme=tvTheme();
+  let h=`<div class="top"><button class="back">←</button><div><div class="tk notr">${esc(name||sym)}</div><div class="mut notr" style="font-size:12px">${esc(sym)}</div></div></div><div style="padding:0 16px" id="symbody"></div>`;
   const d=$("#detail");d.innerHTML=h;d.style.display="block";d.scrollTop=0;
   d.querySelector(".back").onclick=closeDetail;if(tg&&tg.BackButton){tg.BackButton.show();tg.BackButton.onClick(closeDetail)}
+  const b=$("#symbody");
+  tvWidget(b,"symbol-info",{symbol:sym,width:"100%"});
+  const c=document.createElement("div");c.className="chart notr";c.innerHTML=`<iframe src="https://s.tradingview.com/widgetembed/?symbol=${encodeURIComponent(sym)}&interval=D&hidesidetoolbar=0&symboledit=1&saveimage=0&studies=%5B%22RSI%40tv-basicstudies%22%2C%22MASimple%40tv-basicstudies%22%5D&theme=${theme}&style=1&timezone=Asia%2FSeoul&withdateranges=1&locale=${tvLoc()}" allowtransparency="true"></iframe>`;b.appendChild(c);
+  tvWidget(b,"technical-analysis",{symbol:sym,interval:"1D",width:"100%",height:420,showIntervalTabs:true,displayMode:"single"},420);
+  if(!isIndex){tvWidget(b,"financials",{symbol:sym,width:"100%",height:520,displayMode:"regular"},520);tvWidget(b,"symbol-profile",{symbol:sym,width:"100%",height:380},380)}
+  return b;
+}
+function openDetail(t){
+  const q=(D.quotes||[]).find(x=>x.t===t);const s=(D.signals||[]).find(x=>x.t===t&&x.status==="open")||(D.signals||[]).find(x=>x.t===t);
+  const hl=(D.halal||[]).find(x=>x.t===t);
+  const b=openSymbol(tvSym(t),t,false);
+  let h="";
+  if(q)h+=`<div class="card grid2"><div><span class="mut">RSI</span><b>${q.rsi==null?"—":Math.round(q.rsi)}</b></div><div><span class="mut">Hajm</span><b>${q.vr==null?"—":q.vr.toFixed(1)+"x"}</b></div><div><span class="mut">20 kun</span><b class="${cls(q.r20)}">${pct(q.r20)}</b></div><div><span class="mut">Halol</span><b class="notr">${hl?esc(T(hl.v)):"—"}</b></div></div>`;
+  if(s)h+=`<h2>Bot signali</h2>`+sigCard(s);
+  if(hl)h+=`<h2>☪️ ${esc(T("hal"))}</h2><div class="card"><span class="b notr ${HB[hl.v]}">${esc(T(hl.v))}</span><div style="margin-top:8px;font-size:13px">${esc(hl.r)}</div></div>`;
+  h+=`<div class="disc">Batafsil tahlil va halollik uchun botga <b class="notr">${esc(t)}</b> deb yozing.<br>⚠️ Daromad kafolati emas.</div>`;
+  const x=document.createElement("div");x.innerHTML=h;b.insertBefore(x,b.children[2]||null);
 }
 function closeDetail(){$("#detail").style.display="none";if(tg&&tg.BackButton)tg.BackButton.hide()}
 function bind(){
@@ -312,6 +338,7 @@ function bind(){
 }
 document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{TAB=b.dataset.tab;Q="";$("#q").value="";render();scrollTo(0,0)});
 $("#q").oninput=e=>{Q=e.target.value.trim();if(D)render()};
+$("#q").onkeydown=e=>{if(e.key==="Enter"&&Q){e.target.blur();openDetail(Q.toUpperCase().replace(/^\$/,""))}};
 load();setInterval(()=>{if($("#detail").style.display!=="block")load()},120000);
 </script>
 </body>
