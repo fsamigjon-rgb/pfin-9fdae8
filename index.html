@@ -64,6 +64,22 @@ nav button .i{font-size:20px}nav button.on{color:var(--acc2)}
 .disc{font-size:11px;color:var(--mut);margin:18px 0 8px;text-align:center}
 .empty{color:var(--mut);text-align:center;padding:30px 0}
 svg.curve{width:100%;height:120px;display:block}
+.mstate{padding:8px 16px 0;font-size:13px;font-weight:700}.mstate span{color:var(--mut);font-weight:400}
+.mk{flex:0 0 auto;min-width:118px;padding:6px 12px 6px 0;margin-right:4px;border-right:1px solid var(--line)}
+.mk .n{color:var(--acc2);font-weight:700;font-size:13px;white-space:nowrap}.mk .v{font-size:14px;font-weight:600;margin-top:2px;white-space:nowrap}
+.hero{border-radius:14px;overflow:hidden;background:var(--card);border:1px solid var(--line);margin-bottom:12px;cursor:pointer}
+.hero img{width:100%;max-height:220px;object-fit:cover;display:block}.hero .t{font-size:21px;font-weight:800;line-height:1.25;padding:12px 14px 4px}
+.meta{font-size:12px;color:var(--mut);padding:0 14px 12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.news{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.news img{width:84px;height:64px;border-radius:10px;object-fit:cover;flex:0 0 auto;background:var(--card2)}
+.news .t{font-size:15px;font-weight:700;line-height:1.3}.news .meta{padding:4px 0 0}
+.tr{border:1px solid var(--line);background:var(--card2);color:var(--acc2);border-radius:14px;padding:2px 9px;font-size:11px;font-weight:700}
+.trn{color:var(--up);font-size:13px;margin-top:6px;line-height:1.35}
+.tl select,.tl textarea{width:100%;background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:12px;padding:10px;font-size:15px;font-family:inherit}
+.tl textarea{min-height:120px;resize:vertical}.tl .bar2{display:flex;gap:8px;align-items:center;margin:10px 0}
+.tl .bar2 select{flex:1}.btn{background:var(--acc);color:#fff;border:0;border-radius:12px;padding:12px;font-size:15px;font-weight:700;width:100%}
+.btn2{background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:16px}
+.out{min-height:110px;white-space:pre-wrap;font-size:16px;line-height:1.45}
 </style>
 </head>
 <body>
@@ -71,13 +87,14 @@ svg.curve{width:100%;height:120px;display:block}
   <div class="brand"><div class="logo">Penny<b>Finance</b></div><div class="upd" id="upd">yuklanmoqda…</div></div>
   <div class="search">🔎<input id="q" placeholder="Tiker qidirish: AAPL, PLUG…" autocomplete="off" autocapitalize="characters"></div>
 </header>
-<div class="strip" id="strip"></div>
+<div class="mstate" id="mstate"></div><div class="strip" id="strip"></div>
 <main id="main"></main>
 <nav>
-  <button data-tab="sig" class="on"><span class="i">📡</span>Signallar</button>
+  <button data-tab="home" class="on"><span class="i">🏠</span>Asosiy</button>
+  <button data-tab="sig"><span class="i">📡</span>Signallar</button>
   <button data-tab="mkt"><span class="i">📈</span>Bozor</button>
-  <button data-tab="res"><span class="i">🏆</span>Natijalar</button>
   <button data-tab="hal"><span class="i">☪️</span>Halol</button>
+  <button data-tab="tr"><span class="i">🌐</span>Tarjimon</button>
 </nav>
 <div id="detail"></div>
 <script>
@@ -85,7 +102,7 @@ const DATA_URLS=["https://raw.githubusercontent.com/fsamigjon-rgb/pfin-9fdae8/ma
 const tg=window.Telegram&&Telegram.WebApp;
 if(tg){tg.ready();tg.expand();if(tg.colorScheme==="light")document.documentElement.dataset.theme="light"}
 else if(matchMedia("(prefers-color-scheme: light)").matches)document.documentElement.dataset.theme="light";
-let D=null,TAB="sig",SF="open",MS={k:"c",d:-1},MF="all",HF="HALOL",Q="";
+let D=null,TAB="home",SF="open",MS={k:"c",d:-1},MF="all",HF="HALOL",Q="";
 const $=s=>document.querySelector(s);
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const money=v=>v==null?"—":"$"+(v<2?v.toFixed(4):v.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2}));
@@ -94,16 +111,24 @@ const cls=v=>v>0?"up":v<0?"dn":"mut";
 const HB={HALOL:"halol",HAROM:"harom",SHUBHALI:"shubhali"};
 const STN={open:"Faol",win:"Target",loss:"Stop",timeout:"Muddat",be:"1-qism+BE"};
 async function load(){
+  let denied=false;
   for(const u of DATA_URLS){if(u.startsWith("__"))continue;
-    try{const r=await fetch(u+(u.includes("?")?"&":"?")+"t="+Date.now(),{cache:"no-store"});if(r.ok){D=await r.json();break}}catch(e){}}
-  if(!D){$("#main").innerHTML='<div class="empty">Ma\'lumot yuklanmadi. Birozdan keyin qayta oching.</div>';$("#upd").textContent="";return}
-  const st={open:"🟢 Bozor ochiq",pre:"🌅 Pre-market",post:"🌙 Post-market",closed:"🌙 Bozor yopiq"}[D.market_state]||"";
-  $("#upd").innerHTML=esc(st)+"<br>"+esc(D.updated||"");
+    try{const hd=u.startsWith("/")?{"X-Init-Data":(tg&&tg.initData)||""}:{};
+      const r=await fetch(u+(u.includes("?")?"&":"?")+"t="+Date.now(),{cache:"no-store",headers:hd});
+      if(r.status===403){denied=true;break}
+      if(r.ok){D=await r.json();break}}catch(e){}}
+  if(denied){$("#main").innerHTML='<div class="empty">🔒 Bu ilova faqat obunachilar uchun.<br><br>Botda «📝 Obuna bo\'lish» tugmasini bosing va ilovani bot menyusidagi «📱 Ilova» tugmasi orqali oching.</div>';$("#upd").textContent="";return}
+  if(!D){$("#main").innerHTML='<div class="empty">⏳ Ma\'lumot hali kelmagan — bot birinchi ma\'lumotni 1–2 daqiqada yuboradi.<br><br>Sahifa o\'zi yangilanadi.</div>';$("#upd").textContent="";setTimeout(load,20000);return}
+  $("#upd").textContent=D.updated||"";
+  const st={open:"🟢 AQSh bozori ochiq",pre:"🌅 Pre-market",post:"🌙 Post-market",closed:"🌙 AQSh bozori yopiq"}[D.market_state]||"";
+  $("#mstate").innerHTML="US Markets <span>· "+esc(st)+"</span>";
   strip();render();
 }
 function strip(){
-  const it=(D.index||[]).map(x=>`<div class="chip"><div class="s">${esc(x.t)}</div><div class="p">${x.t==="VIX"?x.p.toFixed(2):money(x.p)}</div><div class="c ${cls(x.c)}">${pct(x.c)}</div></div>`);
-  if(D.fear)it.unshift(`<div class="chip"><div class="s">😨 Qo'rquv</div><div class="p">${Math.round(D.fear.score)}/100</div><div class="c mut">${esc(D.fear.label)}</div></div>`);
+  const fmt=v=>v==null?"—":v.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:v<10?4:2});
+  const src=(D.markets&&D.markets.length)?D.markets:(D.index||[]).map(x=>({n:x.t,p:x.p,c:x.c}));
+  const it=src.map(x=>`<div class="mk"><div class="n">${esc(x.n)}</div><div class="v">${fmt(x.p)} <span class="${cls(x.c)}">${pct(x.c)}</span></div></div>`);
+  if(D.fear)it.push(`<div class="mk"><div class="n">😨 Qo'rquv indeksi</div><div class="v">${Math.round(D.fear.score)}/100 <span class="mut">${esc(D.fear.label)}</span></div></div>`);
   $("#strip").innerHTML=it.join("");
 }
 function sigCard(s){
@@ -116,26 +141,63 @@ function sigCard(s){
   <div class="lvl"><div class="bar"><span class="dot" style="left:${pos}%"></span></div><div class="lv"><span>🛑 ${money(lo)}</span><span>Kirish ${money(s.entry)}</span><span>🎯 ${money(hi)}</span></div></div></div>`;
 }
 function render(){
+  if(!D){load();return}
   document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",b.dataset.tab===TAB));
   const m=$("#main");let h="";
   if(Q){const q=Q.toUpperCase();const r=(D.quotes||[]).filter(x=>x.t.startsWith(q)).slice(0,30);
     h+=`<h2>Qidiruv: ${esc(q)}</h2>`+(r.length?quoteTable(r):`<div class="empty">Topilmadi. Botga tikerni yozib to'liq tahlil oling.</div>`);m.innerHTML=h;bind();return}
   if(TAB==="sig"){
     const all=D.signals||[];const L=SF==="open"?all.filter(s=>s.status==="open"):all.filter(s=>s.status!=="open");
-    h+=`<h2>Bot signallari</h2><div class="seg"><button data-sf="open" class="${SF==="open"?"on":""}">Faol (${all.filter(s=>s.status==="open").length})</button><button data-sf="closed" class="${SF!=="open"?"on":""}">Yopilgan</button></div>`;
-    h+=L.length?L.map(sigCard).join(""):`<div class="empty">Hozircha ${SF==="open"?"faol":"yopilgan"} signal yo'q</div>`;
+    h+=`<h2>Bot signallari</h2><div class="seg"><button data-sf="open" class="${SF==="open"?"on":""}">Faol (${all.filter(s=>s.status==="open").length})</button><button data-sf="closed" class="${SF==="closed"?"on":""}">Yopilgan</button><button data-sf="res" class="${SF==="res"?"on":""}">🏆 Natijalar</button></div>`;
+    if(SF==="res")h+=results();
+    else h+=L.length?L.map(sigCard).join(""):`<div class="empty">Hozircha ${SF==="open"?"faol":"yopilgan"} signal yo'q</div>`;
   }else if(TAB==="mkt"){
     let r=(D.quotes||[]).slice();
     if(MF==="halal")r=r.filter(x=>x.h==="HALOL");if(MF==="penny")r=r.filter(x=>x.p<=5);
     r.sort((a,b)=>((a[MS.k]??-1e9)>(b[MS.k]??-1e9)?1:-1)*MS.d);
     h+=`<h2>Bozor</h2><div class="seg"><button data-mf="all" class="${MF==="all"?"on":""}">Hammasi</button><button data-mf="halal" class="${MF==="halal"?"on":""}">☪️ Halol</button><button data-mf="penny" class="${MF==="penny"?"on":""}">🪙 ≤ $5</button></div>`+quoteTable(r.slice(0,150));
-  }else if(TAB==="res"){h+=results()}
+  }else if(TAB==="home"){h+=newsTab()}
+  else if(TAB==="tr"){m.innerHTML=trTab();bindTr();return}
   else{const L=(D.halal||[]).filter(x=>x.v===HF);
     h+=`<h2>Halollik (AAOIFI + boykot)</h2><div class="seg">${["HALOL","SHUBHALI","HAROM"].map(v=>`<button data-hf="${v}" class="${HF===v?"on":""}">${v} (${(D.halal||[]).filter(x=>x.v===v).length})</button>`).join("")}</div>`;
     h+=L.length?L.map(x=>`<div class="card q" data-t="${esc(x.t)}"><div class="row"><div class="tk">${esc(x.t)}</div><span class="b ${HB[x.v]}">${esc(x.v)}</span></div><div class="mut" style="margin-top:6px;font-size:12px">${esc(x.r)}</div></div>`).join(""):`<div class="empty">Ro'yxat bo'sh</div>`;
     h+=`<div class="disc">Halollik bot hisobi (AAOIFI mezonlari + boykot ro'yxati). Yakuniy qaror — o'zingiz va ishongan olimingizda.</div>`}
   m.innerHTML=h+`<div class="disc">⚠️ Umumiy axborot va texnik tahlil — daromad kafolati emas. Qaror va natija uchun o'zingiz javobgarsiz.</div>`;bind();
 }
+function ago(ts){if(!ts)return"";const s=Date.now()/1000-ts;if(s<3600)return Math.max(1,Math.round(s/60))+" daq oldin";if(s<86400)return Math.round(s/3600)+" soat oldin";return Math.round(s/86400)+" kun oldin"}
+function newsTab(){
+  const N=D.news||[];if(!N.length)return '<div class="empty">Yangiliklar yuklanmoqda…</div>';
+  const a=N[0];let h=`<div class="hero" data-l="${esc(a.l)}">${a.i?`<img src="${esc(a.i)}" loading="lazy" onerror="this.remove()">`:""}<div class="t" data-tt="0">${esc(a.t)}</div><div class="meta">${esc(a.src)} · ${ago(a.ts)} <button class="tr" data-tr="0">🌐 O'zbekcha</button></div></div>`;
+  h+=N.slice(1).map((x,i)=>`<div class="news" data-l="${esc(x.l)}"><div style="flex:1"><div class="t" data-tt="${i+1}">${esc(x.t)}</div><div class="meta">${esc(x.src)} · ${ago(x.ts)} <button class="tr" data-tr="${i+1}">🌐</button></div></div>${x.i?`<img src="${esc(x.i)}" loading="lazy" onerror="this.remove()">`:""}</div>`).join("");
+  return h+`<div class="disc">Yangiliklar: Yahoo Finance. Maqolani o'qish uchun sarlavhani bosing.</div>`;
+}
+const LANGS=[["auto","🔎 Avto aniqlash"],["uz","🇺🇿 O'zbek"],["en","🇺🇸 Ingliz"],["ru","🇷🇺 Rus"],["ko","🇰🇷 Koreys"],["tr","🇹🇷 Turk"],["ar","🇸🇦 Arab"],["zh-CN","🇨🇳 Xitoy"],["ja","🇯🇵 Yapon"],["de","🇩🇪 Nemis"],["kk","🇰🇿 Qozoq"],["tg","🇹🇯 Tojik"]];
+let TR={sl:"auto",tl:"uz",txt:"",out:""};
+async function translate(q,sl,tl){
+  q=q.slice(0,1800);
+  try{const r=await fetch("https://translate.googleapis.com/translate_a/single?client=gtx&dt=t&sl="+sl+"&tl="+tl+"&q="+encodeURIComponent(q));
+    if(r.ok){const j=await r.json();return j[0].map(x=>x[0]).join("")}}catch(e){}
+  try{const r=await fetch("https://api.mymemory.translated.net/get?q="+encodeURIComponent(q.slice(0,480))+"&langpair="+(sl==="auto"?"en":sl)+"|"+tl);
+    const j=await r.json();if(j.responseData&&j.responseData.translatedText)return j.responseData.translatedText}catch(e){}
+  throw new Error("x");
+}
+function trTab(){
+  const opt=(sel,skipAuto)=>LANGS.filter(l=>!(skipAuto&&l[0]==="auto")).map(l=>`<option value="${l[0]}" ${l[0]===sel?"selected":""}>${l[1]}</option>`).join("");
+  return `<h2>🌐 Tarjimon</h2><div class="tl"><div class="bar2"><select id="sl">${opt(TR.sl)}</select><button class="btn2" id="sw">⇄</button><select id="tl">${opt(TR.tl,1)}</select></div>
+  <textarea id="tx" placeholder="Matnni yozing yoki joylang…">${esc(TR.txt)}</textarea>
+  <div class="bar2"><button class="btn" id="go">Tarjima qilish</button></div>
+  <div class="card"><div class="row"><b class="mut" style="font-size:12px">TARJIMA</b><button class="btn2" id="cp" style="padding:4px 10px;font-size:13px">📋 Nusxa</button></div><div class="out" id="out">${esc(TR.out)}</div></div></div>
+  <div class="disc">Google Translate asosida. Muhim matnlarni tekshirib oling.</div>`;
+}
+function bindTr(){
+  document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",b.dataset.tab===TAB));
+  const sl=$("#sl"),tl=$("#tl"),tx=$("#tx"),out=$("#out");
+  sl.onchange=()=>TR.sl=sl.value;tl.onchange=()=>TR.tl=tl.value;tx.oninput=()=>TR.txt=tx.value;
+  $("#sw").onclick=()=>{if(TR.sl==="auto")TR.sl="en";[TR.sl,TR.tl]=[TR.tl,TR.sl];[TR.txt,TR.out]=[TR.out||TR.txt,TR.txt];$("#main").innerHTML=trTab();bindTr()};
+  $("#go").onclick=async()=>{if(!tx.value.trim())return;out.textContent="⏳ …";try{TR.out=await translate(tx.value,TR.sl,TR.tl);out.textContent=TR.out}catch(e){out.textContent="❌ Tarjima xizmati javob bermadi. Internetni tekshirib qayta urinib ko'ring."}};
+  $("#cp").onclick=()=>{navigator.clipboard&&navigator.clipboard.writeText(out.textContent);if(tg&&tg.showPopup)tg.showPopup({message:"Nusxalandi ✅"})};
+}
+function openLink(u){if(tg&&tg.openLink)tg.openLink(u);else window.open(u,"_blank")}
 function quoteTable(r){
   const th=(k,t)=>`<th data-k="${k}">${t}${MS.k===k?(MS.d>0?" ▲":" ▼"):""}</th>`;
   return `<div class="card" style="padding:4px 10px"><table><tr>${th("t","Tiker")}${th("p","Narx")}${th("c","Kun")}${th("r20","20 kun")}${th("rsi","RSI")}</tr>`+
@@ -172,6 +234,10 @@ function openDetail(t){
 }
 function closeDetail(){$("#detail").style.display="none";if(tg&&tg.BackButton)tg.BackButton.hide()}
 function bind(){
+  document.querySelectorAll("[data-l]").forEach(e=>e.onclick=ev=>{if(ev.target.closest(".tr"))return;openLink(e.dataset.l)});
+  document.querySelectorAll("[data-tr]").forEach(b=>b.onclick=async ev=>{ev.stopPropagation();const i=+b.dataset.tr,x=D.news[i];const box=b.closest(".hero,.news");
+    if(box.querySelector(".trn"))return;b.textContent="⏳";try{const t=await translate(x.t,"en","uz");const d=document.createElement("div");d.className="trn";d.textContent="🇺🇿 "+t;
+    box.querySelector("[data-tt]").after(d);b.textContent="✅"}catch(e){b.textContent="🌐"}});
   document.querySelectorAll("[data-t]").forEach(e=>e.onclick=()=>openDetail(e.dataset.t));
   document.querySelectorAll("[data-sf]").forEach(e=>e.onclick=()=>{SF=e.dataset.sf;render()});
   document.querySelectorAll("[data-mf]").forEach(e=>e.onclick=()=>{MF=e.dataset.mf;render()});
@@ -179,7 +245,7 @@ function bind(){
   document.querySelectorAll("th[data-k]").forEach(e=>e.onclick=()=>{const k=e.dataset.k;MS={k,d:MS.k===k?-MS.d:(k==="t"?1:-1)};render()});
 }
 document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{TAB=b.dataset.tab;Q="";$("#q").value="";render();scrollTo(0,0)});
-$("#q").oninput=e=>{Q=e.target.value.trim();render()};
+$("#q").oninput=e=>{Q=e.target.value.trim();if(D){if(Q&&TAB==="tr")TAB="mkt";render()}};
 load();setInterval(()=>{if($("#detail").style.display!=="block")load()},120000);
 </script>
 </body>
