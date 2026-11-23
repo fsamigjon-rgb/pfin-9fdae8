@@ -65,6 +65,8 @@ nav button .i{font-size:20px}nav button.on{color:var(--acc2)}
 .empty{color:var(--mut);text-align:center;padding:30px 0}
 svg.curve{width:100%;height:120px;display:block}
 .langsel{background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:18px;padding:6px 10px;font-size:13px;font-weight:700;max-width:150px}
+.grid2c{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.ohlc b{color:var(--tx)}
 .trbusy{position:fixed;bottom:74px;left:50%;transform:translateX(-50%);background:var(--acc);color:#fff;padding:6px 14px;border-radius:16px;font-size:12px;z-index:20;display:none}
 .art img{width:100%;max-height:260px;object-fit:cover;border-radius:14px;display:block;margin:12px 0}
 .art h1{font-size:23px;line-height:1.25;margin:8px 0}.art .sum{font-size:16px;line-height:1.55;margin:12px 0}
@@ -136,7 +138,7 @@ function strip(){
   const it=src.map(x=>`<div class="mk" data-mk="${esc(x.s||x.n)}" data-mn="${esc(x.n)}"><div class="n">${esc(x.n)}</div><div class="v">${fmt(x.p)} <span class="${cls(x.c)}">${pct(x.c)}</span></div></div>`);
   if(D.fear)it.push(`<div class="mk"><div class="n">😨 Qo'rquv indeksi</div><div class="v">${Math.round(D.fear.score)}/100 <span class="mut">${esc(D.fear.label)}</span></div></div>`);
   $("#strip").innerHTML=it.join("");
-  document.querySelectorAll("[data-mk]").forEach(e=>e.onclick=()=>openSymbol(TVMAP[e.dataset.mk]||e.dataset.mk,e.dataset.mn,true));
+  document.querySelectorAll("[data-mk]").forEach(e=>e.onclick=()=>openMarket(e.dataset.mk,e.dataset.mn));
 }
 function sigCard(s){
   const p=s.price||s.entry,lo=s.stop,hi=s.target,pos=Math.max(0,Math.min(100,(p-lo)/(hi-lo)*100));
@@ -293,8 +295,9 @@ function results(){
   if(D.fear)h+=`<h2>Qo'rquv indeksi (VIX)</h2><div class="card fear"><div class="gauge" style="background:conic-gradient(${D.fear.score>=65?"var(--dn)":D.fear.score>=45?"var(--warn)":"var(--up)"} ${D.fear.score*3.6}deg,var(--card2) 0)"><div style="background:var(--card);width:66px;height:66px;border-radius:50%;display:grid;place-items:center">${Math.round(D.fear.score)}</div></div><div><b>${esc(D.fear.label)}</b><div class="mut" style="font-size:12px;margin-top:4px">${esc(D.fear.regime_name||"")}<br>VIX ${D.fear.vix?D.fear.vix.toFixed(1):"—"}</div></div></div>`;
   return h;
 }
-const TVMAP={"ES=F":"CME_MINI:ES1!","YM=F":"CBOT_MINI:YM1!","NQ=F":"CME_MINI:NQ1!","RTY=F":"CME_MINI:RTY1!","^TNX":"TVC:TNX","^VIX":"TVC:VIX","GC=F":"COMEX:GC1!","CL=F":"NYMEX:CL1!","BTC-USD":"BITSTAMP:BTCUSD","SPY":"AMEX:SPY","QQQ":"NASDAQ:QQQ","IWM":"AMEX:IWM","DIA":"AMEX:DIA"};
-function tvLoc(){return {ru:"ru",uz:"ru",kk:"ru",ky:"ru",tg:"ru",tr:"tr",ko:"kr",ja:"ja",de:"de_DE",ar:"ar_AE","zh-CN":"zh_CN"}[LANG]||"en"}
+function fmt(v){return v==null||isNaN(v)?"—":(+v).toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:Math.abs(v)<10?4:2})}
+const TVMAP={"ES=F":"AMEX:SPY","YM=F":"AMEX:DIA","NQ=F":"NASDAQ:QQQ","RTY=F":"AMEX:IWM","GC=F":"AMEX:GLD","CL=F":"AMEX:USO","BTC-USD":"BITSTAMP:BTCUSD","SPY":"AMEX:SPY","QQQ":"NASDAQ:QQQ","IWM":"AMEX:IWM","DIA":"AMEX:DIA"};
+function tvLoc(){return {ru:"ru",kk:"ru",ky:"ru",tg:"ru",tr:"tr",tk:"tr",ko:"kr",ja:"ja",de:"de_DE",ar:"ar_AE","zh-CN":"zh_CN"}[LANG]||"en"}
 function tvTheme(){return document.documentElement.dataset.theme==="light"?"light":"dark"}
 function tvWidget(el,name,cfg,hgt){
   const w=document.createElement("div");w.className="tvbox notr tradingview-widget-container";if(hgt)w.style.height=hgt+"px";
@@ -303,28 +306,146 @@ function tvWidget(el,name,cfg,hgt){
   s.textContent=JSON.stringify(Object.assign({colorTheme:tvTheme(),isTransparent:true,locale:tvLoc()},cfg));w.appendChild(s);el.appendChild(w);
 }
 function tvSym(t){return TVMAP[t]||t}
-function openSymbol(sym,name,isIndex){
+// ===== Texnik tahlil lug'ati (tanlangan tilda) =====
+const TA_UZ={ta:"Texnik tahlil",osc:"Ostsillyatorlar",mas:"O'rtacha chiziqlar",ssell:"Kuchli sotish",sell:"Sotish",neu:"Neytral",buy:"Sotib olish",sbuy:"Kuchli sotib olish",day:"Kunlik",week:"Haftalik",ind:"Ko'rsatkich",val:"Qiymat",act:"Xulosa",r1:"1 oy",r3:"3 oy",r6:"6 oy",r12:"1 yil",opn:"Ochilish",prv:"Oldingi yopilish",dr:"Kunlik oraliq",yr:"52 haftalik oraliq",vol:"Hajm",load:"Yuklanmoqda…",chart:"Grafik",nodata:"Bu tiker bo'yicha ma'lumot topilmadi"};
+const TA_I18N={
+ en:{ta:"Technical analysis",osc:"Oscillators",mas:"Moving averages",ssell:"Strong sell",sell:"Sell",neu:"Neutral",buy:"Buy",sbuy:"Strong buy",day:"Daily",week:"Weekly",ind:"Indicator",val:"Value",act:"Action",r1:"1M",r3:"3M",r6:"6M",r12:"1Y",opn:"Open",prv:"Previous close",dr:"Day's range",yr:"52-week range",vol:"Volume",load:"Loading…",chart:"Chart",nodata:"No data found for this ticker"},
+ ru:{ta:"Технический анализ",osc:"Осцилляторы",mas:"Скользящие средние",ssell:"Активно продавать",sell:"Продавать",neu:"Нейтрально",buy:"Покупать",sbuy:"Активно покупать",day:"День",week:"Неделя",ind:"Индикатор",val:"Значение",act:"Действие",r1:"1 мес",r3:"3 мес",r6:"6 мес",r12:"1 год",opn:"Открытие",prv:"Пред. закрытие",dr:"Дневной диапазон",yr:"Диапазон 52 нед.",vol:"Объём",load:"Загрузка…",chart:"График",nodata:"Данные по тикеру не найдены"},
+ ko:{ta:"기술적 분석",osc:"오실레이터",mas:"이동평균",ssell:"강력 매도",sell:"매도",neu:"중립",buy:"매수",sbuy:"강력 매수",day:"일간",week:"주간",ind:"지표",val:"값",act:"판단",r1:"1개월",r3:"3개월",r6:"6개월",r12:"1년",opn:"시가",prv:"전일 종가",dr:"일중 범위",yr:"52주 범위",vol:"거래량",load:"불러오는 중…",chart:"차트",nodata:"이 티커의 데이터가 없습니다"},
+ tr:{ta:"Teknik analiz",osc:"Osilatörler",mas:"Hareketli ortalamalar",ssell:"Güçlü sat",sell:"Sat",neu:"Nötr",buy:"Al",sbuy:"Güçlü al",day:"Günlük",week:"Haftalık",ind:"Gösterge",val:"Değer",act:"Sinyal",r1:"1A",r3:"3A",r6:"6A",r12:"1Y",opn:"Açılış",prv:"Önceki kapanış",dr:"Günlük aralık",yr:"52 haftalık aralık",vol:"Hacim",load:"Yükleniyor…",chart:"Grafik",nodata:"Bu sembol için veri bulunamadı"},
+ de:{ta:"Technische Analyse",osc:"Oszillatoren",mas:"Gleitende Durchschnitte",ssell:"Starker Verkauf",sell:"Verkaufen",neu:"Neutral",buy:"Kaufen",sbuy:"Starker Kauf",day:"Täglich",week:"Wöchentlich",ind:"Indikator",val:"Wert",act:"Signal",r1:"1M",r3:"3M",r6:"6M",r12:"1J",opn:"Eröffnung",prv:"Vortagesschluss",dr:"Tagesspanne",yr:"52-Wochen-Spanne",vol:"Volumen",load:"Lädt…",chart:"Chart",nodata:"Keine Daten gefunden"},
+ ar:{ta:"التحليل الفني",osc:"المذبذبات",mas:"المتوسطات المتحركة",ssell:"بيع قوي",sell:"بيع",neu:"محايد",buy:"شراء",sbuy:"شراء قوي",day:"يومي",week:"أسبوعي",ind:"المؤشر",val:"القيمة",act:"الإشارة",r1:"شهر",r3:"3 أشهر",r6:"6 أشهر",r12:"سنة",opn:"الافتتاح",prv:"الإغلاق السابق",dr:"نطاق اليوم",yr:"نطاق 52 أسبوعًا",vol:"الحجم",load:"جارٍ التحميل…",chart:"الرسم البياني",nodata:"لا توجد بيانات"},
+ "zh-CN":{ta:"技术分析",osc:"震荡指标",mas:"移动平均线",ssell:"强烈卖出",sell:"卖出",neu:"中立",buy:"买入",sbuy:"强烈买入",day:"日线",week:"周线",ind:"指标",val:"数值",act:"信号",r1:"1月",r3:"3月",r6:"6月",r12:"1年",opn:"开盘",prv:"昨收",dr:"日内区间",yr:"52周区间",vol:"成交量",load:"加载中…",chart:"图表",nodata:"未找到数据"},
+ ja:{ta:"テクニカル分析",osc:"オシレーター",mas:"移動平均",ssell:"強い売り",sell:"売り",neu:"中立",buy:"買い",sbuy:"強い買い",day:"日足",week:"週足",ind:"指標",val:"値",act:"判断",r1:"1ヶ月",r3:"3ヶ月",r6:"6ヶ月",r12:"1年",opn:"始値",prv:"前日終値",dr:"日中レンジ",yr:"52週レンジ",vol:"出来高",load:"読み込み中…",chart:"チャート",nodata:"データがありません"},
+ kk:{ta:"Техникалық талдау",osc:"Осцилляторлар",mas:"Жылжымалы орташалар",ssell:"Белсенді сату",sell:"Сату",neu:"Бейтарап",buy:"Сатып алу",sbuy:"Белсенді сатып алу",day:"Күндік",week:"Апталық",ind:"Көрсеткіш",val:"Мәні",act:"Шешім",r1:"1 ай",r3:"3 ай",r6:"6 ай",r12:"1 жыл",opn:"Ашылу",prv:"Алдыңғы жабылу",dr:"Күндік аралық",yr:"52 апталық аралық",vol:"Көлем",load:"Жүктелуде…",chart:"График",nodata:"Деректер табылмады"},
+ ky:{ta:"Техникалык талдоо",osc:"Осцилляторлор",mas:"Жылма орточолор",ssell:"Активдүү сатуу",sell:"Сатуу",neu:"Нейтралдуу",buy:"Сатып алуу",sbuy:"Активдүү сатып алуу",day:"Күндүк",week:"Жумалык",ind:"Көрсөткүч",val:"Мааниси",act:"Чечим",r1:"1 ай",r3:"3 ай",r6:"6 ай",r12:"1 жыл",opn:"Ачылыш",prv:"Мурунку жабылыш",dr:"Күндүк диапазон",yr:"52 жумалык диапазон",vol:"Көлөм",load:"Жүктөлүүдө…",chart:"График",nodata:"Маалымат табылган жок"},
+ tg:{ta:"Таҳлили техникӣ",osc:"Осцилляторҳо",mas:"Миёнаҳои лағжанда",ssell:"Фурӯши фаъол",sell:"Фурӯхтан",neu:"Бетараф",buy:"Харидан",sbuy:"Хариди фаъол",day:"Рӯзона",week:"Ҳафтаина",ind:"Нишондиҳанда",val:"Қимат",act:"Хулоса",r1:"1 моҳ",r3:"3 моҳ",r6:"6 моҳ",r12:"1 сол",opn:"Кушодашавӣ",prv:"Пӯшиши қаблӣ",dr:"Доираи рӯз",yr:"Доираи 52 ҳафта",vol:"Ҳаҷм",load:"Бор шуда истодааст…",chart:"График",nodata:"Маълумот ёфт нашуд"},
+ tk:{ta:"Tehniki derňew",osc:"Ossilýatorlar",mas:"Hereketli ortalamalar",ssell:"Güýçli sat",sell:"Sat",neu:"Bitarap",buy:"Satyn al",sbuy:"Güýçli satyn al",day:"Günlük",week:"Hepdelik",ind:"Görkeziji",val:"Bahasy",act:"Netije",r1:"1 aý",r3:"3 aý",r6:"6 aý",r12:"1 ýyl",opn:"Açylyş",prv:"Öňki ýapylyş",dr:"Günlük aralyk",yr:"52 hepdelik aralyk",vol:"Göwrüm",load:"Ýüklenýär…",chart:"Grafik",nodata:"Maglumat tapylmady"}};
+function TA(k){const v=(TA_I18N[LANG]||{})[k];if(v)return `<span class="notr">${esc(v)}</span>`;if(LANG==="uz"||LANG==="orig")return `<span class="notr">${esc(TA_UZ[k])}</span>`;return esc(TA_UZ[k])}
+// ===== Indikatorlar =====
+function iSMA(a,n){const o=Array(a.length).fill(null);let s=0;for(let i=0;i<a.length;i++){s+=a[i];if(i>=n)s-=a[i-n];if(i>=n-1)o[i]=s/n}return o}
+function iEMA(a,n){const o=Array(a.length).fill(null);const k=2/(n+1);let e=null;for(let i=0;i<a.length;i++){if(i===n-1){let s=0;for(let j=0;j<n;j++)s+=a[j];e=s/n}else if(i>=n)e=a[i]*k+e*(1-k);if(i>=n-1)o[i]=e}return o}
+function iRSI(c,n=14){const o=Array(c.length).fill(null);let g=0,l=0;for(let i=1;i<c.length;i++){const d=c[i]-c[i-1],u=Math.max(d,0),w=Math.max(-d,0);if(i<=n){g+=u;l+=w;if(i===n){g/=n;l/=n;o[i]=l===0?100:100-100/(1+g/l)}}else{g=(g*(n-1)+u)/n;l=(l*(n-1)+w)/n;o[i]=l===0?100:100-100/(1+g/l)}}return o}
+function iMACD(c){const a=iEMA(c,12),b=iEMA(c,26);const m=c.map((_,i)=>a[i]!=null&&b[i]!=null?a[i]-b[i]:null);const st=m.findIndex(x=>x!=null);const sg=Array(c.length).fill(null);if(st>=0){const e=iEMA(m.slice(st),9);e.forEach((x,i)=>sg[st+i]=x)}return {m,s:sg,h:m.map((x,i)=>x!=null&&sg[i]!=null?x-sg[i]:null)}}
+function iStoch(h,l,c,n=14){const k=c.map((x,i)=>{if(i<n-1)return null;let hh=-1e18,ll=1e18;for(let j=i-n+1;j<=i;j++){hh=Math.max(hh,h[j]);ll=Math.min(ll,l[j])}return hh===ll?50:(x-ll)/(hh-ll)*100});const ks=iSMAn(k,3);return {k:ks,d:iSMAn(ks,3)}}
+function iSMAn(a,n){return a.map((_,i)=>{if(i<n-1)return null;let s=0;for(let j=i-n+1;j<=i;j++){if(a[j]==null)return null;s+=a[j]}return s/n})}
+function iCCI(h,l,c,n=20){const tp=c.map((x,i)=>(h[i]+l[i]+x)/3);return tp.map((x,i)=>{if(i<n-1)return null;let s=0;for(let j=i-n+1;j<=i;j++)s+=tp[j];const m=s/n;let d=0;for(let j=i-n+1;j<=i;j++)d+=Math.abs(tp[j]-m);d/=n;return d?(x-m)/(0.015*d):0})}
+function iWR(h,l,c,n=14){return c.map((x,i)=>{if(i<n-1)return null;let hh=-1e18,ll=1e18;for(let j=i-n+1;j<=i;j++){hh=Math.max(hh,h[j]);ll=Math.min(ll,l[j])}return hh===ll?-50:(hh-x)/(hh-ll)*-100})}
+function iBB(c,n=20,k=2){const m=iSMA(c,n);return c.map((_,i)=>{if(m[i]==null)return null;let v=0;for(let j=i-n+1;j<=i;j++)v+=(c[j]-m[i])**2;const sd=Math.sqrt(v/n);return [m[i]+k*sd,m[i]-k*sd]})}
+function toWeekly(H){const W={d:[],o:[],h:[],l:[],c:[],v:[]};let key=null;H.d.forEach((d,i)=>{const t=new Date(d+"T00:00:00Z");const mon=new Date(t.getTime()-((t.getUTCDay()+6)%7)*864e5).toISOString().slice(0,10);if(mon!==key){key=mon;W.d.push(d);W.o.push(H.o[i]);W.h.push(H.h[i]);W.l.push(H.l[i]);W.c.push(H.c[i]);W.v.push(H.v[i]||0)}else{const j=W.c.length-1;W.h[j]=Math.max(W.h[j],H.h[i]);W.l[j]=Math.min(W.l[j],H.l[i]);W.c[j]=H.c[i];W.v[j]+=H.v[i]||0}});return W}
+function taRate(H){
+  const c=H.c,h=H.h,l=H.l,n=c.length,L=n-1,px=c[L];const osc=[],mas=[];
+  const act=v=>v>0?"buy":v<0?"sell":"neu";
+  const r=iRSI(c);if(r[L]!=null)osc.push(["RSI (14)",r[L],act(r[L]<30&&r[L]>r[L-1]?1:r[L]>70&&r[L]<r[L-1]?-1:0)]);
+  const st=iStoch(h,l,c);if(st.k[L]!=null&&st.d[L]!=null)osc.push(["Stochastic %K (14,3,3)",st.k[L],act(st.k[L]<20&&st.k[L]>st.d[L]?1:st.k[L]>80&&st.k[L]<st.d[L]?-1:0)]);
+  const cc=iCCI(h,l,c);if(cc[L]!=null)osc.push(["CCI (20)",cc[L],act(cc[L]<-100&&cc[L]>cc[L-1]?1:cc[L]>100&&cc[L]<cc[L-1]?-1:0)]);
+  const md=iMACD(c);if(md.m[L]!=null&&md.s[L]!=null)osc.push(["MACD (12,26)",md.m[L],act(md.m[L]>md.s[L]?1:-1)]);
+  if(n>11){const mo=c[L]-c[L-10],mp=c[L-1]-c[L-11];osc.push(["Momentum (10)",mo,act(mo>mp?1:mo<mp?-1:0)])}
+  const wr=iWR(h,l,c);if(wr[L]!=null)osc.push(["Williams %R (14)",wr[L],act(wr[L]<-80&&wr[L]>wr[L-1]?1:wr[L]>-20&&wr[L]<wr[L-1]?-1:0)]);
+  const bb=iBB(c);if(bb[L])osc.push(["Bollinger (20,2)",(px-bb[L][1])/((bb[L][0]-bb[L][1])||1)*100,act(px<bb[L][1]?1:px>bb[L][0]?-1:0)]);
+  for(const p of [10,20,30,50,100,200]){const e=iEMA(c,p)[L],s=iSMA(c,p)[L];if(e!=null)mas.push([`EMA (${p})`,e,act(px>e?1:px<e?-1:0)]);if(s!=null)mas.push([`SMA (${p})`,s,act(px>s?1:px<s?-1:0)])}
+  const sc=a=>{const b=a.filter(x=>x[2]==="buy").length,s=a.filter(x=>x[2]==="sell").length,u=a.length-b-s;return {b,s,u,r:a.length?(b-s)/a.length:0}};
+  const so=sc(osc),sm=sc(mas),all=sc(osc.concat(mas));return {osc,mas,so,sm,all};
+}
+function rateKey(r){return r>0.5?"sbuy":r>0.1?"buy":r<-0.5?"ssell":r<-0.1?"sell":"neu"}
+function gaugeSvg(r,big){const W=big?220:120,cx=W/2,cy=W/2,R=W/2-10;const seg=(a0,a1,col)=>{const p=a=>[cx+R*Math.cos(a),cy-R*Math.sin(a)];const [x0,y0]=p(a0),[x1,y1]=p(a1);return `<path d="M${x0.toFixed(1)} ${y0.toFixed(1)} A${R} ${R} 0 0 1 ${x1.toFixed(1)} ${y1.toFixed(1)}" stroke="${col}" stroke-width="${big?9:6}" fill="none" stroke-linecap="round"/>`};
+  const cols=["var(--dn)","#c0545b","var(--mut)","#4f7cf0","#2f6bff"];let s="";for(let i=0;i<5;i++){const a0=Math.PI-(i*Math.PI/5)-0.06,a1=Math.PI-((i+1)*Math.PI/5)+0.06;s+=seg(a0,a1,cols[i])}
+  const ang=Math.PI*(1-(r+1)/2);const nx=cx+(R-14)*Math.cos(ang),ny=cy-(R-14)*Math.sin(ang);
+  return `<svg viewBox="0 0 ${W} ${W/2+8}" style="width:${big?220:120}px;display:block;margin:0 auto">${s}<line x1="${cx}" y1="${cy}" x2="${nx.toFixed(1)}" y2="${ny.toFixed(1)}" stroke="var(--tx)" stroke-width="${big?4:3}" stroke-linecap="round"/><circle cx="${cx}" cy="${cy}" r="${big?6:4}" fill="var(--tx)"/></svg>`}
+function rateCls(k){return k.indexOf("buy")>=0?"up":k.indexOf("sell")>=0?"dn":"mut"}
+function taHtml(H){const R=taRate(H);const k=rateKey(R.all.r);
+  const mini=(t,s)=>{const kk=rateKey(s.r);return `<div style="text-align:center">${gaugeSvg(s.r,false)}<div style="font-size:12px;font-weight:700">${TA(t)}</div><div class="${rateCls(kk)}" style="font-size:12px;font-weight:700">${TA(kk)}</div><div class="mut notr" style="font-size:11px">▼${s.s} · ●${s.u} · ▲${s.b}</div></div>`};
+  const tb=(t,a)=>`<h3 style="font-size:14px;margin:14px 0 6px">${TA(t)}</h3><table><tr><th>${TA("ind")}</th><th>${TA("val")}</th><th>${TA("act")}</th></tr>`+a.map(x=>`<tr><td class="notr">${x[0]}</td><td class="notr">${fmt(+x[1].toFixed(Math.abs(x[1])<10?3:2))}</td><td class="${rateCls(x[2])}">${TA(x[2])}</td></tr>`).join("")+`</table>`;
+  return `<div style="text-align:center">${gaugeSvg(R.all.r,true)}<div class="${rateCls(k)}" style="font-size:22px;font-weight:800;margin-top:2px">${TA(k)}</div>
+  <div class="row" style="justify-content:center;gap:22px;margin:8px 0 4px;font-size:13px"><div><div class="mut">${TA("sell")}</div><b class="notr">${R.all.s}</b></div><div><div class="mut">${TA("neu")}</div><b class="notr">${R.all.u}</b></div><div><div class="mut">${TA("buy")}</div><b class="notr">${R.all.b}</b></div></div></div>
+  <div class="grid2c">${mini("osc",R.so)}${mini("mas",R.sm)}</div>${tb("osc",R.osc)}${tb("mas",R.mas)}`}
+// ===== O'z grafigimiz (SVG, aynan shu indeks/aksiya) =====
+function drawChart(box,H0,bars,showBB){
+  const n0=H0.c.length,st=Math.max(0,n0-bars);const sl=a=>a.slice(st);
+  const full={c:H0.c,h:H0.h,l:H0.l};const m20=iSMA(full.c,20).slice(st),m50=iSMA(full.c,50).slice(st),bb=iBB(full.c).slice(st),rs=iRSI(full.c).slice(st),md=iMACD(full.c);
+  const mm=sl(md.m),ms=sl(md.s),mh=sl(md.h);
+  const H={d:sl(H0.d),o:sl(H0.o),h:sl(H0.h),l:sl(H0.l),c:sl(H0.c)};const n=H.c.length;
+  const W=Math.max(300,box.clientWidth||340),P=Math.max(46,fmt(Math.max(...H.h)).length*6.3+8),PH=230,RH=62,MH=62,G=14,TOT=PH+RH+MH+G*2+18;
+  let lo=Math.min(...H.l),hi=Math.max(...H.h);if(showBB)bb.forEach(x=>{if(x){lo=Math.min(lo,x[1]);hi=Math.max(hi,x[0])}});const pad=(hi-lo)*0.05||1;lo-=pad;hi+=pad;
+  const pw=W-P,bw=pw/n,X=i=>i*bw+bw/2,Y=v=>(hi-v)/(hi-lo)*PH;
+  let s=`<svg viewBox="0 0 ${W} ${TOT}" width="100%" height="${TOT}" style="display:block;touch-action:pan-y">`;
+  for(let k=0;k<=4;k++){const v=lo+(hi-lo)*k/4,y=Y(v);s+=`<line x1="0" x2="${pw}" y1="${y.toFixed(1)}" y2="${y.toFixed(1)}" stroke="var(--line)" stroke-dasharray="3 4"/><text x="${W-2}" y="${Math.max(10,y+4).toFixed(1)}" text-anchor="end" font-size="10" fill="var(--mut)">${fmt(+v.toFixed(v<10?3:2))}</text>`}
+  let lastM="";H.d.forEach((d,i)=>{const m=d.slice(0,7);if(m!==lastM){if(lastM){const mi=+d.slice(5,7)-1;const lb=(LANG==="uz"||LANG==="orig")?["yan","fev","mar","apr","may","iyn","iyl","avg","sen","okt","noy","dek"][mi]:new Date(d+"T00:00:00Z").toLocaleDateString(LANG,{month:"short",timeZone:"UTC"});s+=`<line x1="${X(i).toFixed(1)}" x2="${X(i).toFixed(1)}" y1="0" y2="${TOT-16}" stroke="var(--line)" stroke-width=".6"/><text x="${X(i).toFixed(1)}" y="${TOT-3}" font-size="10" fill="var(--mut)" text-anchor="middle">${esc(lb)}</text>`}lastM=m}});
+  if(showBB){const up=bb.map((x,i)=>x?`${X(i).toFixed(1)},${Y(x[0]).toFixed(1)}`:"").filter(Boolean).join(" "),dn=bb.map((x,i)=>x?`${X(i).toFixed(1)},${Y(x[1]).toFixed(1)}`:"").filter(Boolean).join(" ");s+=`<polyline points="${up}" fill="none" stroke="#8e7cc3" stroke-width="1"/><polyline points="${dn}" fill="none" stroke="#8e7cc3" stroke-width="1"/>`}
+  const cw=Math.max(1,bw*0.68);
+  for(let i=0;i<n;i++){const up=H.c[i]>=H.o[i],col=up?"var(--up)":"var(--dn)",x=X(i);s+=`<line x1="${x.toFixed(1)}" x2="${x.toFixed(1)}" y1="${Y(H.h[i]).toFixed(1)}" y2="${Y(H.l[i]).toFixed(1)}" stroke="${col}" stroke-width="1"/>`;const y1=Y(Math.max(H.o[i],H.c[i])),y2=Y(Math.min(H.o[i],H.c[i]));s+=`<rect x="${(x-cw/2).toFixed(1)}" y="${y1.toFixed(1)}" width="${cw.toFixed(1)}" height="${Math.max(1,y2-y1).toFixed(1)}" fill="${col}"/>`}
+  const line=(a,col,f)=>{const p=a.map((v,i)=>v==null?"":`${X(i).toFixed(1)},${f(v).toFixed(1)}`).filter(Boolean).join(" ");return p?`<polyline points="${p}" fill="none" stroke="${col}" stroke-width="1.3"/>`:""};
+  s+=line(m20,"#f5a623",Y)+line(m50,"#4f7cf0",Y);
+  const last=H.c[n-1],ly=Y(last);s+=`<line x1="0" x2="${pw}" y1="${ly.toFixed(1)}" y2="${ly.toFixed(1)}" stroke="${last>=H.o[n-1]?"var(--up)":"var(--dn)"}" stroke-dasharray="2 3"/><rect x="${pw+1}" y="${(ly-8).toFixed(1)}" width="${P-1}" height="16" rx="3" fill="${last>=H.o[n-1]?"var(--up)":"var(--dn)"}"/><text x="${W-3}" y="${(ly+4).toFixed(1)}" text-anchor="end" font-size="10" font-weight="700" fill="#fff">${fmt(+last.toFixed(last<10?3:2))}</text>`;
+  const r0=PH+G,RY=v=>r0+(100-v)/100*RH;s+=`<rect x="0" y="${r0}" width="${pw}" height="${RH}" fill="none" stroke="var(--line)"/><line x1="0" x2="${pw}" y1="${RY(70)}" y2="${RY(70)}" stroke="var(--dn)" stroke-dasharray="3 3" opacity=".6"/><line x1="0" x2="${pw}" y1="${RY(30)}" y2="${RY(30)}" stroke="var(--up)" stroke-dasharray="3 3" opacity=".6"/>`+line(rs,"#a477ff",RY)+`<text x="4" y="${r0+11}" font-size="10" fill="var(--mut)">RSI 14: ${rs[n-1]!=null?rs[n-1].toFixed(1):"—"}</text>`;
+  const m0=r0+RH+G;const mx=Math.max(1e-9,...mm.concat(ms).concat(mh).filter(v=>v!=null).map(Math.abs));const MY=v=>m0+MH/2-v/mx*(MH/2-2);
+  s+=`<rect x="0" y="${m0}" width="${pw}" height="${MH}" fill="none" stroke="var(--line)"/>`;mh.forEach((v,i)=>{if(v==null)return;const y=MY(v),z=MY(0);s+=`<rect x="${(X(i)-cw/2).toFixed(1)}" y="${Math.min(y,z).toFixed(1)}" width="${cw.toFixed(1)}" height="${Math.max(.5,Math.abs(z-y)).toFixed(1)}" fill="${v>=0?"var(--up)":"var(--dn)"}" opacity=".55"/>`});
+  s+=line(mm,"#4f7cf0",MY)+line(ms,"#f5a623",MY)+`<text x="4" y="${m0+11}" font-size="10" fill="var(--mut)">MACD 12 26 9</text>`;
+  s+=`<line id="cx" x1="0" x2="0" y1="0" y2="${TOT-16}" stroke="var(--tx)" stroke-width=".7" stroke-dasharray="3 3" style="display:none"/><rect id="cxr" x="0" y="0" width="${pw}" height="${TOT-16}" fill="transparent"/></svg>`;
+  box.innerHTML=`<div class="ohlc notr mut" style="font-size:11px;min-height:16px;margin-bottom:4px"></div>`+s;
+  const info=box.querySelector(".ohlc"),cxl=box.querySelector("#cx"),sv=box.querySelector("svg");
+  const show=i=>{i=Math.max(0,Math.min(n-1,i));const ch=i?((H.c[i]/H.c[i-1]-1)*100):0;info.innerHTML=`${esc(H.d[i])} · O <b>${fmt(H.o[i])}</b> H <b>${fmt(H.h[i])}</b> L <b>${fmt(H.l[i])}</b> C <b>${fmt(H.c[i])}</b> <span class="${cls(ch)}">${pct(+ch.toFixed(2))}</span>`;return i};
+  show(n-1);
+  const mv=e=>{const r=sv.getBoundingClientRect();const p=e.touches?e.touches[0]:e;const x=(p.clientX-r.left)/r.width*W;const i=show(Math.floor(x/bw));cxl.setAttribute("x1",X(i));cxl.setAttribute("x2",X(i));cxl.style.display=""};
+  sv.addEventListener("pointermove",mv);sv.addEventListener("touchmove",mv,{passive:true});sv.addEventListener("pointerdown",mv);
+  sv.addEventListener("pointerleave",()=>{cxl.style.display="none";show(n-1)});
+}
+function ownView(b,H,live){
+  const n=H.c.length,L=n-1,px=live&&live.p!=null?live.p:H.c[L],prev=H.c[L-1];
+  const ch=live&&live.c!=null?live.c:(prev?(px/prev-1)*100:null);const dif=ch==null?null:px-px/(1+ch/100);const y=H.h.slice(-252),yl=H.l.slice(-252);
+  let h=`<div class="card"><div class="row"><div style="font-size:28px;font-weight:800" class="notr">${fmt(px)}</div><div class="${cls(ch)} notr" style="font-size:16px;font-weight:700">${ch==null?"":(dif>=0?"+":"")+fmt(+dif.toFixed(px<10?3:2))+" ("+pct(ch)+")"}</div></div>
+  <div class="grid2" style="margin-top:8px"><div><span class="mut">${TA("opn")}</span><b class="notr">${fmt(H.o[L])}</b></div><div><span class="mut">${TA("prv")}</span><b class="notr">${fmt(prev)}</b></div><div><span class="mut">${TA("dr")}</span><b class="notr">${fmt(H.l[L])} – ${fmt(H.h[L])}</b></div><div><span class="mut">${TA("yr")}</span><b class="notr">${fmt(Math.min(...yl))} – ${fmt(Math.max(...y))}</b></div></div></div>
+  <div class="card"><div class="seg" id="rg">${[["r1",22],["r3",66],["r6",130],["r12",260]].map(r=>`<button data-b="${r[1]}" class="${r[1]===130?"on":""}">${TA(r[0])}</button>`).join("")}<button data-bb="1">BB</button></div>
+  <div class="notr mut" style="font-size:11px;margin-bottom:4px"><span style="color:#f5a623">━ MA20</span> &nbsp;<span style="color:#4f7cf0">━ MA50</span> &nbsp;<span style="color:#a477ff">━ RSI</span></div><div id="ownc"></div></div>
+  <h2>${TA("ta")}</h2><div class="card"><div class="seg" id="tf"><button data-tf="d" class="on">${TA("day")}</button><button data-tf="w">${TA("week")}</button></div><div id="tabox"></div></div>`;
+  const x=document.createElement("div");x.innerHTML=h;b.appendChild(x);
+  let bars=130,bbOn=false;const box=x.querySelector("#ownc");const redraw=()=>drawChart(box,H,bars,bbOn);
+  requestAnimationFrame(redraw);
+  x.querySelectorAll("#rg [data-b]").forEach(e=>e.onclick=()=>{bars=+e.dataset.b;x.querySelectorAll("#rg [data-b]").forEach(z=>z.classList.toggle("on",z===e));redraw()});
+  x.querySelector("#rg [data-bb]").onclick=e=>{bbOn=!bbOn;e.currentTarget.classList.toggle("on",bbOn);redraw()};
+  const tab=x.querySelector("#tabox");const setTF=tf=>{tab.innerHTML=taHtml(tf==="w"?toWeekly(H):H);x.querySelectorAll("#tf button").forEach(z=>z.classList.toggle("on",z.dataset.tf===tf))};
+  setTF("d");x.querySelectorAll("#tf button").forEach(e=>e.onclick=()=>setTF(e.dataset.tf));
+}
+async function yhist(t){
+  const u="https://query1.finance.yahoo.com/v8/finance/chart/"+encodeURIComponent(t)+"?range=1y&interval=1d";
+  for(const url of [u,"https://api.allorigins.win/raw?url="+encodeURIComponent(u),"https://corsproxy.io/?url="+encodeURIComponent(u)]){
+    try{const ctl=new AbortController();const tm=setTimeout(()=>ctl.abort(),7000);const r=await fetch(url,{signal:ctl.signal});clearTimeout(tm);if(!r.ok)continue;
+      const R=(await r.json()).chart.result[0],q=R.indicators.quote[0];const o={d:[],o:[],h:[],l:[],c:[],v:[],n:R.meta.longName||R.meta.shortName||t};
+      (R.timestamp||[]).forEach((ts,i)=>{if(q.close[i]==null||q.open[i]==null)return;o.d.push(new Date(ts*1000).toISOString().slice(0,10));o.o.push(q.open[i]);o.h.push(q.high[i]);o.l.push(q.low[i]);o.c.push(q.close[i]);o.v.push(q.volume[i]||0)});
+      if(o.c.length>30){o.live={p:R.meta.regularMarketPrice,c:null};return o}}catch(e){}
+  }
+  return null}
+function detailShell(name,sym){
+  const d=$("#detail");d.innerHTML=`<div class="top"><button class="back">←</button><div><div class="tk notr">${esc(name||sym)}</div><div class="mut notr" style="font-size:12px">${esc(sym)}</div></div></div><div style="padding:0 16px" id="symbody"></div>`;
+  d.style.display="block";d.scrollTop=0;d.querySelector(".back").onclick=closeDetail;if(tg&&tg.BackButton){tg.BackButton.show();tg.BackButton.onClick(closeDetail)}
+  return $("#symbody")}
+function tvView(b,sym,isIndex){
   const theme=tvTheme();
-  let h=`<div class="top"><button class="back">←</button><div><div class="tk notr">${esc(name||sym)}</div><div class="mut notr" style="font-size:12px">${esc(sym)}</div></div></div><div style="padding:0 16px" id="symbody"></div>`;
-  const d=$("#detail");d.innerHTML=h;d.style.display="block";d.scrollTop=0;
-  d.querySelector(".back").onclick=closeDetail;if(tg&&tg.BackButton){tg.BackButton.show();tg.BackButton.onClick(closeDetail)}
-  const b=$("#symbody");
   tvWidget(b,"symbol-info",{symbol:sym,width:"100%"});
   const c=document.createElement("div");c.className="chart notr";c.innerHTML=`<iframe src="https://s.tradingview.com/widgetembed/?symbol=${encodeURIComponent(sym)}&interval=D&hidesidetoolbar=0&symboledit=1&saveimage=0&studies=%5B%22RSI%40tv-basicstudies%22%2C%22MASimple%40tv-basicstudies%22%5D&theme=${theme}&style=1&timezone=Asia%2FSeoul&withdateranges=1&locale=${tvLoc()}" allowtransparency="true"></iframe>`;b.appendChild(c);
   tvWidget(b,"technical-analysis",{symbol:sym,interval:"1D",width:"100%",height:420,showIntervalTabs:true,displayMode:"single"},420);
-  if(!isIndex){tvWidget(b,"financials",{symbol:sym,width:"100%",height:520,displayMode:"regular"},520);tvWidget(b,"symbol-profile",{symbol:sym,width:"100%",height:380},380)}
-  return b;
 }
-function openDetail(t){
+function tvExtras(b,sym){tvWidget(b,"financials",{symbol:sym,width:"100%",height:520,displayMode:"regular"},520);tvWidget(b,"symbol-profile",{symbol:sym,width:"100%",height:380},380)}
+function openMarket(s,n){
+  const H=D.hist&&D.hist[s];const live=(D.markets||[]).find(x=>x.s===s);const b=detailShell(n||(H&&H.n)||s,s);
+  if(H&&H.c&&H.c.length>30){ownView(b,H,live);return b}
+  tvView(b,tvSym(s),true);return b}
+function openSymbol(sym,name,isIndex){const b=detailShell(name,sym);tvView(b,sym,isIndex);if(!isIndex)tvExtras(b,sym);return b}
+async function openDetail(t){
+  t=String(t||"").toUpperCase().replace(/^\$/,"").trim();if(!t)return;
   const q=(D.quotes||[]).find(x=>x.t===t);const s=(D.signals||[]).find(x=>x.t===t&&x.status==="open")||(D.signals||[]).find(x=>x.t===t);
   const hl=(D.halal||[]).find(x=>x.t===t);
-  const b=openSymbol(tvSym(t),t,false);
-  let h="";
-  if(q)h+=`<div class="card grid2"><div><span class="mut">RSI</span><b>${q.rsi==null?"—":Math.round(q.rsi)}</b></div><div><span class="mut">Hajm</span><b>${q.vr==null?"—":q.vr.toFixed(1)+"x"}</b></div><div><span class="mut">20 kun</span><b class="${cls(q.r20)}">${pct(q.r20)}</b></div><div><span class="mut">Halol</span><b class="notr">${hl?esc(T(hl.v)):"—"}</b></div></div>`;
-  if(s)h+=`<h2>Bot signali</h2>`+sigCard(s);
-  if(hl)h+=`<h2>☪️ ${esc(T("hal"))}</h2><div class="card"><span class="b notr ${HB[hl.v]}">${esc(T(hl.v))}</span><div style="margin-top:8px;font-size:13px">${esc(hl.r)}</div></div>`;
-  h+=`<div class="disc">Batafsil tahlil va halollik uchun botga <b class="notr">${esc(t)}</b> deb yozing.<br>⚠️ Daromad kafolati emas.</div>`;
-  const x=document.createElement("div");x.innerHTML=h;b.insertBefore(x,b.children[2]||null);
+  const b=detailShell(t,t);
+  let ex="";
+  if(q)ex+=`<div class="card grid2"><div><span class="mut">RSI</span><b>${q.rsi==null?"—":Math.round(q.rsi)}</b></div><div><span class="mut">Hajm</span><b>${q.vr==null?"—":q.vr.toFixed(1)+"x"}</b></div><div><span class="mut">20 kun</span><b class="${cls(q.r20)}">${pct(q.r20)}</b></div><div><span class="mut">Halol</span><b class="notr">${hl?esc(T(hl.v)):"—"}</b></div></div>`;
+  if(s)ex+=`<h2>Bot signali</h2>`+sigCard(s);
+  if(hl)ex+=`<h2>☪️ ${esc(T("hal"))}</h2><div class="card"><span class="b notr ${HB[hl.v]}">${esc(T(hl.v))}</span><div style="margin-top:8px;font-size:13px">${esc(hl.r)}</div></div>`;
+  const tail=()=>{const z=document.createElement("div");z.innerHTML=ex+`<div class="disc">Batafsil tahlil va halollik uchun botga <b class="notr">${esc(t)}</b> deb yozing.<br>⚠️ Daromad kafolati emas.</div>`;b.appendChild(z)};
+  let H=D.hist&&D.hist[t];
+  if(!(H&&H.c&&H.c.length>30)){const w=document.createElement("div");w.className="empty";w.innerHTML=TA("load");b.appendChild(w);H=await yhist(t);w.remove();if($("#detail").style.display!=="block")return b}
+  if(H&&H.c&&H.c.length>30){if(H.n)$("#detail .tk").textContent=t+" · "+H.n;ownView(b,H,H.live||(q?{p:q.p,c:q.c}:null));tail();tvExtras(b,tvSym(t));}
+  else{tvView(b,tvSym(t),false);tail();tvExtras(b,tvSym(t))}
+  return b;
 }
 function closeDetail(){$("#detail").style.display="none";if(tg&&tg.BackButton)tg.BackButton.hide()}
 function bind(){
