@@ -65,7 +65,7 @@ nav button .i{font-size:20px}nav button.on{color:var(--acc2)}
 .empty{color:var(--mut);text-align:center;padding:30px 0}
 svg.curve{width:100%;height:120px;display:block}
 .langsel{background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:18px;padding:6px 10px;font-size:13px;font-weight:700;max-width:150px}
-.trbusy{position:fixed;top:8px;left:50%;transform:translateX(-50%);background:var(--acc);color:#fff;padding:6px 14px;border-radius:16px;font-size:12px;z-index:20;display:none}
+.trbusy{position:fixed;bottom:74px;left:50%;transform:translateX(-50%);background:var(--acc);color:#fff;padding:6px 14px;border-radius:16px;font-size:12px;z-index:20;display:none}
 .art img{width:100%;max-height:260px;object-fit:cover;border-radius:14px;display:block;margin:12px 0}
 .art h1{font-size:23px;line-height:1.25;margin:8px 0}.art .sum{font-size:16px;line-height:1.55;margin:12px 0}
 .mstate{padding:8px 16px 0;font-size:13px;font-weight:700}.mstate span{color:var(--mut);font-weight:400}
@@ -123,10 +123,11 @@ async function load(){
   if(denied){$("#main").innerHTML='<div class="empty">🔒 Bu ilova faqat obunachilar uchun.<br><br>Botda «📝 Obuna bo\'lish» tugmasini bosing va ilovani bot menyusidagi «📱 Ilova» tugmasi orqali oching.</div>';$("#upd").textContent="";return}
   if(!D){$("#main").innerHTML='<div class="empty">⏳ Ma\'lumot hali kelmagan — bot birinchi ma\'lumotni 1–2 daqiqada yuboradi.<br><br>Sahifa o\'zi yangilanadi.</div>';$("#upd").textContent="";setTimeout(load,20000);return}
   $("#upd").textContent=D.updated||"";
-  const st={open:"🟢 AQSh bozori ochiq",pre:"🌅 Pre-market",post:"🌙 Post-market",closed:"🌙 AQSh bozori yopiq"}[D.market_state]||"";
-  $("#mstate").innerHTML="US Markets <span>· "+esc(st)+"</span>";
+  mstate();
   strip();render();
 }
+function mstate(){if(!D)return;const ic={open:"🟢",pre:"🌅",post:"🌙",closed:"🌙"}[D.market_state]||"";
+  $("#mstate").innerHTML=`<span class="notr" style="color:var(--tx);font-weight:700">${esc(T("um"))}</span> <span class="notr">· ${ic} ${esc(T(D.market_state)||"")}</span>`}
 function strip(){
   const fmt=v=>v==null?"—":v.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:v<10?4:2});
   const src=(D.markets&&D.markets.length)?D.markets:(D.index||[]).map(x=>({n:x.t,p:x.p,c:x.c}));
@@ -140,7 +141,7 @@ function sigCard(s){
   const rc=s.status==="open"?cls(s.price-s.entry):cls(s.pnl);
   return `<div class="card sig" data-t="${esc(s.t)}"><div class="row"><div><div class="tk">${esc(s.t)}</div><div class="mut" style="font-size:12px">${esc(s.entry_date)}${s.closed_date?" → "+esc(s.closed_date):""}</div></div>
   <div><div class="px">${money(p)}</div><div class="${rc}" style="text-align:right;font-weight:700">${res} <span class="mut" style="font-weight:400;font-size:11px">${s.status==="open"?"kirishdan":"natija"}</span></div></div></div>
-  <div class="badges"><span class="b kind">${esc(s.kind_name||s.kind)}</span><span class="b st-${s.status==="open"?"open":s.pnl>0?"win":"loss"}">${STN[s.status]||s.status}${s.partial?" · 💰1-qism":""}</span>${s.halal?`<span class="b ${HB[s.halal]||""}">☪️ ${esc(s.halal)}</span>`:""}</div>
+  <div class="badges"><span class="b kind">${esc(s.kind_name||s.kind)}</span><span class="b st-${s.status==="open"?"open":s.pnl>0?"win":"loss"}">${STN[s.status]||s.status}${s.partial?" · 💰1-qism":""}</span>${s.halal?`<span class="b notr ${HB[s.halal]||""}">☪️ ${esc(T(s.halal))}</span>`:""}</div>
   <div class="lvl"><div class="bar"><span class="dot" style="left:${pos}%"></span></div><div class="lv"><span>🛑 ${money(lo)}</span><span>Kirish ${money(s.entry)}</span><span>🎯 ${money(hi)}</span></div></div></div>`;
 }
 function render(){
@@ -162,18 +163,18 @@ function render(){
   }else if(TAB==="home"){h+=newsTab()}
 
   else{const L=(D.halal||[]).filter(x=>x.v===HF);
-    h+=`<h2>Halollik (AAOIFI + boykot)</h2><div class="seg">${["HALOL","SHUBHALI","HAROM"].map(v=>`<button data-hf="${v}" class="${HF===v?"on":""}">${v} (${(D.halal||[]).filter(x=>x.v===v).length})</button>`).join("")}</div>`;
-    h+=L.length?L.map(x=>`<div class="card q" data-t="${esc(x.t)}"><div class="row"><div class="tk">${esc(x.t)}</div><span class="b ${HB[x.v]}">${esc(x.v)}</span></div><div class="mut" style="margin-top:6px;font-size:12px">${esc(x.r)}</div></div>`).join(""):`<div class="empty">Ro'yxat bo'sh</div>`;
+    h+=`<h2>Halollik (AAOIFI + boykot)</h2><div class="seg">${["HALOL","SHUBHALI","HAROM"].map(v=>`<button data-hf="${v}" class="notr ${HF===v?"on":""}">${esc(T(v))} (${(D.halal||[]).filter(x=>x.v===v).length})</button>`).join("")}</div>`;
+    h+=L.length?L.map(x=>`<div class="card q" data-t="${esc(x.t)}"><div class="row"><div class="tk">${esc(x.t)}</div><span class="b notr ${HB[x.v]}">${esc(T(x.v))}</span></div><div class="mut" style="margin-top:6px;font-size:12px">${esc(x.r)}</div></div>`).join(""):`<div class="empty">Ro'yxat bo'sh</div>`;
     h+=`<div class="disc">Halollik bot hisobi (AAOIFI mezonlari + boykot ro'yxati). Yakuniy qaror — o'zingiz va ishongan olimingizda.</div>`}
   m.innerHTML=h+`<div class="disc">⚠️ Umumiy axborot va texnik tahlil — daromad kafolati emas. Qaror va natija uchun o'zingiz javobgarsiz.</div>`;bind();
 }
-function ago(ts){if(!ts)return"";const s=Date.now()/1000-ts;if(s<3600)return Math.max(1,Math.round(s/60))+" daq oldin";if(s<86400)return Math.round(s/3600)+" soat oldin";return Math.round(s/86400)+" kun oldin"}
-const NT=x=>(LANG==="uz"&&x.tu)?x.tu:x.t;               // o'zbekcha: botning AI tarjimasi
-const NC=x=>(LANG==="uz"&&x.tu)?"notr":"";              // AI tarjimani brauzer qayta o'girmasin
+function ago(ts){if(!ts)return"";const s=Date.now()/1000-ts;const v=s<3600?[Math.max(1,Math.round(s/60)),"m"]:s<86400?[Math.round(s/3600),"h"]:[Math.round(s/86400),"d"];return `<span class="notr">${v[0]} ${esc(T(v[1]))}</span>`}
+const NT=x=>(LANG==="uz"&&x.tu)?x.tu:(x.tr&&x.tr[LANG])?x.tr[LANG]:x.t;   // tayyor tarjima (AI / bot)
+const NC=x=>((LANG==="uz"&&x.tu)||(x.tr&&x.tr[LANG]))?"notr":"";            // tayyor tarjimani qayta o'girmaslik
 function newsTab(){
   const N=D.news||[];if(!N.length)return '<div class="empty">Yangiliklar yuklanmoqda…</div>';
-  const a=N[0];let h=`<div class="hero" data-n="0">${a.i?`<img src="${esc(a.i)}" loading="lazy" onerror="this.remove()">`:""}<div class="t ${NC(a)}">${esc(NT(a))}</div><div class="meta">${esc(a.src)} · ${ago(a.ts)}${a.ai&&LANG==="uz"?' · <span class="notr">🤖 AI</span>':""}</div></div>`;
-  h+=N.slice(1).map((x,i)=>`<div class="news" data-n="${i+1}"><div style="flex:1"><div class="t ${NC(x)}">${esc(NT(x))}</div><div class="meta">${esc(x.src)} · ${ago(x.ts)}${x.ai&&LANG==="uz"?' · <span class="notr">🤖 AI</span>':""}</div></div>${x.i?`<img src="${esc(x.i)}" loading="lazy" onerror="this.remove()">`:""}</div>`).join("");
+  const a=N[0];let h=`<div class="hero" data-n="0">${a.i?`<img src="${esc(a.i)}" loading="lazy" onerror="this.remove()">`:""}<div class="t ${NC(a)}">${esc(NT(a))}</div><div class="meta"><span class="notr">${esc(a.src)}</span> · ${ago(a.ts)}${a.ai&&LANG==="uz"?' · <span class="notr">🤖 AI</span>':""}</div></div>`;
+  h+=N.slice(1).map((x,i)=>`<div class="news" data-n="${i+1}"><div style="flex:1"><div class="t ${NC(x)}">${esc(NT(x))}</div><div class="meta"><span class="notr">${esc(x.src)}</span> · ${ago(x.ts)}${x.ai&&LANG==="uz"?' · <span class="notr">🤖 AI</span>':""}</div></div>${x.i?`<img src="${esc(x.i)}" loading="lazy" onerror="this.remove()">`:""}</div>`).join("");
   return h+`<div class="disc">Yangiliklar manbasi: Yahoo Finance. O'zbekcha tarjima va qisqa mazmun — AI.</div>`;
 }
 const LANGS=[["auto","🔎 Avto aniqlash"],["uz","🇺🇿 O'zbek"],["en","🇺🇸 Ingliz"],["ru","🇷🇺 Rus"],["ko","🇰🇷 Koreys"],["tr","🇹🇷 Turk"],["ar","🇸🇦 Arab"],["zh-CN","🇨🇳 Xitoy"],["ja","🇯🇵 Yapon"],["de","🇩🇪 Nemis"],["kk","🇰🇿 Qozoq"],["tg","🇹🇯 Tojik"]];
@@ -187,6 +188,23 @@ async function translate(q,sl,tl){
   throw new Error("x");
 }
 // ===== Butun saytni tanlangan tilga o'girish =====
+const I18N={
+ en:{home:"Home",sig:"Signals",mkt:"Market",hal:"Halal",m:"min ago",h:"h ago",d:"d ago",open:"US market open",pre:"Pre-market",post:"After-hours",closed:"US market closed",HALOL:"HALAL",SHUBHALI:"DOUBTFUL",HAROM:"HARAM",um:"US Markets"},
+ ru:{home:"Главная",sig:"Сигналы",mkt:"Рынок",hal:"Халяль",m:"мин назад",h:"ч назад",d:"дн назад",open:"Рынок США открыт",pre:"Премаркет",post:"Постмаркет",closed:"Рынок США закрыт",HALOL:"ХАЛЯЛЬ",SHUBHALI:"СОМНИТЕЛЬНО",HAROM:"ХАРАМ",um:"Рынки США"},
+ ko:{home:"홈",sig:"시그널",mkt:"시장",hal:"할랄",m:"분 전",h:"시간 전",d:"일 전",open:"미국 시장 개장",pre:"프리마켓",post:"애프터마켓",closed:"미국 시장 마감",HALOL:"할랄",SHUBHALI:"의심",HAROM:"하람",um:"미국 시장"},
+ tr:{home:"Ana sayfa",sig:"Sinyaller",mkt:"Piyasa",hal:"Helal",m:"dk önce",h:"sa önce",d:"gün önce",open:"ABD piyasası açık",pre:"Piyasa öncesi",post:"Piyasa sonrası",closed:"ABD piyasası kapalı",HALOL:"HELAL",SHUBHALI:"ŞÜPHELİ",HAROM:"HARAM",um:"ABD Piyasaları"},
+ ar:{home:"الرئيسية",sig:"الإشارات",mkt:"السوق",hal:"حلال",m:"دقيقة مضت",h:"ساعة مضت",d:"يوم مضى",open:"السوق الأمريكي مفتوح",pre:"ما قبل السوق",post:"ما بعد السوق",closed:"السوق الأمريكي مغلق",HALOL:"حلال",SHUBHALI:"مشبوه",HAROM:"حرام",um:"الأسواق الأمريكية"},
+ de:{home:"Start",sig:"Signale",mkt:"Markt",hal:"Halal",m:"Min. her",h:"Std. her",d:"Tg. her",open:"US-Markt offen",pre:"Vorbörse",post:"Nachbörse",closed:"US-Markt geschlossen",HALOL:"HALAL",SHUBHALI:"ZWEIFELHAFT",HAROM:"HARAM",um:"US-Märkte"},
+ kk:{home:"Басты",sig:"Сигналдар",mkt:"Нарық",hal:"Халал",m:"мин бұрын",h:"сағ бұрын",d:"күн бұрын",open:"АҚШ нарығы ашық",pre:"Премаркет",post:"Постмаркет",closed:"АҚШ нарығы жабық",HALOL:"ХАЛАЛ",SHUBHALI:"КҮМӘНДІ",HAROM:"ХАРАМ",um:"АҚШ нарықтары"},
+ tg:{home:"Асосӣ",sig:"Сигналҳо",mkt:"Бозор",hal:"Ҳалол",m:"дақ пеш",h:"соат пеш",d:"рӯз пеш",open:"Бозори ИМА кушода",pre:"Пеш аз бозор",post:"Пас аз бозор",closed:"Бозори ИМА пӯшида",HALOL:"ҲАЛОЛ",SHUBHALI:"ШУБҲАНОК",HAROM:"ҲАРОМ",um:"Бозорҳои ИМА"},
+ ky:{home:"Башкы",sig:"Сигналдар",mkt:"Рынок",hal:"Адал",m:"мүн мурун",h:"саат мурун",d:"күн мурун",open:"АКШ рыногу ачык",pre:"Премаркет",post:"Постмаркет",closed:"АКШ рыногу жабык",HALOL:"АДАЛ",SHUBHALI:"ШЕКТҮҮ",HAROM:"АРАМ",um:"АКШ рыноктору"},
+ tk:{home:"Baş sahypa",sig:"Signallar",mkt:"Bazar",hal:"Halal",m:"min öň",h:"sag öň",d:"gün öň",open:"ABŞ bazary açyk",pre:"Bazardan öň",post:"Bazardan soň",closed:"ABŞ bazary ýapyk",HALOL:"HALAL",SHUBHALI:"ŞÜBHELI",HAROM:"HARAM",um:"ABŞ bazarlary"},
+ "zh-CN":{home:"首页",sig:"信号",mkt:"市场",hal:"清真",m:"分钟前",h:"小时前",d:"天前",open:"美股开盘",pre:"盘前",post:"盘后",closed:"美股休市",HALOL:"清真",SHUBHALI:"存疑",HAROM:"非清真",um:"美国市场"},
+ ja:{home:"ホーム",sig:"シグナル",mkt:"市場",hal:"ハラール",m:"分前",h:"時間前",d:"日前",open:"米国市場オープン",pre:"プレマーケット",post:"アフターマーケット",closed:"米国市場クローズ",HALOL:"ハラール",SHUBHALI:"疑わしい",HAROM:"ハラーム",um:"米国市場"}};
+const UZ={home:"Asosiy",sig:"Signallar",mkt:"Bozor",hal:"Halol",m:"daq oldin",h:"soat oldin",d:"kun oldin",open:"AQSh bozori ochiq",pre:"Pre-market",post:"Post-market",closed:"AQSh bozori yopiq",HALOL:"HALOL",SHUBHALI:"SHUBHALI",HAROM:"HAROM",um:"US Markets"};
+const T=k=>((I18N[LANG]||{})[k])||UZ[k];
+const TS=k=>`<span class="notr">${esc(T(k))}</span>`;
+function navLabels(){document.querySelectorAll("nav button").forEach(b=>{const k=b.dataset.tab;let s=b.querySelector(".lb");if(!s){const ic=b.querySelector(".i");b.textContent="";b.appendChild(ic);s=document.createElement("span");s.className="lb notr";b.appendChild(s)}s.textContent=T(k)})}
 const SITE_LANGS=[["orig","🌐 Asl (tarjimasiz)"],["uz","🇺🇿 O'zbek"],["en","🇺🇸 English"],["ru","🇷🇺 Русский"],["ko","🇰🇷 한국어"],["tr","🇹🇷 Türkçe"],["ar","🇸🇦 العربية"],["zh-CN","🇨🇳 中文"],["ja","🇯🇵 日本語"],["de","🇩🇪 Deutsch"],["kk","🇰🇿 Қазақ"],["tg","🇹🇯 Тоҷикӣ"],["tk","🇹🇲 Türkmen"],["ky","🇰🇬 Кыргыз"]];
 let LANG="uz";try{LANG=localStorage.getItem("pf_lang2")||"uz"}catch(e){}
 let TCACHE={};try{TCACHE=JSON.parse(localStorage.getItem("pf_tc")||"{}")}catch(e){}
@@ -205,6 +223,7 @@ async function applyLang(){
   if(TRBUSY){TRAGAIN=true;return}TRBUSY=true;
   try{
     const nodes=textNodes(document.body);
+    navLabels();mstate();
     if(LANG==="orig"){nodes.forEach(n=>{if(n._o!=null){n.nodeValue=n._o}});const qi=$("#q");qi.placeholder="Tiker qidirish: AAPL, PLUG…";return}
     const C=TCACHE[LANG]=TCACHE[LANG]||{};
     nodes.forEach(n=>{if(n._o==null)n._o=n.nodeValue});
@@ -213,18 +232,19 @@ async function applyLang(){
     let chunk=[],len=0;const chunks=[];
     for(const s of need){if(len+s.length>1400&&chunk.length){chunks.push(chunk);chunk=[];len=0}chunk.push(s.replace(/\n/g," "));len+=s.length+1}
     if(chunk.length)chunks.push(chunk);
-    for(const ch of chunks){
-      try{const t=await gtxBatch(ch,LANG);ch.forEach((s,i)=>C[s]=t[i])}
-      catch(e){for(const s of ch.slice(0,25)){try{C[s]=await translate(s,"auto",LANG)}catch(e2){C[s]=s}}}
-    }
-    nodes.forEach(n=>{const s=n._o.trim();if(C[s]!=null){const lead=n._o.match(/^\s*/)[0],tail=n._o.match(/\s*$/)[0];n.nodeValue=lead+C[s]+tail}});
+    const put=()=>nodes.forEach(n=>{const s=n._o.trim();if(C[s]!=null){const lead=n._o.match(/^\s*/)[0],tail=n._o.match(/\s*$/)[0];n.nodeValue=lead+C[s]+tail}});
+    put();                                                 // keshdagi tarjima — darhol
+    const one=async ch=>{try{const t=await gtxBatch(ch,LANG);ch.forEach((s,i)=>C[s]=t[i])}
+      catch(e){await Promise.all(ch.slice(0,25).map(async s=>{try{C[s]=await translate(s,"auto",LANG)}catch(e2){C[s]=s}}))}put()};
+    for(let k=0;k<chunks.length;k+=5)await Promise.all(chunks.slice(k,k+5).map(one));   // 5 ta parallel
     if(!C.__ph)C.__ph=await translate("Search ticker: AAPL, PLUG…","en",LANG).catch(()=>"AAPL, PLUG…");
     $("#q").placeholder=C.__ph;saveTC();
   }finally{TRBUSY=false;$("#trbusy").style.display="none";document.documentElement.dir=LANG==="ar"?"rtl":"ltr";if(TRAGAIN){TRAGAIN=false;applyLang()}}
 }
 let TRT=null;new MutationObserver(ms=>{if(ms.every(m=>m.target.closest&&m.target.closest(".notr")))return;clearTimeout(TRT);TRT=setTimeout(applyLang,150)}).observe(document.body,{childList:true,subtree:true});
 (function(){const s=$("#lang");s.innerHTML=SITE_LANGS.map(l=>`<option value="${l[0]}" ${l[0]===LANG?"selected":""}>${l[1]}</option>`).join("");
-  s.onchange=()=>{LANG=s.value;try{localStorage.setItem("pf_lang2",LANG)}catch(e){}applyLang()}})();
+  s.onchange=()=>{LANG=s.value;try{localStorage.setItem("pf_lang2",LANG)}catch(e){}navLabels();if(D){mstate();render()}applyLang()}})();
+navLabels();
 function trUrl(u,tl){
   if(!tl||tl==="orig")return u;
   try{const x=new URL(u);const host=x.hostname.replace(/-/g,"--").replace(/\./g,"-")+".translate.goog";
@@ -233,14 +253,14 @@ function trUrl(u,tl){
 }
 function openArticle(i){
   const x=(D.news||[])[i];if(!x)return;
-  const uz=LANG==="uz"&&x.tu;
-  const body=uz?(x.su||""):(x.su||x.d||"");      // boshqa tillarda o'zbekcha xulosa brauzerda o'giriladi
-  let h=`<div class="top"><button class="back">←</button><div class="mut" style="font-size:13px">${esc(x.src)} · ${ago(x.ts)}</div></div><div class="art" style="padding:0 16px">`;
+  const uz=(LANG==="uz"&&x.tu)||(x.tr&&x.tr[LANG]);
+  const body=LANG==="uz"?(x.su||x.d||""):(x.su||x.d||"");      // boshqa tillarda o'zbekcha xulosa brauzerda o'giriladi
+  let h=`<div class="top"><button class="back">←</button><div class="mut" style="font-size:13px"><span class="notr">${esc(x.src)}</span> · ${ago(x.ts)}</div></div><div class="art" style="padding:0 16px">`;
   h+=`<h1 class="${uz?"notr":""}">${esc(NT(x))}</h1>`;
   if(x.i)h+=`<img src="${esc(x.i)}" onerror="this.remove()">`;
-  h+=body?`<div class="sum ${uz?"notr":""}">${esc(body).replace(/\n/g,"<br>")}</div>`:`<div class="sum mut">Qisqa mazmun hali tayyorlanmoqda — bir necha daqiqadan keyin qayta oching.</div>`;
+  h+=body?`<div class="sum ${LANG==="uz"&&x.su?"notr":""}">${esc(body).replace(/\n/g,"<br>")}</div>`:`<div class="sum mut">Qisqa mazmun hali tayyorlanmoqda — bir necha daqiqadan keyin qayta oching.</div>`;
   if(x.ai)h+=`<div class="mut" style="font-size:12px">🤖 Mazmun AI tomonidan o'zbekchaga o'girilib, qisqartirildi.</div>`;
-  h+=`<div class="disc">Manba: ${esc(x.src)} · <a href="#" id="src" style="color:var(--acc2)">asl maqola</a></div></div>`;
+  h+=`<div class="disc">Manba: <span class="notr">${esc(x.src)}</span> · <a href="#" id="src" style="color:var(--acc2)">asl maqola</a></div></div>`;
   const d=$("#detail");d.innerHTML=h;d.style.display="block";d.scrollTop=0;
   d.querySelector(".back").onclick=closeDetail;if(tg&&tg.BackButton){tg.BackButton.show();tg.BackButton.onClick(closeDetail)}
   $("#src").onclick=e=>{e.preventDefault();openLink(x.l)};
