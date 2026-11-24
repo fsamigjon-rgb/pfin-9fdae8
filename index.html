@@ -65,6 +65,39 @@ nav button .i{font-size:20px}nav button.on{color:var(--acc2)}
 .empty{color:var(--mut);text-align:center;padding:30px 0}
 svg.curve{width:100%;height:120px;display:block}
 .langsel{background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:18px;padding:6px 10px;font-size:13px;font-weight:700;max-width:150px}
+.av{border-radius:50%;object-fit:cover;display:grid;place-items:center;color:#fff;font-weight:800;flex:0 0 auto}
+.chead{display:flex;justify-content:space-between;align-items:center;margin:16px 0 12px}.chead h1{font-size:30px;font-weight:800}
+.ib{background:none;border:0;color:var(--tx);font-size:22px;padding:4px}
+.tabs2{display:flex;gap:8px;overflow-x:auto;margin-bottom:14px;scrollbar-width:none}.tabs2 button{flex:0 0 auto;background:none;border:0;color:var(--mut);font-size:17px;font-weight:700;padding:10px 16px;border-radius:16px}
+.tabs2 button.on{background:var(--tx);color:var(--bg)}
+.pc{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:16px;margin-bottom:14px}
+.ph{display:flex;gap:12px;align-items:center;cursor:pointer}.pn{font-size:17px;font-weight:800;display:flex;gap:8px;align-items:center;flex-wrap:wrap}.pdate{color:var(--mut);font-size:13px;margin-top:2px}
+.pimg{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);margin:12px 0;background:linear-gradient(180deg,#160c26,#24123b);aspect-ratio:16/9;cursor:pointer}
+.pimg.big{aspect-ratio:auto;min-height:200px}.pimg img{width:100%;height:100%;object-fit:cover;display:block}.pimg.big img{height:auto;object-fit:contain}.pimg svg{width:100%;height:100%;display:block}
+.tchip{position:absolute;left:10px;bottom:10px;background:rgba(36,36,44,.88);color:#fff;border-radius:22px;padding:4px 14px 4px 4px;display:flex;gap:8px;align-items:center;font-weight:700;font-size:15px}
+.tchip i{width:28px;height:28px;border-radius:50%;background:#fff;color:#111;display:grid;place-items:center;font-style:normal;font-weight:800;font-size:15px}
+.ptitle{font-size:19px;font-weight:800;line-height:1.3;cursor:pointer}.ptext{white-space:pre-wrap;font-size:15px;line-height:1.55;margin:10px 0}
+.pact{display:flex;gap:10px;align-items:center;margin-top:12px}.pill{border:1px solid var(--line);border-radius:22px;padding:7px 16px;display:flex;gap:8px;align-items:center;background:none;color:var(--tx);font-size:16px;font-weight:600}
+.pill.on{color:var(--acc2);border-color:var(--acc2);background:rgba(123,63,228,.12)}.pill0{background:none;border:0;color:var(--tx);font-size:16px;font-weight:600;padding:7px 10px;display:flex;gap:8px;align-items:center}
+.dirb{font-size:11px;font-weight:800;padding:3px 8px;border-radius:6px}.dl{background:rgba(22,199,132,.15);color:var(--up)}.ds{background:rgba(234,57,67,.15);color:var(--dn)}.dn0{background:var(--card2);color:var(--mut)}
+.prem{background:var(--tx);color:var(--bg);font-size:11px;font-weight:800;padding:2px 7px;border-radius:4px;transform:skewX(-10deg);display:inline-block;vertical-align:middle}
+.fab{position:fixed;right:18px;bottom:84px;width:58px;height:58px;border-radius:50%;background:var(--acc);color:#fff;font-size:30px;border:0;box-shadow:0 6px 20px rgba(0,0,0,.45);z-index:7}
+.prof{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;margin-top:14px}
+.stats{display:grid;grid-template-columns:repeat(3,auto);gap:14px;margin-top:10px;justify-content:start}.stats div{display:flex;flex-direction:column;cursor:pointer;font-size:13px;white-space:nowrap}.stats b{font-size:19px}
+.bio{font-size:16px;line-height:1.5;margin:16px 0 6px;white-space:pre-wrap}.joined{margin:12px 0;font-size:15px}
+.socs{display:flex;gap:12px;margin:10px 0 16px}.soc{width:50px;height:50px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--tx);text-decoration:none;font-size:20px;font-weight:800}
+.followbtn{width:100%;background:var(--tx);color:var(--bg);border:0;border-radius:24px;padding:14px;font-size:17px;font-weight:700;margin-top:6px}.followbtn.ing{background:var(--card2);color:var(--tx);border:1px solid var(--line)}
+.fb2{background:var(--tx);color:var(--bg);border:0;border-radius:18px;padding:7px 14px;font-weight:700;font-size:13px;flex:0 0 auto}.fb2.ing{background:var(--card2);color:var(--tx);border:1px solid var(--line)}
+.urow{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.lvls{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}.lvls div{background:var(--card2);border-radius:12px;padding:8px 10px;display:flex;flex-direction:column;font-size:12px}.lvls b{font-size:16px}
+.cm{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}.ctext{white-space:pre-wrap;font-size:15px;margin-top:2px}.cmav{cursor:pointer}
+.cbar{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);display:flex;gap:8px;padding:8px 12px calc(8px + env(safe-area-inset-bottom));z-index:11}
+.cbar textarea{flex:1;background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:18px;padding:10px 14px;font-size:15px;font-family:inherit;resize:none;max-height:120px}
+.form label{display:block;font-size:13px;color:var(--mut);margin:12px 0 6px;font-weight:600}.form input,.form textarea{width:100%;background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:12px;padding:11px;font-size:15px;font-family:inherit}
+.lv3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.imgpick{display:block!important;text-align:center;border:1px dashed var(--line);border-radius:14px;padding:16px!important;margin-top:14px!important;color:var(--tx)!important;cursor:pointer;font-size:15px!important}
+#sheet{position:fixed;inset:0;z-index:30;display:none}.shbg{position:absolute;inset:0;background:rgba(0,0,0,.5)}.sh{position:absolute;left:0;right:0;bottom:0;background:var(--card);border-radius:20px 20px 0 0;padding:10px 10px calc(14px + env(safe-area-inset-bottom))}
+.sh button{display:block;width:100%;text-align:left;background:none;border:0;color:var(--tx);font-size:17px;padding:15px 14px;border-bottom:1px solid var(--line)}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--tx);color:var(--bg);padding:10px 16px;border-radius:14px;font-size:14px;z-index:40;display:none;max-width:90%;text-align:center}
 .grid2c{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
 .ohlc b{color:var(--tx)}
 .trbusy{position:fixed;bottom:74px;left:50%;transform:translateX(-50%);background:var(--acc);color:#fff;padding:6px 14px;border-radius:16px;font-size:12px;z-index:20;display:none}
@@ -102,6 +135,7 @@ svg.curve{width:100%;height:120px;display:block}
   <button data-tab="sig"><span class="i">📡</span>Signallar</button>
   <button data-tab="mkt"><span class="i">📈</span>Bozor</button>
   <button data-tab="hal"><span class="i">☪️</span>Halol</button>
+  <button data-tab="com"><span class="i">👥</span>Hamjamiyat</button>
 </nav>
 <div id="detail"></div><div class="trbusy notr" id="trbusy">🌐 tarjima qilinmoqda…</div>
 <script>
@@ -169,6 +203,7 @@ function render(){
     r.sort((a,b)=>((a[MS.k]??-1e9)>(b[MS.k]??-1e9)?1:-1)*MS.d);
     h+=`<h2>Bozor</h2><div class="seg"><button data-mf="all" class="${MF==="all"?"on":""}">Hammasi</button><button data-mf="halal" class="${MF==="halal"?"on":""}">☪️ Halol</button><button data-mf="penny" class="${MF==="penny"?"on":""}">🪙 ≤ $5</button></div>`+quoteTable(r.slice(0,150));
   }else if(TAB==="home"){h+=newsTab()}
+  else if(TAB==="com"){m.innerHTML=comTab();bindCom(m);return}
 
   else{const L=(D.halal||[]).filter(x=>x.v===HF);
     h+=`<h2>Halollik (AAOIFI + boykot)</h2><div class="seg">${["HALOL","SHUBHALI","HAROM"].map(v=>`<button data-hf="${v}" class="notr ${HF===v?"on":""}">${esc(T(v))} (${(D.halal||[]).filter(x=>x.v===v).length})</button>`).join("")}</div>`;
@@ -210,6 +245,7 @@ const I18N={
  "zh-CN":{home:"首页",sig:"信号",mkt:"市场",hal:"清真",m:"分钟前",h:"小时前",d:"天前",open:"美股开盘",pre:"盘前",post:"盘后",closed:"美股休市",HALOL:"清真",SHUBHALI:"存疑",HAROM:"非清真",um:"美国市场"},
  ja:{home:"ホーム",sig:"シグナル",mkt:"市場",hal:"ハラール",m:"分前",h:"時間前",d:"日前",open:"米国市場オープン",pre:"プレマーケット",post:"アフターマーケット",closed:"米国市場クローズ",HALOL:"ハラール",SHUBHALI:"疑わしい",HAROM:"ハラーム",um:"米国市場"}};
 const UZ={home:"Asosiy",sig:"Signallar",mkt:"Bozor",hal:"Halol",m:"daq oldin",h:"soat oldin",d:"kun oldin",open:"AQSh bozori ochiq",pre:"Pre-market",post:"Post-market",closed:"AQSh bozori yopiq",HALOL:"HALOL",SHUBHALI:"SHUBHALI",HAROM:"HAROM",um:"US Markets"};
+UZ.com="Hamjamiyat";{const CN={en:"Community",ru:"Сообщество",ko:"커뮤니티",tr:"Topluluk",ar:"المجتمع","zh-CN":"社区",ja:"コミュニティ",de:"Community",kk:"Қауымдастық",ky:"Коомчулук",tg:"Ҷомеа",tk:"Jemgyýet"};for(const k in CN)if(I18N[k])I18N[k].com=CN[k]}
 const T=k=>((I18N[LANG]||{})[k])||UZ[k];
 const TS=k=>`<span class="notr">${esc(T(k))}</span>`;
 function navLabels(){document.querySelectorAll("nav button").forEach(b=>{const k=b.dataset.tab;let s=b.querySelector(".lb");if(!s){const ic=b.querySelector(".i");b.textContent="";b.appendChild(ic);s=document.createElement("span");s.className="lb notr";b.appendChild(s)}s.textContent=T(k)})}
@@ -417,7 +453,7 @@ async function yhist(t){
   return null}
 function detailShell(name,sym){
   const d=$("#detail");d.innerHTML=`<div class="top"><button class="back">←</button><div><div class="tk notr">${esc(name||sym)}</div><div class="mut notr" style="font-size:12px">${esc(sym)}</div></div></div><div style="padding:0 16px" id="symbody"></div>`;
-  d.style.display="block";d.scrollTop=0;d.querySelector(".back").onclick=closeDetail;if(tg&&tg.BackButton){tg.BackButton.show();tg.BackButton.onClick(closeDetail)}
+  d.style.display="block";d.scrollTop=0;d.querySelector(".back").onclick=goBack;if(tg&&tg.BackButton){tg.BackButton.offClick(goBack);tg.BackButton.show();tg.BackButton.onClick(goBack)}
   return $("#symbody")}
 function tvView(b,sym,isIndex){
   const theme=tvTheme();
@@ -447,7 +483,206 @@ async function openDetail(t){
   else{tvView(b,tvSym(t),false);tail();tvExtras(b,tvSym(t))}
   return b;
 }
-function closeDetail(){$("#detail").style.display="none";if(tg&&tg.BackButton)tg.BackButton.hide()}
+// ===================== 👥 HAMJAMIYAT =====================
+const CTOPIC="pfc-6f06606180208d6b259f1ed9",CPUB_S='{"kty": "RSA", "n": "zxB3o2a1Ih5YLObM1D2anrvpUYae6DcGyZpu6Hmmx6pH6-qb_sGducZ-lMCH4kjF8u8CfaltYweGgXOlXGNhZ17zcMn3ACN6-Cg35XgnUCmKFrLPFPSz8l03vgE7jEvSGxTLOePDlEjSoeR1QAcUHSE5TdEc0kdPz-ZMTBFpKDe0t1j-_h1k5a-MMKNYBdlQVGfPtvPDf12HBJviv_N43FP2zIrGrsguo-Z2DdhLd4QPabhviReaOApT82vY2Pqj3n-LQ3-4fp6q9vU9meIPwbBdadINHD_rPFeIIDIe6ojMG9b8ghNxgK3n_lq53tBAZpCl716H1rkd04hmiMW3Hw", "e": "AQAB", "alg": "RSA-OAEP-256", "ext": true}';
+const RAWB=DATA_URLS[0].startsWith("__")?"":DATA_URLS[0].replace(/data\.json$/,"");
+const ME=(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user)||null,MEID=ME?String(ME.id):"";
+let C=null,CF="you",STACK=[],PEND=[];
+try{PEND=JSON.parse(localStorage.getItem("pf_pend")||"[]")}catch(e){PEND=[]}
+const CXD={
+ uz:{you:"Siz uchun",picks:"Tahrirchi tanlovi",fwing:"Obunalar",fol:"Obunachilar",fw:"Obunalar",ideas:"G'oyalar",fbtn:"Obuna bo'lish",fing:"Obunadasiz ✓",edit:"Profilni tahrirlash",pubs:"Nashrlar",joined:"Qo'shilgan",prof:"Profil",cms:"Izohlar",wcm:"Izoh yozing…",newi:"Yangi g'oya",pub:"Joylash",share:"Ulashish",copy:"Havolani nusxalash",del:"O'chirish",rep:"Shikoyat qilish",long:"Long ▲",short:"Short ▼",neu:"Neytral",entry:"Kirish",tp:"Nishon",sl:"Stop",com:"Hamjamiyat",srch:"Qidirish",save:"Saqlash",bio:"O'zim haqimda",web:"Veb-sayt",title:"Sarlavha",text:"G'oya matni (tahlil, sabab, reja)",sym:"Tiker (masalan SPY)",tf:"Vaqt oralig'i",dir:"Yo'nalish",img:"📷 Grafik skrinshoti",sending:"⏳ yuborilmoqda…",sent:"✅ Yuborildi — lentada 1 daqiqa ichida chiqadi",empty:"Hali g'oya yo'q. Birinchi bo'lib joylang!",nofw:"Hali hech kimga obuna bo'lmagansiz. Tavsiya etilgan mualliflar:",tgonly:"Yozish uchun ilovani Telegram ichida oching",subonly:"Yozish faqat obunachilar uchun",sug:"Tavsiya etilgan mualliflar",users:"Mualliflar",pinfo:"Daromad kafolati emas. Har bir g'oya — muallifning shaxsiy fikri."},
+ en:{you:"For you",picks:"Editors' picks",fwing:"Following",fol:"Followers",fw:"Following",ideas:"Ideas",fbtn:"Follow",fing:"Following ✓",edit:"Edit profile",pubs:"Publications",joined:"Joined",prof:"Profile",cms:"Comments",wcm:"Write a comment…",newi:"New idea",pub:"Publish",share:"Share",copy:"Copy link",del:"Delete",rep:"Report",long:"Long ▲",short:"Short ▼",neu:"Neutral",entry:"Entry",tp:"Target",sl:"Stop",com:"Community",srch:"Search",save:"Save",bio:"About me",web:"Website",title:"Title",text:"Idea text (analysis, reason, plan)",sym:"Ticker (e.g. SPY)",tf:"Timeframe",dir:"Direction",img:"📷 Chart screenshot",sending:"⏳ sending…",sent:"✅ Sent — appears in the feed within a minute",empty:"No ideas yet. Be the first to publish!",nofw:"You don't follow anyone yet. Suggested authors:",tgonly:"Open the app inside Telegram to post",subonly:"Posting is for subscribers only",sug:"Suggested authors",users:"Authors",pinfo:"Not financial advice. Each idea is the author's personal opinion."},
+ ru:{you:"Для вас",picks:"Выбор редакции",fwing:"Подписки",fol:"Подписчики",fw:"Подписки",ideas:"Идеи",fbtn:"Подписаться",fing:"Вы подписаны ✓",edit:"Редактировать профиль",pubs:"Публикации",joined:"С нами с",prof:"Профиль",cms:"Комментарии",wcm:"Напишите комментарий…",newi:"Новая идея",pub:"Опубликовать",share:"Поделиться",copy:"Копировать ссылку",del:"Удалить",rep:"Пожаловаться",long:"Лонг ▲",short:"Шорт ▼",neu:"Нейтрально",entry:"Вход",tp:"Цель",sl:"Стоп",com:"Сообщество",srch:"Поиск",save:"Сохранить",bio:"О себе",web:"Сайт",title:"Заголовок",text:"Текст идеи (анализ, причина, план)",sym:"Тикер (напр. SPY)",tf:"Таймфрейм",dir:"Направление",img:"📷 Скриншот графика",sending:"⏳ отправка…",sent:"✅ Отправлено — появится в ленте в течение минуты",empty:"Идей пока нет. Опубликуйте первой!",nofw:"Вы ещё ни на кого не подписаны. Рекомендуемые авторы:",tgonly:"Чтобы писать, откройте приложение в Telegram",subonly:"Писать могут только подписчики",sug:"Рекомендуемые авторы",users:"Авторы",pinfo:"Не является инвестиционной рекомендацией. Каждая идея — личное мнение автора."},
+ ko:{you:"추천",picks:"에디터 픽",fwing:"팔로잉",fol:"팔로워",fw:"팔로잉",ideas:"아이디어",fbtn:"팔로우",fing:"팔로잉 ✓",edit:"프로필 편집",pubs:"게시물",joined:"가입일",prof:"프로필",cms:"댓글",wcm:"댓글 쓰기…",newi:"새 아이디어",pub:"게시",share:"공유",copy:"링크 복사",del:"삭제",rep:"신고",long:"롱 ▲",short:"숏 ▼",neu:"중립",entry:"진입",tp:"목표",sl:"손절",com:"커뮤니티",srch:"검색",save:"저장",bio:"자기소개",web:"웹사이트",title:"제목",text:"아이디어 내용 (분석, 이유, 계획)",sym:"티커 (예: SPY)",tf:"시간 단위",dir:"방향",img:"📷 차트 스크린샷",sending:"⏳ 전송 중…",sent:"✅ 전송됨 — 1분 안에 피드에 표시됩니다",empty:"아직 아이디어가 없습니다. 첫 게시물을 올려보세요!",nofw:"아직 팔로우한 사람이 없습니다. 추천 작성자:",tgonly:"글을 쓰려면 텔레그램에서 앱을 여세요",subonly:"구독자만 글을 쓸 수 있습니다",sug:"추천 작성자",users:"작성자",pinfo:"투자 권유가 아닙니다. 각 아이디어는 작성자의 개인 의견입니다."},
+ tr:{you:"Senin için",picks:"Editörün seçimi",fwing:"Takip edilenler",fol:"Takipçiler",fw:"Takip",ideas:"Fikirler",fbtn:"Takip et",fing:"Takip ediliyor ✓",edit:"Profili düzenle",pubs:"Yayınlar",joined:"Katılım",prof:"Profil",cms:"Yorumlar",wcm:"Yorum yaz…",newi:"Yeni fikir",pub:"Yayınla",share:"Paylaş",copy:"Bağlantıyı kopyala",del:"Sil",rep:"Şikayet et",long:"Long ▲",short:"Short ▼",neu:"Nötr",entry:"Giriş",tp:"Hedef",sl:"Stop",com:"Topluluk",srch:"Ara",save:"Kaydet",bio:"Hakkımda",web:"Web sitesi",title:"Başlık",text:"Fikir metni (analiz, neden, plan)",sym:"Sembol (ör. SPY)",tf:"Zaman dilimi",dir:"Yön",img:"📷 Grafik ekran görüntüsü",sending:"⏳ gönderiliyor…",sent:"✅ Gönderildi — bir dakika içinde akışta",empty:"Henüz fikir yok. İlk sen paylaş!",nofw:"Henüz kimseyi takip etmiyorsun. Önerilen yazarlar:",tgonly:"Yazmak için uygulamayı Telegram'da aç",subonly:"Sadece aboneler yazabilir",sug:"Önerilen yazarlar",users:"Yazarlar",pinfo:"Yatırım tavsiyesi değildir. Her fikir yazarın kişisel görüşüdür."}};
+function CX(k){const v=(CXD[LANG]||{})[k];if(v)return `<span class="notr">${esc(v)}</span>`;if(LANG==="uz"||LANG==="orig")return `<span class="notr">${esc(CXD.uz[k])}</span>`;return esc(CXD.uz[k])}
+function CXt(k){return (CXD[LANG]||{})[k]||CXD.uz[k]}
+function toast(t){let e=$("#toast");if(!e){e=document.createElement("div");e.id="toast";e.className="toast";document.body.appendChild(e)}e.innerHTML=t;e.style.display="block";clearTimeout(e._t);e._t=setTimeout(()=>e.style.display="none",3200)}
+async function loadC(){
+  try{const r=await fetch((RAWB||"")+"community.json?t="+Date.now(),{cache:"no-store"});if(r.ok){C=await r.json();
+    const done=new Set(C.done||[]);PEND=PEND.filter(a=>!done.has(a.id)&&Date.now()/1000-a.ts<7200);savePend();comRefresh()}}catch(e){}
+  if(!C)C={users:{},posts:[],done:[],banned:[]};
+}
+function savePend(){try{localStorage.setItem("pf_pend",JSON.stringify(PEND.map(a=>Object.assign({},a,{_img:undefined}))))}catch(e){}}
+function V(){ // server holati + hali yetib kelmagan o'z harakatlarim
+  const X=JSON.parse(JSON.stringify(C||{users:{},posts:[]}));X.users=X.users||{};X.posts=X.posts||[];
+  const me=MEID;if(me&&!X.users[me])X.users[me]={n:[ME.first_name,ME.last_name].filter(Boolean).join(" ")||ME.username||"Men",u:ME.username||"",ph:ME.photo_url||"",joined:Math.floor(Date.now()/1000),fol:[],fw:[],b:""};
+  for(const a of PEND){const U=X.users[me];const p=X.posts.find(x=>x.id===a.pid);
+    if(a.t==="post")X.posts.unshift({id:"tmp-"+a.id,uid:me,ts:a.ts,sym:a.sym,tf:a.tf,dir:a.dir,title:a.title,text:a.text,entry:a.entry,tp:a.tp,sl:a.sl,rk:[],cm:[],pend:true,limg:a._img||""});
+    else if(a.t==="del")X.posts=X.posts.filter(x=>x.id!==a.pid);
+    else if(a.t==="rk"&&p){const i=p.rk.indexOf(me);i>=0?p.rk.splice(i,1):p.rk.push(me)}
+    else if(a.t==="cm"&&p)p.cm.push({id:"tmp-"+a.id,uid:me,ts:a.ts,text:a.text,pend:true});
+    else if(a.t==="dcm"&&p)p.cm=p.cm.filter(c=>c.id!==a.cid);
+    else if(a.t==="pick"&&p)p.ed=!p.ed;
+    else if(a.t==="fl"&&U&&X.users[a.uid]){const T_=X.users[a.uid];T_.fol=T_.fol||[];U.fw=U.fw||[];if(U.fw.includes(a.uid)){U.fw=U.fw.filter(z=>z!==a.uid);T_.fol=T_.fol.filter(z=>z!==me)}else{U.fw.push(a.uid);T_.fol.push(me)}}
+    else if(a.t==="profile"&&U){U.bio=a.bio;U.x=a.x;U.yt=a.yt;U.web=a.web}}
+  return X}
+const b64=buf=>btoa(String.fromCharCode(...new Uint8Array(buf)));
+async function sha256hex(s){const h=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s));return [...new Uint8Array(h)].map(x=>x.toString(16).padStart(2,"0")).join("")}
+async function seal(a){const as=JSON.stringify(a);const h=await sha256hex(as);const sec=new TextEncoder().encode(JSON.stringify({i:(tg&&tg.initData)||"",h}));
+  const key=await crypto.subtle.importKey("jwk",JSON.parse(CPUB_S),{name:"RSA-OAEP",hash:"SHA-256"},false,["encrypt"]);const k=[];
+  for(let i=0;i<sec.length;i+=190)k.push(b64(await crypto.subtle.encrypt({name:"RSA-OAEP"},key,sec.slice(i,i+190))));return JSON.stringify({v:1,a:as,k})}
+function canWrite(){if(!(tg&&tg.initData)){toast(CX("tgonly"));return false}if(CTOPIC.startsWith("__")){toast("⚠️ /webapp update");return false}return true}
+async function act(a,img){
+  if(!canWrite())return false;
+  a.id=Date.now().toString(36)+Math.random().toString(36).slice(2,8);a.ts=Math.floor(Date.now()/1000);
+  const loc=Object.assign({},a);if(img)loc._img=URL.createObjectURL(img);PEND.push(loc);savePend();comRefresh();
+  try{
+    if(img){const r=await fetch("https://ntfy.sh/"+CTOPIC+"?filename=chart.jpg&tags=img",{method:"PUT",body:img});const j=await r.json();if(j.attachment&&j.attachment.url)a.img=j.attachment.url}
+    const body=await seal(a);const r=await fetch("https://ntfy.sh/"+CTOPIC+"?tags=pfa",{method:"POST",body});if(!r.ok)throw new Error(r.status);
+    [20,45,90,180].forEach(s=>setTimeout(loadC,s*1000));return true
+  }catch(e){PEND=PEND.filter(x=>x.id!==a.id);savePend();comRefresh();toast("❌ Yuborilmadi, internetni tekshiring");return false}
+}
+// ---- yordamchilar ----
+const MON_UZ=["yan","fev","mar","apr","may","iyn","iyl","avg","sen","okt","noy","dek"];
+function dfmt(ts,yr){const d=new Date(ts*1000);if(LANG==="uz"||LANG==="orig")return d.getDate()+" "+MON_UZ[d.getMonth()]+(yr?" "+d.getFullYear():"");return d.toLocaleDateString(LANG,{day:"numeric",month:"short",year:yr?"numeric":undefined})}
+function when(ts){return Date.now()/1000-ts<86400?ago(ts):`<span class="notr">${esc(dfmt(ts,new Date(ts*1000).getFullYear()!==new Date().getFullYear()))}</span>`}
+function avatar(U,uid,sz){sz=sz||46;if(uid==="bot")return `<div class="av" style="width:${sz}px;height:${sz}px;font-size:${sz*.36}px;background:linear-gradient(135deg,#7b3fe4,#2f6bff)">PF</div>`;
+  if(U&&U.ph)return `<img class="av" src="${esc(U.ph)}" style="width:${sz}px;height:${sz}px" loading="lazy" onerror="this.outerHTML='<div class=&quot;av&quot; style=&quot;width:${sz}px;height:${sz}px;background:#3a8f72&quot;>${esc(((U&&U.n)||"?")[0].toUpperCase())}</div>'">`;
+  const n=(U&&U.n)||"?";let h=0;for(const c of String(uid))h=(h*31+c.charCodeAt(0))%360;
+  return `<div class="av notr" style="width:${sz}px;height:${sz}px;font-size:${sz*.42}px;background:hsl(${h},45%,42%)">${esc(n[0].toUpperCase())}</div>`}
+function badge(U){const b=U&&U.b;return b==="official"?`<span class="prem" style="background:var(--acc2);color:#fff">✓ RASMIY</span>`:b==="admin"?`<span class="prem">ADMIN</span>`:b==="pro"?`<span class="prem">PRO</span>`:b==="premium"?`<span class="prem">PREMIUM</span>`:""}
+function dirB(p){return p.dir==="long"?`<span class="dirb dl">${CX("long")}</span>`:p.dir==="short"?`<span class="dirb ds">${CX("short")}</span>`:`<span class="dirb dn0">${CX("neu")}</span>`}
+function imgUrl(p){return p.limg||(p.img?(RAWB+p.img):"")}
+function preview(p){const s=p.s||[];if(s.length<10)return `<div style="display:grid;place-items:center;height:100%;color:#7d6aa8;font-size:40px;font-weight:800" class="notr">${esc(p.sym)}</div>`;
+  const W=640,H=360,s0=Math.min(...s),s1=Math.max(...s),lv=[p.entry,p.tp,p.sl].filter(v=>v>s0*.6&&v<s1*1.6);let lo=Math.min(...s,...lv),hi=Math.max(...s,...lv);const pd=(hi-lo)*.08||1;lo-=pd;hi+=pd;
+  const X=i=>i/(s.length-1)*(W-60),Y=v=>(hi-v)/(hi-lo)*(H-20)+10;const pts=s.map((v,i)=>`${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(" ");
+  const up=s[s.length-1]>=s[0];const col=up?"#26c6a0":"#ef5f86";
+  const ln=(v,c,t)=>lv.includes(v)?`<line x1="0" x2="${W-60}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}" stroke="${c}" stroke-width="2" stroke-dasharray="7 6"/><text x="${W-4}" y="${(Y(v)+5).toFixed(1)}" fill="${c}" font-size="17" text-anchor="end" font-weight="700">${t}</text>`:"";
+  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><defs><linearGradient id="g${esc(p.id)}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${col}" stop-opacity=".35"/><stop offset="1" stop-color="${col}" stop-opacity="0"/></linearGradient></defs>
+  <text x="${(W-60)/2}" y="${H/2+18}" fill="#ffffff" fill-opacity=".07" font-size="64" font-weight="800" text-anchor="middle">${esc(p.sym)}, ${esc(p.tf||"1D")}</text>
+  <polygon points="0,${H} ${pts} ${W-60},${H}" fill="url(#g${esc(p.id)})"/><polyline points="${pts}" fill="none" stroke="${col}" stroke-width="2.4"/>${ln(p.tp,"#26c6a0","TP")}${ln(p.entry,"#9aa4ff","IN")}${ln(p.sl,"#ef5f86","SL")}</svg>`}
+function tchip(p){return `<div class="tchip notr" data-sym="${esc(p.sym)}"><i>${esc(p.sym[0])}</i>${esc(p.sym)}</div>`}
+function postCard(p,X){const U=X.users[p.uid]||{n:"?"};const mine=MEID&&p.rk.includes(MEID);const im=imgUrl(p);
+  return `<div class="pc" data-pid="${esc(p.id)}"><div class="ph" data-uid="${esc(p.uid)}">${avatar(U,p.uid)}<div style="min-width:0"><div class="pn"><span class="notr">${esc(U.n)}</span> ${dirB(p)}${p.ed?' <span title="Editors pick">⭐</span>':""}</div><div class="pdate">${when(p.ts)}${p.pend?" · "+CX("sending"):""}</div></div></div>
+  <div class="pimg" data-open="${esc(p.id)}">${im?`<img src="${esc(im)}" loading="lazy">`:preview(p)}${tchip(p)}</div>
+  <div class="ptitle" data-open="${esc(p.id)}">${esc(p.title)}</div>
+  <div class="pact"><button class="pill ${mine?"on":""}" data-rk="${esc(p.id)}">🚀 <span class="notr">${p.rk.length}</span></button><button class="pill0" data-open="${esc(p.id)}">💬 <span class="notr">${p.cm.length}</span></button><button class="pill0" data-menu="${esc(p.id)}">•••</button></div></div>`}
+function rankYou(X){const fw=new Set(((X.users[MEID]||{}).fw)||[]);const now=Date.now()/1000;
+  return X.posts.slice().sort((a,b)=>{const sc=p=>(1+p.rk.length*2+p.cm.length*3+(p.ed?8:0)+(fw.has(p.uid)?5:0)+(p.pend?50:0))/Math.pow((now-p.ts)/3600+2,1.25);return sc(b)-sc(a)})}
+function sugUsers(X,n){return Object.entries(X.users).filter(([k])=>k!==MEID).map(([k,U])=>[k,U,X.posts.filter(p=>p.uid===k).length,(U.fol||[]).length]).filter(x=>x[2]>0).sort((a,b)=>b[3]*3+b[2]-(a[3]*3+a[2])).slice(0,n)}
+function userRow(k,U,X){const me=X.users[MEID]||{};const f=(me.fw||[]).includes(k);
+  return `<div class="urow" data-uid="${esc(k)}">${avatar(U,k,42)}<div style="flex:1;min-width:0"><div style="font-weight:700"><span class="notr">${esc(U.n)}</span> ${badge(U)}</div><div class="mut notr" style="font-size:12px">${(U.fol||[]).length} · ${X.posts.filter(p=>p.uid===k).length} 💡</div></div>${k!==MEID&&MEID?`<button class="fb2 ${f?"ing":""}" data-fl="${esc(k)}">${f?CX("fing"):CX("fbtn")}</button>`:""}</div>`}
+function comTab(){
+  if(!C){loadC();return `<div class="empty">${TA("load")}</div>`}
+  const X=V();let L=CF==="picks"?X.posts.filter(p=>p.ed):CF==="fwing"?X.posts.filter(p=>((X.users[MEID]||{}).fw||[]).includes(p.uid)||p.uid===MEID):rankYou(X);
+  if(CF==="picks"||CF==="fwing")L=L.sort((a,b)=>b.ts-a.ts);
+  const me=X.users[MEID];
+  let h=`<div class="chead"><h1>${CX("com")}</h1><div style="display:flex;gap:12px;align-items:center"><button class="ib" id="csrch">🔍</button>${MEID?`<span id="myav">${avatar(me,MEID,40)}</span>`:""}</div></div>
+  <div class="tabs2">${["you","picks","fwing"].map(k=>`<button data-cf="${k}" class="${CF===k?"on":""}">${CX(k)}</button>`).join("")}</div>`;
+  if(CF==="fwing"&&!L.length){h+=`<div class="mut" style="margin:10px 0">${CX("nofw")}</div>`+sugUsers(X,10).map(x=>userRow(x[0],x[1],X)).join("")}
+  else h+=L.length?L.slice(0,80).map(p=>postCard(p,X)).join(""):`<div class="empty">${CX("empty")}</div>`;
+  h+=`<div class="disc">${CX("pinfo")}</div><button class="fab" id="fab">＋</button>`;
+  return h}
+function bindCom(root){root=root||document;
+  root.querySelectorAll("[data-cf]").forEach(e=>e.onclick=()=>{CF=e.dataset.cf;render()});
+  root.querySelectorAll("[data-open]").forEach(e=>e.onclick=()=>openPost(e.dataset.open));
+  root.querySelectorAll(".ph[data-uid],.urow[data-uid]").forEach(e=>e.onclick=ev=>{if(ev.target.closest("[data-fl]"))return;openProfile(e.dataset.uid)});
+  root.querySelectorAll("[data-rk]").forEach(e=>e.onclick=ev=>{ev.stopPropagation();if(e.dataset.rk.startsWith("tmp-"))return;act({t:"rk",pid:e.dataset.rk})});
+  root.querySelectorAll("[data-menu]").forEach(e=>e.onclick=ev=>{ev.stopPropagation();postMenu(e.dataset.menu)});
+  root.querySelectorAll("[data-fl]").forEach(e=>e.onclick=ev=>{ev.stopPropagation();act({t:"fl",uid:e.dataset.fl})});
+  root.querySelectorAll(".tchip[data-sym]").forEach(e=>e.onclick=ev=>{ev.stopPropagation();openDetail(e.dataset.sym)});
+  const f=root.querySelector("#fab");if(f)f.onclick=openCompose;
+  const s=root.querySelector("#csrch");if(s)s.onclick=openComSearch;
+  const m=root.querySelector("#myav");if(m)m.onclick=()=>openProfile(MEID);
+}
+// ---- sahifa stek (orqaga tugmasi) ----
+function goBack(){STACK.pop();if(STACK.length){STACK[STACK.length-1].fn(true)}else{$("#detail").style.display="none";if(tg&&tg.BackButton)tg.BackButton.hide()}}
+function pushPage(fn,com){if($("#detail").style.display!=="block")STACK=[];STACK.push({fn,com});fn(false)}
+function pageShell(title,keep,right){const d=$("#detail");const st=keep?d.scrollTop:0;
+  d.innerHTML=`<div class="top"><button class="back">←</button><div style="flex:1;font-size:20px;font-weight:800">${title}</div>${right||""}</div><div style="padding:0 16px 90px" id="pg"></div>`;
+  d.style.display="block";d.querySelector(".back").onclick=goBack;if(tg&&tg.BackButton){tg.BackButton.offClick(goBack);tg.BackButton.show();tg.BackButton.onClick(goBack)}
+  requestAnimationFrame(()=>d.scrollTop=st);return $("#pg")}
+function comRefresh(){if(TAB==="com"&&$("#detail").style.display!=="block"){const y=scrollY;render();scrollTo(0,y)}const t=STACK[STACK.length-1];if(t&&t.com&&$("#detail").style.display==="block"&&!document.activeElement.matches("textarea,input"))t.fn(true)}
+// ---- g'oya sahifasi ----
+function openPost(pid){pushPage(keep=>{const X=V();const p=X.posts.find(x=>x.id===pid);const g=pageShell(p?`<span class="notr">${esc(p.sym)}</span>`:"",keep);
+  if(!p){g.innerHTML=`<div class="empty">—</div>`;return}
+  const U=X.users[p.uid]||{n:"?"};const me=X.users[MEID]||{};const f=(me.fw||[]).includes(p.uid);const im=imgUrl(p);
+  let h=`<div class="ph" data-uid="${esc(p.uid)}" style="margin-top:14px">${avatar(U,p.uid)}<div style="flex:1;min-width:0"><div class="pn"><span class="notr">${esc(U.n)}</span> ${badge(U)}</div><div class="pdate">${when(p.ts)} · <span class="notr">${esc(p.tf||"1D")}</span></div></div>${p.uid!==MEID&&MEID?`<button class="fb2 ${f?"ing":""}" data-fl="${esc(p.uid)}">${f?CX("fing"):CX("fbtn")}</button>`:""}</div>
+  <div class="pimg big" id="pimgbig">${im?`<img src="${esc(im)}">`:preview(p)}${tchip(p)}</div>
+  <div class="ptitle" style="font-size:22px">${esc(p.title)}</div><div style="margin:8px 0">${dirB(p)}${p.ed?' <span class="dirb dn0">⭐ '+CXt("picks")+'</span>':""}</div>`;
+  if(p.entry||p.tp||p.sl)h+=`<div class="lvls notr">${p.entry?`<div><span class="mut">${CX("entry")}</span><b>${fmt(p.entry)}</b></div>`:""}${p.tp?`<div><span class="mut">${CX("tp")}</span><b class="up">${fmt(p.tp)}</b></div>`:""}${p.sl?`<div><span class="mut">${CX("sl")}</span><b class="dn">${fmt(p.sl)}</b></div>`:""}</div>`;
+  if(p.text)h+=`<div class="ptext">${esc(p.text)}</div>`;
+  h+=`<div class="pact"><button class="pill ${p.rk.includes(MEID)?"on":""}" data-rk="${esc(p.id)}">🚀 <span class="notr">${p.rk.length}</span></button><button class="pill0">💬 <span class="notr">${p.cm.length}</span></button><button class="pill0" data-menu="${esc(p.id)}">•••</button></div>
+  <h2>${CX("cms")}</h2>`+(p.cm.map(c=>{const CU=X.users[c.uid]||{n:"?"};const can=MEID&&(c.uid===MEID||p.uid===MEID||(X.users[MEID]||{}).b==="admin");
+    return `<div class="cm"><span data-uid="${esc(c.uid)}" class="cmav">${avatar(CU,c.uid,34)}</span><div style="flex:1;min-width:0"><div><b class="notr">${esc(CU.n)}</b> <span class="mut" style="font-size:12px">${when(c.ts)}${c.pend?" · ⏳":""}</span></div><div class="ctext">${esc(c.text)}</div></div>${can&&!c.pend?`<button class="ib" data-dcm="${esc(c.id)}">✕</button>`:""}</div>`}).join("")||`<div class="mut" style="margin:6px 0 10px">—</div>`)+
+  `<div class="disc">${CX("pinfo")}</div>`;
+  g.innerHTML=h;
+  const bar=document.createElement("div");bar.className="cbar";bar.innerHTML=`<textarea id="cmin" rows="1" placeholder="${esc(CXt("wcm"))}"></textarea><button class="btn" id="cmsend" style="width:auto;padding:10px 16px">➤</button>`;g.appendChild(bar);
+  bindCom(g);
+  g.querySelectorAll(".cmav[data-uid]").forEach(e=>e.onclick=()=>openProfile(e.dataset.uid));
+  g.querySelectorAll("[data-dcm]").forEach(e=>e.onclick=()=>act({t:"dcm",pid:p.id,cid:e.dataset.dcm}));
+  const pb=g.querySelector("#pimgbig img");if(pb)pb.onclick=()=>window.open(pb.src,"_blank");
+  g.querySelector("#cmsend").onclick=async()=>{const v=g.querySelector("#cmin").value.trim();if(!v)return;if(p.pend){toast(CX("sending"));return}g.querySelector("#cmin").value="";document.activeElement.blur();await act({t:"cm",pid:p.id,text:v.slice(0,600)})};
+ },true)}
+// ---- profil ----
+function openProfile(uid){pushPage(keep=>{const X=V();const U=X.users[uid];const g=pageShell(CX("prof"),keep);
+  if(!U){g.innerHTML=`<div class="empty">—</div>`;return}
+  const me=X.users[MEID]||{};const f=(me.fw||[]).includes(uid);const posts=X.posts.filter(p=>p.uid===uid).sort((a,b)=>b.ts-a.ts);
+  let soc="";if(U.x)soc+=`<a class="soc" href="https://x.com/${esc(U.x)}" target="_blank">𝕏</a>`;if(U.yt)soc+=`<a class="soc" href="${esc(U.yt)}" target="_blank">▶</a>`;if(U.web)soc+=`<a class="soc" href="${esc(U.web)}" target="_blank">🌐</a>`;
+  if(U.u)soc+=`<a class="soc" href="https://t.me/${esc(U.u)}" target="_blank">✈</a>`;
+  let h=`<div class="prof"><div style="display:flex;gap:18px;align-items:center">${avatar(U,uid,96)}<div style="min-width:0"><div style="font-size:24px;font-weight:800;line-height:1.2"><span class="notr">${esc(U.n)}</span> ${badge(U)}</div>
+  <div class="stats"><div data-ul="fol"><span class="mut">${CX("fol")}</span><b class="notr">${(U.fol||[]).length}</b></div><div data-ul="fw"><span class="mut">${CX("fw")}</span><b class="notr">${(U.fw||[]).length}</b></div><div><span class="mut">${CX("ideas")}</span><b class="notr">${posts.length}</b></div></div></div></div>
+  ${U.bio?`<div class="bio">${esc(U.bio)}</div>`:""}
+  <div class="mut joined"><b style="color:var(--tx)">PF</b> ${CX("joined")} <span class="notr">${esc(dfmt(U.joined||0,true))}</span>${U.u?` · <span class="notr">@${esc(U.u)}</span>`:""}</div>
+  ${soc?`<div class="socs">${soc}</div>`:""}
+  ${uid===MEID?`<button class="followbtn ing" id="editp">${CX("edit")}</button>`:MEID?`<button class="followbtn ${f?"ing":""}" data-fl="${esc(uid)}">${f?CX("fing"):CX("fbtn")}</button>`:""}</div>
+  <h1 style="font-size:26px;margin:22px 0 12px">${CX("pubs")}</h1>`+(posts.length?posts.map(p=>postCard(p,X)).join(""):`<div class="empty">${CX("empty")}</div>`);
+  g.innerHTML=h;bindCom(g);
+  g.querySelectorAll("[data-ul]").forEach(e=>e.onclick=()=>openUserList(uid,e.dataset.ul));
+  const ep=g.querySelector("#editp");if(ep)ep.onclick=openEditProfile;
+ },true)}
+function openUserList(uid,kind){pushPage(keep=>{const X=V();const U=X.users[uid]||{};const g=pageShell(`<span class="notr">${esc(U.n||"")}</span> · ${CX(kind)}`,keep);
+  const ids=(U[kind]||[]).filter(k=>X.users[k]);g.innerHTML=ids.length?ids.map(k=>userRow(k,X.users[k],X)).join(""):`<div class="empty">—</div>`;bindCom(g)},true)}
+function openEditProfile(){pushPage(()=>{const X=V();const U=X.users[MEID]||{};const g=pageShell(CX("edit"));
+  g.innerHTML=`<div class="form"><label>${CX("bio")}</label><textarea id="ebio" maxlength="200" rows="3">${esc(U.bio||"")}</textarea>
+  <label>X (Twitter) username</label><input id="ex" maxlength="30" value="${esc(U.x||"")}" placeholder="username">
+  <label>YouTube</label><input id="eyt" value="${esc(U.yt||"")}" placeholder="https://youtube.com/@...">
+  <label>${CX("web")}</label><input id="eweb" value="${esc(U.web||"")}" placeholder="https://...">
+  <div class="mut" style="font-size:12px;margin:8px 0">Ism va rasm Telegram profilingizdan olinadi.</div><button class="btn" id="esave">${CX("save")}</button></div>`;
+  g.querySelector("#esave").onclick=async()=>{const v=id=>g.querySelector(id).value.trim();if(await act({t:"profile",bio:v("#ebio"),x:v("#ex"),yt:v("#eyt"),web:v("#eweb")})){toast(CX("sent"));goBack()}}},false)}
+// ---- g'oya joylash ----
+async function shrink(file){try{const bm=await createImageBitmap(file);const k=Math.min(1,1280/Math.max(bm.width,bm.height));const cv=document.createElement("canvas");cv.width=Math.round(bm.width*k);cv.height=Math.round(bm.height*k);cv.getContext("2d").drawImage(bm,0,0,cv.width,cv.height);return await new Promise(r=>cv.toBlob(r,"image/jpeg",.82))}catch(e){return null}}
+function openCompose(){if(!canWrite())return;pushPage(()=>{const g=pageShell(CX("newi"));let IMG=null,DIR="long";
+  g.innerHTML=`<div class="form"><label>${CX("sym")}</label><input id="nsym" maxlength="12" autocapitalize="characters" placeholder="SPY">
+  <label>${CX("tf")}</label><div class="seg" id="ntf">${["15m","1H","4H","1D","1W","1M"].map(t=>`<button class="${t==="1D"?"on":""}">${t}</button>`).join("")}</div>
+  <label>${CX("dir")}</label><div class="seg" id="ndir"><button data-d="long" class="on">${CX("long")}</button><button data-d="short">${CX("short")}</button><button data-d="neu">${CX("neu")}</button></div>
+  <label>${CX("title")}</label><input id="ntitle" maxlength="120" placeholder="SPY, hmmm..">
+  <label>${CX("text")}</label><textarea id="ntext" rows="6" maxlength="2500"></textarea>
+  <div class="lv3"><div><label>${CX("entry")}</label><input id="nen" inputmode="decimal"></div><div><label>${CX("tp")}</label><input id="ntp" inputmode="decimal"></div><div><label>${CX("sl")}</label><input id="nsl" inputmode="decimal"></div></div>
+  <label class="imgpick">${CX("img")}<input type="file" id="nimg" accept="image/*" hidden></label><div id="nprev"></div>
+  <button class="btn" id="npub" style="margin-top:14px">${CX("pub")}</button><div class="disc">${CX("pinfo")}</div></div>`;
+  g.querySelectorAll("#ntf button").forEach(b=>b.onclick=()=>g.querySelectorAll("#ntf button").forEach(z=>z.classList.toggle("on",z===b)));
+  g.querySelectorAll("#ndir button").forEach(b=>b.onclick=()=>{DIR=b.dataset.d;g.querySelectorAll("#ndir button").forEach(z=>z.classList.toggle("on",z===b))});
+  g.querySelector("#nimg").onchange=async e=>{const f=e.target.files[0];if(!f)return;IMG=await shrink(f);if(IMG)g.querySelector("#nprev").innerHTML=`<img src="${URL.createObjectURL(IMG)}" style="width:100%;border-radius:14px;margin-top:8px">`};
+  g.querySelector("#npub").onclick=async()=>{const v=id=>g.querySelector(id).value.trim();const sym=v("#nsym").toUpperCase().replace(/^\$/,"");const title=v("#ntitle");
+    if(!sym||!title){toast("⚠️ "+CXt("sym")+" / "+CXt("title"));return}const num=id=>{const x=parseFloat(v(id).replace(",","."));return x>0?x:undefined};
+    const b=g.querySelector("#npub");b.disabled=true;b.textContent=CXt("sending");
+    const ok=await act({t:"post",sym,tf:g.querySelector("#ntf .on").textContent,dir:DIR,title,text:v("#ntext"),entry:num("#nen"),tp:num("#ntp"),sl:num("#nsl")},IMG);
+    if(ok){toast(CX("sent"));CF="you";STACK=[];$("#detail").style.display="none";if(tg&&tg.BackButton)tg.BackButton.hide();TAB="com";render();scrollTo(0,0)}else{b.disabled=false;b.innerHTML=CX("pub")}}},false)}
+// ---- ••• menyu ----
+function postMenu(pid){const X=V();const p=X.posts.find(x=>x.id===pid);if(!p)return;const me=X.users[MEID]||{};const adm=me.b==="admin";
+  const it=[["share","📤"],["copy","🔗"]];if(adm)it.push(["picks","⭐"]);if(p.uid===MEID||adm)it.push(["del","🗑"]);if(p.uid!==MEID)it.push(["rep","⚠️"]);
+  let sh=$("#sheet");if(!sh){sh=document.createElement("div");sh.id="sheet";document.body.appendChild(sh)}
+  sh.innerHTML=`<div class="shbg"></div><div class="sh">${it.map(x=>`<button data-m="${x[0]}">${x[1]} ${CX(x[0])}</button>`).join("")}<button data-m="x" class="mut">✕</button></div>`;sh.style.display="block";
+  const close=()=>sh.style.display="none";sh.querySelector(".shbg").onclick=close;
+  const link=C&&C.bot?`https://t.me/${C.bot}`:location.href;const txt=`💡 $${p.sym}: ${p.title} — Penny Finance`;
+  sh.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>{const m=b.dataset.m;close();if(p.id.startsWith("tmp-")&&m!=="x"){toast(CX("sending"));return}
+    if(m==="share"){const u=`https://t.me/share/url?url=${encodeURIComponent(link)}&text=${encodeURIComponent(txt)}`;tg&&tg.openTelegramLink?tg.openTelegramLink(u):window.open(u)}
+    else if(m==="copy"){navigator.clipboard&&navigator.clipboard.writeText(txt+"\n"+link);toast("✅")}
+    else if(m==="picks")act({t:"pick",pid});
+    else if(m==="del"){act({t:"del",pid});if(STACK.length&&STACK[STACK.length-1].com)goBack()}
+    else if(m==="rep"){const why=prompt(CXt("rep")+"?")||"";act({t:"rep",pid,why}).then(ok=>ok&&toast("✅"))}})}
+// ---- qidiruv ----
+function openComSearch(){pushPage(()=>{const g=pageShell(CX("srch"));g.innerHTML=`<div class="search" style="margin:12px 0"><span>🔎</span><input id="csq" placeholder="SPY, @username, ..." autocomplete="off"></div><div id="csr"></div>`;
+  const inp=g.querySelector("#csq");inp.focus();inp.oninput=()=>{const q=inp.value.trim().toLowerCase().replace(/^[@$]/,"");const X=V();if(!q){g.querySelector("#csr").innerHTML="";return}
+    const us=Object.entries(X.users).filter(([k,U])=>(U.n||"").toLowerCase().includes(q)||(U.u||"").toLowerCase().includes(q)).slice(0,10);
+    const ps=X.posts.filter(p=>p.sym.toLowerCase().startsWith(q)||p.title.toLowerCase().includes(q)).slice(0,30);
+    g.querySelector("#csr").innerHTML=(us.length?`<h2>${CX("users")}</h2>`+us.map(([k,U])=>userRow(k,U,X)).join(""):"")+(ps.length?`<h2>${CX("ideas")}</h2>`+ps.map(p=>postCard(p,X)).join(""):"")||`<div class="empty">—</div>`;bindCom(g.querySelector("#csr"))}},false)}
+setInterval(()=>{if(TAB==="com"||STACK.some(s=>s.com))loadC()},60000);
+const _openDetail=openDetail,_openMarket=openMarket,_openSymbol=openSymbol;
+openDetail=t=>pushPage(()=>_openDetail(t));openMarket=(a,b)=>pushPage(()=>_openMarket(a,b));openSymbol=(a,b,c)=>pushPage(()=>_openSymbol(a,b,c));
+function closeDetail(){STACK=[];$("#detail").style.display="none";if(tg&&tg.BackButton)tg.BackButton.hide()}
 function bind(){
   document.querySelectorAll("[data-n]").forEach(e=>e.onclick=()=>openArticle(+e.dataset.n));
 
