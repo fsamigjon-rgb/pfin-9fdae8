@@ -522,7 +522,12 @@ async function sha256hex(s){const h=await crypto.subtle.digest("SHA-256",new Tex
 async function seal(a){const as=JSON.stringify(a);const h=await sha256hex(as);const sec=new TextEncoder().encode(JSON.stringify({i:(tg&&tg.initData)||"",h}));
   const key=await crypto.subtle.importKey("jwk",JSON.parse(CPUB_S),{name:"RSA-OAEP",hash:"SHA-256"},false,["encrypt"]);const k=[];
   for(let i=0;i<sec.length;i+=190)k.push(b64(await crypto.subtle.encrypt({name:"RSA-OAEP"},key,sec.slice(i,i+190))));return JSON.stringify({v:1,a:as,k})}
-function canWrite(){if(!(tg&&tg.initData)){toast(CX("tgonly"));return false}if(CTOPIC.startsWith("__")){toast("⚠️ /webapp update");return false}return true}
+function noMe(){let sh=$("#sheet");if(!sh){sh=document.createElement("div");sh.id="sheet";document.body.appendChild(sh)}
+  sh.innerHTML=`<div class="shbg"></div><div class="sh" style="padding:18px 18px calc(18px + env(safe-area-inset-bottom))"><div style="font-size:18px;font-weight:800;margin-bottom:8px">👤 Profilingizni ochish</div>
+  <div style="font-size:15px;line-height:1.5">Telegram pastki klaviatura tugmasidan ochilgan ilovaga ismingizni bermaydi. Profil, g'oya joylash va izohlar uchun ilovani shunday oching:<br><br>
+  <b>1)</b> Ilovani yoping<br><b>2)</b> Botda pastdagi <b>«📱 Ilova (Penny Finance)»</b> ni bosing<br><b>3)</b> Bot yuborgan <b>«📱 Penny Finance'ni ochish»</b> tugmasini bosing<br><br>yoki yozuv maydoni chap tomonidagi <b>«Ilova»</b> menyu tugmasini bosing.</div>
+  <button class="btn" style="margin-top:14px" id="nmok">OK</button></div>`;sh.style.display="block";const c=()=>sh.style.display="none";sh.querySelector(".shbg").onclick=c;sh.querySelector("#nmok").onclick=()=>{c();if(tg&&tg.close)tg.close()}}
+function canWrite(){if(!(tg&&tg.initData)){noMe();return false}if(CTOPIC.startsWith("__")){toast("⚠️ /webapp update");return false}return true}
 async function act(a,img){
   if(!canWrite())return false;
   a.id=Date.now().toString(36)+Math.random().toString(36).slice(2,8);a.ts=Math.floor(Date.now()/1000);
@@ -568,7 +573,7 @@ function comTab(){
   const X=V();let L=CF==="picks"?X.posts.filter(p=>p.ed):CF==="fwing"?X.posts.filter(p=>((X.users[MEID]||{}).fw||[]).includes(p.uid)||p.uid===MEID):rankYou(X);
   if(CF==="picks"||CF==="fwing")L=L.sort((a,b)=>b.ts-a.ts);
   const me=X.users[MEID];
-  let h=`<div class="chead"><h1>${CX("com")}</h1><div style="display:flex;gap:12px;align-items:center"><button class="ib" id="csrch">🔍</button>${MEID?`<span id="myav">${avatar(me,MEID,40)}</span>`:""}</div></div>
+  let h=`<div class="chead"><h1>${CX("com")}</h1><div style="display:flex;gap:12px;align-items:center"><button class="ib" id="csrch">🔍</button><span id="myav">${MEID?avatar(me,MEID,40):`<div class="av" style="width:40px;height:40px;font-size:20px;background:var(--card2);color:var(--tx)">👤</div>`}</span></div></div>
   <div class="tabs2">${["you","picks","fwing"].map(k=>`<button data-cf="${k}" class="${CF===k?"on":""}">${CX(k)}</button>`).join("")}</div>`;
   if(CF==="fwing"&&!L.length){h+=`<div class="mut" style="margin:10px 0">${CX("nofw")}</div>`+sugUsers(X,10).map(x=>userRow(x[0],x[1],X)).join("")}
   else h+=L.length?L.slice(0,80).map(p=>postCard(p,X)).join(""):`<div class="empty">${CX("empty")}</div>`;
@@ -584,7 +589,7 @@ function bindCom(root){root=root||document;
   root.querySelectorAll(".tchip[data-sym]").forEach(e=>e.onclick=ev=>{ev.stopPropagation();openDetail(e.dataset.sym)});
   const f=root.querySelector("#fab");if(f)f.onclick=openCompose;
   const s=root.querySelector("#csrch");if(s)s.onclick=openComSearch;
-  const m=root.querySelector("#myav");if(m)m.onclick=()=>openProfile(MEID);
+  const m=root.querySelector("#myav");if(m)m.onclick=()=>MEID?openProfile(MEID):noMe();
 }
 // ---- sahifa stek (orqaga tugmasi) ----
 function goBack(){STACK.pop();if(STACK.length){STACK[STACK.length-1].fn(true)}else{$("#detail").style.display="none";if(tg&&tg.BackButton)tg.BackButton.hide()}}
