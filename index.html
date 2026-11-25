@@ -474,13 +474,17 @@ function hcPut(t,o){o._ts=Date.now();HC[t]=o;try{const ks=JSON.parse(localStorag
 const HINF={};
 function relayFetch(t){return new Promise(res=>{if(CTOPIC.startsWith("__")||typeof EventSource==="undefined")return res(null);
   const rt=CTOPIC+"-r-"+Math.random().toString(36).slice(2,12).replace(/[^a-z0-9]/g,"x");let done=false,es;
-  const fin=v=>{if(done)return;done=true;try{es.close()}catch(e){}clearTimeout(to);res(v)};const to=setTimeout(()=>fin(null),20000);
+  const fin=v=>{if(done)return;done=true;try{es.close()}catch(e){}clearTimeout(to);res(v)};const to=setTimeout(()=>fin(null),15000);
   try{es=new EventSource("https://ntfy.sh/"+rt+"/sse")}catch(e){return fin(null)}
   let sent=false;const send=()=>{if(sent)return;sent=true;fetch("https://ntfy.sh/"+CTOPIC+"-q",{method:"POST",body:JSON.stringify({s:t,r:rt})}).catch(()=>fin(null))};
   es.addEventListener("open",send);es.onopen=send;setTimeout(send,1500);
-  es.onmessage=async e=>{try{const m=JSON.parse(e.data);if(m.event&&m.event!=="message")return;let j=null;
-    if(m.attachment&&m.attachment.url)j=await (await fetch(m.attachment.url)).json();else if(m.message&&m.message[0]==="{")j=JSON.parse(m.message);
-    if(j)fin(j)}catch(x){fin(null)}};})}
+  const parts={};let total=0;
+  es.onmessage=async e=>{try{const m=JSON.parse(e.data);if(m.event&&m.event!=="message")return;
+    if(m.attachment&&m.attachment.url){return fin(await (await fetch(m.attachment.url)).json())}
+    const x=JSON.parse(m.message||"{}");if(x.z==null)return;parts[x.i]=x.z;total=x.n;
+    if(Object.keys(parts).length>=total){const b64=Array.from({length:total},(_,k)=>parts[k]).join("");
+      const bin=Uint8Array.from(atob(b64),c=>c.charCodeAt(0));
+      const txt=await new Response(new Blob([bin]).stream().pipeThrough(new DecompressionStream("deflate"))).text();fin(JSON.parse(txt))}}catch(x){fin(null)}};})}
 function yhist(t){
   const c=hcGet(t);if(c)return Promise.resolve(c);if(HINF[t])return HINF[t];
   const u="https://query1.finance.yahoo.com/v8/finance/chart/"+encodeURIComponent(t)+"?range=1y&interval=1d";
