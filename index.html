@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>Penny Finance</title>
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyBpZD0iQSIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImJnQSIgY3g9IjcwJSIgY3k9IjE4JSIgcj0iOTUlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzZjFmODYiLz48c3RvcCBvZmZzZXQ9Ii41NSIgc3RvcC1jb2xvcj0iIzE0MTEyYyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzBhMGIxMiIvPjwvcmFkaWFsR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ0EiIHgxPSIwIiB5MT0iMSIgeDI9IjEiIHkyPSIwIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM1ZjhiZmYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNjNThjZmYiLz48L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGQiIHgxPSIwIiB5MT0iMSIgeDI9IjEiIHkyPSIwIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmNWE2MjMiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmUyOGYiLz48L2xpbmVhckdyYWRpZW50Pgo8ZmlsdGVyIGlkPSJnbG93IiB4PSItMzAlIiB5PSItMzAlIiB3aWR0aD0iMTYwJSIgaGVpZ2h0PSIxNjAlIj48ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIxOCIgcmVzdWx0PSJiIi8+PGZlTWVyZ2U+PGZlTWVyZ2VOb2RlIGluPSJiIi8+PGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+PC9mZU1lcmdlPjwvZmlsdGVyPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAyNCIgaGVpZ2h0PSIxMDI0IiBmaWxsPSJ1cmwoI2JnQSkiLz48Y2lyY2xlIGN4PSI1MTIiIGN5PSI1MTIiIHI9IjQwNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dBKSIgc3Ryb2tlLXdpZHRoPSIxMiIgb3BhY2l0eT0iLjQiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzggMCkiIGZpbHRlcj0idXJsKCNnbG93KSI+PHBhdGggZD0iTTM4MCA3OTAgVjI0MCBINTc1IEExNzUgMTc1IDAgMCAxIDU3NSA1OTAgSDM4MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dBKSIgc3Ryb2tlLXdpZHRoPSIxMDQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8cG9seWxpbmUgcG9pbnRzPSI0NzAsNTI1IDUzNSw0NTIgNTkyLDQ5MCA2ODAsMzcyIiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMzYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8cGF0aCBkPSJNNjI4IDM2MiBMNzEyIDM0NiBMNjk3IDQzMCBaIiBmaWxsPSJ1cmwoI2dvbGQpIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMTAiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L2c+PC9zdmc+">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
 :root{--bg:#0f1115;--card:#171a21;--card2:#1e222b;--tx:#e8eaf0;--mut:#8b93a7;--line:#262b36;--acc:#7b3fe4;--acc2:#a477ff;--up:#16c784;--dn:#ea3943;--warn:#f5a623}
@@ -109,6 +110,10 @@ svg.curve{width:100%;height:120px;display:block}
 .mcell img,.mcell video{width:100%;height:100%;object-fit:cover;display:block}.mcell span{position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:28px;text-shadow:0 2px 8px #000}
 .mcell b{position:absolute;right:4px;top:4px;background:rgba(0,0,0,.65);color:#fff;border-radius:50%;width:26px;height:26px;display:grid;place-items:center;font-size:13px}
 #imgv{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:50;display:none;align-items:center;justify-content:center}#imgv img{max-width:100%;max-height:100%}#imgv button{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.15);border:0;color:#fff;width:40px;height:40px;border-radius:50%;font-size:18px}
+.pfc{position:relative;margin-top:14px}.pfb{position:absolute;right:12px;top:12px;width:34px;height:34px;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.pfh{font-size:19px;font-weight:800;margin:2px 44px 10px 0}.fsub{font-size:14px;font-weight:800;color:var(--acc2);margin:14px 0 4px}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;column-gap:16px}.frow{display:flex;justify-content:space-between;gap:8px;padding:7px 0;border-bottom:1px solid var(--line);font-size:13px}.frow b{text-align:right}
+.btn2{display:block;text-align:center;margin-top:12px;padding:10px;border-radius:12px;background:var(--card2);color:var(--tx);text-decoration:none;font-weight:700}
 .grid2c{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
 .ohlc b{color:var(--tx)}
 .trbusy{position:fixed;bottom:74px;left:50%;transform:translateX(-50%);background:var(--acc);color:#fff;padding:6px 14px;border-radius:16px;font-size:12px;z-index:20;display:none}
@@ -136,7 +141,7 @@ svg.curve{width:100%;height:120px;display:block}
 </head>
 <body>
 <header>
-  <div class="brand"><div class="logo">Penny<b>Finance</b></div><div style="display:flex;align-items:center;gap:8px"><div class="upd notr" id="upd">yuklanmoqda…</div><select id="lang" class="langsel notr"></select></div></div>
+  <div class="brand"><div class="logo" style="display:flex;align-items:center;gap:5px"><img src="data:image/svg+xml;base64,PHN2ZyBpZD0iQSIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImJnQSIgY3g9IjcwJSIgY3k9IjE4JSIgcj0iOTUlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzZjFmODYiLz48c3RvcCBvZmZzZXQ9Ii41NSIgc3RvcC1jb2xvcj0iIzE0MTEyYyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzBhMGIxMiIvPjwvcmFkaWFsR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ0EiIHgxPSIwIiB5MT0iMSIgeDI9IjEiIHkyPSIwIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM1ZjhiZmYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNjNThjZmYiLz48L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGQiIHgxPSIwIiB5MT0iMSIgeDI9IjEiIHkyPSIwIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmNWE2MjMiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmUyOGYiLz48L2xpbmVhckdyYWRpZW50Pgo8ZmlsdGVyIGlkPSJnbG93IiB4PSItMzAlIiB5PSItMzAlIiB3aWR0aD0iMTYwJSIgaGVpZ2h0PSIxNjAlIj48ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIxOCIgcmVzdWx0PSJiIi8+PGZlTWVyZ2U+PGZlTWVyZ2VOb2RlIGluPSJiIi8+PGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+PC9mZU1lcmdlPjwvZmlsdGVyPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAyNCIgaGVpZ2h0PSIxMDI0IiBmaWxsPSJ1cmwoI2JnQSkiLz48Y2lyY2xlIGN4PSI1MTIiIGN5PSI1MTIiIHI9IjQwNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dBKSIgc3Ryb2tlLXdpZHRoPSIxMiIgb3BhY2l0eT0iLjQiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzggMCkiIGZpbHRlcj0idXJsKCNnbG93KSI+PHBhdGggZD0iTTM4MCA3OTAgVjI0MCBINTc1IEExNzUgMTc1IDAgMCAxIDU3NSA1OTAgSDM4MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dBKSIgc3Ryb2tlLXdpZHRoPSIxMDQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8cG9seWxpbmUgcG9pbnRzPSI0NzAsNTI1IDUzNSw0NTIgNTkyLDQ5MCA2ODAsMzcyIiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMzYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8cGF0aCBkPSJNNjI4IDM2MiBMNzEyIDM0NiBMNjk3IDQzMCBaIiBmaWxsPSJ1cmwoI2dvbGQpIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMTAiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L2c+PC9zdmc+" alt="" style="width:24px;height:24px;border-radius:7px">Penny<b>Finance</b></div><div style="display:flex;align-items:center;gap:8px"><div class="upd notr" id="upd">yuklanmoqda…</div><select id="lang" class="langsel notr"></select></div></div>
   <div class="search">🔎<input id="q" placeholder="Tiker qidirish: AAPL, PLUG…" autocomplete="off" autocapitalize="characters"></div>
 </header>
 <div class="mstate" id="mstate"></div><div class="strip" id="strip"></div>
@@ -444,7 +449,7 @@ function ownView(b,H,live){
   <div class="grid2" style="margin-top:8px"><div><span class="mut">${TA("opn")}</span><b class="notr">${fmt(H.o[L])}</b></div><div><span class="mut">${TA("prv")}</span><b class="notr">${fmt(prev)}</b></div><div><span class="mut">${TA("dr")}</span><b class="notr">${fmt(H.l[L])} – ${fmt(H.h[L])}</b></div><div><span class="mut">${TA("yr")}</span><b class="notr">${fmt(Math.min(...yl))} – ${fmt(Math.max(...y))}</b></div></div></div>
   <div class="card"><div class="seg" id="rg">${[["r1",22],["r3",66],["r6",130],["r12",260]].map(r=>`<button data-b="${r[1]}" class="${r[1]===130?"on":""}">${TA(r[0])}</button>`).join("")}<button data-bb="1">BB</button></div>
   <div class="notr mut" style="font-size:11px;margin-bottom:4px"><span style="color:#f5a623">━ MA20</span> &nbsp;<span style="color:#4f7cf0">━ MA50</span> &nbsp;<span style="color:#a477ff">━ RSI</span></div><div id="ownc"></div></div>
-  <h2>${TA("ta")}</h2><div class="card"><div class="seg" id="tf"><button data-tf="d" class="on">${TA("day")}</button><button data-tf="w">${TA("week")}</button></div><div id="tabox"></div></div>`;
+  <h2>${TA("ta")}</h2><div class="card pfc"><img class="pfb" src="${PFLOGO}" alt=""><div class="seg" id="tf" style="margin-right:44px"><button data-tf="d" class="on">${TA("day")}</button><button data-tf="w">${TA("week")}</button></div><div id="tabox"></div></div>`;
   const x=document.createElement("div");x.innerHTML=h;b.appendChild(x);
   let bars=130,bbOn=false;const box=x.querySelector("#ownc");const redraw=()=>drawChart(box,H,bars,bbOn);
   requestAnimationFrame(redraw);
@@ -457,7 +462,7 @@ async function yhist(t){
   const u="https://query1.finance.yahoo.com/v8/finance/chart/"+encodeURIComponent(t)+"?range=1y&interval=1d";
   for(const url of [u,"https://api.allorigins.win/raw?url="+encodeURIComponent(u),"https://corsproxy.io/?url="+encodeURIComponent(u)]){
     try{const ctl=new AbortController();const tm=setTimeout(()=>ctl.abort(),7000);const r=await fetch(url,{signal:ctl.signal});clearTimeout(tm);if(!r.ok)continue;
-      const R=(await r.json()).chart.result[0],q=R.indicators.quote[0];const o={d:[],o:[],h:[],l:[],c:[],v:[],n:R.meta.longName||R.meta.shortName||t};
+      const R=(await r.json()).chart.result[0],q=R.indicators.quote[0];const o={d:[],o:[],h:[],l:[],c:[],v:[],n:R.meta.longName||R.meta.shortName||t,ex:R.meta.fullExchangeName||R.meta.exchangeName||""};
       (R.timestamp||[]).forEach((ts,i)=>{if(q.close[i]==null||q.open[i]==null)return;o.d.push(new Date(ts*1000).toISOString().slice(0,10));o.o.push(q.open[i]);o.h.push(q.high[i]);o.l.push(q.low[i]);o.c.push(q.close[i]);o.v.push(q.volume[i]||0)});
       if(o.c.length>30){o.live={p:R.meta.regularMarketPrice,c:null};return o}}catch(e){}
   }
@@ -466,18 +471,28 @@ function detailShell(name,sym){
   const d=$("#detail");d.innerHTML=`<div class="top"><button class="back">←</button><div><div class="tk notr">${esc(name||sym)}</div><div class="mut notr" style="font-size:12px">${esc(sym)}</div></div></div><div style="padding:0 16px" id="symbody"></div>`;
   d.style.display="block";d.scrollTop=0;d.querySelector(".back").onclick=goBack;if(tg&&tg.BackButton){tg.BackButton.offClick(goBack);tg.BackButton.show();tg.BackButton.onClick(goBack)}
   return $("#symbody")}
-function tvView(b,sym,isIndex){
-  const theme=tvTheme();
-  tvWidget(b,"symbol-info",{symbol:sym,width:"100%"});
-  const c=document.createElement("div");c.className="chart notr";c.innerHTML=`<iframe src="https://s.tradingview.com/widgetembed/?symbol=${encodeURIComponent(sym)}&interval=D&hidesidetoolbar=0&symboledit=1&saveimage=0&studies=%5B%22RSI%40tv-basicstudies%22%2C%22MASimple%40tv-basicstudies%22%5D&theme=${theme}&style=1&timezone=Asia%2FSeoul&withdateranges=1&locale=${tvLoc()}" allowtransparency="true"></iframe>`;b.appendChild(c);
-  tvWidget(b,"technical-analysis",{symbol:sym,interval:"1D",width:"100%",height:420,showIntervalTabs:true,displayMode:"single"},420);
-}
-function tvExtras(b,sym){tvWidget(b,"financials",{symbol:sym,width:"100%",height:520,displayMode:"regular"},520);tvWidget(b,"symbol-profile",{symbol:sym,width:"100%",height:380},380)}
+function tvView(b,sym,isIndex){const w=document.createElement("div");w.className="card";w.style.textAlign="center";
+  w.innerHTML=`<div style="font-size:34px">📭</div><div style="margin-top:8px">${TA("nodata")}</div><div class="mut" style="font-size:12px;margin-top:6px">Bir necha daqiqadan keyin qayta urinib ko'ring.</div>`;b.appendChild(w)}
+const PFLOGO="data:image/svg+xml;base64,PHN2ZyBpZD0iQSIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImJnQSIgY3g9IjcwJSIgY3k9IjE4JSIgcj0iOTUlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzZjFmODYiLz48c3RvcCBvZmZzZXQ9Ii41NSIgc3RvcC1jb2xvcj0iIzE0MTEyYyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzBhMGIxMiIvPjwvcmFkaWFsR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ0EiIHgxPSIwIiB5MT0iMSIgeDI9IjEiIHkyPSIwIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM1ZjhiZmYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNjNThjZmYiLz48L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGQiIHgxPSIwIiB5MT0iMSIgeDI9IjEiIHkyPSIwIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmNWE2MjMiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmUyOGYiLz48L2xpbmVhckdyYWRpZW50Pgo8ZmlsdGVyIGlkPSJnbG93IiB4PSItMzAlIiB5PSItMzAlIiB3aWR0aD0iMTYwJSIgaGVpZ2h0PSIxNjAlIj48ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIxOCIgcmVzdWx0PSJiIi8+PGZlTWVyZ2U+PGZlTWVyZ2VOb2RlIGluPSJiIi8+PGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+PC9mZU1lcmdlPjwvZmlsdGVyPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAyNCIgaGVpZ2h0PSIxMDI0IiBmaWxsPSJ1cmwoI2JnQSkiLz48Y2lyY2xlIGN4PSI1MTIiIGN5PSI1MTIiIHI9IjQwNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dBKSIgc3Ryb2tlLXdpZHRoPSIxMiIgb3BhY2l0eT0iLjQiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzggMCkiIGZpbHRlcj0idXJsKCNnbG93KSI+PHBhdGggZD0iTTM4MCA3OTAgVjI0MCBINTc1IEExNzUgMTc1IDAgMCAxIDU3NSA1OTAgSDM4MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dBKSIgc3Ryb2tlLXdpZHRoPSIxMDQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8cG9seWxpbmUgcG9pbnRzPSI0NzAsNTI1IDUzNSw0NTIgNTkyLDQ5MCA2ODAsMzcyIiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMzYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8cGF0aCBkPSJNNjI4IDM2MiBMNzEyIDM0NiBMNjk3IDQzMCBaIiBmaWxsPSJ1cmwoI2dvbGQpIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMTAiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L2c+PC9zdmc+";
+function pfCard(title,body){return `<div class="card pfc"><img class="pfb" src="${PFLOGO}" alt="Penny Finance"><div class="pfh">${title}</div>${body}</div>`}
+function tvExtras(b,H,t){const F=(D.fund||{})[t]||{};const w=document.createElement("div");let h="";
+  const row=(k,v)=>v==null||v===""||(typeof v==="number"&&isNaN(v))?"":`<div class="frow"><span class="mut">${k}</span><b class="notr">${v}</b></div>`;
+  const P=v=>v==null?null:`<span class="${cls(v)}">${(+v).toFixed(2)}%</span>`,N=v=>v==null?null:(+v).toFixed(2);
+  if(H&&H.c&&H.c.length>=30){const c=H.c,n=c.length,v=(H.v||[]).slice(-20).filter(x=>x>0);const av=v.length?v.reduce((a,x)=>a+x,0)/v.length:0,y1=c[Math.max(0,n-252)],ch=(c[n-1]/y1-1)*100;
+    h+=pfCard(`<span class="notr">${esc(t)}</span> · Narx tarixi`,`<div class="fgrid">${row("O'rtacha hajm (20 kun)",av?fmtBig(av):null)}${row("1 yillik o'zgarish",P(ch))}${row("52 hafta eng yuqori",fmt(Math.max(...H.h.slice(-252))))}${row("52 hafta eng past",fmt(Math.min(...H.l.slice(-252))))}${row("Beta (1 yil)",N(F.beta))}</div>`)}
+  if(Object.keys(F).length>2){
+    h+=pfCard(`<span class="notr">${esc(t)}</span> · Moliyaviy ko'rsatkichlar`,`<div class="fsub">Baholash</div><div class="fgrid">${row("Bozor qiymati",F.mc!=null?"$"+fmtBig(F.mc*1e6):null)}${row("P/E",N(F.pe))}${row("P/S",N(F.ps))}${row("P/B",N(F.pb))}${row("EPS (12 oy)",N(F.eps))}${row("Aksiya balans qiymati",N(F.bvps))}</div>
+      <div class="fsub">Rentabellik</div><div class="fgrid">${row("Yalpi marja",P(F.gm))}${row("Operatsion marja",P(F.om))}${row("Sof marja",P(F.nm))}${row("ROE",P(F.roe))}${row("ROA",P(F.roa))}${row("Daromad o'sishi (yillik)",P(F.rg))}</div>
+      <div class="fsub">Moliyaviy holat</div><div class="fgrid">${row("Joriy nisbat",N(F.cr))}${row("Qarz / kapital",N(F.de))}${row("Dividend daromadi",F.dy!=null?(+F.dy).toFixed(2)+"%":"—")}${row("Aksiyalar soni",F.sh!=null?fmtBig(F.sh*1e6):null)}</div>`);
+    h+=pfCard(`<span class="notr">${esc(t)}</span> · Kompaniya`,`<div class="fgrid">${row("Nomi",F.n?esc(F.n):(H&&H.n?esc(H.n):null))}${row("Soha",F.ind?esc(F.ind):null)}${row("Davlat",F.cty?esc(F.cty):null)}${row("Birja",F.ex?esc(F.ex):(H&&H.ex?esc(H.ex):null))}${row("Birjaga chiqqan",F.ipo?esc(F.ipo):null)}</div>${F.web&&/^https?:\/\//.test(F.web)?`<a class="btn2" href="${esc(F.web)}" target="_blank">🌐 Rasmiy sayt</a>`:""}`)}
+  else if(H&&H.n)h+=pfCard(`<span class="notr">${esc(t)}</span> · Kompaniya`,`<div class="fgrid">${row("Nomi",esc(H.n))}${row("Birja",H.ex?esc(H.ex):null)}</div><div class="mut" style="font-size:12px;margin-top:8px">To'liq moliyaviy ko'rsatkichlar bot signal bergan aksiyalar uchun chiqadi.</div>`);
+  w.innerHTML=h;b.appendChild(w)}
+function fmtBig(x){return x>=1e9?(x/1e9).toFixed(2)+"B":x>=1e6?(x/1e6).toFixed(2)+"M":x>=1e3?(x/1e3).toFixed(1)+"K":Math.round(x)+""}
 function openMarket(s,n){
   const H=D.hist&&D.hist[s];const live=(D.markets||[]).find(x=>x.s===s);const b=detailShell(n||(H&&H.n)||s,s);
   if(H&&H.c&&H.c.length>30){ownView(b,H,live);return b}
   tvView(b,tvSym(s),true);return b}
-function openSymbol(sym,name,isIndex){const b=detailShell(name,sym);tvView(b,sym,isIndex);if(!isIndex)tvExtras(b,sym);return b}
+function openSymbol(sym,name,isIndex){return isIndex?_openMarket(sym,name):_openDetail(sym)}
 async function openDetail(t){
   t=String(t||"").toUpperCase().replace(/^\$/,"").trim();if(!t)return;
   const q=(D.quotes||[]).find(x=>x.t===t);const s=(D.signals||[]).find(x=>x.t===t&&x.status==="open")||(D.signals||[]).find(x=>x.t===t);
@@ -490,8 +505,8 @@ async function openDetail(t){
   const tail=()=>{const z=document.createElement("div");z.innerHTML=ex+`<div class="disc">Batafsil tahlil va halollik uchun botga <b class="notr">${esc(t)}</b> deb yozing.<br>⚠️ Daromad kafolati emas.</div>`;b.appendChild(z)};
   let H=D.hist&&D.hist[t];
   if(!(H&&H.c&&H.c.length>30)){const w=document.createElement("div");w.className="empty";w.innerHTML=TA("load");b.appendChild(w);H=await yhist(t);w.remove();if($("#detail").style.display!=="block")return b}
-  if(H&&H.c&&H.c.length>30){if(H.n)$("#detail .tk").textContent=t+" · "+H.n;ownView(b,H,H.live||(q?{p:q.p,c:q.c}:null));tail();tvExtras(b,tvSym(t));}
-  else{tvView(b,tvSym(t),false);tail();tvExtras(b,tvSym(t))}
+  if(H&&H.c&&H.c.length>30){if(H.n)$("#detail .tk").textContent=t+" · "+H.n;ownView(b,H,H.live||(q?{p:q.p,c:q.c}:null));tvExtras(b,H,t);tail();}
+  else{tvView(b,t,false);tvExtras(b,null,t);tail()}
   return b;
 }
 // ===================== 👥 HAMJAMIYAT =====================
