@@ -287,6 +287,7 @@ function textNodes(root){const out=[];const w=document.createTreeWalker(root,Nod
 async function gtxBatch(arr,tl){
   const q=arr.join("\n");const r=await fetch("https://translate.googleapis.com/translate_a/single?client=gtx&dt=t&sl=auto&tl="+tl+"&q="+encodeURIComponent(q));
   if(!r.ok)throw 0;const j=await r.json();const t=j[0].map(x=>x[0]).join("").split("\n");if(t.length!==arr.length)throw 1;return t}
+const _DE=document.createElement("textarea");function decEnt(x){if(!/&[#a-z0-9]+;/i.test(x))return x;_DE.innerHTML=x;return _DE.value}
 let TRBUSY=false,TRAGAIN=false;
 async function applyLang(){
   if(TRBUSY){TRAGAIN=true;return}TRBUSY=true;
@@ -301,7 +302,7 @@ async function applyLang(){
     let chunk=[],len=0;const chunks=[];
     for(const s of need){if(len+s.length>1400&&chunk.length){chunks.push(chunk);chunk=[];len=0}chunk.push(s.replace(/\n/g," "));len+=s.length+1}
     if(chunk.length)chunks.push(chunk);
-    const put=()=>nodes.forEach(n=>{const s=n._o.trim();if(C[s]!=null){const lead=n._o.match(/^\s*/)[0],tail=n._o.match(/\s*$/)[0];n.nodeValue=lead+C[s]+tail}});
+    const put=()=>nodes.forEach(n=>{const s=n._o.trim();if(C[s]!=null){const lead=n._o.match(/^\s*/)[0],tail=n._o.match(/\s*$/)[0];n.nodeValue=lead+decEnt(C[s])+tail}});
     put();                                                 // keshdagi tarjima — darhol
     const one=async ch=>{try{const t=await gtxBatch(ch,LANG);ch.forEach((s,i)=>C[s]=t[i])}
       catch(e){await Promise.all(ch.slice(0,25).map(async s=>{try{C[s]=await translate(s,"auto",LANG)}catch(e2){C[s]=s}}))}put()};
@@ -468,20 +469,28 @@ function ownView(b,H,live){
   setTF("d");x.querySelectorAll("#tf button").forEach(e=>e.onclick=()=>setTF(e.dataset.tf));
 }
 const HC={};
-function hcGet(t){if(HC[t])return HC[t];try{const x=JSON.parse(localStorage.getItem("pf_h_"+t)||"null");if(x&&Date.now()-x._ts<6*3600e3){HC[t]=x;return x}}catch(e){}return null}
+function hcGet(t){if(HC[t])return HC[t];try{const x=JSON.parse(localStorage.getItem("pf_h_"+t)||"null");if(x&&Date.now()-x._ts<6*3600e3){HC[t]=x;if(x._f){FUND=FUND||{};FUND[t]=x._f}return x}}catch(e){}return null}
 function hcPut(t,o){o._ts=Date.now();HC[t]=o;try{const ks=JSON.parse(localStorage.getItem("pf_hk")||"[]").filter(k=>k!==t);ks.push(t);while(ks.length>25)localStorage.removeItem("pf_h_"+ks.shift());localStorage.setItem("pf_hk",JSON.stringify(ks));localStorage.setItem("pf_h_"+t,JSON.stringify(o))}catch(e){}}
 const HINF={};
+function relayFetch(t){return new Promise(res=>{if(CTOPIC.startsWith("__")||typeof EventSource==="undefined")return res(null);
+  const rt=CTOPIC+"-r-"+Math.random().toString(36).slice(2,12).replace(/[^a-z0-9]/g,"x");let done=false,es;
+  const fin=v=>{if(done)return;done=true;try{es.close()}catch(e){}clearTimeout(to);res(v)};const to=setTimeout(()=>fin(null),20000);
+  try{es=new EventSource("https://ntfy.sh/"+rt+"/sse")}catch(e){return fin(null)}
+  let sent=false;const send=()=>{if(sent)return;sent=true;fetch("https://ntfy.sh/"+CTOPIC+"-q",{method:"POST",body:JSON.stringify({s:t,r:rt})}).catch(()=>fin(null))};
+  es.addEventListener("open",send);es.onopen=send;setTimeout(send,1500);
+  es.onmessage=async e=>{try{const m=JSON.parse(e.data);if(m.event&&m.event!=="message")return;let j=null;
+    if(m.attachment&&m.attachment.url)j=await (await fetch(m.attachment.url)).json();else if(m.message&&m.message[0]==="{")j=JSON.parse(m.message);
+    if(j)fin(j)}catch(x){fin(null)}};})}
 function yhist(t){
   const c=hcGet(t);if(c)return Promise.resolve(c);if(HINF[t])return HINF[t];
   const u="https://query1.finance.yahoo.com/v8/finance/chart/"+encodeURIComponent(t)+"?range=1y&interval=1d";
-  const u2=u.replace("query1","query2");
-  const urls=[u,u2,"https://corsproxy.io/?url="+encodeURIComponent(u),"https://api.allorigins.win/raw?url="+encodeURIComponent(u),"https://api.codetabs.com/v1/proxy?quest="+encodeURIComponent(u2)];
-  const ctl=new AbortController();const tm=setTimeout(()=>ctl.abort(),9000);
-  const one=async url=>{const r=await fetch(url,{signal:ctl.signal});if(!r.ok)throw 0;const R=(await r.json()).chart.result[0],q=R.indicators.quote[0];
+  const ctl=new AbortController();
+  const direct=(async()=>{const r=await fetch(u,{signal:ctl.signal});if(!r.ok)throw 0;const R=(await r.json()).chart.result[0],q=R.indicators.quote[0];
     const o={d:[],o:[],h:[],l:[],c:[],v:[],n:R.meta.longName||R.meta.shortName||t,ex:R.meta.fullExchangeName||R.meta.exchangeName||""};
     (R.timestamp||[]).forEach((ts,i)=>{if(q.close[i]==null||q.open[i]==null)return;o.d.push(new Date(ts*1000).toISOString().slice(0,10));o.o.push(+q.open[i].toFixed(4));o.h.push(+q.high[i].toFixed(4));o.l.push(+q.low[i].toFixed(4));o.c.push(+q.close[i].toFixed(4));o.v.push(q.volume[i]||0)});
-    if(o.c.length<30)throw 0;o.live={p:R.meta.regularMarketPrice,c:R.meta.chartPreviousClose&&o.c.length>1?null:null};return o};
-  HINF[t]=Promise.any(urls.map(one)).then(o=>{clearTimeout(tm);ctl.abort();hcPut(t,o);return o}).catch(()=>{clearTimeout(tm);return null}).finally(()=>{delete HINF[t]});
+    if(o.c.length<30)throw 0;return o})();
+  const relay=relayFetch(t).then(j=>{if(!j||!j.h||!j.h.c||j.h.c.length<30)throw 0;const o=j.h;if(j.f&&Object.keys(j.f).length){FUND=FUND||{};FUND[t]=j.f;o._f=j.f}if(o.px)o.live={p:o.px,c:null};return o});
+  HINF[t]=Promise.any([direct,relay]).then(o=>{ctl.abort();hcPut(t,o);return o}).catch(()=>null).finally(()=>{delete HINF[t]});
   return HINF[t]}
 // ---- tikerlar ro'yxati (qidiruv takliflari) ----
 let SYMS=null,SYMP=null;
@@ -501,7 +510,7 @@ function tvView(b,sym,isIndex){const w=document.createElement("div");w.className
   w.innerHTML=`<div style="font-size:34px">📭</div><div style="margin-top:8px">${TA("nodata")}</div><div class="mut" style="font-size:12px;margin-top:6px">Bir necha daqiqadan keyin qayta urinib ko'ring.</div>`;b.appendChild(w)}
 const PFLOGO="data:image/svg+xml;base64,PHN2ZyBpZD0iQSIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImJnQSIgY3g9IjcwJSIgY3k9IjE4JSIgcj0iOTUlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzZjFmODYiLz48c3RvcCBvZmZzZXQ9Ii41NSIgc3RvcC1jb2xvcj0iIzE0MTEyYyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzBhMGIxMiIvPjwvcmFkaWFsR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ0EiIHgxPSIwIiB5MT0iMSIgeDI9IjEiIHkyPSIwIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM1ZjhiZmYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNjNThjZmYiLz48L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGQiIHgxPSIwIiB5MT0iMSIgeDI9IjEiIHkyPSIwIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmNWE2MjMiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmUyOGYiLz48L2xpbmVhckdyYWRpZW50Pgo8ZmlsdGVyIGlkPSJnbG93IiB4PSItMzAlIiB5PSItMzAlIiB3aWR0aD0iMTYwJSIgaGVpZ2h0PSIxNjAlIj48ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIxOCIgcmVzdWx0PSJiIi8+PGZlTWVyZ2U+PGZlTWVyZ2VOb2RlIGluPSJiIi8+PGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+PC9mZU1lcmdlPjwvZmlsdGVyPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAyNCIgaGVpZ2h0PSIxMDI0IiBmaWxsPSJ1cmwoI2JnQSkiLz48Y2lyY2xlIGN4PSI1MTIiIGN5PSI1MTIiIHI9IjQwNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dBKSIgc3Ryb2tlLXdpZHRoPSIxMiIgb3BhY2l0eT0iLjQiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzggMCkiIGZpbHRlcj0idXJsKCNnbG93KSI+PHBhdGggZD0iTTM4MCA3OTAgVjI0MCBINTc1IEExNzUgMTc1IDAgMCAxIDU3NSA1OTAgSDM4MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dBKSIgc3Ryb2tlLXdpZHRoPSIxMDQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8cG9seWxpbmUgcG9pbnRzPSI0NzAsNTI1IDUzNSw0NTIgNTkyLDQ5MCA2ODAsMzcyIiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMzYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8cGF0aCBkPSJNNjI4IDM2MiBMNzEyIDM0NiBMNjk3IDQzMCBaIiBmaWxsPSJ1cmwoI2dvbGQpIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMTAiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L2c+PC9zdmc+";
 function pfCard(title,body){return `<div class="card pfc"><img class="pfb" src="${PFLOGO}" alt="Penny Finance"><div class="pfh">${title}</div>${body}</div>`}
-let FUND=null;async function getFund(){if(FUND)return FUND;try{const r=await fetch((RAWB||"")+"fund.json?t="+Math.floor(Date.now()/600000));FUND=r.ok?await r.json():{}}catch(e){FUND={}}return FUND}
+let FUND=null,FUNDL=false;async function getFund(){if(FUNDL)return FUND;try{const r=await fetch((RAWB||"")+"fund.json?t="+Math.floor(Date.now()/600000));const j=r.ok?await r.json():{};FUND=Object.assign(j,FUND||{})}catch(e){FUND=FUND||{}}FUNDL=true;return FUND}
 function tvExtras(b,H,t){const F=(FUND&&FUND[t])||(D.fund||{})[t]||{};const w=document.createElement("div");let h="";
   const row=(k,v)=>`<div class="frow"><span class="mut">${k}</span><b class="notr">${v==null||v===""||(typeof v==="number"&&isNaN(v))?"—":v}</b></div>`;
   const P=v=>v==null?null:`<span class="${cls(v)}">${(+v).toFixed(2)}%</span>`,N=v=>v==null?null:(+v).toFixed(2),M=v=>v==null?null:(v<0?"-":"")+"$"+fmtBig(Math.abs(v)),C=v=>v==null?null:fmtBig(v);
