@@ -222,7 +222,7 @@ function render(){
     if(!SYMS)loadSyms().then(()=>{if(Q)render()});
     let sg=symMatch(Q.replace(/^\$/,""),8);
     if(/^[A-Z][A-Z0-9.\-]{0,9}$/.test(q)&&!sg.some(x=>x[0]===q))sg.unshift([q,""]);
-    if(sg.length)prefetch(sg[0][0]);
+    if(sg.length&&sg[0][0]===q&&(SYMS||[]).some(x=>x[0]===q))prefetch(q);   // faqat to'liq tiker yozilganda oldindan yuklash
     h+=`<div class="sugg notr">${sg.map((x,k)=>`<div class="sg ${k===0?"first":""}" data-sym="${esc(x[0])}"><div class="sgi">${esc(x[0][0])}</div><div style="flex:1;min-width:0"><div class="sgt">${esc(x[0])}</div><div class="sgn">${esc(x[1]||"📈 Grafik va texnik tahlil")}</div></div><div class="sga">›</div></div>`).join("")}</div>`;
     if(r.length)h+=`<h2 style="font-size:14px">Bot skaneridagi aksiyalar</h2>`+quoteTable(r);
     m.innerHTML=h;bind();m.querySelectorAll(".sg[data-sym]").forEach(e=>e.onclick=()=>{$("#q").blur();openDetail(e.dataset.sym)});return}
