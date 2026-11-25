@@ -120,6 +120,55 @@ svg.curve{width:100%;height:120px;display:block}
 .pfh{font-size:19px;font-weight:800;margin:2px 44px 10px 0}.fsub{font-size:14px;font-weight:800;color:var(--acc2);margin:14px 0 4px}
 .fgrid{display:grid;grid-template-columns:1fr 1fr;column-gap:16px}.frow{display:flex;justify-content:space-between;gap:8px;padding:7px 0;border-bottom:1px solid var(--line);font-size:13px}.frow b{text-align:right}
 .btn2{display:block;text-align:center;margin-top:12px;padding:10px;border-radius:12px;background:var(--card2);color:var(--tx);text-decoration:none;font-weight:700}
+.pfc-wrap{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin:12px 0;position:relative}
+.pfc-bar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:space-between;padding:8px;border-bottom:1px solid var(--line)}
+.pfc-ivs,.pfc-tools{display:flex;gap:4px;align-items:center;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;max-width:100%}.pfc-ivs::-webkit-scrollbar,.pfc-tools::-webkit-scrollbar{display:none}
+.pfc-bar button,.pfc-bar select{white-space:nowrap;background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:9px;padding:6px 9px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer}
+.pfc-bar button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.pfc-ind{background:linear-gradient(90deg,#7b3fe4,#4f6bff)!important;color:#fff!important;border:0!important}
+.pfc-stage{position:relative;height:min(62vh,520px);min-height:360px;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.pfc-stage canvas{display:block;width:100%;height:100%}
+.pfc-leg{position:absolute;left:8px;top:6px;right:70px;pointer-events:none;font-size:12px;line-height:1.5}
+.pfc-l0{color:var(--tx)}.pfc-l0 span{color:var(--mut);margin-left:6px}.pfc-l0 em{font-style:normal;margin-left:6px}.pfc-l0 .up{color:var(--up)}.pfc-l0 .dn{color:var(--dn)}
+.pfc-li{display:inline-flex;gap:6px;align-items:center;background:color-mix(in srgb,var(--card) 80%,transparent);border-radius:6px;padding:0 6px;margin:1px 0;pointer-events:auto;cursor:pointer;color:var(--mut)}
+.pfc-li i{font-style:normal;font-weight:700}.pfc-li button{background:none;border:0;color:var(--mut);font-size:12px;padding:0 2px;cursor:pointer}
+.pfc-pl{position:absolute;left:0}
+.pfc-msg{display:none;position:absolute;left:50%;top:45%;transform:translate(-50%,-50%);background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-size:13px;max-width:80%;text-align:center}
+.pfc-home{display:none;position:absolute;right:70px;bottom:30px;background:var(--card2);border:1px solid var(--line);color:var(--tx);border-radius:50%;width:34px;height:34px;font-size:16px;cursor:pointer}
+.pfc-full{position:fixed!important;inset:0;z-index:60;margin:0!important;border-radius:0!important;display:flex;flex-direction:column;padding-top:env(safe-area-inset-top)}
+.pfc-full .pfc-stage{flex:1;height:auto!important;touch-action:none}
+body.pfc-lock{overflow:hidden}
+#pfc-sheet{position:fixed;inset:0;z-index:70;display:none}.pfc-sbg{position:absolute;inset:0;background:rgba(0,0,0,.5)}
+.pfc-sh{position:absolute;left:0;right:0;bottom:0;max-height:85vh;overflow:auto;background:var(--card);border-radius:20px 20px 0 0;padding:14px 16px calc(16px + env(safe-area-inset-bottom))}
+@media(min-width:900px){.pfc-sh{left:50%;right:auto;bottom:auto;top:50%;transform:translate(-50%,-50%);width:560px;border-radius:18px;max-height:80vh}}
+.pfc-sh-h{display:flex;align-items:center;gap:10px;margin-bottom:10px}.pfc-sh-h b{font-size:18px;flex:1}.pfc-cl{background:none;border:0;color:var(--tx);font-size:20px;cursor:pointer}
+.pfc-q{width:100%;background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:12px;padding:10px;font-size:15px;margin-bottom:8px}
+.pfc-g{font-size:12px;font-weight:800;color:var(--acc2);margin:12px 0 4px;text-transform:uppercase;letter-spacing:.5px}
+.pfc-it{display:flex;align-items:center;gap:8px;padding:11px 10px;border-radius:10px;cursor:pointer;font-size:15px}.pfc-it:hover{background:var(--card2)}.pfc-it span{flex:1}.pfc-it em{font-style:normal;font-size:11px;color:var(--mut)}
+.pfc-it button{background:none;border:0;font-size:15px;cursor:pointer}.pfc-new{color:var(--acc2);font-weight:700;border:1px dashed var(--line)}
+.pfc-warn{background:rgba(250,176,5,.12);color:#fab005;border-radius:10px;padding:10px;font-size:13px;margin:6px 0}
+.pfc-lb{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}.pfc-lb input{width:110px;background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:8px;padding:7px}
+.pfc-code{width:100%;min-height:220px;background:#0b0d12;color:#d7e3ff;border:1px solid var(--line);border-radius:12px;padding:10px;font:13px/1.5 ui-monospace,Menlo,Consolas,monospace;resize:vertical;tab-size:2}
+.pfc-help pre{white-space:pre-wrap;font-size:12px;color:var(--mut);background:var(--card2);padding:10px;border-radius:10px}.pfc-help summary{cursor:pointer;margin:8px 0;font-size:13px}
+.pfc-err{font-size:13px;margin-top:8px;min-height:18px}
+@media(min-width:900px){.pfc-stage{height:min(72vh,760px)}.pfc-bar button,.pfc-bar select{white-space:nowrap;padding:6px 11px}}
+
+/* ===== DESKTOP (kompyuter) ===== */
+@media(min-width:900px){
+ body{padding-bottom:0;padding-left:220px}
+ nav{top:0;bottom:0;left:0;right:auto;width:220px;flex-direction:column;justify-content:flex-start;gap:4px;padding:84px 12px 12px;border-top:0;border-right:1px solid var(--line)}
+ nav button{flex:0 0 auto;flex-direction:row;justify-content:flex-start;gap:12px;font-size:15px;padding:11px 14px;border-radius:12px}
+ nav button.on{background:var(--card2)}nav button .i{font-size:20px}
+ header{padding:14px 28px 10px}header .brand,header .search{max-width:1180px;margin-left:auto;margin-right:auto}
+ .mrow,.strip{max-width:1236px;margin-left:auto;margin-right:auto}
+ main{max-width:1180px;margin:0 auto;padding:0 28px}
+ #detail{left:220px}#detail .top{padding:14px 28px}#detail #symbody,#detail #pg{max-width:1180px;margin:0 auto;padding-left:28px!important;padding-right:28px!important}
+ #symbody>div:first-child .card,#symbody .card{border-radius:16px}
+ .fab{right:40px;bottom:40px}.toast{bottom:40px}.cbar{left:220px}
+ .pc{max-width:760px}.prof{max-width:760px}
+ .sugg{max-width:680px}
+}
+@media(min-width:1300px){#detail #symbody>div{}}
 .grid2c{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
 .ohlc b{color:var(--tx)}
 .trbusy{position:fixed;bottom:74px;left:50%;transform:translateX(-50%);background:var(--acc);color:#fff;padding:6px 14px;border-radius:16px;font-size:12px;z-index:20;display:none}
@@ -187,7 +236,8 @@ async function load(){
   mstate();
   strip();render();
 }
-async function aclOk(){try{if(!MEID)return false;const h=await sha256hex(D.acl.s+":"+MEID);return (D.acl.h||[]).includes(h.slice(0,20))}catch(e){return false}}
+let CTIER="trial";
+async function aclOk(){try{if(!MEID)return false;const h=(await sha256hex(D.acl.s+":"+MEID)).slice(0,20);CTIER=(D.acl.t||{})[h]||"basic";return (D.acl.h||[]).includes(h)}catch(e){return false}}
 function lockScreen(){document.querySelector("nav").style.display="none";const sb=document.querySelector(".search");if(sb)sb.style.display="none";
   $("#strip").innerHTML="";$("#mstate").innerHTML="";
   $("#main").innerHTML=`<div class="card" style="margin-top:30px;text-align:center;padding:28px 20px"><div style="font-size:54px">🔒</div>
@@ -462,19 +512,15 @@ function drawChart(box,H0,bars,showBB){
   sv.addEventListener("pointermove",mv);sv.addEventListener("touchmove",mv,{passive:true});sv.addEventListener("pointerdown",mv);
   sv.addEventListener("pointerleave",()=>{cxl.style.display="none";show(n-1)});
 }
-function ownView(b,H,live){
+function ownView(b,H,live,sym){
   const n=H.c.length,L=n-1,px=live&&live.p!=null?live.p:H.c[L],prev=H.c[L-1];
   const ch=live&&live.c!=null?live.c:(prev?(px/prev-1)*100:null);const dif=ch==null?null:px-px/(1+ch/100);const y=H.h.slice(-252),yl=H.l.slice(-252);
   let h=`<div class="card"><div class="row"><div style="font-size:28px;font-weight:800" class="notr">${fmt(px)}</div><div class="${cls(ch)} notr" style="font-size:16px;font-weight:700">${ch==null?"":(dif>=0?"+":"")+fmt(+dif.toFixed(px<10?3:2))+" ("+pct(ch)+")"}</div></div>
   <div class="grid2" style="margin-top:8px"><div><span class="mut">${TA("opn")}</span><b class="notr">${fmt(H.o[L])}</b></div><div><span class="mut">${TA("prv")}</span><b class="notr">${fmt(prev)}</b></div><div><span class="mut">${TA("dr")}</span><b class="notr">${fmt(H.l[L])} – ${fmt(H.h[L])}</b></div><div><span class="mut">${TA("yr")}</span><b class="notr">${fmt(Math.min(...yl))} – ${fmt(Math.max(...y))}</b></div></div></div>
-  <div class="card"><div class="seg" id="rg">${[["r1",22],["r3",66],["r6",130],["r12",260]].map(r=>`<button data-b="${r[1]}" class="${r[1]===130?"on":""}">${TA(r[0])}</button>`).join("")}<button data-bb="1">BB</button></div>
-  <div class="notr mut" style="font-size:11px;margin-bottom:4px"><span style="color:#f5a623">━ MA20</span> &nbsp;<span style="color:#4f7cf0">━ MA50</span> &nbsp;<span style="color:#a477ff">━ RSI</span></div><div id="ownc"></div></div>
+  <div class="pfc-host"></div>
   <h2>${TA("ta")}</h2><div class="card pfc"><img class="pfb" src="${PFLOGO}" alt=""><div class="seg" id="tf" style="margin-right:44px"><button data-tf="d" class="on">${TA("day")}</button><button data-tf="w">${TA("week")}</button></div><div id="tabox"></div></div>`;
   const x=document.createElement("div");x.innerHTML=h;b.appendChild(x);
-  let bars=130,bbOn=false;const box=x.querySelector("#ownc");const redraw=()=>drawChart(box,H,bars,bbOn);
-  requestAnimationFrame(redraw);
-  x.querySelectorAll("#rg [data-b]").forEach(e=>e.onclick=()=>{bars=+e.dataset.b;x.querySelectorAll("#rg [data-b]").forEach(z=>z.classList.toggle("on",z===e));redraw()});
-  x.querySelector("#rg [data-bb]").onclick=e=>{bbOn=!bbOn;e.currentTarget.classList.toggle("on",bbOn);redraw()};
+  try{x.querySelector(".pfc-host")._chart=new PFChart(x.querySelector(".pfc-host"),{sym:sym||"",tier:CTIER,base:H,fetcher:chartFetch})}catch(e){console.error(e)}
   const tab=x.querySelector("#tabox");const setTF=tf=>{tab.innerHTML=taHtml(tf==="w"?toWeekly(H):H);x.querySelectorAll("#tf button").forEach(z=>z.classList.toggle("on",z.dataset.tf===tf))};
   setTF("d");x.querySelectorAll("#tf button").forEach(e=>e.onclick=()=>setTF(e.dataset.tf));
 }
@@ -482,19 +528,24 @@ const HC={};
 function hcGet(t){if(HC[t])return HC[t];try{const x=JSON.parse(localStorage.getItem("pf_h_"+t)||"null");if(x&&Date.now()-x._ts<6*3600e3){HC[t]=x;if(x._f){FUND=FUND||{};FUND[t]=x._f}return x}}catch(e){}return null}
 function hcPut(t,o){o._ts=Date.now();HC[t]=o;try{const ks=JSON.parse(localStorage.getItem("pf_hk")||"[]").filter(k=>k!==t);ks.push(t);while(ks.length>25)localStorage.removeItem("pf_h_"+ks.shift());localStorage.setItem("pf_hk",JSON.stringify(ks));localStorage.setItem("pf_h_"+t,JSON.stringify(o))}catch(e){}}
 const HINF={};
-function relayFetch(t){return new Promise(res=>{if(CTOPIC.startsWith("__")||typeof EventSource==="undefined")return res(null);
-  const rt=CTOPIC+"-r-"+Math.random().toString(36).slice(2,12).replace(/[^a-z0-9]/g,"x");let done=false,es;
-  const fin=v=>{if(done)return;done=true;try{es.close()}catch(e){}clearTimeout(to);res(v)};const to=setTimeout(()=>fin(null),15000);
-  try{es=new EventSource("https://ntfy.sh/"+rt+"/sse")}catch(e){return fin(null)}
-  let sent=false;const send=()=>{if(sent)return;sent=true;fetch("https://ntfy.sh/"+CTOPIC+"-q",{method:"POST",body:JSON.stringify({s:t,r:rt})}).catch(()=>fin(null))};
+let RELERR="";
+function relayFetch(t,iv){return new Promise(res=>{if(CTOPIC.startsWith("__")||typeof EventSource==="undefined"){RELERR="ilova eski — /webapp update";return res(null)}
+  const DS=typeof DecompressionStream!=="undefined";
+  const rt=CTOPIC+"-r-"+Math.random().toString(36).slice(2,12).replace(/[^a-z0-9]/g,"x");let done=false,es,got=false;
+  const fin=v=>{if(done)return;done=true;try{es.close()}catch(e){}clearTimeout(to);if(!v&&!RELERR)RELERR=got?"javob buzildi":"bot javob bermadi (bot ishlayaptimi?)";res(v)};
+  const to=setTimeout(()=>fin(null),iv&&iv!=="1d"?20000:15000);
+  try{es=new EventSource("https://ntfy.sh/"+rt+"/sse")}catch(e){RELERR="ulanib bo'lmadi";return fin(null)}
+  let sent=false;const send=()=>{if(sent)return;sent=true;fetch("https://ntfy.sh/"+CTOPIC+"-q",{method:"POST",body:JSON.stringify(Object.assign({s:t,r:rt,z:DS?1:0},iv?{iv}:{}))}).catch(()=>{RELERR="so'rov yuborilmadi (internet?)";fin(null)})};
   es.addEventListener("open",send);es.onopen=send;setTimeout(send,1500);
-  const parts={};let total=0;
-  es.onmessage=async e=>{try{const m=JSON.parse(e.data);if(m.event&&m.event!=="message")return;
-    if(m.attachment&&m.attachment.url){return fin(await (await fetch(m.attachment.url)).json())}
-    const x=JSON.parse(m.message||"{}");if(x.z==null)return;parts[x.i]=x.z;total=x.n;
-    if(Object.keys(parts).length>=total){const b64=Array.from({length:total},(_,k)=>parts[k]).join("");
-      const bin=Uint8Array.from(atob(b64),c=>c.charCodeAt(0));
-      const txt=await new Response(new Blob([bin]).stream().pipeThrough(new DecompressionStream("deflate"))).text();fin(JSON.parse(txt))}}catch(x){fin(null)}};})}
+  const parts={};let total=0,kind="z";
+  es.onmessage=async e=>{try{const m=JSON.parse(e.data);if(m.event&&m.event!=="message")return;got=true;
+    const x=JSON.parse(m.message||"{}");if(x.z==null&&x.p==null)return;kind=x.z!=null?"z":"p";parts[x.i]=x.z!=null?x.z:x.p;total=x.n;
+    if(Object.keys(parts).length>=total){const all=Array.from({length:total},(_,k)=>parts[k]).join("");let txt;
+      if(kind==="p")txt=all;else{const bin=Uint8Array.from(atob(all),c=>c.charCodeAt(0));txt=await new Response(new Blob([bin]).stream().pipeThrough(new DecompressionStream("deflate"))).text()}
+      const j=JSON.parse(txt);if(j.err)RELERR="manba: "+j.err;fin(j)}}catch(x){RELERR="o'qishda xato: "+String(x).slice(0,60);fin(null)}};})}
+async function chartFetch(sym,iv){const k="pf_g_"+sym+"_"+iv,ttl=["5m","15m","1h"].includes(iv)?3*60e3:30*60e3;
+  try{const c=JSON.parse(localStorage.getItem(k)||"null");if(c&&Date.now()-c._ts<ttl)return c}catch(e){}
+  const j=await relayFetch(sym,iv);const g=j&&j.g;if(g&&g.c&&g.c.length){g._ts=Date.now();try{localStorage.setItem(k,JSON.stringify(g))}catch(e){try{Object.keys(localStorage).filter(x=>x.startsWith("pf_g_")).forEach(x=>localStorage.removeItem(x))}catch(_){}}}return g||null}
 function yhist(t){
   const c=hcGet(t);if(c)return Promise.resolve(c);if(HINF[t])return HINF[t];
   const u="https://query1.finance.yahoo.com/v8/finance/chart/"+encodeURIComponent(t)+"?range=1y&interval=1d";
@@ -504,7 +555,7 @@ function yhist(t){
     (R.timestamp||[]).forEach((ts,i)=>{if(q.close[i]==null||q.open[i]==null)return;o.d.push(new Date(ts*1000).toISOString().slice(0,10));o.o.push(+q.open[i].toFixed(4));o.h.push(+q.high[i].toFixed(4));o.l.push(+q.low[i].toFixed(4));o.c.push(+q.close[i].toFixed(4));o.v.push(q.volume[i]||0)});
     if(o.c.length<30)throw 0;return o})();
   const relay=relayFetch(t).then(j=>{if(!j||!j.h||!j.h.c||j.h.c.length<30)throw 0;const o=j.h;if(j.f&&Object.keys(j.f).length){FUND=FUND||{};FUND[t]=j.f;o._f=j.f}if(o.px)o.live={p:o.px,c:null};return o});
-  HINF[t]=Promise.any([direct,relay]).then(o=>{ctl.abort();hcPut(t,o);return o}).catch(()=>null).finally(()=>{delete HINF[t]});
+  RELERR="";HINF[t]=Promise.any([direct,relay]).then(o=>{ctl.abort();hcPut(t,o);return o}).catch(()=>null).finally(()=>{delete HINF[t]});
   return HINF[t]}
 // ---- tikerlar ro'yxati (qidiruv takliflari) ----
 let SYMS=null,SYMP=null;
@@ -521,7 +572,8 @@ function detailShell(name,sym){
   d.style.display="block";d.scrollTop=0;d.querySelector(".back").onclick=goBack;if(tg&&tg.BackButton){tg.BackButton.offClick(goBack);tg.BackButton.show();tg.BackButton.onClick(goBack)}
   return $("#symbody")}
 function tvView(b,sym,isIndex){const w=document.createElement("div");w.className="card";w.style.textAlign="center";
-  w.innerHTML=`<div style="font-size:34px">📭</div><div style="margin-top:8px">${TA("nodata")}</div><div class="mut" style="font-size:12px;margin-top:6px">Bir necha daqiqadan keyin qayta urinib ko'ring.</div>`;b.appendChild(w)}
+  w.innerHTML=`<div style="font-size:34px">📭</div><div style="margin-top:8px">${TA("nodata")}</div><div class="mut" style="font-size:12px;margin-top:6px">Bir necha daqiqadan keyin qayta urinib ko'ring.</div>${RELERR?`<div class="mut notr" style="font-size:11px;margin-top:6px">Sabab: ${esc(RELERR)}</div>`:""}<button class="btn2" style="margin:12px auto 0;display:inline-block;padding:9px 18px" id="rtry">🔄 Qayta urinish</button>`;b.appendChild(w);
+  const rb=w.querySelector("#rtry");if(rb)rb.onclick=()=>{try{localStorage.removeItem("pf_h_"+sym)}catch(e){}delete HC[sym];goBack();openDetail(sym)}}
 const PFLOGO="data:image/svg+xml;base64,PHN2ZyBpZD0iQSIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImJnQSIgY3g9IjcwJSIgY3k9IjE4JSIgcj0iOTUlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzZjFmODYiLz48c3RvcCBvZmZzZXQ9Ii41NSIgc3RvcC1jb2xvcj0iIzE0MTEyYyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzBhMGIxMiIvPjwvcmFkaWFsR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ0EiIHgxPSIwIiB5MT0iMSIgeDI9IjEiIHkyPSIwIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM1ZjhiZmYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNjNThjZmYiLz48L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGQiIHgxPSIwIiB5MT0iMSIgeDI9IjEiIHkyPSIwIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmNWE2MjMiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmUyOGYiLz48L2xpbmVhckdyYWRpZW50Pgo8ZmlsdGVyIGlkPSJnbG93IiB4PSItMzAlIiB5PSItMzAlIiB3aWR0aD0iMTYwJSIgaGVpZ2h0PSIxNjAlIj48ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIxOCIgcmVzdWx0PSJiIi8+PGZlTWVyZ2U+PGZlTWVyZ2VOb2RlIGluPSJiIi8+PGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+PC9mZU1lcmdlPjwvZmlsdGVyPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAyNCIgaGVpZ2h0PSIxMDI0IiBmaWxsPSJ1cmwoI2JnQSkiLz48Y2lyY2xlIGN4PSI1MTIiIGN5PSI1MTIiIHI9IjQwNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dBKSIgc3Ryb2tlLXdpZHRoPSIxMiIgb3BhY2l0eT0iLjQiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzggMCkiIGZpbHRlcj0idXJsKCNnbG93KSI+PHBhdGggZD0iTTM4MCA3OTAgVjI0MCBINTc1IEExNzUgMTc1IDAgMCAxIDU3NSA1OTAgSDM4MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dBKSIgc3Ryb2tlLXdpZHRoPSIxMDQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8cG9seWxpbmUgcG9pbnRzPSI0NzAsNTI1IDUzNSw0NTIgNTkyLDQ5MCA2ODAsMzcyIiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMzYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8cGF0aCBkPSJNNjI4IDM2MiBMNzEyIDM0NiBMNjk3IDQzMCBaIiBmaWxsPSJ1cmwoI2dvbGQpIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMTAiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L2c+PC9zdmc+";
 function pfCard(title,body){return `<div class="card pfc"><img class="pfb" src="${PFLOGO}" alt="Penny Finance"><div class="pfh">${title}</div>${body}</div>`}
 let FUND=null,FUNDL=false;async function getFund(){if(FUNDL)return FUND;try{const r=await fetch((RAWB||"")+"fund.json?t="+Math.floor(Date.now()/600000));const j=r.ok?await r.json():{};FUND=Object.assign(j,FUND||{})}catch(e){FUND=FUND||{}}FUNDL=true;return FUND}
@@ -551,7 +603,7 @@ function tvExtras(b,H,t){const F=(FUND&&FUND[t])||(D.fund||{})[t]||{};const w=do
 function fmtBig(x){return x>=1e9?(x/1e9).toFixed(2)+"B":x>=1e6?(x/1e6).toFixed(2)+"M":x>=1e3?(x/1e3).toFixed(1)+"K":Math.round(x)+""}
 function openMarket(s,n){
   const H=D.hist&&D.hist[s];const live=(D.markets||[]).find(x=>x.s===s);const b=detailShell(n||(H&&H.n)||s,s);
-  if(H&&H.c&&H.c.length>30){ownView(b,H,live);return b}
+  if(H&&H.c&&H.c.length>30){ownView(b,H,live,s);return b}
   tvView(b,tvSym(s),true);return b}
 function openSymbol(sym,name,isIndex){return isIndex?_openMarket(sym,name):_openDetail(sym)}
 async function openDetail(t){
@@ -567,7 +619,7 @@ async function openDetail(t){
   let H=D.hist&&D.hist[t];getFund();
   if(!(H&&H.c&&H.c.length>30))H=hcGet(t);
   if(!(H&&H.c&&H.c.length>30)){const w=document.createElement("div");w.innerHTML=`<div class="skel" style="height:110px"></div><div class="skel" style="height:300px"></div><div class="skel" style="height:220px"></div>`;b.appendChild(w);H=await yhist(t);w.remove();if($("#detail").style.display!=="block")return b}
-  if(H&&H.c&&H.c.length>30){if(H.n)$("#detail .tk").textContent=t+" · "+H.n;ownView(b,H,H.live||(q?{p:q.p,c:q.c}:null));await getFund();tvExtras(b,H,t);tail();}
+  if(H&&H.c&&H.c.length>30){if(H.n)$("#detail .tk").textContent=t+" · "+H.n;ownView(b,H,H.live||(q?{p:q.p,c:q.c}:null),t);await getFund();tvExtras(b,H,t);tail();}
   else{tvView(b,t,false);await getFund();tvExtras(b,null,t);tail()}
   return b;
 }
@@ -809,6 +861,355 @@ function openComSearch(){pushPage(()=>{const g=pageShell(CX("srch"));g.innerHTML
 setInterval(()=>{if(TAB==="com"||STACK.some(s=>s.com))loadC()},60000);
 const _openDetail=openDetail,_openMarket=openMarket,_openSymbol=openSymbol;
 openDetail=t=>pushPage(()=>_openDetail(t));openMarket=(a,b)=>pushPage(()=>_openMarket(a,b));openSymbol=(a,b,c)=>pushPage(()=>_openSymbol(a,b,c));
+// ===================== PF INDIKATORLAR + PINE-LITE =====================
+const PFI=(()=>{
+const N=NaN,isn=x=>x==null||Number.isNaN(x);
+const mk=n=>new Array(n).fill(N);
+function sma(a,n){const o=mk(a.length);let s=0,c=0;for(let i=0;i<a.length;i++){const v=a[i];if(!isn(v)){s+=v;c++}if(i>=n){const w=a[i-n];if(!isn(w)){s-=w;c--}}if(i>=n-1&&c===n)o[i]=s/n}return o}
+function ema(a,n){const o=mk(a.length),k=2/(n+1);let e=N,cnt=0,s=0;for(let i=0;i<a.length;i++){const v=a[i];if(isn(v)){o[i]=e;continue}if(isn(e)){s+=v;cnt++;if(cnt===n){e=s/n;o[i]=e}}else{e=v*k+e*(1-k);o[i]=e}}return o}
+function rma(a,n){const o=mk(a.length);let e=N,cnt=0,s=0;for(let i=0;i<a.length;i++){const v=a[i];if(isn(v)){o[i]=e;continue}if(isn(e)){s+=v;cnt++;if(cnt===n){e=s/n;o[i]=e}}else{e=(e*(n-1)+v)/n;o[i]=e}}return o}
+function wma(a,n){const o=mk(a.length),d=n*(n+1)/2;for(let i=n-1;i<a.length;i++){let s=0,ok=true;for(let j=0;j<n;j++){const v=a[i-j];if(isn(v)){ok=false;break}s+=v*(n-j)}if(ok)o[i]=s/d}return o}
+function stdev(a,n){const m=sma(a,n),o=mk(a.length);for(let i=n-1;i<a.length;i++){if(isn(m[i]))continue;let s=0;for(let j=0;j<n;j++)s+=(a[i-j]-m[i])**2;o[i]=Math.sqrt(s/n)}return o}
+function highest(a,n){const o=mk(a.length);for(let i=n-1;i<a.length;i++){let h=-Infinity;for(let j=0;j<n;j++){const v=a[i-j];if(!isn(v)&&v>h)h=v}o[i]=h===-Infinity?N:h}return o}
+function lowest(a,n){const o=mk(a.length);for(let i=n-1;i<a.length;i++){let h=Infinity;for(let j=0;j<n;j++){const v=a[i-j];if(!isn(v)&&v<h)h=v}o[i]=h===Infinity?N:h}return o}
+function shift(a,n){const o=mk(a.length);for(let i=n;i<a.length;i++)o[i]=a[i-n];return o}
+function change(a,n=1){return a.map((v,i)=>i>=n?v-a[i-n]:N)}
+function trueRange(D){return D.c.map((c,i)=>i?Math.max(D.h[i]-D.l[i],Math.abs(D.h[i]-D.c[i-1]),Math.abs(D.l[i]-D.c[i-1])):D.h[i]-D.l[i])}
+function atr(D,n){return rma(trueRange(D),n)}
+function rsi(a,n){const up=a.map((v,i)=>i?Math.max(v-a[i-1],0):N),dn=a.map((v,i)=>i?Math.max(a[i-1]-v,0):N);const u=rma(up,n),d=rma(dn,n);return u.map((x,i)=>isn(x)||isn(d[i])?N:d[i]===0?100:100-100/(1+x/d[i]))}
+function stoch(D,n,k,dd){const hh=highest(D.h,n),ll=lowest(D.l,n);const raw=D.c.map((c,i)=>isn(hh[i])?N:hh[i]===ll[i]?50:(c-ll[i])/(hh[i]-ll[i])*100);const K=sma(raw,k);return [K,sma(K,dd)]}
+function hl2(D){return D.h.map((h,i)=>(h+D.l[i])/2)}
+const C=["#f5a623","#4f8cff","#e64980","#20c997","#a477ff","#ff922b","#15aabf","#fab005","#94d82d","#ff6b6b"];
+// ---- o'rnatilgan indikatorlar ----
+const IND={
+ sma:{n:"SMA — oddiy o'rtacha",g:"Trend",ov:1,p:{len:20},f:(D,p,c)=>({L:[{v:sma(D.c,p.len),c}]})},
+ ema:{n:"EMA — eksponensial o'rtacha",g:"Trend",ov:1,p:{len:20},f:(D,p,c)=>({L:[{v:ema(D.c,p.len),c}]})},
+ wma:{n:"WMA — vaznli o'rtacha",g:"Trend",ov:1,p:{len:20},f:(D,p,c)=>({L:[{v:wma(D.c,p.len),c}]})},
+ bb:{n:"Bollinger Bands",g:"Volatillik",ov:1,p:{len:20,mult:2},f:(D,p,c)=>{const m=sma(D.c,p.len),s=stdev(D.c,p.len);const u=m.map((x,i)=>x+p.mult*s[i]),l=m.map((x,i)=>x-p.mult*s[i]);return {L:[{v:m,c,w:1},{v:u,c:"#a477ff",w:1},{v:l,c:"#a477ff",w:1}],F:[{a:u,b:l,c:"rgba(164,119,255,.08)"}]}}},
+ donch:{n:"Donchian kanali",g:"Volatillik",ov:1,p:{len:20},f:(D,p,c)=>{const u=highest(D.h,p.len),l=lowest(D.l,p.len);return {L:[{v:u,c:"#20c997",w:1},{v:l,c:"#20c997",w:1},{v:u.map((x,i)=>(x+l[i])/2),c,w:1}],F:[{a:u,b:l,c:"rgba(32,201,151,.07)"}]}}},
+ kelt:{n:"Keltner kanali",g:"Volatillik",ov:1,p:{len:20,mult:2},f:(D,p,c)=>{const m=ema(D.c,p.len),a=atr(D,10);const u=m.map((x,i)=>x+p.mult*a[i]),l=m.map((x,i)=>x-p.mult*a[i]);return {L:[{v:m,c,w:1},{v:u,c:"#15aabf",w:1},{v:l,c:"#15aabf",w:1}],F:[{a:u,b:l,c:"rgba(21,170,191,.07)"}]}}},
+ env:{n:"Envelope (konvert)",g:"Trend",ov:1,p:{len:20,pct:5},f:(D,p,c)=>{const m=sma(D.c,p.len);return {L:[{v:m,c,w:1},{v:m.map(x=>x*(1+p.pct/100)),c:"#ff922b",w:1},{v:m.map(x=>x*(1-p.pct/100)),c:"#ff922b",w:1}]}}},
+ vwap:{n:"VWAP (hajm bo'yicha o'rtacha)",g:"Hajm",ov:1,p:{},f:(D,p,c)=>{let pv=0,vv=0,day="";const o=D.c.map((x,i)=>{const d=new Date(D.t[i]*1000).toISOString().slice(0,10);if(D.intra&&d!==day){day=d;pv=0;vv=0}const tp=(D.h[i]+D.l[i]+x)/3;pv+=tp*(D.v[i]||0);vv+=(D.v[i]||0);return vv?pv/vv:N});return {L:[{v:o,c}]}}},
+ st:{n:"SuperTrend",g:"Trend",ov:1,p:{len:10,mult:3},f:(D,p,c)=>{const a=atr(D,p.len),m=hl2(D),n=D.c.length;const up=mk(n),dn=mk(n),dir=new Array(n).fill(1),o=mk(n);
+   for(let i=0;i<n;i++){if(isn(a[i]))continue;let bu=m[i]-p.mult*a[i],bd=m[i]+p.mult*a[i];if(i&&!isn(up[i-1])){bu=D.c[i-1]>up[i-1]?Math.max(bu,up[i-1]):bu;bd=D.c[i-1]<dn[i-1]?Math.min(bd,dn[i-1]):bd;dir[i]=dir[i-1];if(dir[i]===1&&D.c[i]<up[i-1])dir[i]=-1;else if(dir[i]===-1&&D.c[i]>dn[i-1])dir[i]=1}up[i]=bu;dn[i]=bd;o[i]=dir[i]===1?bu:bd}
+   return {L:[{v:o.map((x,i)=>dir[i]===1?x:N),c:"#16c784",w:2},{v:o.map((x,i)=>dir[i]===-1?x:N),c:"#ea3943",w:2}]}}},
+ psar:{n:"Parabolic SAR",g:"Trend",ov:1,p:{step:0.02,max:0.2},f:(D,p,c)=>{const n=D.c.length,o=mk(n);if(n<3)return {L:[]};let up=true,af=p.step,ep=D.h[0],sar=D.l[0];
+   for(let i=1;i<n;i++){sar=sar+af*(ep-sar);if(up){sar=Math.min(sar,D.l[i-1],i>1?D.l[i-2]:D.l[i-1]);if(D.l[i]<sar){up=false;sar=ep;ep=D.l[i];af=p.step}else if(D.h[i]>ep){ep=D.h[i];af=Math.min(af+p.step,p.max)}}
+   else{sar=Math.max(sar,D.h[i-1],i>1?D.h[i-2]:D.h[i-1]);if(D.h[i]>sar){up=true;sar=ep;ep=D.h[i];af=p.step}else if(D.l[i]<ep){ep=D.l[i];af=Math.min(af+p.step,p.max)}}o[i]=sar}
+   return {P:[{v:o,c}]}}},
+ ichi:{n:"Ichimoku bulut",g:"Trend",ov:1,p:{t:9,k:26,s:52},f:(D,p,c)=>{const mid=n=>{const H=highest(D.h,n),L=lowest(D.l,n);return H.map((h,i)=>(h+L[i])/2)};const T=mid(p.t),K=mid(p.k),A=shift(T.map((x,i)=>(x+K[i])/2),p.k),B=shift(mid(p.s),p.k);
+   return {L:[{v:T,c:"#4f8cff",w:1},{v:K,c:"#e64980",w:1},{v:A,c:"#16c784",w:1},{v:B,c:"#ea3943",w:1}],F:[{a:A,b:B,c:"rgba(22,199,132,.08)"}]}}},
+ vol:{n:"Hajm (Volume)",g:"Hajm",ov:0,p:{len:20},f:(D,p,c)=>({H:[{v:D.v,cs:D.c.map((x,i)=>x>=D.o[i])}],L:[{v:sma(D.v,p.len),c:"#f5a623",w:1}]})},
+ rsi:{n:"RSI — nisbiy kuch",g:"Ostsillyator",ov:0,p:{len:14},rg:[0,100],f:(D,p,c)=>({L:[{v:rsi(D.c,p.len),c:"#a477ff"}],Y:[70,30]})},
+ macd:{n:"MACD",g:"Ostsillyator",ov:0,p:{fast:12,slow:26,sig:9},f:(D,p,c)=>{const e2=ema(D.c,p.slow),m=ema(D.c,p.fast).map((x,i)=>x-e2[i]);const s=ema(m,p.sig);return {H:[{v:m.map((x,i)=>x-s[i])}],L:[{v:m,c:"#4f8cff"},{v:s,c:"#f5a623"}],Y:[0]}}},
+ stoch:{n:"Stochastic",g:"Ostsillyator",ov:0,p:{len:14,k:3,d:3},rg:[0,100],f:(D,p,c)=>{const [K,Dd]=stoch(D,p.len,p.k,p.d);return {L:[{v:K,c:"#4f8cff"},{v:Dd,c:"#f5a623"}],Y:[80,20]}}},
+ srsi:{n:"Stochastic RSI",g:"Ostsillyator",ov:0,p:{len:14,k:3,d:3},rg:[0,100],f:(D,p,c)=>{const r=rsi(D.c,p.len),hh=highest(r,p.len),ll=lowest(r,p.len);const raw=r.map((x,i)=>hh[i]===ll[i]?50:(x-ll[i])/(hh[i]-ll[i])*100);const K=sma(raw,p.k);return {L:[{v:K,c:"#4f8cff"},{v:sma(K,p.d),c:"#f5a623"}],Y:[80,20]}}},
+ atr:{n:"ATR — o'rtacha diapazon",g:"Volatillik",ov:0,p:{len:14},f:(D,p,c)=>({L:[{v:atr(D,p.len),c}]})},
+ adx:{n:"ADX / DMI",g:"Trend",ov:0,p:{len:14},f:(D,p,c)=>{const n=D.c.length,pdm=mk(n),ndm=mk(n);for(let i=1;i<n;i++){const u=D.h[i]-D.h[i-1],d=D.l[i-1]-D.l[i];pdm[i]=u>d&&u>0?u:0;ndm[i]=d>u&&d>0?d:0}
+   const tr=rma(trueRange(D),p.len),pd=rma(pdm,p.len).map((x,i)=>100*x/tr[i]),nd=rma(ndm,p.len).map((x,i)=>100*x/tr[i]);const dx=pd.map((x,i)=>100*Math.abs(x-nd[i])/((x+nd[i])||1));
+   return {L:[{v:rma(dx,p.len),c:"#e6e6e6",w:2},{v:pd,c:"#16c784",w:1},{v:nd,c:"#ea3943",w:1}],Y:[25]}}},
+ cci:{n:"CCI",g:"Ostsillyator",ov:0,p:{len:20},f:(D,p,c)=>{const tp=D.c.map((x,i)=>(x+D.h[i]+D.l[i])/3),m=sma(tp,p.len);const o=tp.map((x,i)=>{if(isn(m[i]))return N;let d=0;for(let j=0;j<p.len;j++)d+=Math.abs(tp[i-j]-m[i]);d/=p.len;return d?(x-m[i])/(0.015*d):0});return {L:[{v:o,c}],Y:[100,-100]}}},
+ wr:{n:"Williams %R",g:"Ostsillyator",ov:0,p:{len:14},rg:[-100,0],f:(D,p,c)=>{const hh=highest(D.h,p.len),ll=lowest(D.l,p.len);return {L:[{v:D.c.map((x,i)=>hh[i]===ll[i]?-50:(hh[i]-x)/(hh[i]-ll[i])*-100),c}],Y:[-20,-80]}}},
+ mfi:{n:"MFI — pul oqimi",g:"Hajm",ov:0,p:{len:14},rg:[0,100],f:(D,p,c)=>{const tp=D.c.map((x,i)=>(x+D.h[i]+D.l[i])/3);const pos=tp.map((x,i)=>i&&x>tp[i-1]?x*(D.v[i]||0):0),neg=tp.map((x,i)=>i&&x<tp[i-1]?x*(D.v[i]||0):0);
+   const sp=sma(pos,p.len),sn=sma(neg,p.len);return {L:[{v:sp.map((x,i)=>sn[i]===0?100:100-100/(1+x/sn[i])),c:"#20c997"}],Y:[80,20]}}},
+ obv:{n:"OBV — hajm balansi",g:"Hajm",ov:0,p:{},f:(D,p,c)=>{let s=0;return {L:[{v:D.c.map((x,i)=>{if(i){s+=x>D.c[i-1]?(D.v[i]||0):x<D.c[i-1]?-(D.v[i]||0):0}return s}),c}]}}},
+ roc:{n:"ROC — o'zgarish tezligi",g:"Ostsillyator",ov:0,p:{len:10},f:(D,p,c)=>({L:[{v:D.c.map((x,i)=>i>=p.len?(x/D.c[i-p.len]-1)*100:N),c}],Y:[0]})},
+ mom:{n:"Momentum",g:"Ostsillyator",ov:0,p:{len:10},f:(D,p,c)=>({L:[{v:change(D.c,p.len),c}],Y:[0]})},
+};
+// ===================== PINE-LITE (xavfsiz interpretator, eval YO'Q) =====================
+function tokenize(src){const T=[];let i=0,line=1;const re=/\s/;
+  while(i<src.length){const ch=src[i];
+    if(ch==="\n"){T.push({t:"nl",line});line++;i++;continue}
+    if(re.test(ch)){i++;continue}
+    if(ch==="/"&&src[i+1]==="/"){while(i<src.length&&src[i]!=="\n")i++;continue}
+    if(/[0-9]/.test(ch)||(ch==="."&&/[0-9]/.test(src[i+1]||""))){let j=i;while(j<src.length&&/[0-9.eE]/.test(src[j]))j++;T.push({t:"num",v:parseFloat(src.slice(i,j)),line});i=j;continue}
+    if(/[A-Za-z_]/.test(ch)){let j=i;while(j<src.length&&/[A-Za-z0-9_]/.test(src[j]))j++;T.push({t:"id",v:src.slice(i,j),line});i=j;continue}
+    if(ch==='"'||ch==="'"){let j=i+1;while(j<src.length&&src[j]!==ch&&src[j]!=="\n")j++;T.push({t:"str",v:src.slice(i+1,j),line});i=j+1;continue}
+    const two=src.slice(i,i+2);if([">=","<=","==","!="].includes(two)){T.push({t:"op",v:two,line});i+=2;continue}
+    if("+-*/%<>()[],=?:".includes(ch)){T.push({t:"op",v:ch,line});i++;continue}
+    throw new Error(`${line}-qator: tushunarsiz belgi "${ch}"`)}
+  T.push({t:"nl",line});return T}
+function parse(T){let p=0;const peek=()=>T[p],nx=()=>T[p++],isop=v=>T[p]&&T[p].t==="op"&&T[p].v===v,isid=v=>T[p]&&T[p].t==="id"&&T[p].v===v;
+  const exp=v=>{if(!isop(v))throw new Error(`${(T[p]||{}).line||"?"}-qator: "${v}" kutilgan`);p++};
+  function primary(){const t=nx();if(!t)throw new Error("ifoda tugamadi");
+    if(t.t==="num")return {k:"n",v:t.v};if(t.t==="str")return {k:"s",v:t.v};
+    if(t.t==="op"&&t.v==="("){const e=expr();exp(")");return e}
+    if(t.t==="op"&&t.v==="-")return {k:"neg",a:postfix(primary())};
+    if(t.t==="id"&&t.v==="not")return {k:"not",a:postfix(primary())};
+    if(t.t==="id"){if(t.v==="true")return {k:"n",v:1};if(t.v==="false")return {k:"n",v:0};
+      if(isop("(")){p++;const args=[],kw={};if(!isop(")")){do{if(T[p].t==="id"&&T[p+1]&&T[p+1].t==="op"&&T[p+1].v==="="){const k=T[p].v;p+=2;kw[k]=expr()}else args.push(expr())}while(isop(",")&&(p++,true))}exp(")");return {k:"call",f:t.v,args,kw,line:t.line}}
+      return {k:"var",v:t.v,line:t.line}}
+    throw new Error(`${t.line}-qator: kutilmagan "${t.v}"`)}
+  function postfix(e){while(isop("[")){p++;const n=expr();exp("]");e={k:"ref",a:e,n}}return e}
+  const prec={"or":1,"and":2,"==":3,"!=":3,">":4,"<":4,">=":4,"<=":4,"+":5,"-":5,"*":6,"/":6,"%":6};
+  function bin(minP){let l=postfix(primary());for(;;){const t=peek();if(!t)break;const op=t.t==="op"?t.v:(t.t==="id"&&(t.v==="and"||t.v==="or"))?t.v:null;if(!op||prec[op]==null||prec[op]<minP)break;p++;const r=bin(prec[op]+1);l={k:"bin",op,a:l,b:r}}return l}
+  function expr(){const c=bin(1);if(isop("?")){p++;const a=expr();exp(":");const b=expr();return {k:"tern",c,a,b}}return c}
+  const S=[];while(p<T.length){if(T[p].t==="nl"){p++;continue}const line=T[p].line;
+    if(T[p].t==="id"&&T[p+1]&&T[p+1].t==="op"&&T[p+1].v==="="&&!(T[p+2]&&T[p+2].t==="op"&&T[p+2].v==="=")){const name=T[p].v;p+=2;S.push({k:"set",name,e:expr(),line})}
+    else S.push({k:"do",e:expr(),line});
+    if(T[p]&&T[p].t!=="nl")throw new Error(`${line}-qator: ortiqcha "${T[p].v}"`)}
+  if(S.length>200)throw new Error("200 qatordan ko'p bo'lmasin");return S}
+const COLORS={red:"#ea3943",green:"#16c784",blue:"#4f8cff",orange:"#ff922b",yellow:"#fab005",purple:"#a477ff",white:"#e6e6e6",gray:"#8b93a7",aqua:"#15aabf",lime:"#94d82d",fuchsia:"#e64980",teal:"#20c997",black:"#111"};
+function run(src,D){const S=parse(tokenize(src));const n=D.c.length,env={},out={name:"Mening indikatorim",ov:false,L:[],Y:[],P:[],SH:[]};
+  const ser=x=>Array.isArray(x)?x:new Array(n).fill(x);
+  const num=x=>{if(Array.isArray(x))throw new Error("bu yerda son kerak (masalan 14)");return +x};
+  const vec2=(a,b,fn)=>{if(!Array.isArray(a)&&!Array.isArray(b))return fn(a,b);const A=ser(a),B=ser(b),o=new Array(n);for(let i=0;i<n;i++)o[i]=fn(A[i],B[i]);return o};
+  const vec1=(a,fn)=>Array.isArray(a)?a.map(fn):fn(a);
+  const base={open:D.o,high:D.h,low:D.l,close:D.c,volume:D.v,hl2:hl2(D),hlc3:D.c.map((x,i)=>(x+D.h[i]+D.l[i])/3),ohlc4:D.c.map((x,i)=>(x+D.h[i]+D.l[i]+D.o[i])/4),bar_index:D.c.map((_,i)=>i),na:N};
+  const col=v=>{if(v==null)return null;const s=typeof v==="string"?v:"";return COLORS[s]||(/^#[0-9a-fA-F]{3,8}$/.test(s)?s:null)};
+  const F={sma:(a,l)=>sma(ser(a),num(l)),ema:(a,l)=>ema(ser(a),num(l)),wma:(a,l)=>wma(ser(a),num(l)),rma:(a,l)=>rma(ser(a),num(l)),rsi:(a,l)=>rsi(ser(a),num(l)),
+    stdev:(a,l)=>stdev(ser(a),num(l)),highest:(a,l)=>l==null?highest(D.h,num(a)):highest(ser(a),num(l)),lowest:(a,l)=>l==null?lowest(D.l,num(a)):lowest(ser(a),num(l)),
+    change:(a,l)=>change(ser(a),l==null?1:num(l)),atr:l=>atr(D,num(l)),tr:()=>trueRange(D),
+    crossover:(a,b)=>{const A=ser(a),B=ser(b);return A.map((x,i)=>i&&x>B[i]&&A[i-1]<=B[i-1]?1:0)},crossunder:(a,b)=>{const A=ser(a),B=ser(b);return A.map((x,i)=>i&&x<B[i]&&A[i-1]>=B[i-1]?1:0)},
+    abs:a=>vec1(a,Math.abs),sqrt:a=>vec1(a,Math.sqrt),log:a=>vec1(a,Math.log),round:a=>vec1(a,Math.round),max:(a,b)=>vec2(a,b,Math.max),min:(a,b)=>vec2(a,b,Math.min),pow:(a,b)=>vec2(a,b,Math.pow),
+    nz:(a,b)=>vec2(a,b==null?0:b,(x,y)=>isn(x)?y:x),cum:a=>{let s=0;return ser(a).map(x=>(s+=isn(x)?0:x))},
+    macd:(a,f,s)=>{const A=ser(a);const e1=ema(A,f==null?12:num(f)),e2=ema(A,s==null?26:num(s));return e1.map((x,i)=>x-e2[i])},
+    stoch:(l)=>stoch(D,l==null?14:num(l),3,3)[0]};
+  const ev=e=>{switch(e.k){case "n":return e.v;case "s":return e.v;
+    case "var":if(e.v in env)return env[e.v];if(e.v in base)return base[e.v];if(COLORS[e.v])return e.v;throw new Error(`${e.line}-qator: "${e.v}" nomi aniqlanmagan`);
+    case "neg":return vec1(ev(e.a),x=>-x);case "not":return vec1(ev(e.a),x=>x?0:1);
+    case "ref":{const a=ev(e.a),k=num(ev(e.n));return Array.isArray(a)?shift(a,Math.max(0,Math.floor(k))):a}
+    case "tern":{const c=ev(e.c),a=ev(e.a),b=ev(e.b);if(!Array.isArray(c))return c?a:b;const A=ser(a),B=ser(b);return c.map((x,i)=>x?A[i]:B[i])}
+    case "bin":{const a=ev(e.a),b=ev(e.b),o=e.op;const fn={"+":(x,y)=>x+y,"-":(x,y)=>x-y,"*":(x,y)=>x*y,"/":(x,y)=>y===0?N:x/y,"%":(x,y)=>x%y,">":(x,y)=>x>y?1:0,"<":(x,y)=>x<y?1:0,">=":(x,y)=>x>=y?1:0,"<=":(x,y)=>x<=y?1:0,"==":(x,y)=>x===y?1:0,"!=":(x,y)=>x!==y?1:0,"and":(x,y)=>x&&y?1:0,"or":(x,y)=>x||y?1:0}[o];return vec2(a,b,fn)}
+    case "call":{const f=e.f,A=e.args.map(ev),K={};for(const k in e.kw)K[k]=ev(e.kw[k]);
+      if(f==="indicator"){if(A[0]!=null)out.name=String(A[0]).slice(0,40);if(K.overlay!=null)out.ov=!!K.overlay;return 0}
+      if(f==="plot"){if(out.L.length>=8)throw new Error("ko'pi bilan 8 ta plot");out.L.push({v:ser(A[0]).map(x=>isn(x)?N:+x),c:col(K.color||A[2])||C[out.L.length%C.length],w:K.linewidth!=null?num(K.linewidth):2,n:A[1]!=null?String(A[1]).slice(0,20):""});return 0}
+      if(f==="hline"){out.Y.push(num(A[0]));return 0}
+      if(f==="plotshape"){const c=ser(A[0]);const st=String(K.style||A[1]||"up");out.SH.push({v:c,up:st!=="down",c:col(K.color)||(st==="down"?"#ea3943":"#16c784")});return 0}
+      if(!F[f])throw new Error(`${e.line}-qator: "${f}" funksiyasi yo'q`);return F[f](...A)}}};
+  for(const st of S){if(st.k==="set")env[st.name]=ev(st.e);else ev(st.e)}
+  if(!out.L.length&&!out.SH.length)throw new Error("hech narsa chizilmadi — plot(...) qo'shing");
+  return out}
+const EXAMPLE=`indicator("Mening MACD'im", overlay=false)
+// izoh: // bilan boshlanadi
+tez = ema(close, 12)
+sekin = ema(close, 26)
+m = tez - sekin
+signal = ema(m, 9)
+plot(m, "MACD", color=blue)
+plot(signal, "Signal", color=orange)
+hline(0)
+plotshape(crossover(m, signal), style="up")
+plotshape(crossunder(m, signal), style="down")`;
+const HELP=`Ma'lumotlar: open high low close volume hl2 hlc3 ohlc4 bar_index
+Funksiyalar: sma ema wma rma rsi stdev highest lowest change atr tr macd stoch crossover crossunder abs max min sqrt log pow round nz cum
+Chizish: indicator("Nom", overlay=true) · plot(seriya, "nom", color=red) · hline(70) · plotshape(shart, style="up")
+Amallar: + - * / > < >= <= == != and or not · shart ? a : b · close[1] — 1 sham oldingi qiymat`;
+return {IND,C,run,EXAMPLE,HELP,sma,ema,rsi,atr}})();
+
+// ===================== PF CHART: o'zimizning grafik dvigatelimiz (canvas) =====================
+// Shamlar/chiziq/maydon/Heikin-Ashi, zoom (g'ildirak, 2 barmoq), surish, krestik, chizish asboblari,
+// indikatorlar (tarif bo'yicha limit), o'z formulasi bilan indikator (Pine-lite), to'liq ekran.
+const PFC_LIMIT={trial:2,basic:5,pro:10,admin:20};
+const PFC_IVS=[["5m","5m"],["15m","15m"],["1h","1h"],["1d","1D"],["1wk","1W"],["1mo","1M"]];
+const PFC_IVNAME={"5m":"5 daqiqa","15m":"15 daqiqa","1h":"1 soat","1d":"Kunlik","1wk":"Haftalik","1mo":"Oylik"};
+function pfcLoad(k,d){try{return JSON.parse(localStorage.getItem(k)||"null")??d}catch(e){return d}}
+function pfcSave(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+function pfcTheme(){const cs=getComputedStyle(document.documentElement);const g=n=>cs.getPropertyValue(n).trim();
+  const dark=document.documentElement.dataset.theme!=="light";
+  return {bg:g("--card")||"#171a21",tx:g("--tx")||"#e6e6e6",mut:g("--mut")||"#8b93a7",line:g("--line")||"#262b36",up:g("--up")||"#16c784",dn:g("--dn")||"#ea3943",grid:dark?"rgba(255,255,255,.05)":"rgba(0,0,0,.06)",cross:dark?"rgba(255,255,255,.55)":"rgba(0,0,0,.5)"}}
+class PFChart{
+ constructor(host,o){this.host=host;this.sym=o.sym;this.tier=o.tier||"trial";this.limit=PFC_LIMIT[this.tier]||2;this.base=o.base;this.fetcher=o.fetcher;
+  const S=pfcLoad("pf_chart",{});this.iv=S.iv||"1d";this.type=S.type||"candle";this.log=!!S.log;this.showVol=S.vol!==false;
+  this.inds=(S.inds||[{k:"ema",p:{len:20},c:"#f5a623"},{k:"ema",p:{len:50},c:"#4f8cff"}]).slice(0,this.limit);
+  this.draws=pfcLoad("pf_draw_"+this.sym,[]);this.tool=null;this.pend=null;this.cross=null;this.D=null;this.cache={};
+  this.build();this.setData(this.base?this.fromBase(this.base):null,"1d");if(this.iv!=="1d"||!this.base)this.loadIv(this.iv);}
+ fromBase(H){if(!H||!H.c)return null;const t=H.t||H.d.map(d=>Math.floor(Date.parse(d+"T14:30:00Z")/1000));return {t,o:H.o.slice(),h:H.h.slice(),l:H.l.slice(),c:H.c.slice(),v:(H.v||[]).slice(),intra:false}}
+ save(){pfcSave("pf_chart",{iv:this.iv,type:this.type,log:this.log,vol:this.showVol,inds:this.inds.map(x=>({k:x.k,p:x.p,c:x.c,src:x.src,nm:x.nm}))})}
+ build(){const h=this.host;h.classList.add("pfc-wrap");
+  h.innerHTML=`<div class="pfc-bar notr"><div class="pfc-ivs">${PFC_IVS.map(x=>`<button data-iv="${x[0]}">${x[1]}</button>`).join("")}</div>
+   <div class="pfc-tools"><select class="pfc-type"><option value="candle">🕯 Sham</option><option value="ha">🕯 Heikin-Ashi</option><option value="bar">┤ Bar</option><option value="line">📈 Chiziq</option><option value="area">⛰ Maydon</option></select>
+   <button class="pfc-ind">ƒx <span class="pfc-cnt"></span></button><button class="pfc-t" data-t="h" title="Gorizontal chiziq">―</button><button class="pfc-t" data-t="tl" title="Trend chizig'i">╱</button><button class="pfc-t" data-t="clr" title="Chizmalarni o'chirish">🧹</button>
+   <button class="pfc-log" title="Logarifmik shkala">log</button><button class="pfc-fs" title="To'liq ekran">⛶</button></div></div>
+   <div class="pfc-stage"><canvas></canvas><div class="pfc-leg notr"></div><div class="pfc-msg notr"></div><button class="pfc-home notr" title="Oxirgi shamga qaytish">⟫</button></div>`;
+  this.cv=h.querySelector("canvas");this.ctx=this.cv.getContext("2d");this.stage=h.querySelector(".pfc-stage");this.leg=h.querySelector(".pfc-leg");this.msg=h.querySelector(".pfc-msg");
+  h.querySelectorAll("[data-iv]").forEach(b=>b.onclick=()=>this.loadIv(b.dataset.iv));
+  const ty=h.querySelector(".pfc-type");ty.value=this.type;ty.onchange=()=>{this.type=ty.value;this.save();this.draw()};
+  h.querySelector(".pfc-ind").onclick=()=>this.indMenu();
+  h.querySelectorAll(".pfc-t").forEach(b=>b.onclick=()=>{const t=b.dataset.t;if(t==="clr"){this.draws=[];pfcSave("pf_draw_"+this.sym,[]);this.tool=null;this.draw();this.syncBar();return}this.tool=this.tool===t?null:t;this.pend=null;this.syncBar();this.note(this.tool==="h"?"Narx darajasini bosing":this.tool==="tl"?"Ikki nuqtani bosing":"")});
+  h.querySelector(".pfc-log").onclick=()=>{this.log=!this.log;this.save();this.syncBar();this.draw()};
+  h.querySelector(".pfc-fs").onclick=()=>this.fullscreen();
+  h.querySelector(".pfc-home").onclick=()=>{if(!this.D)return;this.end=this.D.c.length-1+3;this.draw()};
+  this.bind();new ResizeObserver(()=>this.draw()).observe(this.stage);this.syncBar()}
+ syncBar(){const h=this.host;h.querySelectorAll("[data-iv]").forEach(b=>b.classList.toggle("on",b.dataset.iv===this.iv));
+  h.querySelectorAll(".pfc-t").forEach(b=>b.classList.toggle("on",b.dataset.t===this.tool));h.querySelector(".pfc-log").classList.toggle("on",this.log);
+  h.querySelector(".pfc-cnt").textContent=`${this.inds.length}/${this.limit}`}
+ note(t){this.msg.textContent=t||"";this.msg.style.display=t?"block":"none"}
+ async loadIv(iv){this.iv=iv;this.save();this.syncBar();
+  if(this.cache[iv]){this.setData(this.cache[iv],iv);return}
+  if(iv==="1d"&&this.base&&!this.fetcher){this.setData(this.fromBase(this.base),iv);return}
+  this.note("⏳ "+PFC_IVNAME[iv]+" ma'lumotlari yuklanmoqda…");
+  const g=this.fetcher?await this.fetcher(this.sym,iv):null;
+  if(this.iv!==iv)return;
+  if(g&&g.c&&g.c.length>5){const d={t:g.t,o:g.o,h:g.h,l:g.l,c:g.c,v:g.v||[],intra:["5m","15m","1h"].includes(iv)};this.cache[iv]=d;this.setData(d,iv);this.note("")}
+  else if(iv==="1d"&&this.base){this.setData(this.fromBase(this.base),iv);this.note("")}
+  else{this.note("⚠️ "+PFC_IVNAME[iv]+" ma'lumoti olinmadi. Boshqa oraliqni tanlang yoki keyinroq urinib ko'ring.")}}
+ setData(d,iv){if(!d){this.note("⏳ Yuklanmoqda…");return}this.D=d;this.n0=d.c.length;this.nvis=Math.min(this.n0+3,iv==="1d"?130:iv==="1wk"?104:iv==="1mo"?120:100);this.end=this.n0-1+3;this.calc();this.draw()}
+ series(){const D=this.D;if(this.type!=="ha")return D;const o=[],c=[],h=[],l=[];for(let i=0;i<D.c.length;i++){const cc=(D.o[i]+D.h[i]+D.l[i]+D.c[i])/4,oo=i?(o[i-1]+c[i-1])/2:(D.o[i]+D.c[i])/2;o.push(oo);c.push(cc);h.push(Math.max(D.h[i],oo,cc));l.push(Math.min(D.l[i],oo,cc))}return {t:D.t,o,h,l,c,v:D.v,intra:D.intra}}
+ calc(){const D=this.D;if(!D)return;this.out=this.inds.map((x,ix)=>{try{if(x.src){const r=PFI.run(x.src,D);x.nm=r.name;return {ov:r.ov,r}}const def=PFI.IND[x.k];if(!def)return null;return {ov:!!def.ov,r:def.f(D,x.p,x.c||PFI.C[ix%PFI.C.length]),rg:def.rg}}catch(e){return {ov:true,r:{L:[]},err:e.message}}});}
+ fullscreen(){const on=!this.host.classList.contains("pfc-full");this.host.classList.toggle("pfc-full",on);document.body.classList.toggle("pfc-lock",on);
+  try{if(on&&window.Telegram&&Telegram.WebApp&&Telegram.WebApp.requestFullscreen)Telegram.WebApp.requestFullscreen();else if(!on&&Telegram.WebApp.exitFullscreen&&Telegram.WebApp.isFullscreen)Telegram.WebApp.exitFullscreen()}catch(e){}
+  this.host.querySelector(".pfc-fs").textContent=on?"✕":"⛶";setTimeout(()=>this.draw(),60)}
+ // ---------- geometriya ----------
+ geom(){const W=this.stage.clientWidth,Hs=this.stage.clientHeight;const subs=this.out?this.out.filter(o=>o&&!o.ov).length+(this.showVol&&false?1:0):0;
+  const AX=Math.max(54,this.axW||54),TB=22;const subH=Math.min(110,Math.max(70,(Hs-TB)*0.18));const mainH=Math.max(120,Hs-TB-subs*subH);
+  return {W,H:Hs,AX,TB,pw:W-AX,mainH,subH,subs}}
+ xi(i,g){const bw=g.pw/this.nvis;return g.pw-(this.end-i+0.5)*bw}
+ ix(x,g){const bw=g.pw/this.nvis;return Math.round(this.end+0.5-(g.pw-x)/bw)}
+ // ---------- chizish ----------
+ draw(){const cv=this.cv,st=this.stage;const dpr=window.devicePixelRatio||1;const W=st.clientWidth,H=st.clientHeight;if(!W||!H)return;
+  if(cv.width!==Math.round(W*dpr)||cv.height!==Math.round(H*dpr)){cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);cv.style.width=W+"px";cv.style.height=H+"px"}
+  const x=this.ctx;x.setTransform(dpr,0,0,dpr,0,0);const T=pfcTheme();this.T=T;x.clearRect(0,0,W,H);
+  if(!this.D){this.leg.innerHTML="";return}
+  const D=this.series(),n=D.c.length;this.nvis=Math.max(8,Math.min(this.nvis,n+20));this.end=Math.max(this.nvis*0.3,Math.min(this.end,n-1+this.nvis*0.6));
+  const g=this.geom();const i0=Math.max(0,Math.floor(this.end-this.nvis)),i1=Math.min(n-1,Math.ceil(this.end));const bw=g.pw/this.nvis;
+  // main y range
+  let lo=Infinity,hi=-Infinity;for(let i=i0;i<=i1;i++){if(D.l[i]<lo)lo=D.l[i];if(D.h[i]>hi)hi=D.h[i]}
+  (this.out||[]).forEach(o=>{if(!o||!o.ov)return;[...(o.r.L||[]),...(o.r.P||[])].forEach(L=>{for(let i=i0;i<=i1;i++){const v=L.v[i];if(v==null||isNaN(v))continue;if(v<lo)lo=v;if(v>hi)hi=v}})});
+  if(!isFinite(lo)){lo=0;hi=1}const pad=(hi-lo)*0.06||hi*0.02||1;lo-=pad+(this.showVol?(hi-lo)*0.16:0);hi+=pad;if(this.log&&lo<=0)lo=hi*0.01;
+  const fy=this.log?(v=>{const a=Math.log(lo),b=Math.log(hi);return 6+(b-Math.log(Math.max(v,1e-9)))/(b-a)*(g.mainH-12)}):(v=>6+(hi-v)/(hi-lo)*(g.mainH-12));
+  this.fy=fy;this.g=g;this.lohi=[lo,hi];
+  // grid + price axis
+  x.font="11px Inter,system-ui,sans-serif";x.textBaseline="middle";
+  const ticks=this.niceTicks(lo,hi,Math.max(3,Math.floor(g.mainH/55)));const dec=hi<1?4:hi<10?3:2;
+  x.strokeStyle=T.grid;x.lineWidth=1;x.fillStyle=T.mut;x.textAlign="left";
+  let axw=0;ticks.forEach(v=>{const y=Math.round(fy(v))+.5;if(y<4||y>g.mainH-4)return;x.beginPath();x.moveTo(0,y);x.lineTo(g.pw,y);x.stroke();const s=this.fmt(v,dec);axw=Math.max(axw,x.measureText(s).width);x.fillText(s,g.pw+6,y)});
+  this.axW=Math.ceil(axw+16);
+  // time axis
+  this.timeAxis(x,g,D,i0,i1,T);
+  // volume (main pane pastida)
+  if(this.showVol&&D.v&&D.v.some(v=>v>0)){let vm=0;for(let i=i0;i<=i1;i++)vm=Math.max(vm,D.v[i]||0);const vh=g.mainH*0.18;
+    for(let i=i0;i<=i1;i++){const xx=this.xi(i,g),hh=(D.v[i]||0)/vm*vh;x.fillStyle=(D.c[i]>=D.o[i]?T.up:T.dn)+"40";x.fillRect(xx-bw*0.35,g.mainH-hh,Math.max(1,bw*0.7),hh)}}
+  // fills (bands)
+  (this.out||[]).forEach(o=>{if(!o||!o.ov||!o.r.F)return;o.r.F.forEach(F=>this.fillBand(x,g,F,i0,i1,fy))});
+  // narx
+  x.save();x.beginPath();x.rect(0,0,g.pw,g.mainH);x.clip();
+  const cw=Math.max(1,bw*0.7);
+  if(this.type==="line"||this.type==="area"){x.beginPath();let first=true;for(let i=i0;i<=i1;i++){const xx=this.xi(i,g),yy=fy(D.c[i]);first?x.moveTo(xx,yy):x.lineTo(xx,yy);first=false}
+    x.strokeStyle="#4f8cff";x.lineWidth=2;x.stroke();if(this.type==="area"){x.lineTo(this.xi(i1,g),g.mainH);x.lineTo(this.xi(i0,g),g.mainH);x.closePath();const gr=x.createLinearGradient(0,0,0,g.mainH);gr.addColorStop(0,"rgba(79,140,255,.35)");gr.addColorStop(1,"rgba(79,140,255,0)");x.fillStyle=gr;x.fill()}}
+  else for(let i=i0;i<=i1;i++){const xx=this.xi(i,g),up=D.c[i]>=D.o[i],col=up?T.up:T.dn;x.strokeStyle=col;x.fillStyle=col;x.lineWidth=1;
+    if(this.type==="bar"){x.beginPath();x.moveTo(xx,fy(D.h[i]));x.lineTo(xx,fy(D.l[i]));x.moveTo(xx-cw/2,fy(D.o[i]));x.lineTo(xx,fy(D.o[i]));x.moveTo(xx,fy(D.c[i]));x.lineTo(xx+cw/2,fy(D.c[i]));x.stroke();continue}
+    x.beginPath();x.moveTo(Math.round(xx)+.5,fy(D.h[i]));x.lineTo(Math.round(xx)+.5,fy(D.l[i]));x.stroke();const y1=fy(Math.max(D.o[i],D.c[i])),y2=fy(Math.min(D.o[i],D.c[i]));x.fillRect(xx-cw/2,y1,cw,Math.max(1,y2-y1))}
+  // overlay indikatorlar
+  (this.out||[]).forEach((o,k)=>{if(!o||!o.ov)return;this.lines(x,g,o.r.L||[],i0,i1,fy);(o.r.P||[]).forEach(P=>{x.fillStyle=P.c;for(let i=i0;i<=i1;i++){const v=P.v[i];if(v==null||isNaN(v))continue;x.beginPath();x.arc(this.xi(i,g),fy(v),Math.max(1.5,Math.min(3,bw*0.2)),0,7);x.fill()}});this.shapes(x,g,o.r.SH,i0,i1,D,fy)});
+  // chizmalar
+  this.drawings(x,g,D,fy,T);
+  x.restore();
+  // oxirgi narx
+  const lc=this.D.c[n-1],ly=fy(lc);if(ly>0&&ly<g.mainH){const col=this.D.c[n-1]>=this.D.o[n-1]?T.up:T.dn;x.setLineDash([2,3]);x.strokeStyle=col;x.beginPath();x.moveTo(0,ly);x.lineTo(g.pw,ly);x.stroke();x.setLineDash([]);
+    x.fillStyle=col;x.fillRect(g.pw,ly-9,g.AX,18);x.fillStyle="#fff";x.textAlign="left";x.fillText(this.fmt(lc,dec),g.pw+6,ly)}
+  // pastki panellar
+  let top=g.mainH;this.panes=[];(this.out||[]).forEach((o,k)=>{if(!o||o.ov)return;this.pane(x,g,o,top,i0,i1,T,k);top+=g.subH});
+  x.strokeStyle=T.line;x.beginPath();x.moveTo(g.pw+.5,0);x.lineTo(g.pw+.5,H-g.TB);x.stroke();
+  // krestik
+  if(this.cross)this.crosshair(x,g,D,T,dec);
+  this.legend(D,i1);this.host.querySelector(".pfc-home").style.display=this.end<n-2?"block":"none"}
+ niceTicks(lo,hi,n){const span=hi-lo;if(span<=0)return [lo];const step0=span/n,mag=Math.pow(10,Math.floor(Math.log10(step0)));const st=[1,2,2.5,5,10].map(m=>m*mag).find(s=>s>=step0)||mag*10;const out=[];for(let v=Math.ceil(lo/st)*st;v<=hi;v+=st)out.push(+v.toFixed(10));return out}
+ fmt(v,dec){if(v==null||isNaN(v))return "—";const a=Math.abs(v);if(a>=1e9)return (v/1e9).toFixed(2)+"B";if(a>=1e6)return (v/1e6).toFixed(2)+"M";if(a>=1e4&&dec<=2)return v.toLocaleString("en-US",{maximumFractionDigits:0});return v.toFixed(dec)}
+ timeAxis(x,g,D,i0,i1,T){const y=g.H-g.TB;x.fillStyle=T.mut;x.textAlign="center";const step=Math.max(1,Math.ceil(80/(g.pw/this.nvis)));let last="";
+  const MU=["yan","fev","mar","apr","may","iyn","iyl","avg","sen","okt","noy","dek"];
+  for(let i=Math.ceil(i0/step)*step;i<=i1;i+=step){const d=new Date(D.t[i]*1000+9*3600e3);let s;
+    if(D.intra){const dd=d.getUTCDate()+" "+MU[d.getUTCMonth()];s=dd!==last?dd:String(d.getUTCHours()).padStart(2,"0")+":"+String(d.getUTCMinutes()).padStart(2,"0");last=dd}
+    else if(this.iv==="1mo"||this.iv==="1wk"){s=MU[d.getUTCMonth()]+" "+String(d.getUTCFullYear()).slice(2)}else s=d.getUTCDate()+" "+MU[d.getUTCMonth()];
+    const xx=this.xi(i,g);x.strokeStyle=T.grid;x.beginPath();x.moveTo(Math.round(xx)+.5,0);x.lineTo(Math.round(xx)+.5,y);x.stroke();x.fillText(s,xx,y+11)}}
+ lines(x,g,L,i0,i1,fy){L.forEach(l=>{x.strokeStyle=l.c||"#f5a623";x.lineWidth=l.w||1.6;x.beginPath();let pen=false;for(let i=i0;i<=i1;i++){const v=l.v[i];if(v==null||isNaN(v)){pen=false;continue}const xx=this.xi(i,g),yy=fy(v);if(!pen){x.moveTo(xx,yy);pen=true}else x.lineTo(xx,yy)}x.stroke()})}
+ fillBand(x,g,F,i0,i1,fy){x.fillStyle=F.c;x.beginPath();const pts=[];for(let i=i0;i<=i1;i++){if(isNaN(F.a[i])||isNaN(F.b[i]))continue;pts.push(i)}if(pts.length<2)return;
+  pts.forEach((i,k)=>{const xx=this.xi(i,g);k?x.lineTo(xx,fy(F.a[i])):x.moveTo(xx,fy(F.a[i]))});for(let k=pts.length-1;k>=0;k--){const i=pts[k];x.lineTo(this.xi(i,g),fy(F.b[i]))}x.closePath();x.fill()}
+ shapes(x,g,SH,i0,i1,D,fy){if(!SH)return;SH.forEach(s=>{x.fillStyle=s.c;for(let i=i0;i<=i1;i++){if(!s.v[i])continue;const xx=this.xi(i,g),yy=s.up?fy(D.l[i])+12:fy(D.h[i])-12,d=s.up?-1:1;x.beginPath();x.moveTo(xx,yy+d*6);x.lineTo(xx-5,yy-d*4);x.lineTo(xx+5,yy-d*4);x.closePath();x.fill()}})}
+ pane(x,g,o,top,i0,i1,T,k){const h=g.subH;x.strokeStyle=T.line;x.beginPath();x.moveTo(0,top+.5);x.lineTo(g.W,top+.5);x.stroke();
+  const r=o.r;let lo=Infinity,hi=-Infinity;if(o.rg){[lo,hi]=o.rg}else{[...(r.L||[]),...(r.H||[])].forEach(L=>{for(let i=i0;i<=i1;i++){const v=L.v[i];if(v==null||isNaN(v))continue;if(v<lo)lo=v;if(v>hi)hi=v}});(r.Y||[]).forEach(v=>{lo=Math.min(lo,v);hi=Math.max(hi,v)});if((r.H||[]).length){lo=Math.min(lo,0);hi=Math.max(hi,0)}}
+  if(!isFinite(lo)){lo=0;hi=1}if(hi===lo){hi+=1;lo-=1}const pd=o.rg?0:(hi-lo)*0.08;lo-=pd;hi+=pd;const fy=v=>top+4+(hi-v)/(hi-lo)*(h-8);
+  x.save();x.beginPath();x.rect(0,top,g.pw,h);x.clip();
+  (r.Y||[]).forEach(v=>{x.setLineDash([3,3]);x.strokeStyle=T.mut+"88";x.beginPath();x.moveTo(0,fy(v));x.lineTo(g.pw,fy(v));x.stroke();x.setLineDash([])});
+  const bw=g.pw/this.nvis;(r.H||[]).forEach(Hh=>{for(let i=i0;i<=i1;i++){const v=Hh.v[i];if(v==null||isNaN(v))continue;const up=Hh.cs?Hh.cs[i]:v>=0;x.fillStyle=(up?T.up:T.dn)+(Hh.cs?"88":"aa");const y0=fy(Hh.cs?lo:0),y1=fy(v);x.fillRect(this.xi(i,g)-bw*0.35,Math.min(y0,y1),Math.max(1,bw*0.7),Math.max(1,Math.abs(y1-y0)))}});
+  this.lines(x,g,r.L||[],i0,i1,fy);this.shapes(x,g,r.SH,i0,i1,this.D,v=>fy(v));x.restore();
+  x.fillStyle=T.mut;x.textAlign="left";[hi-pd,lo+pd].forEach(v=>x.fillText(this.fmt(v,Math.abs(v)<10?2:0),g.pw+6,fy(v)));
+  this.panes.push({top,h,k,fy})}
+ drawings(x,g,D,fy,T){const n=D.t.length;const ti=t=>{let a=0,b=n-1;if(t<=D.t[0])return 0;if(t>=D.t[b])return b+(t-D.t[b])/((D.t[b]-D.t[b-1])||1);while(b-a>1){const m=(a+b)>>1;D.t[m]<=t?a=m:b=m}return a+(t-D.t[a])/((D.t[b]-D.t[a])||1)};
+  x.lineWidth=1.5;this.draws.forEach(d=>{x.strokeStyle=d.c||"#fab005";if(d.k==="h"){const y=fy(d.p);x.beginPath();x.moveTo(0,y);x.lineTo(g.pw,y);x.stroke();x.fillStyle=d.c||"#fab005";x.fillRect(g.pw,y-8,g.AX,16);x.fillStyle="#111";x.textAlign="left";x.fillText(this.fmt(d.p,d.p<10?3:2),g.pw+6,y)}
+   else if(d.k==="tl"){const x1=this.xi(ti(d.t1),g),x2=this.xi(ti(d.t2),g),y1=fy(d.p1),y2=fy(d.p2);const sl=(y2-y1)/((x2-x1)||1);x.beginPath();x.moveTo(x1,y1);x.lineTo(g.pw,y1+sl*(g.pw-x1));x.stroke();[[x1,y1],[x2,y2]].forEach(([a,b])=>{x.beginPath();x.arc(a,b,3,0,7);x.fillStyle=d.c||"#fab005";x.fill()})}});
+  if(this.pend&&this.cross){const p=this.pend;x.setLineDash([4,3]);x.strokeStyle="#fab005";x.beginPath();x.moveTo(this.xi(ti(p.t),g),fy(p.p));x.lineTo(this.cross.x,this.cross.y);x.stroke();x.setLineDash([])}}
+ crosshair(x,g,D,T,dec){const c=this.cross;const i=Math.max(0,Math.min(D.c.length-1,this.ix(c.x,g)));const xx=this.xi(i,g);x.strokeStyle=T.cross;x.setLineDash([4,4]);x.lineWidth=1;
+  x.beginPath();x.moveTo(xx,0);x.lineTo(xx,g.H-g.TB);x.stroke();if(c.y<g.mainH){x.beginPath();x.moveTo(0,c.y);x.lineTo(g.pw,c.y);x.stroke()}x.setLineDash([]);
+  if(c.y<g.mainH){const v=this.yv(c.y);x.fillStyle="#444b5a";x.fillRect(g.pw,c.y-9,g.AX,18);x.fillStyle="#fff";x.textAlign="left";x.fillText(this.fmt(v,dec),g.pw+6,c.y)}
+  const d=new Date(D.t[i]*1000+9*3600e3),s=d.toISOString().slice(0,10)+(D.intra?" "+d.toISOString().slice(11,16):"");x.font="11px Inter,system-ui";const w=x.measureText(s).width+12;
+  x.fillStyle="#444b5a";x.fillRect(xx-w/2,g.H-g.TB,w,g.TB);x.fillStyle="#fff";x.textAlign="center";x.fillText(s,xx,g.H-g.TB/2);this.ci=i}
+ yv(y){const [lo,hi]=this.lohi,g=this.g;if(this.log){const a=Math.log(lo),b=Math.log(hi);return Math.exp(b-(y-6)/(g.mainH-12)*(b-a))}return hi-(y-6)/(g.mainH-12)*(hi-lo)}
+ legend(D,i1){const i=this.cross&&this.ci!=null?this.ci:D.c.length-1,R=this.D;const ch=i?(R.c[i]/R.c[i-1]-1)*100:0;const dec=R.c[i]<1?4:R.c[i]<10?3:2;const f=v=>this.fmt(v,dec);
+  let h=`<div class="pfc-l0"><b>${esc(this.sym)}</b> · ${PFC_IVNAME[this.iv]} <span>O</span>${f(R.o[i])} <span>H</span>${f(R.h[i])} <span>L</span>${f(R.l[i])} <span>C</span>${f(R.c[i])} <em class="${ch>=0?"up":"dn"}">${ch>=0?"+":""}${ch.toFixed(2)}%</em></div>`;
+  (this.out||[]).forEach((o,k)=>{if(!o)return;const x=this.inds[k],def=PFI.IND[x.k];const nm=x.src?(x.nm||"Mening indikatorim"):(def?def.n.split(" —")[0]:x.k);const pr=x.src?"":Object.values(x.p||{}).join(", ");
+   const vals=[...(o.r.L||[]),...(o.r.H||[])].slice(0,3).map(L=>`<i style="color:${L.c||"#f5a623"}">${this.fmt(L.v[i],Math.abs(L.v[i])<10?2:Math.abs(L.v[i])>1e5?0:2)}</i>`).join(" ");
+   const row=`<div class="pfc-li" data-k="${k}"><span>${esc(nm)}${pr?" "+esc(pr):""}</span> ${o.err?`<i style="color:#ea3943">⚠ ${esc(o.err.slice(0,40))}</i>`:vals} <button data-x="${k}">✕</button></div>`;
+   if(o.ov)h+=row;else{const p=(this.panes||[]).find(p=>p.k===k);if(p)h+=`<div class="pfc-pl" style="top:${p.top+2}px">${row}</div>`}});
+  this.leg.innerHTML=h;this.leg.querySelectorAll("[data-x]").forEach(b=>b.onclick=e=>{e.stopPropagation();this.inds.splice(+b.dataset.x,1);this.save();this.calc();this.syncBar();this.draw()});
+  this.leg.querySelectorAll(".pfc-li").forEach(r=>r.onclick=()=>this.indEdit(+r.dataset.k))}
+ // ---------- boshqaruv ----------
+ bind(){const cv=this.cv,P=new Map();let pan=null,pinch=null,moved=false,downT=0;
+  const pos=e=>{const r=cv.getBoundingClientRect();return {x:e.clientX-r.left,y:e.clientY-r.top}};
+  cv.addEventListener("pointerdown",e=>{cv.setPointerCapture(e.pointerId);P.set(e.pointerId,pos(e));moved=false;downT=Date.now();
+   if(P.size===1){const p=pos(e);pan={x:p.x,y:p.y,end:this.end}}else if(P.size===2){const [a,b]=[...P.values()];pinch={d:Math.hypot(a.x-b.x,a.y-b.y),n:this.nvis,cx:(a.x+b.x)/2,end:this.end};pan=null}});
+  cv.addEventListener("pointermove",e=>{const p=pos(e);if(!P.has(e.pointerId)){if(e.pointerType==="mouse"){this.cross=p;this.draw()}return}P.set(e.pointerId,p);
+   if(pinch&&P.size>=2){const [a,b]=[...P.values()];const d=Math.hypot(a.x-b.x,a.y-b.y);if(d>10){const g=this.geom();const ni=Math.max(8,Math.min(this.D.c.length+20,pinch.n*pinch.d/d));const anchor=pinch.end+0.5-(g.pw-pinch.cx)/(g.pw/pinch.n);this.nvis=ni;this.end=anchor-0.5+(g.pw-pinch.cx)/(g.pw/ni);moved=true;this.draw()}return}
+   if(pan){const dx=p.x-pan.x;if(Math.abs(dx)>4||Math.abs(p.y-pan.y)>4)moved=true;if(moved&&!this.tool){if(this.cross&&e.pointerType!=="mouse"){this.cross=p;this.draw();return}const g=this.geom();this.end=pan.end-dx/(g.pw/this.nvis);this.draw()}
+    if(e.pointerType==="mouse"){this.cross=p;this.draw()}}});
+  const up=e=>{const p=P.get(e.pointerId);P.delete(e.pointerId);if(P.size<2)pinch=null;if(P.size===0){if(!moved&&p&&Date.now()-downT<500)this.tap(p,e.pointerType);pan=null}};
+  cv.addEventListener("pointerup",up);cv.addEventListener("pointercancel",up);
+  cv.addEventListener("pointerleave",e=>{if(e.pointerType==="mouse"&&!this.tool){this.cross=null;this.draw()}});
+  cv.addEventListener("wheel",e=>{if(!this.D)return;e.preventDefault();const g=this.geom(),p=pos(e);if(e.shiftKey||Math.abs(e.deltaX)>Math.abs(e.deltaY)){this.end+=(e.deltaX||e.deltaY)/(g.pw/this.nvis)*0.5;this.draw();return}
+   const k=Math.exp(e.deltaY*0.0015),anchor=this.end+0.5-(g.pw-p.x)/(g.pw/this.nvis);const ni=Math.max(8,Math.min(this.D.c.length+20,this.nvis*k));this.nvis=ni;this.end=anchor-0.5+(g.pw-p.x)/(g.pw/ni);this.draw()},{passive:false});
+  cv.addEventListener("dblclick",()=>{if(!this.D)return;this.nvis=Math.min(this.D.c.length,130);this.end=this.D.c.length-1+3;this.draw()})}
+ tap(p,pt){if(!this.D)return;const g=this.geom();
+  if(this.tool&&p.y<g.mainH){const i=Math.max(0,Math.min(this.D.c.length-1,this.ix(p.x,g))),price=this.yv(p.y);
+   if(this.tool==="h"){this.draws.push({k:"h",p:+price.toPrecision(6)});this.tool=null}
+   else if(this.tool==="tl"){if(!this.pend){this.pend={t:this.D.t[i],p:price};this.cross=p;this.note("Ikkinchi nuqtani bosing");this.draw();return}this.draws.push({k:"tl",t1:this.pend.t,p1:this.pend.p,t2:this.D.t[i],p2:price});this.pend=null;this.tool=null}
+   pfcSave("pf_draw_"+this.sym,this.draws);this.note("");this.syncBar();this.cross=null;this.draw();return}
+  if(pt!=="mouse"){this.cross=this.cross?null:p;this.draw()}}
+ // ---------- indikator menyusi ----------
+ sheet(html){let s=document.getElementById("pfc-sheet");if(!s){s=document.createElement("div");s.id="pfc-sheet";document.body.appendChild(s)}
+  s.innerHTML=`<div class="pfc-sbg"></div><div class="pfc-sh">${html}</div>`;s.style.display="block";s.querySelector(".pfc-sbg").onclick=()=>s.style.display="none";return s}
+ limitMsg(){const nx=this.tier==="trial"?"Oylik obunada 5 tagacha, Pro tarifda 10 tagacha indikator qo'shiladi.":this.tier==="basic"?"Pro tarifda 10 tagacha indikator qo'shiladi.":"";
+  return `⚠️ Limit: ${this.limit} ta indikator (${this.tier==="trial"?"10 kunlik bepul paket":this.tier==="basic"?"oylik obuna":"Pro"}). ${nx}`}
+ add(it){if(this.inds.length>=this.limit){alertBox(this.limitMsg());return false}this.inds.push(it);this.save();this.calc();this.syncBar();this.draw();return true}
+ indMenu(){const G={};for(const k in PFI.IND){const d=PFI.IND[k];(G[d.g]=G[d.g]||[]).push([k,d])}
+  const my=pfcLoad("pf_scripts",[]);
+  const s=this.sheet(`<div class="pfc-sh-h"><b>ƒx Indikatorlar</b><span class="mut">${this.inds.length}/${this.limit}</span><button class="pfc-cl">✕</button></div>
+   <input class="pfc-q" placeholder="🔎 Qidirish: RSI, MACD, Bollinger…">
+   ${this.inds.length>=this.limit?`<div class="pfc-warn">${this.limitMsg()}</div>`:""}
+   <div class="pfc-list"><div class="pfc-g">⭐ Mening indikatorlarim (o'z formulam)</div>
+   ${my.map((m,i)=>`<div class="pfc-it" data-my="${i}"><span>📝 ${esc(m.nm||"Indikator")}</span><button data-ed="${i}">✏️</button><button data-del="${i}">🗑</button></div>`).join("")}
+   <div class="pfc-it pfc-new" data-new="1">＋ Yangi indikator yozish (formula/kod)</div>
+   ${Object.entries(G).map(([g,a])=>`<div class="pfc-g">${g}</div>`+a.map(([k,d])=>`<div class="pfc-it" data-k="${k}"><span>${esc(d.n)}</span><em>${d.ov?"grafikda":"panelda"}</em></div>`).join("")).join("")}</div>`);
+  const q=s.querySelector(".pfc-q");q.oninput=()=>{const v=q.value.toLowerCase();s.querySelectorAll(".pfc-it[data-k]").forEach(e=>e.style.display=e.textContent.toLowerCase().includes(v)?"":"none")};
+  s.querySelector(".pfc-cl").onclick=()=>s.style.display="none";
+  s.querySelectorAll("[data-k]").forEach(e=>e.onclick=()=>{const k=e.dataset.k,d=PFI.IND[k];if(this.add({k,p:Object.assign({},d.p),c:PFI.C[this.inds.length%PFI.C.length]}))s.style.display="none"});
+  s.querySelectorAll("[data-my]").forEach(e=>e.onclick=ev=>{if(ev.target.closest("button"))return;const m=my[+e.dataset.my];if(this.add({k:"custom",src:m.src,nm:m.nm}))s.style.display="none"});
+  s.querySelectorAll("[data-ed]").forEach(b=>b.onclick=()=>this.editor(+b.dataset.ed));
+  s.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{my.splice(+b.dataset.del,1);pfcSave("pf_scripts",my);this.indMenu()});
+  s.querySelector("[data-new]").onclick=()=>this.editor(-1)}
+ indEdit(k){const x=this.inds[k];if(!x)return;if(x.src){const my=pfcLoad("pf_scripts",[]);const i=my.findIndex(m=>m.src===x.src);this.editor(i,k);return}const d=PFI.IND[x.k];
+  const s=this.sheet(`<div class="pfc-sh-h"><b>${esc(d.n)}</b><button class="pfc-cl">✕</button></div>
+   ${Object.keys(d.p).map(p=>`<label class="pfc-lb">${esc({len:"Davr",mult:"Ko'paytuvchi",fast:"Tez",slow:"Sekin",sig:"Signal",k:"%K",d:"%D",pct:"Foiz",step:"Qadam",max:"Maks",t:"Tenkan",s:"Senkou"}[p]||p)}<input type="number" step="any" data-p="${p}" value="${x.p[p]}"></label>`).join("")}
+   <label class="pfc-lb">Rang<input type="color" class="pfc-col" value="${(x.c||"#f5a623").slice(0,7)}"></label>
+   <div style="display:flex;gap:8px;margin-top:12px"><button class="btn pfc-ok">Saqlash</button><button class="btn2 pfc-rm" style="margin:0">🗑 O'chirish</button></div>`);
+  s.querySelector(".pfc-cl").onclick=()=>s.style.display="none";
+  s.querySelector(".pfc-ok").onclick=()=>{s.querySelectorAll("[data-p]").forEach(i=>{const v=parseFloat(i.value);if(v>0&&v<1000)x.p[i.dataset.p]=v});x.c=s.querySelector(".pfc-col").value;this.save();this.calc();this.draw();s.style.display="none"};
+  s.querySelector(".pfc-rm").onclick=()=>{this.inds.splice(k,1);this.save();this.calc();this.syncBar();this.draw();s.style.display="none"}}
+ editor(i,activeK){const my=pfcLoad("pf_scripts",[]);const m=i>=0?my[i]:{nm:"",src:PFI.EXAMPLE};
+  const s=this.sheet(`<div class="pfc-sh-h"><b>📝 O'z indikatoringiz</b><button class="pfc-cl">✕</button></div>
+   <div class="mut" style="font-size:12px;margin-bottom:6px">Pine Script'ga o'xshash oddiy til. Kod faqat sizning ilovangizda saqlanadi.</div>
+   <textarea class="pfc-code notr" spellcheck="false">${esc(m.src)}</textarea>
+   <details class="pfc-help"><summary>📘 Qo'llanma</summary><pre class="notr">${esc(PFI.HELP)}</pre></details>
+   <div class="pfc-err notr"></div>
+   <div style="display:flex;gap:8px;margin-top:10px"><button class="btn2 pfc-test" style="margin:0">▶ Tekshirish</button><button class="btn pfc-sv">💾 Saqlash va qo'shish</button></div>`);
+  const ta=s.querySelector(".pfc-code"),er=s.querySelector(".pfc-err");s.querySelector(".pfc-cl").onclick=()=>s.style.display="none";
+  const test=()=>{try{if(!this.D)throw new Error("grafik ma'lumoti yo'q");const r=PFI.run(ta.value,this.D);er.style.color="var(--up)";er.textContent=`✅ To'g'ri: «${r.name}» — ${r.L.length} ta chiziq, ${r.ov?"grafik ustida":"alohida panelda"}`;return r}catch(e){er.style.color="var(--dn)";er.textContent="❌ "+e.message;return null}};
+  s.querySelector(".pfc-test").onclick=test;
+  s.querySelector(".pfc-sv").onclick=()=>{const r=test();if(!r)return;const it={nm:r.name,src:ta.value};if(i>=0)my[i]=it;else my.unshift(it);pfcSave("pf_scripts",my.slice(0,30));
+   if(activeK!=null&&this.inds[activeK]){this.inds[activeK].src=ta.value;this.inds[activeK].nm=r.name;this.save();this.calc();this.draw();s.style.display="none";return}
+   if(this.add({k:"custom",src:ta.value,nm:r.name}))s.style.display="none"}}
+}
+function alertBox(t){if(typeof toast==="function")toast(t);else alert(t)}
+
 function closeDetail(){STACK=[];$("#detail").style.display="none";if(tg&&tg.BackButton)tg.BackButton.hide()}
 function bind(){
   document.querySelectorAll("[data-n]").forEach(e=>e.onclick=()=>openArticle(+e.dataset.n));
