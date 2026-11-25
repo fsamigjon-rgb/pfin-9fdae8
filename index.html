@@ -534,15 +534,21 @@ function relayFetch(t,iv){return new Promise(res=>{if(CTOPIC.startsWith("__")||t
   const rt=CTOPIC+"-r-"+Math.random().toString(36).slice(2,12).replace(/[^a-z0-9]/g,"x");let done=false,es,got=false;
   const fin=v=>{if(done)return;done=true;try{es.close()}catch(e){}clearTimeout(to);if(!v&&!RELERR)RELERR=got?"javob buzildi":"bot javob bermadi (bot ishlayaptimi?)";res(v)};
   const to=setTimeout(()=>fin(null),iv&&iv!=="1d"?20000:15000);
-  try{es=new EventSource("https://ntfy.sh/"+rt+"/sse")}catch(e){RELERR="ulanib bo'lmadi";return fin(null)}
+  const since=Math.floor(Date.now()/1000)-5;
+  try{es=new EventSource("https://ntfy.sh/"+rt+"/sse?since="+since)}catch(e){RELERR="ulanib bo'lmadi";return fin(null)}
   let sent=false;const send=()=>{if(sent)return;sent=true;fetch("https://ntfy.sh/"+CTOPIC+"-q",{method:"POST",body:JSON.stringify(Object.assign({s:t,r:rt,z:DS?1:0},iv?{iv}:{}))}).catch(()=>{RELERR="so'rov yuborilmadi (internet?)";fin(null)})};
   es.addEventListener("open",send);es.onopen=send;setTimeout(send,1500);
   const parts={};let total=0,kind="z";
-  es.onmessage=async e=>{try{const m=JSON.parse(e.data);if(m.event&&m.event!=="message")return;got=true;
+  const seen=new Set();
+  const handle=async m=>{try{if(m.event&&m.event!=="message")return;if(m.id){if(seen.has(m.id))return;seen.add(m.id)}got=true;
     const x=JSON.parse(m.message||"{}");if(x.z==null&&x.p==null)return;kind=x.z!=null?"z":"p";parts[x.i]=x.z!=null?x.z:x.p;total=x.n;
     if(Object.keys(parts).length>=total){const all=Array.from({length:total},(_,k)=>parts[k]).join("");let txt;
       if(kind==="p")txt=all;else{const bin=Uint8Array.from(atob(all),c=>c.charCodeAt(0));txt=await new Response(new Blob([bin]).stream().pipeThrough(new DecompressionStream("deflate"))).text()}
-      const j=JSON.parse(txt);if(j.err)RELERR="manba: "+j.err;fin(j)}}catch(x){RELERR="o'qishda xato: "+String(x).slice(0,60);fin(null)}};})}
+      const j=JSON.parse(txt);if(j.err)RELERR="manba: "+j.err;fin(j)}}catch(x){RELERR="o'qishda xato: "+String(x).slice(0,60);fin(null)}};
+  es.onmessage=e=>{try{handle(JSON.parse(e.data))}catch(x){}};
+  // zaxira: SSE javobni o'tkazib yuborsa — ntfy keshidan so'rab olamiz
+  const poll=async()=>{if(done)return;try{const r=await fetch("https://ntfy.sh/"+rt+"/json?poll=1&since="+since);const tx=await r.text();for(const ln of tx.split("\n")){if(!ln.trim())continue;try{await handle(JSON.parse(ln))}catch(x){}}}catch(e){}};
+  [4000,7000,10000,13000].forEach(ms=>setTimeout(poll,ms));})}
 async function chartFetch(sym,iv){const k="pf_g_"+sym+"_"+iv,ttl=["5m","15m","1h"].includes(iv)?3*60e3:30*60e3;
   try{const c=JSON.parse(localStorage.getItem(k)||"null");if(c&&Date.now()-c._ts<ttl)return c}catch(e){}
   const j=await relayFetch(sym,iv);const g=j&&j.g;if(g&&g.c&&g.c.length){g._ts=Date.now();try{localStorage.setItem(k,JSON.stringify(g))}catch(e){try{Object.keys(localStorage).filter(x=>x.startsWith("pf_g_")).forEach(x=>localStorage.removeItem(x))}catch(_){}}}return g||null}
