@@ -15,7 +15,7 @@ body{padding-bottom:70px}
 header{position:sticky;top:0;z-index:5;background:var(--bg);padding:12px 16px 8px;border-bottom:1px solid var(--line)}
 .brand{display:flex;align-items:center;justify-content:space-between}
 .logo{font-weight:800;font-size:20px;letter-spacing:-.3px}.logo b{color:var(--acc2)}
-.upd{font-size:11px;color:var(--mut);text-align:right}
+.upd{font-size:12px;color:var(--mut);white-space:nowrap;flex:0 0 auto}.mrow{display:flex;justify-content:space-between;align-items:center;gap:10px}.mrow .upd{padding:8px 16px 0 0}.mrow .mstate{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .search{margin-top:10px;display:flex;align-items:center;background:var(--card2);border-radius:22px;padding:0 14px}
 .search input{flex:1;background:none;border:0;outline:0;color:var(--tx);padding:10px 8px;font-size:15px}
 .strip{display:flex;gap:8px;overflow-x:auto;padding:10px 16px;scrollbar-width:none}.strip::-webkit-scrollbar{display:none}
@@ -110,6 +110,12 @@ svg.curve{width:100%;height:120px;display:block}
 .mcell img,.mcell video{width:100%;height:100%;object-fit:cover;display:block}.mcell span{position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:28px;text-shadow:0 2px 8px #000}
 .mcell b{position:absolute;right:4px;top:4px;background:rgba(0,0,0,.65);color:#fff;border-radius:50%;width:26px;height:26px;display:grid;place-items:center;font-size:13px}
 #imgv{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:50;display:none;align-items:center;justify-content:center}#imgv img{max-width:100%;max-height:100%}#imgv button{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.15);border:0;color:#fff;width:40px;height:40px;border-radius:50%;font-size:18px}
+.fcols{columns:2;column-gap:18px}.fsec{break-inside:avoid;margin-bottom:6px}.fprof div{margin:6px 0;font-size:15px}.fdesc{margin-top:12px;font-size:15px;line-height:1.6;color:var(--tx)}
+@media(max-width:360px){.fcols{columns:1}}
+.sugg{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin:10px 0}
+.sg{display:flex;gap:12px;align-items:center;padding:11px 14px;border-bottom:1px solid var(--line);cursor:pointer}.sg:last-child{border-bottom:0}.sg.first{background:rgba(123,63,228,.1)}
+.sgi{width:34px;height:34px;border-radius:50%;background:var(--card2);display:grid;place-items:center;font-weight:800;flex:0 0 auto}.sgt{font-weight:800;font-size:16px}.sgn{color:var(--mut);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.sga{color:var(--mut);font-size:20px}
+.skel{border-radius:16px;margin:12px 0;background:linear-gradient(90deg,var(--card) 25%,var(--card2) 50%,var(--card) 75%);background-size:200% 100%;animation:sk 1.2s infinite linear}@keyframes sk{0%{background-position:200% 0}100%{background-position:-200% 0}}
 .pfc{position:relative;margin-top:14px}.pfb{position:absolute;right:12px;top:12px;width:34px;height:34px;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.4)}
 .pfh{font-size:19px;font-weight:800;margin:2px 44px 10px 0}.fsub{font-size:14px;font-weight:800;color:var(--acc2);margin:14px 0 4px}
 .fgrid{display:grid;grid-template-columns:1fr 1fr;column-gap:16px}.frow{display:flex;justify-content:space-between;gap:8px;padding:7px 0;border-bottom:1px solid var(--line);font-size:13px}.frow b{text-align:right}
@@ -141,10 +147,10 @@ svg.curve{width:100%;height:120px;display:block}
 </head>
 <body>
 <header>
-  <div class="brand"><div class="logo" style="display:flex;align-items:center;gap:5px"><img src="data:image/svg+xml;base64,PHN2ZyBpZD0iQSIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImJnQSIgY3g9IjcwJSIgY3k9IjE4JSIgcj0iOTUlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzZjFmODYiLz48c3RvcCBvZmZzZXQ9Ii41NSIgc3RvcC1jb2xvcj0iIzE0MTEyYyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzBhMGIxMiIvPjwvcmFkaWFsR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ0EiIHgxPSIwIiB5MT0iMSIgeDI9IjEiIHkyPSIwIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM1ZjhiZmYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNjNThjZmYiLz48L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGQiIHgxPSIwIiB5MT0iMSIgeDI9IjEiIHkyPSIwIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmNWE2MjMiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmUyOGYiLz48L2xpbmVhckdyYWRpZW50Pgo8ZmlsdGVyIGlkPSJnbG93IiB4PSItMzAlIiB5PSItMzAlIiB3aWR0aD0iMTYwJSIgaGVpZ2h0PSIxNjAlIj48ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIxOCIgcmVzdWx0PSJiIi8+PGZlTWVyZ2U+PGZlTWVyZ2VOb2RlIGluPSJiIi8+PGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+PC9mZU1lcmdlPjwvZmlsdGVyPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAyNCIgaGVpZ2h0PSIxMDI0IiBmaWxsPSJ1cmwoI2JnQSkiLz48Y2lyY2xlIGN4PSI1MTIiIGN5PSI1MTIiIHI9IjQwNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dBKSIgc3Ryb2tlLXdpZHRoPSIxMiIgb3BhY2l0eT0iLjQiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzggMCkiIGZpbHRlcj0idXJsKCNnbG93KSI+PHBhdGggZD0iTTM4MCA3OTAgVjI0MCBINTc1IEExNzUgMTc1IDAgMCAxIDU3NSA1OTAgSDM4MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dBKSIgc3Ryb2tlLXdpZHRoPSIxMDQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8cG9seWxpbmUgcG9pbnRzPSI0NzAsNTI1IDUzNSw0NTIgNTkyLDQ5MCA2ODAsMzcyIiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMzYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8cGF0aCBkPSJNNjI4IDM2MiBMNzEyIDM0NiBMNjk3IDQzMCBaIiBmaWxsPSJ1cmwoI2dvbGQpIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMTAiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L2c+PC9zdmc+" alt="" style="width:24px;height:24px;border-radius:7px">Penny<b>Finance</b></div><div style="display:flex;align-items:center;gap:8px"><div class="upd notr" id="upd">yuklanmoqda…</div><select id="lang" class="langsel notr"></select></div></div>
+  <div class="brand"><div class="logo" style="display:flex;align-items:center;gap:5px"><img src="data:image/svg+xml;base64,PHN2ZyBpZD0iQSIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImJnQSIgY3g9IjcwJSIgY3k9IjE4JSIgcj0iOTUlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzZjFmODYiLz48c3RvcCBvZmZzZXQ9Ii41NSIgc3RvcC1jb2xvcj0iIzE0MTEyYyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzBhMGIxMiIvPjwvcmFkaWFsR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ0EiIHgxPSIwIiB5MT0iMSIgeDI9IjEiIHkyPSIwIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM1ZjhiZmYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNjNThjZmYiLz48L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGQiIHgxPSIwIiB5MT0iMSIgeDI9IjEiIHkyPSIwIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmNWE2MjMiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmUyOGYiLz48L2xpbmVhckdyYWRpZW50Pgo8ZmlsdGVyIGlkPSJnbG93IiB4PSItMzAlIiB5PSItMzAlIiB3aWR0aD0iMTYwJSIgaGVpZ2h0PSIxNjAlIj48ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIxOCIgcmVzdWx0PSJiIi8+PGZlTWVyZ2U+PGZlTWVyZ2VOb2RlIGluPSJiIi8+PGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+PC9mZU1lcmdlPjwvZmlsdGVyPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAyNCIgaGVpZ2h0PSIxMDI0IiBmaWxsPSJ1cmwoI2JnQSkiLz48Y2lyY2xlIGN4PSI1MTIiIGN5PSI1MTIiIHI9IjQwNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dBKSIgc3Ryb2tlLXdpZHRoPSIxMiIgb3BhY2l0eT0iLjQiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzggMCkiIGZpbHRlcj0idXJsKCNnbG93KSI+PHBhdGggZD0iTTM4MCA3OTAgVjI0MCBINTc1IEExNzUgMTc1IDAgMCAxIDU3NSA1OTAgSDM4MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dBKSIgc3Ryb2tlLXdpZHRoPSIxMDQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8cG9seWxpbmUgcG9pbnRzPSI0NzAsNTI1IDUzNSw0NTIgNTkyLDQ5MCA2ODAsMzcyIiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMzYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8cGF0aCBkPSJNNjI4IDM2MiBMNzEyIDM0NiBMNjk3IDQzMCBaIiBmaWxsPSJ1cmwoI2dvbGQpIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMTAiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L2c+PC9zdmc+" alt="" style="width:24px;height:24px;border-radius:7px">Penny<b>Finance</b></div><div style="display:flex;align-items:center;gap:8px"><select id="lang" class="langsel notr"></select></div></div>
   <div class="search">🔎<input id="q" placeholder="Tiker qidirish: AAPL, PLUG…" autocomplete="off" autocapitalize="characters"></div>
 </header>
-<div class="mstate" id="mstate"></div><div class="strip" id="strip"></div>
+<div class="mrow"><div class="mstate" id="mstate"></div><div class="upd notr" id="upd"></div></div><div class="strip" id="strip"></div>
 <main id="main"></main>
 <nav>
   <button data-tab="home" class="on"><span class="i">🏠</span>Asosiy</button>
@@ -176,7 +182,7 @@ async function load(){
       if(r.ok){D=await r.json();break}}catch(e){}}
   if(denied){$("#main").innerHTML='<div class="empty">🔒 Bu ilova faqat obunachilar uchun.<br><br>Botda «📝 Obuna bo\'lish» tugmasini bosing va ilovani bot menyusidagi «📱 Ilova» tugmasi orqali oching.</div>';$("#upd").textContent="";return}
   if(!D){$("#main").innerHTML='<div class="empty">⏳ Ma\'lumot hali kelmagan — bot birinchi ma\'lumotni 1–2 daqiqada yuboradi.<br><br>Sahifa o\'zi yangilanadi.</div>';$("#upd").textContent="";setTimeout(load,20000);return}
-  $("#upd").textContent=D.updated||"";
+  {const u=String(D.updated||"").split(" ");$("#upd").textContent=u.length>=2?"🕒 "+u[1]:"";}
   mstate();
   strip();render();
 }
@@ -204,10 +210,13 @@ function render(){
   document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",b.dataset.tab===TAB));
   const m=$("#main");let h="";
   if(Q){const q=Q.toUpperCase().replace(/^\$/,"");const r=(D.quotes||[]).filter(x=>x.t.startsWith(q)).slice(0,30);
-    h+=`<h2>Qidiruv: ${esc(q)}</h2>`;
-    if(/^[A-Z][A-Z0-9.\-]{0,9}(:[A-Z0-9.!\-]+)?$/.test(q))h+=`<div class="card sig" id="opensym"><div class="row"><div><div class="tk notr">${esc(q)}</div><div class="mut" style="font-size:12px">📈 Grafik, narx va texnik ko'rsatkichlar</div></div><div style="font-size:22px">›</div></div></div>`;
+    if(!SYMS)loadSyms().then(()=>{if(Q)render()});
+    let sg=symMatch(Q.replace(/^\$/,""),8);
+    if(/^[A-Z][A-Z0-9.\-]{0,9}$/.test(q)&&!sg.some(x=>x[0]===q))sg.unshift([q,""]);
+    if(sg.length)prefetch(sg[0][0]);
+    h+=`<div class="sugg notr">${sg.map((x,k)=>`<div class="sg ${k===0?"first":""}" data-sym="${esc(x[0])}"><div class="sgi">${esc(x[0][0])}</div><div style="flex:1;min-width:0"><div class="sgt">${esc(x[0])}</div><div class="sgn">${esc(x[1]||"📈 Grafik va texnik tahlil")}</div></div><div class="sga">›</div></div>`).join("")}</div>`;
     if(r.length)h+=`<h2 style="font-size:14px">Bot skaneridagi aksiyalar</h2>`+quoteTable(r);
-    m.innerHTML=h;bind();const o=$("#opensym");if(o)o.onclick=()=>openDetail(q);return}
+    m.innerHTML=h;bind();m.querySelectorAll(".sg[data-sym]").forEach(e=>e.onclick=()=>{$("#q").blur();openDetail(e.dataset.sym)});return}
   if(TAB==="sig"){
     const all=D.signals||[];const L=SF==="open"?all.filter(s=>s.status==="open"):all.filter(s=>s.status!=="open");
     h+=`<h2>Bot signallari</h2><div class="seg"><button data-sf="open" class="${SF==="open"?"on":""}">Faol (${all.filter(s=>s.status==="open").length})</button><button data-sf="closed" class="${SF==="closed"?"on":""}">Yopilgan</button><button data-sf="res" class="${SF==="res"?"on":""}">🏆 Natijalar</button></div>`;
@@ -458,15 +467,32 @@ function ownView(b,H,live){
   const tab=x.querySelector("#tabox");const setTF=tf=>{tab.innerHTML=taHtml(tf==="w"?toWeekly(H):H);x.querySelectorAll("#tf button").forEach(z=>z.classList.toggle("on",z.dataset.tf===tf))};
   setTF("d");x.querySelectorAll("#tf button").forEach(e=>e.onclick=()=>setTF(e.dataset.tf));
 }
-async function yhist(t){
+const HC={};
+function hcGet(t){if(HC[t])return HC[t];try{const x=JSON.parse(localStorage.getItem("pf_h_"+t)||"null");if(x&&Date.now()-x._ts<6*3600e3){HC[t]=x;return x}}catch(e){}return null}
+function hcPut(t,o){o._ts=Date.now();HC[t]=o;try{const ks=JSON.parse(localStorage.getItem("pf_hk")||"[]").filter(k=>k!==t);ks.push(t);while(ks.length>25)localStorage.removeItem("pf_h_"+ks.shift());localStorage.setItem("pf_hk",JSON.stringify(ks));localStorage.setItem("pf_h_"+t,JSON.stringify(o))}catch(e){}}
+const HINF={};
+function yhist(t){
+  const c=hcGet(t);if(c)return Promise.resolve(c);if(HINF[t])return HINF[t];
   const u="https://query1.finance.yahoo.com/v8/finance/chart/"+encodeURIComponent(t)+"?range=1y&interval=1d";
-  for(const url of [u,"https://api.allorigins.win/raw?url="+encodeURIComponent(u),"https://corsproxy.io/?url="+encodeURIComponent(u)]){
-    try{const ctl=new AbortController();const tm=setTimeout(()=>ctl.abort(),7000);const r=await fetch(url,{signal:ctl.signal});clearTimeout(tm);if(!r.ok)continue;
-      const R=(await r.json()).chart.result[0],q=R.indicators.quote[0];const o={d:[],o:[],h:[],l:[],c:[],v:[],n:R.meta.longName||R.meta.shortName||t,ex:R.meta.fullExchangeName||R.meta.exchangeName||""};
-      (R.timestamp||[]).forEach((ts,i)=>{if(q.close[i]==null||q.open[i]==null)return;o.d.push(new Date(ts*1000).toISOString().slice(0,10));o.o.push(q.open[i]);o.h.push(q.high[i]);o.l.push(q.low[i]);o.c.push(q.close[i]);o.v.push(q.volume[i]||0)});
-      if(o.c.length>30){o.live={p:R.meta.regularMarketPrice,c:null};return o}}catch(e){}
-  }
-  return null}
+  const u2=u.replace("query1","query2");
+  const urls=[u,u2,"https://corsproxy.io/?url="+encodeURIComponent(u),"https://api.allorigins.win/raw?url="+encodeURIComponent(u),"https://api.codetabs.com/v1/proxy?quest="+encodeURIComponent(u2)];
+  const ctl=new AbortController();const tm=setTimeout(()=>ctl.abort(),9000);
+  const one=async url=>{const r=await fetch(url,{signal:ctl.signal});if(!r.ok)throw 0;const R=(await r.json()).chart.result[0],q=R.indicators.quote[0];
+    const o={d:[],o:[],h:[],l:[],c:[],v:[],n:R.meta.longName||R.meta.shortName||t,ex:R.meta.fullExchangeName||R.meta.exchangeName||""};
+    (R.timestamp||[]).forEach((ts,i)=>{if(q.close[i]==null||q.open[i]==null)return;o.d.push(new Date(ts*1000).toISOString().slice(0,10));o.o.push(+q.open[i].toFixed(4));o.h.push(+q.high[i].toFixed(4));o.l.push(+q.low[i].toFixed(4));o.c.push(+q.close[i].toFixed(4));o.v.push(q.volume[i]||0)});
+    if(o.c.length<30)throw 0;o.live={p:R.meta.regularMarketPrice,c:R.meta.chartPreviousClose&&o.c.length>1?null:null};return o};
+  HINF[t]=Promise.any(urls.map(one)).then(o=>{clearTimeout(tm);ctl.abort();hcPut(t,o);return o}).catch(()=>{clearTimeout(tm);return null}).finally(()=>{delete HINF[t]});
+  return HINF[t]}
+// ---- tikerlar ro'yxati (qidiruv takliflari) ----
+let SYMS=null,SYMP=null;
+function loadSyms(){if(SYMS)return Promise.resolve(SYMS);if(SYMP)return SYMP;
+  try{const x=JSON.parse(localStorage.getItem("pf_syms")||"null");if(x&&Date.now()-x.t<3*86400e3){SYMS=x.l;return Promise.resolve(SYMS)}}catch(e){}
+  SYMP=fetch((RAWB||"")+"symbols.txt?t="+Math.floor(Date.now()/864e5)).then(r=>r.ok?r.text():"").then(tx=>{SYMS=tx?tx.split("\n").map(l=>l.split("|")):[];
+    try{localStorage.setItem("pf_syms",JSON.stringify({t:Date.now(),l:SYMS}))}catch(e){}return SYMS}).catch(()=>{SYMS=[];return SYMS});return SYMP}
+function symMatch(q,n){q=q.toUpperCase();const ql=q.toLowerCase();const a=[],b=[];const L=(SYMS||[]).concat((D.quotes||[]).map(x=>[x.t,""]));const seen=new Set();
+  for(const [t,nm] of L){if(seen.has(t))continue;if(t===q||t.startsWith(q)){seen.add(t);a.push([t,nm])}else if(q.length>1&&nm&&nm.toLowerCase().includes(ql)){seen.add(t);b.push([t,nm])}if(a.length>=n&&b.length>=n)break}
+  a.sort((x,y)=>x[0].length-y[0].length);return a.concat(b).slice(0,n)}
+let PFT=null;function prefetch(t){clearTimeout(PFT);PFT=setTimeout(()=>{if(!(D.hist&&D.hist[t]))yhist(t);getFund()},250)}
 function detailShell(name,sym){
   const d=$("#detail");d.innerHTML=`<div class="top"><button class="back">←</button><div><div class="tk notr">${esc(name||sym)}</div><div class="mut notr" style="font-size:12px">${esc(sym)}</div></div></div><div style="padding:0 16px" id="symbody"></div>`;
   d.style.display="block";d.scrollTop=0;d.querySelector(".back").onclick=goBack;if(tg&&tg.BackButton){tg.BackButton.offClick(goBack);tg.BackButton.show();tg.BackButton.onClick(goBack)}
@@ -475,17 +501,29 @@ function tvView(b,sym,isIndex){const w=document.createElement("div");w.className
   w.innerHTML=`<div style="font-size:34px">📭</div><div style="margin-top:8px">${TA("nodata")}</div><div class="mut" style="font-size:12px;margin-top:6px">Bir necha daqiqadan keyin qayta urinib ko'ring.</div>`;b.appendChild(w)}
 const PFLOGO="data:image/svg+xml;base64,PHN2ZyBpZD0iQSIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImJnQSIgY3g9IjcwJSIgY3k9IjE4JSIgcj0iOTUlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzZjFmODYiLz48c3RvcCBvZmZzZXQ9Ii41NSIgc3RvcC1jb2xvcj0iIzE0MTEyYyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzBhMGIxMiIvPjwvcmFkaWFsR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ0EiIHgxPSIwIiB5MT0iMSIgeDI9IjEiIHkyPSIwIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM1ZjhiZmYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNjNThjZmYiLz48L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGQiIHgxPSIwIiB5MT0iMSIgeDI9IjEiIHkyPSIwIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmNWE2MjMiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmUyOGYiLz48L2xpbmVhckdyYWRpZW50Pgo8ZmlsdGVyIGlkPSJnbG93IiB4PSItMzAlIiB5PSItMzAlIiB3aWR0aD0iMTYwJSIgaGVpZ2h0PSIxNjAlIj48ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIxOCIgcmVzdWx0PSJiIi8+PGZlTWVyZ2U+PGZlTWVyZ2VOb2RlIGluPSJiIi8+PGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+PC9mZU1lcmdlPjwvZmlsdGVyPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAyNCIgaGVpZ2h0PSIxMDI0IiBmaWxsPSJ1cmwoI2JnQSkiLz48Y2lyY2xlIGN4PSI1MTIiIGN5PSI1MTIiIHI9IjQwNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dBKSIgc3Ryb2tlLXdpZHRoPSIxMiIgb3BhY2l0eT0iLjQiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzggMCkiIGZpbHRlcj0idXJsKCNnbG93KSI+PHBhdGggZD0iTTM4MCA3OTAgVjI0MCBINTc1IEExNzUgMTc1IDAgMCAxIDU3NSA1OTAgSDM4MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dBKSIgc3Ryb2tlLXdpZHRoPSIxMDQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8cG9seWxpbmUgcG9pbnRzPSI0NzAsNTI1IDUzNSw0NTIgNTkyLDQ5MCA2ODAsMzcyIiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMzYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8cGF0aCBkPSJNNjI4IDM2MiBMNzEyIDM0NiBMNjk3IDQzMCBaIiBmaWxsPSJ1cmwoI2dvbGQpIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMTAiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L2c+PC9zdmc+";
 function pfCard(title,body){return `<div class="card pfc"><img class="pfb" src="${PFLOGO}" alt="Penny Finance"><div class="pfh">${title}</div>${body}</div>`}
-function tvExtras(b,H,t){const F=(D.fund||{})[t]||{};const w=document.createElement("div");let h="";
-  const row=(k,v)=>v==null||v===""||(typeof v==="number"&&isNaN(v))?"":`<div class="frow"><span class="mut">${k}</span><b class="notr">${v}</b></div>`;
-  const P=v=>v==null?null:`<span class="${cls(v)}">${(+v).toFixed(2)}%</span>`,N=v=>v==null?null:(+v).toFixed(2);
-  if(H&&H.c&&H.c.length>=30){const c=H.c,n=c.length,v=(H.v||[]).slice(-20).filter(x=>x>0);const av=v.length?v.reduce((a,x)=>a+x,0)/v.length:0,y1=c[Math.max(0,n-252)],ch=(c[n-1]/y1-1)*100;
-    h+=pfCard(`<span class="notr">${esc(t)}</span> · Narx tarixi`,`<div class="fgrid">${row("O'rtacha hajm (20 kun)",av?fmtBig(av):null)}${row("1 yillik o'zgarish",P(ch))}${row("52 hafta eng yuqori",fmt(Math.max(...H.h.slice(-252))))}${row("52 hafta eng past",fmt(Math.min(...H.l.slice(-252))))}${row("Beta (1 yil)",N(F.beta))}</div>`)}
-  if(Object.keys(F).length>2){
-    h+=pfCard(`<span class="notr">${esc(t)}</span> · Moliyaviy ko'rsatkichlar`,`<div class="fsub">Baholash</div><div class="fgrid">${row("Bozor qiymati",F.mc!=null?"$"+fmtBig(F.mc*1e6):null)}${row("P/E",N(F.pe))}${row("P/S",N(F.ps))}${row("P/B",N(F.pb))}${row("EPS (12 oy)",N(F.eps))}${row("Aksiya balans qiymati",N(F.bvps))}</div>
-      <div class="fsub">Rentabellik</div><div class="fgrid">${row("Yalpi marja",P(F.gm))}${row("Operatsion marja",P(F.om))}${row("Sof marja",P(F.nm))}${row("ROE",P(F.roe))}${row("ROA",P(F.roa))}${row("Daromad o'sishi (yillik)",P(F.rg))}</div>
-      <div class="fsub">Moliyaviy holat</div><div class="fgrid">${row("Joriy nisbat",N(F.cr))}${row("Qarz / kapital",N(F.de))}${row("Dividend daromadi",F.dy!=null?(+F.dy).toFixed(2)+"%":"—")}${row("Aksiyalar soni",F.sh!=null?fmtBig(F.sh*1e6):null)}</div>`);
-    h+=pfCard(`<span class="notr">${esc(t)}</span> · Kompaniya`,`<div class="fgrid">${row("Nomi",F.n?esc(F.n):(H&&H.n?esc(H.n):null))}${row("Soha",F.ind?esc(F.ind):null)}${row("Davlat",F.cty?esc(F.cty):null)}${row("Birja",F.ex?esc(F.ex):(H&&H.ex?esc(H.ex):null))}${row("Birjaga chiqqan",F.ipo?esc(F.ipo):null)}</div>${F.web&&/^https?:\/\//.test(F.web)?`<a class="btn2" href="${esc(F.web)}" target="_blank">🌐 Rasmiy sayt</a>`:""}`)}
-  else if(H&&H.n)h+=pfCard(`<span class="notr">${esc(t)}</span> · Kompaniya`,`<div class="fgrid">${row("Nomi",esc(H.n))}${row("Birja",H.ex?esc(H.ex):null)}</div><div class="mut" style="font-size:12px;margin-top:8px">To'liq moliyaviy ko'rsatkichlar bot signal bergan aksiyalar uchun chiqadi.</div>`);
+let FUND=null;async function getFund(){if(FUND)return FUND;try{const r=await fetch((RAWB||"")+"fund.json?t="+Math.floor(Date.now()/600000));FUND=r.ok?await r.json():{}}catch(e){FUND={}}return FUND}
+function tvExtras(b,H,t){const F=(FUND&&FUND[t])||(D.fund||{})[t]||{};const w=document.createElement("div");let h="";
+  const row=(k,v)=>`<div class="frow"><span class="mut">${k}</span><b class="notr">${v==null||v===""||(typeof v==="number"&&isNaN(v))?"—":v}</b></div>`;
+  const P=v=>v==null?null:`<span class="${cls(v)}">${(+v).toFixed(2)}%</span>`,N=v=>v==null?null:(+v).toFixed(2),M=v=>v==null?null:(v<0?"-":"")+"$"+fmtBig(Math.abs(v)),C=v=>v==null?null:fmtBig(v);
+  const sec=(t_,rows)=>`<div class="fsec"><div class="fsub">${t_}</div>${rows}</div>`;
+  let ph=null;if(H&&H.c&&H.c.length>=30){const c=H.c,n=c.length,v=(H.v||[]).slice(-20).filter(x=>x>0);const av=v.length?v.reduce((a,x)=>a+x,0)/v.length:0,y1=c[Math.max(0,n-252)];
+    ph={av,ch:(c[n-1]/y1-1)*100,hi:Math.max(...H.h.slice(-252)),lo:Math.min(...H.l.slice(-252))}}
+  const has=Object.keys(F).length>2;
+  if(has||ph){
+    h+=pfCard(`<span class="notr" style="color:#4f8cff">${esc(t)}</span> Moliyaviy ko'rsatkichlar`,`<div class="fcols">
+      ${sec("Asosiy",row("Bozor qiymati",M(F.mc))+row("Korxona qiymati (EV)",M(F.ev))+row("EV / daromad",N(F.evr))+row("EV / EBITDA",N(F.eve))+row("P/E",N(F.pe))+row("Kelgusi P/E",N(F.fpe))+row("P/S",N(F.ps))+row("P/B",N(F.pb))+row("PEG",N(F.peg)))}
+      ${sec("Rentabellik",row("Yalpi marja",P(F.gm))+row("Operatsion marja",P(F.om))+row("EBITDA marja",P(F.em))+row("Sof marja",P(F.nm)))}
+      ${sec("Daromadlar hisoboti",row("Jami daromad",M(F.rev))+row("Aksiya boshiga daromad",N(F.rps))+row("Yalpi foyda",M(F.gp))+row("EBITDA",M(F.ebitda))+row("Sof foyda",M(F.ni))+row("EPS (12 oy)",N(F.eps))+row("Kelgusi EPS",N(F.feps))+row("Daromad o'sishi",P(F.rg))+row("Foyda o'sishi",P(F.eg)))}
+      ${sec("Samaradorlik",row("Aktivlar rentabelligi (ROA)",P(F.roa))+row("Kapital rentabelligi (ROE)",P(F.roe))+(F.at!=null?row("Aktivlar aylanmasi",N(F.at)):""))}
+      ${sec("Balans",row("Jami naqd pul",M(F.cash))+row("Jami qarz",M(F.debt))+row("Qarz / kapital",F.de!=null?(+F.de).toFixed(1)+"%":null)+row("Joriy nisbat",N(F.cr))+row("Tez likvidlik",N(F.qr))+row("Aksiya balans qiymati",N(F.bvps))+row("Operatsion pul oqimi",M(F.ocf))+row("Erkin pul oqimi",M(F.fcf)))}
+      ${sec("Narx tarixi",row("O'rtacha hajm",C(F.av||(ph&&ph.av)))+row("1 yillik o'zgarish",ph?P(ph.ch):null)+row("52 hafta eng yuqori",ph?fmt(ph.hi):null)+row("52 hafta eng past",ph?fmt(ph.lo):null)+row("Beta (1 yil)",N(F.beta)))}
+      ${sec("Aksiyalar",row("Aksiyalar soni",C(F.sh))+row("Erkin muomalada",C(F.flt))+row("Short (erkin ulushdan)",F.si!=null?(+F.si).toFixed(2)+"%":null)+row("Insayderlarda",F.ins!=null?(+F.ins).toFixed(2)+"%":null)+row("Institutlarda",F.inst!=null?(+F.inst).toFixed(2)+"%":null))}
+      ${sec("Dividendlar",row("Dividend daromadi",F.dy!=null?(+F.dy).toFixed(2)+"%":null)+row("Yillik dividend",N(F.dr))+row("To'lov ulushi",F.po!=null?(+F.po).toFixed(2)+"%":null)+row("Dividend sanasi",F.exd?esc(F.exd):null))}
+      ${F.earn||F.tgt?sec("Tahlilchilar",row("Keyingi hisobot",F.earn?esc(F.earn):null)+row("O'rtacha maqsad narx",N(F.tgt))+row("Tavsiya",F.rec?esc(F.rec):null)+row("Tahlilchilar soni",F.nan)):""}
+    </div>`);
+    h+=pfCard(`<span class="notr" style="color:#4f8cff">${esc(t)}</span> Profil`,`<div class="fprof">${F.sec?`<div>Sektor: <b>${esc(F.sec)}</b></div>`:""}${F.ind?`<div>Soha: <b>${esc(F.ind)}</b></div>`:""}${F.emp?`<div>Xodimlar: <b class="notr">${fmtBig(F.emp)}</b></div>`:""}${F.hq||F.cty?`<div>Joylashuvi: <b class="notr">${esc([F.hq,F.cty].filter(Boolean).join(", "))}</b></div>`:""}${F.ex||(H&&H.ex)?`<div>Birja: <b class="notr">${esc(F.ex||H.ex)}</b></div>`:""}${F.ipo?`<div>Birjaga chiqqan: <b class="notr">${esc(F.ipo)}</b></div>`:""}</div>
+      ${F.desc?`<div class="fdesc">${esc(F.desc)}</div>`:(has?"":`<div class="mut" style="font-size:13px;margin-top:8px">Kompaniya ma'lumotlari yuklanmoqda — bot bir necha soat ichida barcha aksiyalar uchun to'playdi.</div>`)}
+      ${F.web&&/^https?:\/\//.test(F.web)?`<a class="btn2" href="${esc(F.web)}" target="_blank">🌐 Rasmiy sayt</a>`:""}`)}
   w.innerHTML=h;b.appendChild(w)}
 function fmtBig(x){return x>=1e9?(x/1e9).toFixed(2)+"B":x>=1e6?(x/1e6).toFixed(2)+"M":x>=1e3?(x/1e3).toFixed(1)+"K":Math.round(x)+""}
 function openMarket(s,n){
@@ -503,10 +541,11 @@ async function openDetail(t){
   if(s)ex+=`<h2>Bot signali</h2>`+sigCard(s);
   if(hl)ex+=`<h2>☪️ ${esc(T("hal"))}</h2><div class="card"><span class="b notr ${HB[hl.v]}">${esc(T(hl.v))}</span><div style="margin-top:8px;font-size:13px">${esc(hl.r)}</div></div>`;
   const tail=()=>{const z=document.createElement("div");z.innerHTML=ex+`<div class="disc">Batafsil tahlil va halollik uchun botga <b class="notr">${esc(t)}</b> deb yozing.<br>⚠️ Daromad kafolati emas.</div>`;b.appendChild(z)};
-  let H=D.hist&&D.hist[t];
-  if(!(H&&H.c&&H.c.length>30)){const w=document.createElement("div");w.className="empty";w.innerHTML=TA("load");b.appendChild(w);H=await yhist(t);w.remove();if($("#detail").style.display!=="block")return b}
-  if(H&&H.c&&H.c.length>30){if(H.n)$("#detail .tk").textContent=t+" · "+H.n;ownView(b,H,H.live||(q?{p:q.p,c:q.c}:null));tvExtras(b,H,t);tail();}
-  else{tvView(b,t,false);tvExtras(b,null,t);tail()}
+  let H=D.hist&&D.hist[t];getFund();
+  if(!(H&&H.c&&H.c.length>30))H=hcGet(t);
+  if(!(H&&H.c&&H.c.length>30)){const w=document.createElement("div");w.innerHTML=`<div class="skel" style="height:110px"></div><div class="skel" style="height:300px"></div><div class="skel" style="height:220px"></div>`;b.appendChild(w);H=await yhist(t);w.remove();if($("#detail").style.display!=="block")return b}
+  if(H&&H.c&&H.c.length>30){if(H.n)$("#detail .tk").textContent=t+" · "+H.n;ownView(b,H,H.live||(q?{p:q.p,c:q.c}:null));await getFund();tvExtras(b,H,t);tail();}
+  else{tvView(b,t,false);await getFund();tvExtras(b,null,t);tail()}
   return b;
 }
 // ===================== 👥 HAMJAMIYAT =====================
@@ -759,7 +798,8 @@ function bind(){
 }
 document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{TAB=b.dataset.tab;Q="";$("#q").value="";render();scrollTo(0,0)});
 $("#q").oninput=e=>{Q=e.target.value.trim();if(D)render()};
-$("#q").onkeydown=e=>{if(e.key==="Enter"&&Q){e.target.blur();openDetail(Q.toUpperCase().replace(/^\$/,""))}};
+$("#q").onkeydown=e=>{if(e.key==="Enter"&&Q){e.target.blur();const f=document.querySelector(".sg.first");openDetail(f?f.dataset.sym:Q.toUpperCase().replace(/^\$/,""))}};
+$("#q").onfocus=()=>{loadSyms()};
 load();setInterval(()=>{if($("#detail").style.display!=="block")load()},120000);
 </script>
 </body>
