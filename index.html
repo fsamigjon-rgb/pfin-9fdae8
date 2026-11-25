@@ -192,6 +192,40 @@ body.pfc-lock{overflow:hidden}
 .tl .bar2 select{flex:1}.btn{background:var(--acc);color:#fff;border:0;border-radius:12px;padding:12px;font-size:15px;font-weight:700;width:100%}
 .btn2{background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:16px}
 .out{min-height:110px;white-space:pre-wrap;font-size:16px;line-height:1.45}
+/* ===== mini grafik kartalari (v10.3) ===== */
+.mkc{flex:0 0 auto;width:140px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:8px 10px 6px;cursor:pointer;overflow:hidden}
+.strip .mkc{width:136px;padding:7px 10px 4px}
+.mkc.big{width:172px;padding:10px 12px 6px}
+.mkn{font-weight:700;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mkp{font-size:16px;font-weight:800;margin-top:3px;white-space:nowrap}.mkc.big .mkp{font-size:18px}
+.mkch{font-size:12px;white-space:nowrap;margin:1px 0 3px}
+.spk{display:block}.spkf{width:100%}.spk0{display:inline-block}
+.mkc .spk{margin:0 -2px}
+.cgrid{display:grid;grid-auto-flow:column;grid-template-rows:repeat(2,auto);grid-auto-columns:172px;gap:10px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+.cgrid::-webkit-scrollbar{display:none}.cgrid.one{grid-template-rows:auto}
+.hmv{margin:4px 0 14px}
+.sgspk{margin:10px -2px 2px}
+table.qt td.spc,table.qt th.spc{padding-left:2px;padding-right:2px;width:64px}
+@media(max-width:400px){table.qt th:last-child,table.qt td:last-child{display:none}}
+/* hamjamiyat: grafik yuklanishi */
+.plazy{display:grid;place-items:center;align-content:center;height:100%;background:#131722;gap:6px}
+.plz-t{color:#7d6aa8;font-size:40px;font-weight:800}.plz-s{color:var(--mut);font-size:12px}
+/* 📊 Grafik bo'limi */
+body[data-tab=chart] .strip,body[data-tab=chart] .mrow,body[data-tab=chart] header .search{display:none}
+.ctab{padding-top:6px}.cbar2{display:flex;gap:8px}
+.csrch{flex:1;display:flex;align-items:center;gap:8px;background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:0 12px}
+.csrch input{flex:1;background:none;border:0;color:var(--tx);font-size:16px;padding:10px 0;outline:0;min-width:0}
+.csg{position:relative;z-index:5}.csg:not(:empty){background:var(--card);border:1px solid var(--line);border-radius:12px;margin-top:6px;overflow:hidden}
+.cchips{display:flex;gap:6px;overflow-x:auto;padding:8px 0;scrollbar-width:none}.cchips::-webkit-scrollbar{display:none}
+.cchip{flex:0 0 auto;background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:16px;padding:6px 11px;font-size:13px;font-weight:600;white-space:nowrap}
+.cchip.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.chd{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;margin:2px 0 8px;min-height:44px}
+.chd1{display:flex;flex-direction:column;min-width:0}.chd1 b{font-size:20px}.chd1 span{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:46vw}
+.chd2{display:flex;align-items:center;gap:8px;white-space:nowrap}.chp{font-size:20px;font-weight:800}
+.cinf{background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:10px;padding:5px 9px;font-size:12px}
+.ctall .pfc-stage{height:calc(var(--tg-viewport-stable-height,100vh) - 400px);min-height:300px}
+nav button{min-width:0;font-size:10.5px}nav button .lb{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(min-width:900px){.ctall .pfc-stage{height:calc(100vh - 290px);min-height:420px}.cgrid{grid-auto-flow:row;grid-template-rows:none;grid-template-columns:repeat(auto-fill,minmax(172px,1fr));overflow:visible}.cgrid.one{grid-auto-flow:column;grid-template-columns:none;overflow-x:auto}.mkc.big{width:auto}nav button{font-size:15px}}
 </style>
 </head>
 <body>
@@ -203,6 +237,7 @@ body.pfc-lock{overflow:hidden}
 <main id="main"></main>
 <nav>
   <button data-tab="home" class="on"><span class="i">🏠</span>Asosiy</button>
+  <button data-tab="chart"><span class="i">📊</span>Grafik</button>
   <button data-tab="sig"><span class="i">📡</span>Signallar</button>
   <button data-tab="mkt"><span class="i">📈</span>Bozor</button>
   <button data-tab="hal"><span class="i">☪️</span>Halol</button>
@@ -251,7 +286,7 @@ function mstate(){if(!D)return;const ic={open:"🟢",pre:"🌅",post:"🌙",clos
 function strip(){
   const fmt=v=>v==null?"—":v.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:v<10?4:2});
   const src=(D.markets&&D.markets.length)?D.markets:(D.index||[]).map(x=>({n:x.t,p:x.p,c:x.c}));
-  const it=src.map(x=>`<div class="mk" data-mk="${esc(x.s||x.n)}" data-mn="${esc(x.n)}"><div class="n">${esc(x.n)}</div><div class="v">${fmt(x.p)} <span class="${cls(x.c)}">${pct(x.c)}</span></div></div>`);
+  const it=src.map(x=>mkCard(x,false));
   if(D.fear)it.push(`<div class="mk"><div class="n">😨 Qo'rquv indeksi</div><div class="v">${Math.round(D.fear.score)}/100 <span class="mut">${esc(D.fear.label)}</span></div></div>`);
   $("#strip").innerHTML=it.join("");
   document.querySelectorAll("[data-mk]").forEach(e=>e.onclick=()=>openMarket(e.dataset.mk,e.dataset.mn));
@@ -262,13 +297,16 @@ function sigCard(s){
   const rc=s.status==="open"?cls(s.price-s.entry):cls(s.pnl);
   return `<div class="card sig" data-t="${esc(s.t)}"><div class="row"><div><div class="tk">${esc(s.t)}</div><div class="mut" style="font-size:12px">${esc(s.entry_date)}${s.closed_date?" → "+esc(s.closed_date):""}</div></div>
   <div><div class="px">${money(p)}</div><div class="${rc}" style="text-align:right;font-weight:700">${res} <span class="mut" style="font-weight:400;font-size:11px">${s.status==="open"?"kirishdan":"natija"}</span></div></div></div>
+  ${(s.sp&&s.sp.length>1)||spOf(s.t)?`<div class="sgspk">${spark((s.sp&&s.sp.length>1)?s.sp:spOf(s.t),320,46,null,"fl")}</div>`:""}
   <div class="badges"><span class="b kind">${esc(s.kind_name||s.kind)}</span><span class="b st-${s.status==="open"?"open":s.pnl>0?"win":"loss"}">${STN[s.status]||s.status}${s.partial?" · 💰1-qism":""}</span>${s.halal?`<span class="b notr ${HB[s.halal]||""}">☪️ ${esc(T(s.halal))}</span>`:""}</div>
   <div class="lvl"><div class="bar"><span class="dot" style="left:${pos}%"></span></div><div class="lv"><span>🛑 ${money(lo)}</span><span>Kirish ${money(s.entry)}</span><span>🎯 ${money(hi)}</span></div></div></div>`;
 }
 function render(){
   if(!D){load();return}
   document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",b.dataset.tab===TAB));
+  document.body.dataset.tab=Q?"q":TAB;QMAP=null;
   const m=$("#main");let h="";
+  if(!Q&&TAB==="chart"){const ex=$("#chost");if(!ex||!m.contains(ex))chartTab(m);return}
   if(Q){const q=Q.toUpperCase().replace(/^\$/,"");const r=(D.quotes||[]).filter(x=>x.t.startsWith(q)).slice(0,30);
     if(!SYMS)loadSyms().then(()=>{if(Q)render()});
     let sg=symMatch(Q.replace(/^\$/,""),8);
@@ -286,13 +324,14 @@ function render(){
     let r=(D.quotes||[]).slice();
     if(MF==="halal")r=r.filter(x=>x.h==="HALOL");if(MF==="penny")r=r.filter(x=>x.p<=5);
     r.sort((a,b)=>((a[MS.k]??-1e9)>(b[MS.k]??-1e9)?1:-1)*MS.d);
-    h+=`<h2>Bozor</h2><div class="seg"><button data-mf="all" class="${MF==="all"?"on":""}">Hammasi</button><button data-mf="halal" class="${MF==="halal"?"on":""}">☪️ Halol</button><button data-mf="penny" class="${MF==="penny"?"on":""}">🪙 ≤ $5</button></div>`+quoteTable(r.slice(0,150));
-  }else if(TAB==="home"){h+=newsTab()}
+    h+=mktOverview();
+    h+=`<h2>Barcha aksiyalar</h2><div class="seg"><button data-mf="all" class="${MF==="all"?"on":""}">Hammasi</button><button data-mf="halal" class="${MF==="halal"?"on":""}">☪️ Halol</button><button data-mf="penny" class="${MF==="penny"?"on":""}">🪙 ≤ $5</button></div>`+quoteTable(r.slice(0,150));
+  }else if(TAB==="home"){h+=homeMovers()+newsTab()}
   else if(TAB==="com"){m.innerHTML=comTab();bindCom(m);return}
 
   else{const L=(D.halal||[]).filter(x=>x.v===HF);
     h+=`<h2>Halollik (AAOIFI + boykot)</h2><div class="seg">${["HALOL","SHUBHALI","HAROM"].map(v=>`<button data-hf="${v}" class="notr ${HF===v?"on":""}">${esc(T(v))} (${(D.halal||[]).filter(x=>x.v===v).length})</button>`).join("")}</div>`;
-    h+=L.length?L.map(x=>`<div class="card q" data-t="${esc(x.t)}"><div class="row"><div class="tk">${esc(x.t)}</div><span class="b notr ${HB[x.v]}">${esc(T(x.v))}</span></div><div class="mut" style="margin-top:6px;font-size:12px">${esc(x.r)}</div></div>`).join(""):`<div class="empty">Ro'yxat bo'sh</div>`;
+    h+=L.length?L.map(x=>`<div class="card q" data-t="${esc(x.t)}"><div class="row"><div class="tk">${esc(x.t)}</div><div style="display:flex;align-items:center;gap:10px">${spark(spOf(x.t),76,26)}<span class="b notr ${HB[x.v]}">${esc(T(x.v))}</span></div></div><div class="mut" style="margin-top:6px;font-size:12px">${esc(x.r)}</div></div>`).join(""):`<div class="empty">Ro'yxat bo'sh</div>`;
     h+=`<div class="disc">Halollik bot hisobi (AAOIFI mezonlari + boykot ro'yxati). Yakuniy qaror — o'zingiz va ishongan olimingizda.</div>`}
   m.innerHTML=h+`<div class="disc">⚠️ Umumiy axborot va texnik tahlil — daromad kafolati emas. Qaror va natija uchun o'zingiz javobgarsiz.</div>`;bind();
 }
@@ -330,7 +369,7 @@ const I18N={
  "zh-CN":{home:"首页",sig:"信号",mkt:"市场",hal:"清真",m:"分钟前",h:"小时前",d:"天前",open:"美股开盘",pre:"盘前",post:"盘后",closed:"美股休市",HALOL:"清真",SHUBHALI:"存疑",HAROM:"非清真",um:"美国市场"},
  ja:{home:"ホーム",sig:"シグナル",mkt:"市場",hal:"ハラール",m:"分前",h:"時間前",d:"日前",open:"米国市場オープン",pre:"プレマーケット",post:"アフターマーケット",closed:"米国市場クローズ",HALOL:"ハラール",SHUBHALI:"疑わしい",HAROM:"ハラーム",um:"米国市場"}};
 const UZ={home:"Asosiy",sig:"Signallar",mkt:"Bozor",hal:"Halol",m:"daq oldin",h:"soat oldin",d:"kun oldin",open:"AQSh bozori ochiq",pre:"Pre-market",post:"Post-market",closed:"AQSh bozori yopiq",HALOL:"HALOL",SHUBHALI:"SHUBHALI",HAROM:"HAROM",um:"US Markets"};
-UZ.com="Hamjamiyat";{const CN={en:"Community",ru:"Сообщество",ko:"커뮤니티",tr:"Topluluk",ar:"المجتمع","zh-CN":"社区",ja:"コミュニティ",de:"Community",kk:"Қауымдастық",ky:"Коомчулук",tg:"Ҷомеа",tk:"Jemgyýet"};for(const k in CN)if(I18N[k])I18N[k].com=CN[k]}
+UZ.com="Hamjamiyat";UZ.chart="Grafik";{const CH={en:"Chart",ru:"График",ko:"차트",tr:"Grafik",ar:"الرسم","zh-CN":"图表",ja:"チャート",de:"Chart",kk:"График",ky:"График",tg:"График",tk:"Grafik"};for(const k in CH)if(I18N[k])I18N[k].chart=CH[k]}{const CN={en:"Community",ru:"Сообщество",ko:"커뮤니티",tr:"Topluluk",ar:"المجتمع","zh-CN":"社区",ja:"コミュニティ",de:"Community",kk:"Қауымдастық",ky:"Коомчулук",tg:"Ҷомеа",tk:"Jemgyýet"};for(const k in CN)if(I18N[k])I18N[k].com=CN[k]}
 const T=k=>((I18N[LANG]||{})[k])||UZ[k];
 const TS=k=>`<span class="notr">${esc(T(k))}</span>`;
 function navLabels(){document.querySelectorAll("nav button").forEach(b=>{const k=b.dataset.tab;let s=b.querySelector(".lb");if(!s){const ic=b.querySelector(".i");b.textContent="";b.appendChild(ic);s=document.createElement("span");s.className="lb notr";b.appendChild(s)}s.textContent=T(k)})}
@@ -398,8 +437,8 @@ function openArticle(i){
 function openLink(u){if(tg&&tg.openLink)tg.openLink(u);else window.open(u,"_blank")}
 function quoteTable(r){
   const th=(k,t)=>`<th data-k="${k}">${t}${MS.k===k?(MS.d>0?" ▲":" ▼"):""}</th>`;
-  return `<div class="card" style="padding:4px 10px"><table><tr>${th("t","Tiker")}${th("p","Narx")}${th("c","Kun")}${th("r20","20 kun")}${th("rsi","RSI")}</tr>`+
-  r.map(x=>`<tr class="q" data-t="${esc(x.t)}"><td><b>${esc(x.t)}</b>${x.h==="HALOL"?' <span class="up" style="font-size:11px">☪️</span>':""}</td><td>${money(x.p)}</td><td class="${cls(x.c)}">${pct(x.c)}</td><td class="${cls(x.r20)}">${pct(x.r20)}</td><td>${x.rsi==null?"—":Math.round(x.rsi)}</td></tr>`).join("")+`</table></div>`;
+  return `<div class="card" style="padding:4px 10px"><table class="qt"><tr>${th("t","Tiker")}<th class="spc">30 kun</th>${th("p","Narx")}${th("c","Kun")}${th("r20","20 kun")}${th("rsi","RSI")}</tr>`+
+  r.map(x=>`<tr class="q" data-t="${esc(x.t)}"><td><b>${esc(x.t)}</b>${x.h==="HALOL"?' <span class="up" style="font-size:11px">☪️</span>':""}</td><td class="spc">${spark(x.sp,62,24)}</td><td>${money(x.p)}</td><td class="${cls(x.c)}">${pct(x.c)}</td><td class="${cls(x.r20)}">${pct(x.r20)}</td><td>${x.rsi==null?"—":Math.round(x.rsi)}</td></tr>`).join("")+`</table></div>`;
 }
 function results(){
   const s=D.stats||{};const pf=s.pf==null?"—":s.pf>=99?"∞":s.pf.toFixed(2);
@@ -521,7 +560,7 @@ function ownView(b,H,live,sym){
   <h2>${TA("ta")}</h2><div class="card pfc"><img class="pfb" src="${PFLOGO}" alt=""><div class="seg" id="tf" style="margin-right:44px"><button data-tf="d" class="on">${TA("day")}</button><button data-tf="w">${TA("week")}</button></div><div id="tabox"></div></div>`;
   const x=document.createElement("div");x.innerHTML=h;b.appendChild(x);
   try{x.querySelector(".pfc-host")._chart=new PFChart(x.querySelector(".pfc-host"),{sym:sym||"",tier:CTIER,base:H,fetcher:chartFetch})}catch(e){console.error(e)}
-  const tab=x.querySelector("#tabox");const setTF=tf=>{tab.innerHTML=taHtml(tf==="w"?toWeekly(H):H);x.querySelectorAll("#tf button").forEach(z=>z.classList.toggle("on",z.dataset.tf===tf))};
+  const tab=x.querySelector("#tabox");const setTF=tf=>{try{tab.innerHTML=H.c.length>=30?taHtml(tf==="w"?toWeekly(H):H):`<div class="mut">Texnik tahlil uchun kamida 30 kunlik ma'lumot kerak.</div>`}catch(e){tab.innerHTML=`<div class="mut">Texnik tahlil hisoblanmadi.</div>`}x.querySelectorAll("#tf button").forEach(z=>z.classList.toggle("on",z.dataset.tf===tf))};
   setTF("d");x.querySelectorAll("#tf button").forEach(e=>e.onclick=()=>setTF(e.dataset.tf));
 }
 const HC={};
@@ -531,27 +570,27 @@ const HINF={};
 let RELERR="";
 function relayFetch(t,iv){return new Promise(res=>{if(CTOPIC.startsWith("__")||typeof EventSource==="undefined"){RELERR="ilova eski — /webapp update";return res(null)}
   const DS=typeof DecompressionStream!=="undefined";
-  const rt=CTOPIC+"-r-"+Math.random().toString(36).slice(2,12).replace(/[^a-z0-9]/g,"x");let done=false,es,got=false;
-  const fin=v=>{if(done)return;done=true;try{es.close()}catch(e){}clearTimeout(to);if(!v&&!RELERR)RELERR=got?"javob buzildi":"bot javob bermadi (bot ishlayaptimi?)";res(v)};
-  const to=setTimeout(()=>fin(null),iv&&iv!=="1d"?20000:15000);
-  const since=Math.floor(Date.now()/1000)-5;
-  try{es=new EventSource("https://ntfy.sh/"+rt+"/sse?since="+since)}catch(e){RELERR="ulanib bo'lmadi";return fin(null)}
-  let sent=false;const send=()=>{if(sent)return;sent=true;fetch("https://ntfy.sh/"+CTOPIC+"-q",{method:"POST",body:JSON.stringify(Object.assign({s:t,r:rt,z:DS?1:0},iv?{iv}:{}))}).catch(()=>{RELERR="so'rov yuborilmadi (internet?)";fin(null)})};
-  es.addEventListener("open",send);es.onopen=send;setTimeout(send,1500);
-  const parts={};let total=0,kind="z";
-  const seen=new Set();
-  const handle=async m=>{try{if(m.event&&m.event!=="message")return;if(m.id){if(seen.has(m.id))return;seen.add(m.id)}got=true;
+  const AZ="abcdefghijklmnopqrstuvwxyz0123456789";let rid="";for(let i=0;i<12;i++)rid+=AZ[Math.floor(Math.random()*36)];const rt=CTOPIC+"-r-"+rid;
+  let done=false,es=null,got=false;const timers=[];const later=(f,ms)=>timers.push(setTimeout(f,ms));
+  const fin=v=>{if(done)return;done=true;try{es&&es.close()}catch(e){}timers.forEach(clearTimeout);if(!v&&!RELERR)RELERR=got?"javob buzildi":"bot javob bermadi (bot ishlayaptimi?)";res(v)};
+  later(()=>fin(null),iv==="f"?40000:32000);
+  let sent=false;const send=()=>{if(sent||done)return;sent=true;fetch("https://ntfy.sh/"+CTOPIC+"-q",{method:"POST",body:JSON.stringify(Object.assign({s:t,r:rt,z:DS?1:0},iv?{iv}:{}))}).catch(()=>{RELERR="so'rov yuborilmadi (internet?)";fin(null)})};
+  const parts={};let total=0,kind="z";const seen=new Set();
+  const handle=async m=>{try{if(done||(m.event&&m.event!=="message"))return;if(m.id){if(seen.has(m.id))return;seen.add(m.id)}got=true;
     const x=JSON.parse(m.message||"{}");if(x.z==null&&x.p==null)return;kind=x.z!=null?"z":"p";parts[x.i]=x.z!=null?x.z:x.p;total=x.n;
     if(Object.keys(parts).length>=total){const all=Array.from({length:total},(_,k)=>parts[k]).join("");let txt;
       if(kind==="p")txt=all;else{const bin=Uint8Array.from(atob(all),c=>c.charCodeAt(0));txt=await new Response(new Blob([bin]).stream().pipeThrough(new DecompressionStream("deflate"))).text()}
       const j=JSON.parse(txt);if(j.err)RELERR="manba: "+j.err;fin(j)}}catch(x){RELERR="o'qishda xato: "+String(x).slice(0,60);fin(null)}};
-  es.onmessage=e=>{try{handle(JSON.parse(e.data))}catch(x){}};
-  // zaxira: SSE javobni o'tkazib yuborsa — ntfy keshidan so'rab olamiz
-  const poll=async()=>{if(done)return;try{const r=await fetch("https://ntfy.sh/"+rt+"/json?poll=1&since="+since);const tx=await r.text();for(const ln of tx.split("\n")){if(!ln.trim())continue;try{await handle(JSON.parse(ln))}catch(x){}}}catch(e){}};
-  [4000,7000,10000,13000].forEach(ms=>setTimeout(poll,ms));})}
-async function chartFetch(sym,iv){const k="pf_g_"+sym+"_"+iv,ttl=["5m","15m","1h"].includes(iv)?3*60e3:30*60e3;
+  // javob kanali tasodifiy va bir martalik — shuning uchun since=all xavfsiz va telefon soatiga bog'liq emas
+  try{es=new EventSource("https://ntfy.sh/"+rt+"/sse?since=all");es.onopen=send;es.onmessage=e=>{try{handle(JSON.parse(e.data))}catch(x){}}}catch(e){}
+  later(send,1200);
+  const poll=async()=>{if(done)return;try{const r=await fetch("https://ntfy.sh/"+rt+"/json?poll=1&since=all",{cache:"no-store"});const tx=await r.text();for(const ln of tx.split("\n")){if(!ln.trim())continue;try{await handle(JSON.parse(ln))}catch(x){}}}catch(e){}};
+  [3000,5500,8000,11000,14000,18000,22000,26000,30500].forEach(ms=>later(poll,ms));})}
+async function relayGet(t,iv){RELERR="";let j=await relayFetch(t,iv);if(!j&&!/^manba|eski/.test(RELERR)){RELERR="";j=await relayFetch(t,iv)}return j}
+const CFI={};function chartFetch(sym,iv){const kk=sym+"|"+iv;if(CFI[kk])return CFI[kk];CFI[kk]=chartFetch0(sym,iv).finally(()=>{delete CFI[kk]});return CFI[kk]}
+async function chartFetch0(sym,iv){const k="pf_g_"+sym+"_"+iv,ttl=["5m","15m","1h"].includes(iv)?3*60e3:30*60e3;
   try{const c=JSON.parse(localStorage.getItem(k)||"null");if(c&&Date.now()-c._ts<ttl)return c}catch(e){}
-  const j=await relayFetch(sym,iv);const g=j&&j.g;if(g&&g.c&&g.c.length){g._ts=Date.now();try{localStorage.setItem(k,JSON.stringify(g))}catch(e){try{Object.keys(localStorage).filter(x=>x.startsWith("pf_g_")).forEach(x=>localStorage.removeItem(x))}catch(_){}}}return g||null}
+  const j=await relayGet(sym,iv);const g=j&&j.g;if(g&&g.c&&g.c.length){g._ts=Date.now();try{localStorage.setItem(k,JSON.stringify(g))}catch(e){try{Object.keys(localStorage).filter(x=>x.startsWith("pf_g_")).forEach(x=>localStorage.removeItem(x))}catch(_){}}}return g||null}
 function yhist(t){
   const c=hcGet(t);if(c)return Promise.resolve(c);if(HINF[t])return HINF[t];
   const u="https://query1.finance.yahoo.com/v8/finance/chart/"+encodeURIComponent(t)+"?range=1y&interval=1d";
@@ -560,9 +599,85 @@ function yhist(t){
     const o={d:[],o:[],h:[],l:[],c:[],v:[],n:R.meta.longName||R.meta.shortName||t,ex:R.meta.fullExchangeName||R.meta.exchangeName||""};
     (R.timestamp||[]).forEach((ts,i)=>{if(q.close[i]==null||q.open[i]==null)return;o.d.push(new Date(ts*1000).toISOString().slice(0,10));o.o.push(+q.open[i].toFixed(4));o.h.push(+q.high[i].toFixed(4));o.l.push(+q.low[i].toFixed(4));o.c.push(+q.close[i].toFixed(4));o.v.push(q.volume[i]||0)});
     if(o.c.length<30)throw 0;return o})();
-  const relay=relayFetch(t).then(j=>{if(!j||!j.h||!j.h.c||j.h.c.length<30)throw 0;const o=j.h;if(j.f&&Object.keys(j.f).length){FUND=FUND||{};FUND[t]=j.f;o._f=j.f}if(o.px)o.live={p:o.px,c:null};return o});
+  const relay=relayGet(t).then(j=>{if(!j||!j.h||!j.h.c||j.h.c.length<2)throw 0;const o=j.h;if(j.f&&Object.keys(j.f).length){FUND=FUND||{};FUND[t]=j.f;o._f=j.f}if(o.px)o.live={p:o.px,c:null};return o});
   RELERR="";HINF[t]=Promise.any([direct,relay]).then(o=>{ctl.abort();hcPut(t,o);return o}).catch(()=>null).finally(()=>{delete HINF[t]});
   return HINF[t]}
+// ===================== 📈 MINI GRAFIKLAR (TradingView kabi) =====================
+let SPID=0,QMAP=null,GL="g";
+function qOf(t){if(!QMAP){QMAP={};(D.quotes||[]).forEach(x=>QMAP[x.t]=x)}return QMAP[t]}
+function spOf(t){const q=qOf(t);if(q&&q.sp&&q.sp.length>1)return q.sp;const H=D.hist&&D.hist[t];if(H&&H.c&&H.c.length>1)return H.c.slice(-30);
+  const s=(D.signals||[]).find(x=>x.t===t&&x.sp&&x.sp.length>1);if(s)return s.sp;const g=lsChart(t);return g?g.c.slice(-30):null}
+function spark(a,w,h,pc,cl){a=(a||[]).filter(v=>v!=null&&isFinite(v));if(a.length<2)return `<span class="spk0" style="width:${cl==="fl"?"100%":w+"px"};height:${h}px"></span>`;
+  const ref=pc!=null?pc:a[0],up=a[a.length-1]>=ref,col=up?"#16c784":"#ea3943";
+  let lo=Math.min(...a),hi=Math.max(...a);if(pc!=null){lo=Math.min(lo,pc);hi=Math.max(hi,pc)}const pd=(hi-lo)*.1||Math.abs(hi)*.01||1;lo-=pd;hi+=pd;
+  const X=i=>(i/(a.length-1)*(w-5)+1).toFixed(1),Y=v=>((hi-v)/(hi-lo)*(h-4)+2).toFixed(1);
+  const pts=a.map((v,i)=>X(i)+","+Y(v)).join(" ");const id="spg"+(++SPID);const fl=cl==="fl";
+  return `<svg class="spk ${fl?"spkf":""}" viewBox="0 0 ${w} ${h}" ${fl?"":`width="${w}"`} height="${h}" preserveAspectRatio="none"><defs><linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${col}" stop-opacity=".38"/><stop offset="1" stop-color="${col}" stop-opacity="0"/></linearGradient></defs>${pc!=null?`<line x1="0" x2="${w}" y1="${Y(pc)}" y2="${Y(pc)}" stroke="#8b93a7" stroke-width="1" stroke-dasharray="2 3" opacity=".55" vector-effect="non-scaling-stroke"/>`:""}<polygon points="1,${h} ${pts} ${X(a.length-1)},${h}" fill="url(#${id})"/><polyline points="${pts}" fill="none" stroke="${col}" stroke-width="1.8" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>${fl?"":`<circle cx="${X(a.length-1)}" cy="${Y(a[a.length-1])}" r="2.7" fill="${col}"/>`}</svg>`}
+function fmtP(v){return v==null?"—":v.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:v<10?4:2})}
+function mkCard(x,big){const s=x.s||x.n;let sp=(x.sp&&x.sp.length>1)?x.sp:null;if(!sp){const H=D.hist&&D.hist[s];if(H&&H.c)sp=H.c.slice(-30)}
+  return `<div class="mkc ${big?"big":""}" data-mk="${esc(s)}" data-mn="${esc(x.n)}"><div class="mkn notr">${esc(x.n)}</div><div class="mkp notr">${fmtP(x.p)}</div><div class="mkch"><b class="${cls(x.c)} notr">${pct(x.c)}</b> <span class="mut">bugun</span></div>${spark(sp,big?150:116,big?44:28,x.pc)}</div>`}
+function stCard(q){return `<div class="mkc big" data-t="${esc(q.t)}"><div class="mkn notr">${esc(q.t)}${q.h==="HALOL"?' <span style="font-size:11px">☪️</span>':""}</div><div class="mkp notr">${money(q.p)}</div><div class="mkch"><b class="${cls(q.c)} notr">${pct(q.c)}</b> <span class="mut">bugun</span></div>${spark(q.sp,150,44)}</div>`}
+function movers(){const all=(D.quotes||[]).filter(x=>x.c!=null&&x.p!=null);return {g:all.slice().sort((a,b)=>b.c-a.c).slice(0,12),l:all.slice().sort((a,b)=>a.c-b.c).slice(0,12)}}
+function mktOverview(){let h="";const M=D.markets||[];
+  if(M.length)h+=`<h2>Indekslar va bozorlar</h2><div class="cgrid">${M.map(x=>mkCard(x,true)).join("")}</div>`;
+  const mv=movers();if(mv.g.length)h+=`<h2>Aksiyalar</h2><div class="seg"><button data-gl="g" class="${GL==="g"?"on":""}">📈 Eng ko'p o'sganlar</button><button data-gl="l" class="${GL==="l"?"on":""}">📉 Eng ko'p tushganlar</button></div><div class="cgrid">${(GL==="g"?mv.g:mv.l).map(stCard).join("")}</div>`;
+  return h}
+function homeMovers(){const mv=movers();if(!mv.g.length)return "";return `<div class="hmv"><div class="row" style="margin:2px 0 8px"><b style="font-size:16px">📈 Bugun eng ko'p o'sganlar</b><a href="#" class="mut" style="font-size:13px" onclick="TAB='mkt';render();scrollTo(0,0);return false">Barchasi ›</a></div><div class="cgrid one">${mv.g.slice(0,10).map(stCard).join("")}</div></div>`}
+// ---- hamjamiyat: sham grafigi (rasm o'rniga) ----
+function kOf(H,n){n=n||60;return {o:H.o.slice(-n),h:H.h.slice(-n),l:H.l.slice(-n),c:H.c.slice(-n)}}
+function lsChart(t){try{const g=JSON.parse(localStorage.getItem("pf_g_"+t+"_1d")||"null");return g&&g.c&&g.c.length>=10&&g.o?g:null}catch(e){return null}}
+function candleSvg(k,p){const W=640,H=360,AX=70,pw=W-AX,n=k.c.length;const f=v=>v<10?v.toFixed(3):v.toFixed(2);
+  let lo=Math.min(...k.l),hi=Math.max(...k.h);const lv=[["tp",p.tp,"#26a69a","TP"],["entry",p.entry,"#5b8cff","IN"],["sl",p.sl,"#ef5350","SL"]].filter(x=>x[1]&&x[1]>lo*.55&&x[1]<hi*1.8);
+  lv.forEach(x=>{lo=Math.min(lo,x[1]);hi=Math.max(hi,x[1])});const pd=(hi-lo)*.07||hi*.02||1;lo-=pd;hi+=pd;
+  const Y=v=>((hi-v)/(hi-lo)*(H-34)+10),bw=pw/n,cw=Math.max(1.5,bw*.64);let g="";
+  for(let i=0;i<5;i++){const v=lo+(hi-lo)*(i+.5)/5,y=Y(v).toFixed(1);g+=`<line x1="0" x2="${pw}" y1="${y}" y2="${y}" stroke="#ffffff" stroke-opacity=".06"/><text x="${W-6}" y="${(+y+5).toFixed(1)}" fill="#8b93a7" font-size="15" text-anchor="end">${f(v)}</text>`}
+  let c="";for(let i=0;i<n;i++){const o=k.o[i],cl=k.c[i],up=cl>=o,col=up?"#26a69a":"#ef5350",x=(i+.5)*bw;const y1=Y(Math.max(o,cl)),y2=Y(Math.min(o,cl));
+    c+=`<line x1="${x.toFixed(1)}" x2="${x.toFixed(1)}" y1="${Y(k.h[i]).toFixed(1)}" y2="${Y(k.l[i]).toFixed(1)}" stroke="${col}" stroke-width="1.4"/><rect x="${(x-cw/2).toFixed(1)}" y="${y1.toFixed(1)}" width="${cw.toFixed(1)}" height="${Math.max(1.2,y2-y1).toFixed(1)}" fill="${col}"/>`}
+  const last=k.c[n-1],ly=Y(last),lc=last>=k.o[n-1]?"#26a69a":"#ef5350";
+  let L="";lv.forEach(x=>{const y=Y(x[1]).toFixed(1);L+=`<line x1="0" x2="${pw}" y1="${y}" y2="${y}" stroke="${x[2]}" stroke-width="2" stroke-dasharray="8 6"/><rect x="${pw+2}" y="${(+y-11).toFixed(1)}" width="${AX-4}" height="22" rx="4" fill="${x[2]}"/><text x="${pw+AX/2}" y="${(+y+5).toFixed(1)}" fill="#fff" font-size="13" font-weight="700" text-anchor="middle">${x[3]} ${f(x[1])}</text>`});
+  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" style="display:block;width:100%;height:100%"><rect width="${W}" height="${H}" fill="#131722"/>
+  <text x="${pw/2}" y="${H/2+20}" fill="#ffffff" fill-opacity=".06" font-size="58" font-weight="800" text-anchor="middle">${esc(p.sym)}, ${esc(p.tf||"1D")}</text>${g}${c}${L}
+  <line x1="0" x2="${pw}" y1="${ly.toFixed(1)}" y2="${ly.toFixed(1)}" stroke="${lc}" stroke-dasharray="2 4" stroke-opacity=".8"/><rect x="${pw+2}" y="${(ly-11).toFixed(1)}" width="${AX-4}" height="22" rx="4" fill="${lc}"/><text x="${pw+AX/2}" y="${(ly+5).toFixed(1)}" fill="#fff" font-size="14" font-weight="700" text-anchor="middle">${f(last)}</text></svg>`}
+const LZQ=[];let LZN=0;
+function lzRun(){while(LZN<2&&LZQ.length){const el=LZQ.shift();if(!el.isConnected)continue;LZN++;const t=el.dataset.lz;
+  chartFetch(t,"1d").then(g=>{if(g&&g.c&&g.c.length>=10&&g.o){const P=(C&&C.posts)||[];
+    document.querySelectorAll('.plazy[data-lz="'+t+'"]').forEach(e=>{const pc=e.closest("[data-pid]");const pp=(pc&&P.find(z=>z.id===pc.dataset.pid))||P.find(z=>z.sym===t)||{sym:t};e.outerHTML=candleSvg(kOf(g),pp)})}
+    else{const z=el.querySelector(".plz-s");if(z)z.textContent=""}}).catch(()=>{}).finally(()=>{LZN--;lzRun()})}}
+const LZO=typeof IntersectionObserver!=="undefined"?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){LZO.unobserve(e.target);if(!LZQ.some(x=>x.dataset.lz===e.target.dataset.lz))LZQ.push(e.target);lzRun()}}),{rootMargin:"200px"}):null;
+let LZT=null;new MutationObserver(()=>{clearTimeout(LZT);LZT=setTimeout(()=>{if(!LZO)return;document.querySelectorAll(".plazy:not([data-ob])").forEach(e=>{e.dataset.ob=1;LZO.observe(e)})},120)}).observe(document.body,{childList:true,subtree:true});
+// ===================== 📊 GRAFIK BO'LIMI (alohida, to'liq ekran) =====================
+let CSYM="";try{CSYM=localStorage.getItem("pf_csym")||""}catch(e){}
+function chartTab(m){
+  const sigs=[...new Set((D.signals||[]).filter(s=>s.status==="open").map(s=>s.t))];
+  if(!CSYM)CSYM=sigs[0]||"^GSPC";
+  let rec=[];try{rec=JSON.parse(localStorage.getItem("pf_crec")||"[]")}catch(e){}
+  const IDX=[["^GSPC","S&P 500"],["^IXIC","Nasdaq"],["^DJI","Dow 30"],["^RUT","Russell 2000"],["BTC-USD","Bitcoin"],["GC=F","Oltin"]];
+  const chip=(s,n)=>`<button class="cchip" data-cs="${esc(s)}">${esc(n||s)}</button>`;
+  m.innerHTML=`<div class="ctab"><div class="cbar2"><div class="csrch">🔎<input id="cq" placeholder="Tiker: AAPL, MU, SPY…" autocomplete="off" autocapitalize="characters"></div></div><div class="csg notr" id="csg"></div>
+  <div class="cchips notr">${rec.slice(0,6).map(s=>chip(s)).join("")}${sigs.slice(0,8).map(s=>chip(s,"📡 "+s)).join("")}${IDX.map(x=>chip(x[0],x[1])).join("")}</div>
+  <div class="chd notr" id="chd"></div><div class="pfc-host ctall" id="chost"></div>
+  <div class="disc">📊 Grafik: zoom — 2 barmoq yoki g'ildirak, surish — barmoq bilan. ƒx — indikatorlar (o'z formulangiz ham). ⛶ — to'liq ekran. ⚠️ Daromad kafolati emas.</div></div>`;
+  m.querySelectorAll("[data-cs]").forEach(e=>e.onclick=()=>mountChart(e.dataset.cs));
+  const qi=m.querySelector("#cq"),sg=m.querySelector("#csg");
+  const go=v=>{v=String(v||"").toUpperCase().replace(/^\$/,"").trim();if(!v)return;qi.value="";sg.innerHTML="";qi.blur();mountChart(v)};
+  qi.oninput=()=>{const v=qi.value.trim();if(!v){sg.innerHTML="";return}if(!SYMS)loadSyms().then(()=>qi.oninput());let L=symMatch(v.replace(/^\$/,""),6);const u=v.toUpperCase();
+    if(/^[A-Z^][A-Z0-9.\-=^]{0,9}$/.test(u)&&!L.some(x=>x[0]===u))L.unshift([u,""]);
+    sg.innerHTML=L.map(x=>`<div class="sg" data-g="${esc(x[0])}"><div class="sgi">${esc(x[0][0])}</div><div style="flex:1;min-width:0"><div class="sgt">${esc(x[0])}</div><div class="sgn">${esc(x[1]||"")}</div></div></div>`).join("");
+    sg.querySelectorAll("[data-g]").forEach(e=>e.onclick=()=>go(e.dataset.g))};
+  qi.onkeydown=e=>{if(e.key==="Enter"){const f=sg.querySelector("[data-g]");go(f?f.dataset.g:qi.value)}};
+  mountChart(CSYM)}
+function mountChart(sym){const host=$("#chost");if(!host)return;CSYM=sym;
+  try{localStorage.setItem("pf_csym",sym);let r=JSON.parse(localStorage.getItem("pf_crec")||"[]").filter(x=>x!==sym);r.unshift(sym);localStorage.setItem("pf_crec",JSON.stringify(r.slice(0,8)))}catch(e){}
+  document.querySelectorAll("[data-cs]").forEach(e=>e.classList.toggle("on",e.dataset.cs===sym));
+  const q=qOf(sym),mk=(D.markets||[]).find(x=>x.s===sym);
+  const H0=(D.hist&&D.hist[sym]&&D.hist[sym].c&&D.hist[sym].c.length>5)?D.hist[sym]:hcGet(sym);
+  const head=(d)=>{const el=$("#chd");if(!el||CSYM!==sym)return;const c=d&&d.c||[];const last=mk?mk.p:q?q.p:c[c.length-1];
+    let ch=mk?mk.c:q?q.c:null;if(ch==null&&d&&!d.intra&&c.length>1)ch=(c[c.length-1]/c[c.length-2]-1)*100;
+    const nm=(mk&&mk.n)||(H0&&H0.n)||(d&&d.n)||"";
+    el.innerHTML=`<div class="chd1"><b>${esc(sym)}</b>${nm&&nm!==sym?`<span class="mut">${esc(nm)}</span>`:""}</div><div class="chd2"><span class="chp">${last==null?"":fmtP(last)}</span>${ch==null?"":`<b class="${cls(ch)}">${pct(ch)}</b>`}<button class="cinf" id="cinf">ℹ️ Batafsil</button></div>`;
+    const bi=$("#cinf");if(bi)bi.onclick=()=>openDetail(sym)};
+  head(H0);host.innerHTML="";
+  try{const ch=new PFChart(host,{sym,tier:CTIER,base:H0&&H0.c&&H0.c.length>5?H0:null,fetcher:chartFetch});ch.onData=d=>head(d);host._chart=ch;if(ch.D)head(ch.D)}catch(e){console.error(e);host.innerHTML=`<div class="empty">Grafik ochilmadi: ${esc(String(e).slice(0,80))}</div>`}}
 // ---- tikerlar ro'yxati (qidiruv takliflari) ----
 let SYMS=null,SYMP=null;
 function loadSyms(){if(SYMS)return Promise.resolve(SYMS);if(SYMP)return SYMP;
@@ -605,12 +720,13 @@ function tvExtras(b,H,t){const F=(FUND&&FUND[t])||(D.fund||{})[t]||{};const w=do
     h+=pfCard(`<span class="notr" style="color:#4f8cff">${esc(t)}</span> Profil`,`<div class="fprof">${F.sec?`<div>Sektor: <b>${esc(F.sec)}</b></div>`:""}${F.ind?`<div>Soha: <b>${esc(F.ind)}</b></div>`:""}${F.emp?`<div>Xodimlar: <b class="notr">${fmtBig(F.emp)}</b></div>`:""}${F.hq||F.cty?`<div>Joylashuvi: <b class="notr">${esc([F.hq,F.cty].filter(Boolean).join(", "))}</b></div>`:""}${F.ex||(H&&H.ex)?`<div>Birja: <b class="notr">${esc(F.ex||H.ex)}</b></div>`:""}${F.ipo?`<div>Birjaga chiqqan: <b class="notr">${esc(F.ipo)}</b></div>`:""}</div>
       ${F.desc?`<div class="fdesc">${esc(F.desc)}</div>`:(has?"":`<div class="mut" style="font-size:13px;margin-top:8px">Kompaniya ma'lumotlari yuklanmoqda — bot bir necha soat ichida barcha aksiyalar uchun to'playdi.</div>`)}
       ${F.web&&/^https?:\/\//.test(F.web)?`<a class="btn2" href="${esc(F.web)}" target="_blank">🌐 Rasmiy sayt</a>`:""}`)}
-  w.innerHTML=h;b.appendChild(w)}
+  w.innerHTML=h;w.className="fxbox";const o_=b.querySelector(".fxbox");if(o_)o_.replaceWith(w);else b.appendChild(w)}
 function fmtBig(x){return x>=1e9?(x/1e9).toFixed(2)+"B":x>=1e6?(x/1e6).toFixed(2)+"M":x>=1e3?(x/1e3).toFixed(1)+"K":Math.round(x)+""}
 function openMarket(s,n){
   const H=D.hist&&D.hist[s];const live=(D.markets||[]).find(x=>x.s===s);const b=detailShell(n||(H&&H.n)||s,s);
   if(H&&H.c&&H.c.length>30){ownView(b,H,live,s);return b}
-  tvView(b,tvSym(s),true);return b}
+  const w=document.createElement("div");w.innerHTML=`<div class="mut" style="text-align:center;font-size:13px;margin:4px 0 8px">⏳ Grafik yuklanmoqda…</div><div class="skel" style="height:110px"></div><div class="skel" style="height:300px"></div>`;b.appendChild(w);
+  yhist(s).then(H2=>{w.remove();if(!b.isConnected)return;if(H2&&H2.c&&H2.c.length>=2)ownView(b,H2,live||H2.live,s);else tvView(b,s,true)});return b}
 function openSymbol(sym,name,isIndex){return isIndex?_openMarket(sym,name):_openDetail(sym)}
 async function openDetail(t){
   t=String(t||"").toUpperCase().replace(/^\$/,"").trim();if(!t)return;
@@ -624,8 +740,9 @@ async function openDetail(t){
   const tail=()=>{const z=document.createElement("div");z.innerHTML=ex+`<div class="disc">Batafsil tahlil va halollik uchun botga <b class="notr">${esc(t)}</b> deb yozing.<br>⚠️ Daromad kafolati emas.</div>`;b.appendChild(z)};
   let H=D.hist&&D.hist[t];getFund();
   if(!(H&&H.c&&H.c.length>30))H=hcGet(t);
-  if(!(H&&H.c&&H.c.length>30)){const w=document.createElement("div");w.innerHTML=`<div class="skel" style="height:110px"></div><div class="skel" style="height:300px"></div><div class="skel" style="height:220px"></div>`;b.appendChild(w);H=await yhist(t);w.remove();if($("#detail").style.display!=="block")return b}
-  if(H&&H.c&&H.c.length>30){if(H.n)$("#detail .tk").textContent=t+" · "+H.n;ownView(b,H,H.live||(q?{p:q.p,c:q.c}:null),t);await getFund();tvExtras(b,H,t);tail();}
+  if(!(H&&H.c&&H.c.length>30)){const w=document.createElement("div");w.innerHTML=`<div class="mut" style="text-align:center;font-size:13px;margin:4px 0 8px">⏳ Grafik yuklanmoqda…</div><div class="skel" style="height:110px"></div><div class="skel" style="height:300px"></div><div class="skel" style="height:220px"></div>`;b.appendChild(w);H=await yhist(t);w.remove();if($("#detail").style.display!=="block")return b}
+  if(H&&H.c&&H.c.length>=2){if(H.n)$("#detail .tk").textContent=t+" · "+H.n;ownView(b,H,H.live||(q?{p:q.p,c:q.c}:null),t);await getFund();tvExtras(b,H,t);tail();
+    if(!(FUND&&FUND[t]&&Object.keys(FUND[t]).length>2))relayFetch(t,"f").then(j=>{if(j&&j.f&&Object.keys(j.f).length>2){FUND=FUND||{};FUND[t]=j.f;if(b.isConnected)tvExtras(b,H,t)}});}
   else{tvView(b,t,false);await getFund();tvExtras(b,null,t);tail()}
   return b;
 }
@@ -710,7 +827,11 @@ function mediaHtml(p,big){const v=vidUrl(p),L=imgList(p);let h="";
   if(!h)h=`<div class="pimg ${big?"big":""}" data-open="${esc(p.id)}">${preview(p)}${tchip(p)}</div>`;
   if(!big&&v&&L.length)h=h.replace('<div class="vplay">▶</div>',`<div class="vplay">▶</div><div class="cnt notr">🖼 ${L.length}</div>`);
   return h}
-function preview(p){const s=p.s||[];if(s.length<10)return `<div style="display:grid;place-items:center;height:100%;color:#7d6aa8;font-size:40px;font-weight:800" class="notr">${esc(p.sym)}</div>`;
+function preview(p){let k=p.k&&p.k.c&&p.k.c.length>=10?p.k:null;
+  if(!k){const H=D&&D.hist&&D.hist[p.sym];if(H&&H.c&&H.c.length>=20&&H.o)k=kOf(H)}
+  if(!k){const g=lsChart(p.sym);if(g)k=kOf(g)}
+  if(k)return candleSvg(k,p);
+  const s=p.s||[];if(s.length<10)return `<div class="plazy notr" data-lz="${esc(p.sym)}"><div class="plz-t">${esc(p.sym)}</div><div class="plz-s">⏳ grafik yuklanmoqda…</div></div>`;
   const W=640,H=360,s0=Math.min(...s),s1=Math.max(...s),lv=[p.entry,p.tp,p.sl].filter(v=>v>s0*.6&&v<s1*1.6);let lo=Math.min(...s,...lv),hi=Math.max(...s,...lv);const pd=(hi-lo)*.08||1;lo-=pd;hi+=pd;
   const X=i=>i/(s.length-1)*(W-60),Y=v=>(hi-v)/(hi-lo)*(H-20)+10;const pts=s.map((v,i)=>`${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(" ");
   const up=s[s.length-1]>=s[0];const col=up?"#26c6a0":"#ef5f86";
@@ -1050,7 +1171,7 @@ class PFChart{
   if(g&&g.c&&g.c.length>5){const d={t:g.t,o:g.o,h:g.h,l:g.l,c:g.c,v:g.v||[],intra:["5m","15m","1h"].includes(iv)};this.cache[iv]=d;this.setData(d,iv);this.note("")}
   else if(iv==="1d"&&this.base){this.setData(this.fromBase(this.base),iv);this.note("")}
   else{this.note("⚠️ "+PFC_IVNAME[iv]+" ma'lumoti olinmadi. Boshqa oraliqni tanlang yoki keyinroq urinib ko'ring.")}}
- setData(d,iv){if(!d){this.note("⏳ Yuklanmoqda…");return}this.D=d;this.n0=d.c.length;this.nvis=Math.min(this.n0+3,iv==="1d"?130:iv==="1wk"?104:iv==="1mo"?120:100);this.end=this.n0-1+3;this.calc();this.draw()}
+ setData(d,iv){if(!d){this.note("⏳ Yuklanmoqda…");return}this.D=d;this.n0=d.c.length;this.nvis=Math.min(this.n0+3,iv==="1d"?130:iv==="1wk"?104:iv==="1mo"?120:100);this.end=this.n0-1+3;this.calc();this.draw();if(this.onData)try{this.onData(d,iv)}catch(e){}}
  series(){const D=this.D;if(this.type!=="ha")return D;const o=[],c=[],h=[],l=[];for(let i=0;i<D.c.length;i++){const cc=(D.o[i]+D.h[i]+D.l[i]+D.c[i])/4,oo=i?(o[i-1]+c[i-1])/2:(D.o[i]+D.c[i])/2;o.push(oo);c.push(cc);h.push(Math.max(D.h[i],oo,cc));l.push(Math.min(D.l[i],oo,cc))}return {t:D.t,o,h,l,c,v:D.v,intra:D.intra}}
  calc(){const D=this.D;if(!D)return;this.out=this.inds.map((x,ix)=>{try{if(x.src){const r=PFI.run(x.src,D);x.nm=r.name;return {ov:r.ov,r}}const def=PFI.IND[x.k];if(!def)return null;return {ov:!!def.ov,r:def.f(D,x.p,x.c||PFI.C[ix%PFI.C.length]),rg:def.rg}}catch(e){return {ov:true,r:{L:[]},err:e.message}}});}
  fullscreen(){const on=!this.host.classList.contains("pfc-full");this.host.classList.toggle("pfc-full",on);document.body.classList.toggle("pfc-lock",on);
@@ -1224,6 +1345,8 @@ function bind(){
   document.querySelectorAll("[data-sf]").forEach(e=>e.onclick=()=>{SF=e.dataset.sf;render()});
   document.querySelectorAll("[data-mf]").forEach(e=>e.onclick=()=>{MF=e.dataset.mf;render()});
   document.querySelectorAll("[data-hf]").forEach(e=>e.onclick=()=>{HF=e.dataset.hf;render()});
+  document.querySelectorAll("[data-gl]").forEach(e=>e.onclick=()=>{GL=e.dataset.gl;render()});
+  document.querySelectorAll("#main [data-mk]").forEach(e=>e.onclick=()=>openMarket(e.dataset.mk,e.dataset.mn));
   document.querySelectorAll("th[data-k]").forEach(e=>e.onclick=()=>{const k=e.dataset.k;MS={k,d:MS.k===k?-MS.d:(k==="t"?1:-1)};render()});
 }
 document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{TAB=b.dataset.tab;Q="";$("#q").value="";render();scrollTo(0,0)});
