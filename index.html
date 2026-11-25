@@ -183,9 +183,18 @@ async function load(){
   if(denied){$("#main").innerHTML='<div class="empty">🔒 Bu ilova faqat obunachilar uchun.<br><br>Botda «📝 Obuna bo\'lish» tugmasini bosing va ilovani bot menyusidagi «📱 Ilova» tugmasi orqali oching.</div>';$("#upd").textContent="";return}
   if(!D){$("#main").innerHTML='<div class="empty">⏳ Ma\'lumot hali kelmagan — bot birinchi ma\'lumotni 1–2 daqiqada yuboradi.<br><br>Sahifa o\'zi yangilanadi.</div>';$("#upd").textContent="";setTimeout(load,20000);return}
   {const u=String(D.updated||"").split(" ");$("#upd").textContent=u.length>=2?"🕒 "+u[1]:"";}
+  if(D.acl&&!(await aclOk())){lockScreen();return}
   mstate();
   strip();render();
 }
+async function aclOk(){try{if(!MEID)return false;const h=await sha256hex(D.acl.s+":"+MEID);return (D.acl.h||[]).includes(h.slice(0,20))}catch(e){return false}}
+function lockScreen(){document.querySelector("nav").style.display="none";const sb=document.querySelector(".search");if(sb)sb.style.display="none";
+  $("#strip").innerHTML="";$("#mstate").innerHTML="";
+  $("#main").innerHTML=`<div class="card" style="margin-top:30px;text-align:center;padding:28px 20px"><div style="font-size:54px">🔒</div>
+  <div style="font-size:22px;font-weight:800;margin:10px 0">Penny Finance — faqat obunachilar uchun</div>
+  <div class="mut" style="font-size:15px;line-height:1.55">Ilovadan foydalanish uchun obuna bo'ling.<br>Botga qayting va <b>/start</b> bosing — narx va to'lov ma'lumotlari chiqadi.<br>To'lov tasdiqlangach ilova avtomatik ochiladi.</div>
+  <button class="btn" style="margin-top:18px" id="lkb">🤖 Botga qaytish</button></div>`;
+  const b=$("#lkb");if(b)b.onclick=()=>{try{tg.close()}catch(e){}}}
 function mstate(){if(!D)return;const ic={open:"🟢",pre:"🌅",post:"🌙",closed:"🌙"}[D.market_state]||"";
   $("#mstate").innerHTML=`<span class="notr" style="color:var(--tx);font-weight:700">${esc(T("um"))}</span> <span class="notr">· ${ic} ${esc(T(D.market_state)||"")}</span>`}
 function strip(){
