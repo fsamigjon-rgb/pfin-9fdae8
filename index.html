@@ -192,9 +192,10 @@ function lockScreen(){document.querySelector("nav").style.display="none";const s
   $("#strip").innerHTML="";$("#mstate").innerHTML="";
   $("#main").innerHTML=`<div class="card" style="margin-top:30px;text-align:center;padding:28px 20px"><div style="font-size:54px">🔒</div>
   <div style="font-size:22px;font-weight:800;margin:10px 0">Penny Finance — faqat obunachilar uchun</div>
-  <div class="mut" style="font-size:15px;line-height:1.55">Ilovadan foydalanish uchun obuna bo'ling.<br>Botga qayting va <b>/start</b> bosing — narx va to'lov ma'lumotlari chiqadi.<br>To'lov tasdiqlangach ilova avtomatik ochiladi.</div>
+  <div class="mut" style="font-size:15px;line-height:1.55">Ilovadan foydalanish uchun obuna bo'ling yoki <b>🎁 10 kunlik BEPUL paketni</b> oling.<br>Botga qayting va <b>/start</b> bosing.<br>Paket yoki obuna faollashgach ilova 1 daqiqa ichida o'zi ochiladi.</div>
   <button class="btn" style="margin-top:18px" id="lkb">🤖 Botga qaytish</button></div>`;
-  const b=$("#lkb");if(b)b.onclick=()=>{try{tg.close()}catch(e){}}}
+  const b=$("#lkb");if(b)b.onclick=()=>{try{tg.close()}catch(e){}};
+  clearTimeout(window._lkT);window._lkT=setTimeout(async()=>{D=null;await load();if(!document.querySelector("#lkb")){document.querySelector("nav").style.display="";const sb=document.querySelector(".search");if(sb)sb.style.display=""}},30000)}
 function mstate(){if(!D)return;const ic={open:"🟢",pre:"🌅",post:"🌙",closed:"🌙"}[D.market_state]||"";
   $("#mstate").innerHTML=`<span class="notr" style="color:var(--tx);font-weight:700">${esc(T("um"))}</span> <span class="notr">· ${ic} ${esc(T(D.market_state)||"")}</span>`}
 function strip(){
