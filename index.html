@@ -192,6 +192,8 @@ body.pfc-lock{overflow:hidden}
 .tl .bar2 select{flex:1}.btn{background:var(--acc);color:#fff;border:0;border-radius:12px;padding:12px;font-size:15px;font-weight:700;width:100%}
 .btn2{background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:16px}
 .out{min-height:110px;white-space:pre-wrap;font-size:16px;line-height:1.45}
+/* ===== VIX ===== */
+.vxc{display:flex;gap:12px;align-items:center;cursor:pointer;padding:12px 14px}
 /* ===== mini grafik kartalari (v10.3) ===== */
 .mkc{flex:0 0 auto;width:140px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:8px 10px 6px;cursor:pointer;overflow:hidden}
 .strip .mkc{width:136px;padding:7px 10px 4px}
@@ -287,9 +289,10 @@ function strip(){
   const fmt=v=>v==null?"—":v.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:v<10?4:2});
   const src=(D.markets&&D.markets.length)?D.markets:(D.index||[]).map(x=>({n:x.t,p:x.p,c:x.c}));
   const it=src.map(x=>mkCard(x,false));
-  if(D.fear)it.push(`<div class="mk"><div class="n">😨 Qo'rquv indeksi</div><div class="v">${Math.round(D.fear.score)}/100 <span class="mut">${esc(D.fear.label)}</span></div></div>`);
+  if(D.fear||D.vix)it.push(vixMini());
   $("#strip").innerHTML=it.join("");
   document.querySelectorAll("[data-mk]").forEach(e=>e.onclick=()=>openMarket(e.dataset.mk,e.dataset.mn));
+  document.querySelectorAll("#strip [data-vix]").forEach(e=>e.onclick=openVix);
 }
 function sigCard(s){
   const p=s.price||s.entry,lo=s.stop,hi=s.target,pos=Math.max(0,Math.min(100,(p-lo)/(hi-lo)*100));
@@ -324,9 +327,9 @@ function render(){
     let r=(D.quotes||[]).slice();
     if(MF==="halal")r=r.filter(x=>x.h==="HALOL");if(MF==="penny")r=r.filter(x=>x.p<=5);
     r.sort((a,b)=>((a[MS.k]??-1e9)>(b[MS.k]??-1e9)?1:-1)*MS.d);
-    h+=mktOverview();
+    h+=vixCard()+mktOverview();
     h+=`<h2>Barcha aksiyalar</h2><div class="seg"><button data-mf="all" class="${MF==="all"?"on":""}">Hammasi</button><button data-mf="halal" class="${MF==="halal"?"on":""}">☪️ Halol</button><button data-mf="penny" class="${MF==="penny"?"on":""}">🪙 ≤ $5</button></div>`+quoteTable(r.slice(0,150));
-  }else if(TAB==="home"){h+=homeMovers()+newsTab()}
+  }else if(TAB==="home"){h+=vixCard()+homeMovers()+newsTab()}
   else if(TAB==="com"){m.innerHTML=comTab();bindCom(m);return}
 
   else{const L=(D.halal||[]).filter(x=>x.v===HF);
@@ -622,6 +625,47 @@ function mktOverview(){let h="";const M=D.markets||[];
   if(M.length)h+=`<h2>Indekslar va bozorlar</h2><div class="cgrid">${M.map(x=>mkCard(x,true)).join("")}</div>`;
   const mv=movers();if(mv.g.length)h+=`<h2>Aksiyalar</h2><div class="seg"><button data-gl="g" class="${GL==="g"?"on":""}">📈 Eng ko'p o'sganlar</button><button data-gl="l" class="${GL==="l"?"on":""}">📉 Eng ko'p tushganlar</button></div><div class="cgrid">${(GL==="g"?mv.g:mv.l).map(stCard).join("")}</div>`;
   return h}
+// ===================== 😨 VIX — QO'RQUV INDEKSI =====================
+const RCOL={OSISH:"#ea3943",BURILISH:"#16c784",EHTIYOT:"#f5a623",OCHKOZLIK:"#a477ff",NORMAL:"#8b93a7"};
+function VX(){const v=D.vix;if(v)return v;const f=D.fear;return f?{score:f.score,label:f.label,regime:f.regime,rname:f.regime_name,vix:f.vix}:null}
+function gauge(sc,w){w=w||220;const h=w*0.6,cx=w/2,cy=w*0.52,r=w*0.42;const a=v=>Math.PI*(1-v/100);const P=v=>[cx+r*Math.cos(a(v)),cy-r*Math.sin(a(v))];
+  const seg=(v0,v1,c)=>{const p0=P(v0),p1=P(v1);return `<path d="M${p0[0].toFixed(1)} ${p0[1].toFixed(1)} A${r} ${r} 0 0 1 ${p1[0].toFixed(1)} ${p1[1].toFixed(1)}" stroke="${c}" stroke-width="${w*0.075}" fill="none"/>`};
+  const n=P(Math.max(0,Math.min(100,sc)));
+  return `<svg viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" style="display:block;margin:0 auto">${seg(0,25,"#a477ff")}${seg(25.5,45,"#16c784")}${seg(45.5,65,"#f5a623")}${seg(65.5,100,"#ea3943")}
+  <line x1="${cx}" y1="${cy}" x2="${n[0].toFixed(1)}" y2="${n[1].toFixed(1)}" stroke="var(--tx)" stroke-width="${w*0.018}" stroke-linecap="round"/><circle cx="${cx}" cy="${cy}" r="${w*0.03}" fill="var(--tx)"/></svg>`}
+function vixMini(){const v=VX();if(!v)return "";return `<div class="mkc" data-vix="1"><div class="mkn notr">😨 VIX · Qo'rquv</div><div class="mkp notr" style="color:${RCOL[v.regime]||"var(--tx)"}">${Math.round(v.score)}/100</div><div class="mkch"><span class="notr">VIX ${v.vix!=null?(+v.vix).toFixed(1):"—"}</span> <span class="mut">${esc(v.label||"")}</span></div>${v.ser?spark(v.ser.s.slice(-30),116,28):""}</div>`}
+function vixCard(){const v=VX();if(!v)return "";const c=RCOL[v.regime]||"var(--mut)";
+  return `<div class="card vxc" data-vix="1"><div style="flex:0 0 auto">${gauge(v.score,120)}</div><div style="flex:1;min-width:0">
+  <div class="mut" style="font-size:12px">😨 VIX qo'rquv indeksi</div><div style="font-size:24px;font-weight:800" class="notr">${Math.round(v.score)}<span class="mut" style="font-size:14px">/100</span> <span style="font-size:15px">${esc(v.label||"")}</span></div>
+  <div style="color:${c};font-weight:700;font-size:13px;margin-top:2px">${esc(v.rname||v.regime||"")}</div>
+  <div class="mut notr" style="font-size:12px;margin-top:3px">VIX ${v.vix!=null?(+v.vix).toFixed(2):"—"}${v.chg5!=null?` · 5 kun ${v.chg5>0?"+":""}${v.chg5}%`:""} ›</div></div></div>`}
+function vixChart(v){const S=v.ser;if(!S||!S.s||S.s.length<5)return "";const W=640,H=300,AX=44,pw=W-AX,n=S.s.length,h1=180,h2=90,g2=h1+20;
+  const X=i=>(i/(n-1)*pw).toFixed(1);let bands="";let st=0;for(let i=1;i<=n;i++){if(i===n||S.r[i]!==S.r[st]){bands+=`<rect x="${X(st)}" y="0" width="${Math.max(1,(i-st)/(n-1)*pw).toFixed(1)}" height="${h1}" fill="${RCOL[S.r[st]]||"#888"}" opacity=".13"/>`;st=i}}
+  const Ys=x=>((100-x)/100*(h1-10)+5).toFixed(1);const vs=S.v.filter(x=>x!=null),vl=Math.min(...vs)*.95,vh=Math.max(...vs)*1.05,Yv=x=>(g2+(vh-x)/(vh-vl)*h2).toFixed(1);
+  const ps=S.s.map((x,i)=>X(i)+","+Ys(x)).join(" "),pv=S.v.map((x,i)=>x==null?"":X(i)+","+Yv(x)).filter(Boolean).join(" ");
+  let grid="";[25,45,65].forEach(l=>{grid+=`<line x1="0" x2="${pw}" y1="${Ys(l)}" y2="${Ys(l)}" stroke="#8b93a7" stroke-dasharray="3 4" opacity=".4"/><text x="${W-4}" y="${+Ys(l)+4}" fill="#8b93a7" font-size="12" text-anchor="end">${l}</text>`});
+  const mi=[0,Math.floor(n/2),n-1].map(i=>`<text x="${Math.min(pw-30,Math.max(0,+X(i)-(i?30:0)))}" y="${H-2}" fill="#8b93a7" font-size="12">${S.d[i].slice(5)}</text>`).join("");
+  return `<svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;display:block">${bands}${grid}<polyline points="${ps}" fill="none" stroke="#e6e8ee" stroke-width="2"/>
+  <text x="4" y="16" fill="#e6e8ee" font-size="13" font-weight="700">Qo'rquv balli (rang — rejim)</text>
+  <line x1="0" x2="${pw}" y1="${g2-6}" y2="${g2-6}" stroke="#ffffff" opacity=".08"/><polyline points="${pv}" fill="none" stroke="#f5a623" stroke-width="1.8"/>
+  <text x="4" y="${g2+12}" fill="#f5a623" font-size="13" font-weight="700">VIX</text><text x="${W-4}" y="${+Yv(vs[vs.length-1])+4}" fill="#f5a623" font-size="12" text-anchor="end">${vs[vs.length-1].toFixed(1)}</text>${mi}</svg>`}
+function openVix(){const v=VX();if(!v)return;const b=detailShell("😨 VIX — Qo'rquv indeksi","VIX");const c=RCOL[v.regime]||"var(--mut)";
+  const yn=x=>x?"✅":"—";const tm=v.term==null?"—":`${v.term} — ${v.term>1?"⚠️ teskari tuzilma (haqiqiy stress)":v.term>0.95?"tekis (ehtiyot)":"normal (xotirjam)"}`;
+  let h=`<div class="card" style="text-align:center">${gauge(v.score,240)}<div style="font-size:34px;font-weight:800;margin-top:-6px" class="notr">${Math.round(v.score)}<span class="mut" style="font-size:16px">/100</span></div>
+  <div style="font-size:16px;font-weight:700">${esc(v.label||"")}</div><div style="color:${c};font-weight:800;margin-top:8px">${esc(v.rname||v.regime)}</div>
+  ${v.note?`<div class="mut" style="margin-top:4px">${esc(v.note)}${v.mult!=null?` · pozitsiya hajmi ×${v.mult}`:""}</div>`:""}${v.date?`<div class="mut notr" style="font-size:11px;margin-top:6px">📅 ${esc(v.date)}</div>`:""}</div>`;
+  h+=`<h2>Ko'rsatkichlar</h2><div class="card grid2 notr-in"><div><span class="mut">VIX</span><b class="notr">${v.vix??"—"}</b></div><div><span class="mut">Kecha</span><b class="notr">${v.vix_prev??"—"}</b></div>
+  <div><span class="mut">5 kunda</span><b class="notr ${cls(v.chg5)}">${v.chg5==null?"—":(v.chg5>0?"+":"")+v.chg5+"%"}</b></div><div><span class="mut">VVIX</span><b class="notr">${v.vvix??"—"}</b></div>
+  <div><span class="mut">SPY 20 kunlik cho'qqidan</span><b class="notr ${cls(v.spy_dd)}">${v.spy_dd==null?"—":v.spy_dd+"%"}</b></div><div><span class="mut">5 kunlik cho'qqi</span><b class="notr">${v.peak??"—"}</b></div>
+  <div><span class="mut">Bollinger qaytishi</span><b>${yn(v.bb)}</b></div><div><span class="mut">VVIX tushishi</span><b>${yn(v.vv)}</b></div></div>
+  <div class="card" style="font-size:13px"><span class="mut">VIX/VIX3M:</span> <b class="notr">${esc(tm)}</b></div>`;
+  const ch=vixChart(v);if(ch)h+=`<h2>6 oylik tarix</h2><div class="card" style="padding:10px">${ch}</div>`;
+  if(v.byreg&&v.byreg.length){const ord=["BURILISH","NORMAL","EHTIYOT","OCHKOZLIK","OSISH"];h+=`<h2>Bot signallari rejim bo'yicha</h2><div class="card" style="padding:4px 10px"><table><tr><th>Rejim</th><th>Signal</th><th>G'alaba</th><th>O'rtacha</th></tr>`+
+    v.byreg.slice().sort((a,b)=>ord.indexOf(a.r)-ord.indexOf(b.r)).map(x=>`<tr><td style="color:${RCOL[x.r]};font-weight:700">${esc(((v.rinfo||{})[x.r]||[x.r])[0])}</td><td class="notr">${x.n}</td><td class="notr">${x.win}%</td><td class="notr ${cls(x.avg)}">${pct(x.avg)}</td></tr>`).join("")+`</table></div>`}
+  if(v.rinfo){h+=`<h2>Rejimlar nimani anglatadi</h2><div class="card">`+["OSISH","EHTIYOT","NORMAL","OCHKOZLIK","BURILISH"].filter(k=>v.rinfo[k]).map(k=>`<div style="padding:7px 0;border-bottom:1px solid var(--line)"><b style="color:${RCOL[k]}">${esc(v.rinfo[k][0])}</b><div class="mut" style="font-size:13px">${esc(v.rinfo[k][2])} · hajm ×${v.rinfo[k][1]}</div></div>`).join("")+`</div>`}
+  if(CTIER==="admin")h+=`<h2>🤖 VIX AI</h2><div class="card" style="font-size:14px;line-height:1.5">🔒 Faqat sizga ko'rinadi.<br>VIX AI ilova va signallarni kuzatib turadi va botda sizga hisobot yuboradi:<br>• har kuni ertalab 07:00 (KST): signallar qanday ketyapti, kamchiliklar va yechimlar<br>• VIX rejimi o'zgarsa, 3 ta ketma-ket zarar bo'lsa yoki ilovada nosozlik bo'lsa — darhol<br><br>Botda: <b class="notr">/vixai</b> — hozir hisobot · <b class="notr">/vixai off</b> / <b class="notr">on</b></div>`;
+  h+=`<div class="disc">VIX — S&P 500 opsionlaridan hisoblanadigan kutilayotgan o'zgaruvchanlik ("qo'rquv indeksi"). Qo'rquv balli: VIX darajasi va 1 yillik o'rni, SPY pasayishi, VIX tezligi va VIX/VIX3M tuzilmasi asosida (0 — ochko'zlik, 100 — vahima). ⚠️ Daromad kafolati emas.</div>`;
+  const w=document.createElement("div");w.innerHTML=h;b.appendChild(w)}
 function homeMovers(){const mv=movers();if(!mv.g.length)return "";return `<div class="hmv"><div class="row" style="margin:2px 0 8px"><b style="font-size:16px">📈 Bugun eng ko'p o'sganlar</b><a href="#" class="mut" style="font-size:13px" onclick="TAB='mkt';render();scrollTo(0,0);return false">Barchasi ›</a></div><div class="cgrid one">${mv.g.slice(0,10).map(stCard).join("")}</div></div>`}
 // ---- hamjamiyat: sham grafigi (rasm o'rniga) ----
 function kOf(H,n){n=n||60;return {o:H.o.slice(-n),h:H.h.slice(-n),l:H.l.slice(-n),c:H.c.slice(-n)}}
@@ -1346,6 +1390,7 @@ function bind(){
   document.querySelectorAll("[data-mf]").forEach(e=>e.onclick=()=>{MF=e.dataset.mf;render()});
   document.querySelectorAll("[data-hf]").forEach(e=>e.onclick=()=>{HF=e.dataset.hf;render()});
   document.querySelectorAll("[data-gl]").forEach(e=>e.onclick=()=>{GL=e.dataset.gl;render()});
+  document.querySelectorAll("#main [data-vix]").forEach(e=>e.onclick=openVix);
   document.querySelectorAll("#main [data-mk]").forEach(e=>e.onclick=()=>openMarket(e.dataset.mk,e.dataset.mn));
   document.querySelectorAll("th[data-k]").forEach(e=>e.onclick=()=>{const k=e.dataset.k;MS={k,d:MS.k===k?-MS.d:(k==="t"?1:-1)};render()});
 }
