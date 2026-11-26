@@ -269,17 +269,23 @@ async function load(){
   if(denied){$("#main").innerHTML='<div class="empty">🔒 Bu ilova faqat obunachilar uchun.<br><br>Botda «📝 Obuna bo\'lish» tugmasini bosing va ilovani bot menyusidagi «📱 Ilova» tugmasi orqali oching.</div>';$("#upd").textContent="";return}
   if(!D){$("#main").innerHTML='<div class="empty">⏳ Ma\'lumot hali kelmagan — bot birinchi ma\'lumotni 1–2 daqiqada yuboradi.<br><br>Sahifa o\'zi yangilanadi.</div>';$("#upd").textContent="";setTimeout(load,20000);return}
   {const u=String(D.updated||"").split(" ");$("#upd").textContent=u.length>=2?"🕒 "+u[1]:"";}
-  if(D.acl&&!(await aclOk())){lockScreen();return}
+  if(D.acl&&!(await aclOk())&&!(await aclRelay())){lockScreen();return}
   mstate();
   strip();render();
 }
 let CTIER="trial";
 async function aclOk(){try{if(!MEID)return false;const h=(await sha256hex(D.acl.s+":"+MEID)).slice(0,20);CTIER=(D.acl.t||{})[h]||"basic";return (D.acl.h||[]).includes(h)}catch(e){return false}}
+async function aclRelay(){if(!MEID||!(tg&&tg.initData)||CTOPIC.startsWith("__")||typeof CPUB_S==="undefined"||String(CPUB_S).startsWith("__"))return false;
+  try{const c=JSON.parse(localStorage.getItem("pf_aclok")||"null");if(c&&c.id===MEID&&Date.now()-c.t<6*3600e3){CTIER=c.tier||"basic";return true}}catch(e){}
+  try{$("#main").innerHTML='<div class="empty">⏳ Obuna tekshirilmoqda… (10 soniyagacha)</div>';
+    const j=await relayFetch("ACL","",{acl:await seal({k:"acl",ts:Date.now()})});
+    if(j&&j.acl){CTIER=j.tier||"basic";try{localStorage.setItem("pf_aclok",JSON.stringify({id:MEID,t:Date.now(),tier:CTIER}))}catch(e){}return true}}catch(e){}
+  try{localStorage.removeItem("pf_aclok")}catch(e){}return false}
 function lockScreen(){document.querySelector("nav").style.display="none";const sb=document.querySelector(".search");if(sb)sb.style.display="none";
   $("#strip").innerHTML="";$("#mstate").innerHTML="";
   $("#main").innerHTML=`<div class="card" style="margin-top:30px;text-align:center;padding:28px 20px"><div style="font-size:54px">🔒</div>
   <div style="font-size:22px;font-weight:800;margin:10px 0">Penny Finance — faqat obunachilar uchun</div>
-  <div class="mut" style="font-size:15px;line-height:1.55">Ilovadan foydalanish uchun obuna bo'ling yoki <b>🎁 10 kunlik BEPUL paketni</b> oling.<br>Botga qayting va <b>/start</b> bosing.<br>Paket yoki obuna faollashgach ilova 1 daqiqa ichida o'zi ochiladi.</div>
+  <div class="mut" style="font-size:15px;line-height:1.55">Ilovadan foydalanish uchun obuna bo'ling yoki <b>🎁 10 kunlik BEPUL paketni</b> oling.<br>Botga qayting va <b>/start</b> bosing.<br>Paket yoki obuna faollashgach ilova 1 daqiqa ichida o'zi ochiladi.</div>${MEID?"":`<div style="margin-top:12px;font-size:14px;color:#f5a623">⚠️ Ilova Telegram hisobingizni aniqlay olmadi. Uni botdagi <b>«📱 Ilova»</b> tugmasi yoki chapdagi ko'k menyu tugmasi orqali oching.</div>`}
   <button class="btn" style="margin-top:18px" id="lkb">🤖 Botga qaytish</button></div>`;
   const b=$("#lkb");if(b)b.onclick=()=>{try{tg.close()}catch(e){}};
   clearTimeout(window._lkT);window._lkT=setTimeout(async()=>{D=null;await load();if(!document.querySelector("#lkb")){document.querySelector("nav").style.display="";const sb=document.querySelector(".search");if(sb)sb.style.display=""}},30000)}
@@ -571,13 +577,13 @@ function hcGet(t){if(HC[t])return HC[t];try{const x=JSON.parse(localStorage.getI
 function hcPut(t,o){o._ts=Date.now();HC[t]=o;try{const ks=JSON.parse(localStorage.getItem("pf_hk")||"[]").filter(k=>k!==t);ks.push(t);while(ks.length>25)localStorage.removeItem("pf_h_"+ks.shift());localStorage.setItem("pf_hk",JSON.stringify(ks));localStorage.setItem("pf_h_"+t,JSON.stringify(o))}catch(e){}}
 const HINF={};
 let RELERR="";
-function relayFetch(t,iv){return new Promise(res=>{if(CTOPIC.startsWith("__")||typeof EventSource==="undefined"){RELERR="ilova eski — /webapp update";return res(null)}
+function relayFetch(t,iv,extra){return new Promise(res=>{if(CTOPIC.startsWith("__")||typeof EventSource==="undefined"){RELERR="ilova eski — /webapp update";return res(null)}
   const DS=typeof DecompressionStream!=="undefined";
   const AZ="abcdefghijklmnopqrstuvwxyz0123456789";let rid="";for(let i=0;i<12;i++)rid+=AZ[Math.floor(Math.random()*36)];const rt=CTOPIC+"-r-"+rid;
   let done=false,es=null,got=false;const timers=[];const later=(f,ms)=>timers.push(setTimeout(f,ms));
   const fin=v=>{if(done)return;done=true;try{es&&es.close()}catch(e){}timers.forEach(clearTimeout);if(!v&&!RELERR)RELERR=got?"javob buzildi":"bot javob bermadi (bot ishlayaptimi?)";res(v)};
   later(()=>fin(null),iv==="f"?40000:32000);
-  let sent=false;const send=()=>{if(sent||done)return;sent=true;fetch("https://ntfy.sh/"+CTOPIC+"-q",{method:"POST",body:JSON.stringify(Object.assign({s:t,r:rt,z:DS?1:0},iv?{iv}:{}))}).catch(()=>{RELERR="so'rov yuborilmadi (internet?)";fin(null)})};
+  let sent=false;const send=()=>{if(sent||done)return;sent=true;fetch("https://ntfy.sh/"+CTOPIC+"-q",{method:"POST",body:JSON.stringify(Object.assign({s:t,r:rt,z:DS?1:0},iv?{iv}:{},extra||{}))}).catch(()=>{RELERR="so'rov yuborilmadi (internet?)";fin(null)})};
   const parts={};let total=0,kind="z";const seen=new Set();
   const handle=async m=>{try{if(done||(m.event&&m.event!=="message"))return;if(m.id){if(seen.has(m.id))return;seen.add(m.id)}got=true;
     const x=JSON.parse(m.message||"{}");if(x.z==null&&x.p==null)return;kind=x.z!=null?"z":"p";parts[x.i]=x.z!=null?x.z:x.p;total=x.n;
