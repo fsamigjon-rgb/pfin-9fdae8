@@ -275,6 +275,9 @@ async function load(){
 }
 let CTIER="trial";
 async function aclOk(){try{if(!MEID)return false;const h=(await sha256hex(D.acl.s+":"+MEID)).slice(0,20);CTIER=(D.acl.t||{})[h]||"basic";return (D.acl.h||[]).includes(h)}catch(e){return false}}
+function promoLine(){const P=D&&D.promo;if(!P||!P.on||!P.until)return "";const ms=Date.parse(P.until+":00+09:00")-Date.now();if(!(ms>0))return "";
+  const d=Math.floor(ms/864e5),h=Math.floor(ms%864e5/36e5),m=Math.floor(ms%36e5/6e4);const left=d>=1?`${d} kun ${h} soat`:h?`${h} soat ${m} daqiqa`:`${m} daqiqa`;
+  return `<div style="margin-top:14px;padding:12px;border-radius:12px;background:linear-gradient(135deg,#ff5a5f22,#f5a62322);border:1px solid #f5a62366;font-size:15px;line-height:1.5">🔥 <b>SHOSHILING!</b> 🎁 ${P.days||10} kunlik BEPUL paket aksiyasi tugashiga <b style="color:#f5a623">${left}</b> qoldi!<br><span class="mut">⏰ ${esc(P.txt||"")} gacha</span></div>`}
 async function aclRelay(){if(!MEID||!(tg&&tg.initData)||CTOPIC.startsWith("__")||typeof CPUB_S==="undefined"||String(CPUB_S).startsWith("__"))return false;
   try{const c=JSON.parse(localStorage.getItem("pf_aclok")||"null");if(c&&c.id===MEID&&Date.now()-c.t<6*3600e3){CTIER=c.tier||"basic";return true}}catch(e){}
   try{$("#main").innerHTML='<div class="empty">⏳ Obuna tekshirilmoqda… (10 soniyagacha)</div>';
@@ -285,7 +288,7 @@ function lockScreen(){document.querySelector("nav").style.display="none";const s
   $("#strip").innerHTML="";$("#mstate").innerHTML="";
   $("#main").innerHTML=`<div class="card" style="margin-top:30px;text-align:center;padding:28px 20px"><div style="font-size:54px">🔒</div>
   <div style="font-size:22px;font-weight:800;margin:10px 0">Penny Finance — faqat obunachilar uchun</div>
-  <div class="mut" style="font-size:15px;line-height:1.55">Ilovadan foydalanish uchun obuna bo'ling yoki <b>🎁 10 kunlik BEPUL paketni</b> oling.<br>Botga qayting va <b>/start</b> bosing.<br>Paket yoki obuna faollashgach ilova 1 daqiqa ichida o'zi ochiladi.</div>${MEID?"":`<div style="margin-top:12px;font-size:14px;color:#f5a623">⚠️ Ilova Telegram hisobingizni aniqlay olmadi. Uni botdagi <b>«📱 Ilova»</b> tugmasi yoki chapdagi ko'k menyu tugmasi orqali oching.</div>`}
+  <div class="mut" style="font-size:15px;line-height:1.55">Ilovadan foydalanish uchun obuna bo'ling yoki <b>🎁 10 kunlik BEPUL paketni</b> oling.<br>Botga qayting va <b>/start</b> bosing.<br>Paket yoki obuna faollashgach ilova 1 daqiqa ichida o'zi ochiladi.</div>${promoLine()}${MEID?"":`<div style="margin-top:12px;font-size:14px;color:#f5a623">⚠️ Ilova Telegram hisobingizni aniqlay olmadi. Uni botdagi <b>«📱 Ilova»</b> tugmasi yoki chapdagi ko'k menyu tugmasi orqali oching.</div>`}
   <button class="btn" style="margin-top:18px" id="lkb">🤖 Botga qaytish</button></div>`;
   const b=$("#lkb");if(b)b.onclick=()=>{try{tg.close()}catch(e){}};
   clearTimeout(window._lkT);window._lkT=setTimeout(async()=>{D=null;await load();if(!document.querySelector("#lkb")){document.querySelector("nav").style.display="";const sb=document.querySelector(".search");if(sb)sb.style.display=""}},30000)}
