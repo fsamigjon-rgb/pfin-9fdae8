@@ -612,24 +612,26 @@ function relayFetch(t,iv,extra){return new Promise(res=>{if(CTOPIC.startsWith("_
       if(kind==="p")txt=all;else{const bin=Uint8Array.from(atob(all),c=>c.charCodeAt(0));txt=await new Response(new Blob([bin]).stream().pipeThrough(new DecompressionStream("deflate"))).text()}
       const j=JSON.parse(txt);if(j.err)RELERR="manba: "+j.err;fin(j)}}catch(x){RELERR="o'qishda xato: "+String(x).slice(0,60);fin(null)}};
   // javob kanali tasodifiy va bir martalik — shuning uchun since=all xavfsiz va telefon soatiga bog'liq emas
-  try{es=new EventSource("https://ntfy.sh/"+rt+"/sse?since=all");es.onmessage=e=>{try{handle(JSON.parse(e.data))}catch(x){}}}catch(e){}
+  let sseOk=false;try{es=new EventSource("https://ntfy.sh/"+rt+"/sse?since=all");es.onopen=()=>{sseOk=true};es.onmessage=e=>{try{handle(JSON.parse(e.data))}catch(x){}}}catch(e){}
   send();   // since=all — javob kanali bir martalik, shuning uchun kutmasdan darhol so'raymiz
   const poll=async()=>{if(done)return;try{const r=await fetch("https://ntfy.sh/"+rt+"/json?poll=1&since=all",{cache:"no-store"});const tx=await r.text();for(const ln of tx.split("\n")){if(!ln.trim())continue;try{await handle(JSON.parse(ln))}catch(x){}}}catch(e){}};
-  [1300,2100,2900,3800,4800,6000,7500,9500,12000,15000,19000,23000,27000,30500].forEach(ms=>later(poll,ms));})}
+  // SSE ochiq bo'lsa javob o'zi keladi — faqat 3 ta zaxira tekshiruv; SSE ishlamasa — tez-tez
+  [1500,2600,3600,5000,7000,9500,13000,17000,22000,27000,30500].forEach(ms=>later(()=>{if(!sseOk||[3600,7000,13000,22000,30500].includes(ms))poll()},ms));})}
 async function relayGet(t,iv){RELERR="";let j=await relayFetch(t,iv);if(!j&&!/^manba|eski/.test(RELERR)){RELERR="";j=await relayFetch(t,iv)}return j}
 const CFI={};function chartFetch(sym,iv,force){const kk=sym+"|"+iv+(force?"!":"");if(CFI[kk])return CFI[kk];CFI[kk]=chartFetch0(sym,iv,force).finally(()=>{delete CFI[kk]});return CFI[kk]}
 async function chartFetch0(sym,iv,force){const k="pf_g_"+sym+"_"+iv,ttl=["5m","15m","1h"].includes(iv)?3*60e3:30*60e3;
   if(!force)try{const c=JSON.parse(localStorage.getItem(k)||"null");if(c&&Date.now()-c._ts<ttl)return c}catch(e){}
-  const j=await relayGet(sym,iv);const g=j&&j.g;if(g&&g.c&&g.c.length){g._ts=Date.now();try{localStorage.setItem(k,JSON.stringify(g))}catch(e){try{Object.keys(localStorage).filter(x=>x.startsWith("pf_g_")).forEach(x=>localStorage.removeItem(x))}catch(_){}}}return g||null}
+  let g=null;if(PX()&&PXR[iv]){g=pxG(await pxChart(sym,PXR[iv][0],PXR[iv][1]),sym)}
+  if(!g){const j=await relayGet(sym,iv);g=j&&j.g}if(g&&g.c&&g.c.length){g._ts=Date.now();try{localStorage.setItem(k,JSON.stringify(g))}catch(e){try{Object.keys(localStorage).filter(x=>x.startsWith("pf_g_")).forEach(x=>localStorage.removeItem(x))}catch(_){}}}return g||null}
 function yhist(t){
   const c=hcGet(t);if(c)return Promise.resolve(c);if(HINF[t])return HINF[t];
-  const u="https://query1.finance.yahoo.com/v8/finance/chart/"+encodeURIComponent(t)+"?range=1y&interval=1d";
+  const u=PX()?PX()+"/?s="+encodeURIComponent(t)+"&range=1y&interval=1d":"https://query1.finance.yahoo.com/v8/finance/chart/"+encodeURIComponent(t)+"?range=1y&interval=1d";
   const ctl=new AbortController();
   const direct=(async()=>{const r=await fetch(u,{signal:ctl.signal});if(!r.ok)throw 0;const R=(await r.json()).chart.result[0],q=R.indicators.quote[0];
     const o={d:[],o:[],h:[],l:[],c:[],v:[],n:R.meta.longName||R.meta.shortName||t,ex:R.meta.fullExchangeName||R.meta.exchangeName||""};
     (R.timestamp||[]).forEach((ts,i)=>{if(q.close[i]==null||q.open[i]==null)return;o.d.push(new Date(ts*1000).toISOString().slice(0,10));o.o.push(+q.open[i].toFixed(4));o.h.push(+q.high[i].toFixed(4));o.l.push(+q.low[i].toFixed(4));o.c.push(+q.close[i].toFixed(4));o.v.push(q.volume[i]||0)});
-    if(o.c.length<30)throw 0;return o})();
-  const relay=relayGet(t).then(j=>{if(!j||!j.h||!j.h.c||j.h.c.length<2)throw 0;const o=j.h;if(j.f&&Object.keys(j.f).length){FUND=FUND||{};FUND[t]=j.f;o._f=j.f}if(o.px)o.live={p:o.px,c:null};return o});
+    if(o.c.length<2)throw 0;return o})();
+  const relay=new Promise((res,rej)=>{let st=false;const go=()=>{if(st||ctl.signal.aborted)return;st=true;relayGet(t).then(j=>{if(!j||!j.h||!j.h.c||j.h.c.length<2)throw 0;const o=j.h;if(j.f&&Object.keys(j.f).length){FUND=FUND||{};FUND[t]=j.f;o._f=j.f}if(o.px)o.live={p:o.px,c:null};return o}).then(res,rej)};direct.catch(go);setTimeout(go,PX()?6000:0)});
   RELERR="";HINF[t]=Promise.any([direct,relay]).then(o=>{ctl.abort();hcPut(t,o);return o}).catch(()=>null).finally(()=>{delete HINF[t]});
   return HINF[t]}
 // ===================== 📈 MINI GRAFIKLAR (TradingView kabi) =====================
@@ -736,7 +738,11 @@ function wlHas(sym){return wlAll().includes(sym)}
 function wlToggle(sym){wlLoad();const L=wlCur()||WL.lists[0];if(wlHas(sym)){WL.lists.forEach(l=>l.items=l.items.filter(x=>x!==sym));delete WL.flags[sym]}else L.items.push(sym);wlSave();return wlHas(sym)}
 function wlQ(sym){const q=WQ[sym];const m=(D&&D.markets||[]).find(x=>x.s===sym);if(m)return {p:m.p,c:m.c,pc:m.pc,sp:m.sp,n:m.n};const sq=D&&qOf(sym);
   if(q&&(!sq||(q.t||0)>Date.now()-120000))return q;if(sq)return {p:sq.p,c:sq.c,sp:sq.sp,n:""};return q||null}
-async function wlFetch(force){const all=wlAll();const need=all.filter(s=>{const q=WQ[s];return force||!q||Date.now()-(q.t||0)>60000});if(!need.length)return;
+async function wlFetch(force){const all=wlAll();const need=all.filter(s=>{const q=WQ[s];return force||!q||Date.now()-(q.t||0)>(PX()?55000:170000)});if(!need.length)return;
+  if(PX()){const now=Date.now();await Promise.all(need.slice(0,60).map(async s=>{const R=await pxChart(s,"1d","5m",8000);if(!R)return;const m=R.meta||{},px=m.regularMarketPrice,pc=m.chartPreviousClose||m.previousClose;
+      let cl=((R.indicators.quote[0]||{}).close||[]).filter(x=>x!=null);if(cl.length>40){const st=cl.length/40;cl=Array.from({length:40},(_,i)=>cl[Math.floor(i*st)]).concat([cl[cl.length-1]])}
+      WQ[s]={p:px,pc,c:px&&pc?+((px/pc-1)*100).toFixed(2):null,n:(m.shortName||m.longName||"").slice(0,40),sp:cl.map(v=>+v.toFixed(v<10?4:2)),t:now}}));
+    try{localStorage.setItem(WQK,JSON.stringify(WQ))}catch(e){}if(document.querySelector(".wlv"))wlRows();return}
   for(let i=0;i<need.length;i+=40){const j=await relayFetch("W","w",{w:need.slice(i,i+40).join(",")});if(j&&j.q){const now=Date.now();for(const k in j.q){WQ[k]=Object.assign(j.q[k],{t:now})}}}
   try{localStorage.setItem(WQK,JSON.stringify(WQ))}catch(e){}if(document.querySelector(".wlv"))wlRows()}
 function wlColor(s){let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))%360;return `hsl(${h},55%,45%)`}
@@ -880,7 +886,13 @@ async function openDetail(t){
   return b;
 }
 // ===================== 👥 HAMJAMIYAT =====================
-const CTOPIC="pfc-6f06606180208d6b259f1ed9",CPUB_S='{"kty": "RSA", "n": "zxB3o2a1Ih5YLObM1D2anrvpUYae6DcGyZpu6Hmmx6pH6-qb_sGducZ-lMCH4kjF8u8CfaltYweGgXOlXGNhZ17zcMn3ACN6-Cg35XgnUCmKFrLPFPSz8l03vgE7jEvSGxTLOePDlEjSoeR1QAcUHSE5TdEc0kdPz-ZMTBFpKDe0t1j-_h1k5a-MMKNYBdlQVGfPtvPDf12HBJviv_N43FP2zIrGrsguo-Z2DdhLd4QPabhviReaOApT82vY2Pqj3n-LQ3-4fp6q9vU9meIPwbBdadINHD_rPFeIIDIe6ojMG9b8ghNxgK3n_lq53tBAZpCl716H1rkd04hmiMW3Hw", "e": "AQAB", "alg": "RSA-OAEP-256", "ext": true}';
+const CTOPIC="pfc-6f06606180208d6b259f1ed9",CPUB_S='{"kty": "RSA", "n": "zxB3o2a1Ih5YLObM1D2anrvpUYae6DcGyZpu6Hmmx6pH6-qb_sGducZ-lMCH4kjF8u8CfaltYweGgXOlXGNhZ17zcMn3ACN6-Cg35XgnUCmKFrLPFPSz8l03vgE7jEvSGxTLOePDlEjSoeR1QAcUHSE5TdEc0kdPz-ZMTBFpKDe0t1j-_h1k5a-MMKNYBdlQVGfPtvPDf12HBJviv_N43FP2zIrGrsguo-Z2DdhLd4QPabhviReaOApT82vY2Pqj3n-LQ3-4fp6q9vU9meIPwbBdadINHD_rPFeIIDIe6ojMG9b8ghNxgK3n_lq53tBAZpCl716H1rkd04hmiMW3Hw", "e": "AQAB", "alg": "RSA-OAEP-256", "ext": true}',PROXY0="https://penny-proxyrly-king-c23e.mh1232273.workers.dev";
+function PX(){const p=(typeof D!=="undefined"&&D&&D.proxy)||(PROXY0.startsWith("__")?"":PROXY0);return p?String(p).replace(/\/$/,""):""}
+async function pxChart(sym,range,interval,ms){const p=PX();if(!p)return null;const ctl=new AbortController();const tm=setTimeout(()=>ctl.abort(),ms||9000);
+  try{const r=await fetch(p+"/?s="+encodeURIComponent(sym)+"&range="+range+"&interval="+interval,{signal:ctl.signal});if(!r.ok)return null;const j=await r.json();return j&&j.chart&&j.chart.result&&j.chart.result[0]||null}catch(e){return null}finally{clearTimeout(tm)}}
+function pxG(R,sym){if(!R||!R.indicators)return null;const q=R.indicators.quote[0]||{},m=R.meta||{};const g={t:[],o:[],h:[],l:[],c:[],v:[],n:m.longName||m.shortName||sym,px:m.regularMarketPrice};
+  (R.timestamp||[]).forEach((ts,i)=>{if(q.close[i]==null||q.open[i]==null||q.high[i]==null||q.low[i]==null)return;const r4=v=>+(+v).toFixed(v<10?4:2);g.t.push(ts);g.o.push(r4(q.open[i]));g.h.push(r4(q.high[i]));g.l.push(r4(q.low[i]));g.c.push(r4(q.close[i]));g.v.push(q.volume?(q.volume[i]||0):0)});return g.c.length?g:null}
+const PXR={"5m":["5d","5m"],"15m":["1mo","15m"],"1h":["6mo","60m"],"1d":["2y","1d"],"1wk":["10y","1wk"],"1mo":["max","1mo"]};
 const RAWB=DATA_URLS[0].startsWith("__")?"":DATA_URLS[0].replace(/data\.json$/,"");
 const ME=(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.user)||null,MEID=ME?String(ME.id):"";
 let C=null,CF="you",STACK=[],PEND=[],PT="pubs";
@@ -1276,7 +1288,7 @@ class PFChart{
   this.inds=(S.inds||[{k:"ema",p:{len:20},c:"#f5a623"},{k:"ema",p:{len:50},c:"#4f8cff"}]).slice(0,this.limit);
   this.draws=pfcLoad("pf_draw_"+this.sym,[]);this.tool=null;this.pend=null;this.cross=null;this.D=null;this.cache={};
   this.showSig=pfcLoad("pf_sig",true);this.sigs=o.sigs||[];this.cmp=null;this.meas=null;this.alerts=pfcLoad("pf_al_"+this.sym,[]);
-  this.live=setInterval(()=>this.refresh(),60000);
+  this._rt=Date.now();this.live=setInterval(()=>this.refresh(),30000);
   this.build();this.setData(this.base?this.fromBase(this.base):null,"1d");if(this.iv!=="1d"||!this.base)this.loadIv(this.iv);}
  fromBase(H){if(!H||!H.c)return null;const t=H.t||H.d.map(d=>Math.floor(Date.parse(d+"T14:30:00Z")/1000));return {t,o:H.o.slice(),h:H.h.slice(),l:H.l.slice(),c:H.c.slice(),v:(H.v||[]).slice(),intra:false}}
  save(){pfcSave("pf_chart",{iv:this.iv,type:this.type,log:this.log,vol:this.showVol,inds:this.inds.map(x=>({k:x.k,p:x.p,c:x.c,src:x.src,nm:x.nm}))})}
@@ -1322,7 +1334,7 @@ class PFChart{
   this.host.querySelector(".pfc-fs").textContent=on?"✕":"⛶";setTimeout(()=>this.draw(),60)}
  // ---------- jonli yangilanish ----------
  async refresh(){if(!this.host.isConnected){clearInterval(this.live);return}if(document.hidden||!this.fetcher||!this.D||this.busyR)return;
-  const intra=["5m","15m","1h"].includes(this.iv);if(!intra&&this._rt&&Date.now()-this._rt<300000)return;this._rt=Date.now();this.busyR=true;
+  const intra=["5m","15m","1h"].includes(this.iv),gap=PX()?(intra?55000:300000):(intra?170000:600000);if(this._rt&&Date.now()-this._rt<gap)return;this._rt=Date.now();this.busyR=true;
   try{const iv=this.iv,g=await this.fetcher(this.sym,iv,true);if(g&&g.c&&g.c.length>5&&this.iv===iv){const atEnd=this.end>=this.D.c.length-1;const d={t:g.t,o:g.o,h:g.h,l:g.l,c:g.c,v:g.v||[],intra};
     const add=d.c.length-this.D.c.length;this.cache[iv]=d;this.D=d;this.n0=d.c.length;if(atEnd)this.end+=Math.max(0,add);this.calc();this.draw();if(this.onData)try{this.onData(d,iv)}catch(e){}}}catch(e){}
   this.busyR=false}
