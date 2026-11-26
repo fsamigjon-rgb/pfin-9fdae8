@@ -192,6 +192,24 @@ body.pfc-lock{overflow:hidden}
 .tl .bar2 select{flex:1}.btn{background:var(--acc);color:#fff;border:0;border-radius:12px;padding:12px;font-size:15px;font-weight:700;width:100%}
 .btn2{background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:16px}
 .out{min-height:110px;white-space:pre-wrap;font-size:16px;line-height:1.45}
+/* ===== WATCHLIST ===== */
+#askm{display:none;position:fixed;inset:0;z-index:300}#askm .pfc-sbg{position:absolute;inset:0;background:rgba(0,0,0,.5)}#askm .askbox{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);width:min(340px,88vw);background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:12px}
+#askm input{background:var(--card2);border:1px solid var(--line);color:var(--tx);border-radius:10px;padding:11px;font-size:16px}.askbt{display:flex;gap:8px;justify-content:flex-end}.askbt button{background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:10px;padding:9px 16px;font-weight:700}#askok{background:var(--acc);color:#fff;border-color:var(--acc)}#askok.dang{background:#ea3943;border-color:#ea3943}
+.wlbtn{background:var(--card2);border:1px solid var(--line);color:#f5c518;border-radius:10px;width:38px;height:36px;font-size:18px;padding:0}
+.wlstar{background:none;border:0;color:#f5c518;font-size:26px;padding:4px 8px;line-height:1}.chd2 .wlstar{font-size:22px;padding:2px 4px}
+.wltabs{display:flex;gap:6px;overflow-x:auto;padding:4px 0 10px;scrollbar-width:none}.wltabs::-webkit-scrollbar{display:none}
+.wltabs button{flex:0 0 auto;background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:12px;padding:8px 14px;font-size:14px;font-weight:700;display:flex;align-items:center;gap:6px}
+.wltabs button.on{background:var(--tx);color:var(--bg)}.wlflag{display:inline-block;width:10px;height:14px;border-radius:2px}
+.wlbar{display:flex;gap:8px;align-items:center}.wlbar .cinf{height:42px;padding:0 12px}.cinf.on{background:var(--acc);color:#fff}
+.wledbar{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.wledbar button{background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:10px;padding:7px 10px;font-size:13px}
+.wlsec{display:flex;align-items:center;gap:10px;padding:14px 4px 8px;font-weight:700;font-size:15px;border-bottom:1px solid var(--line);cursor:pointer}.wlsec span{width:14px;color:var(--mut)}
+.wlsec em,.wlrow em{margin-left:auto;display:flex;gap:4px;font-style:normal}.wlsec em button,.wlrow em button{background:var(--card2);border:1px solid var(--line);color:var(--tx);border-radius:8px;width:30px;height:30px;padding:0}
+.wlrow{position:relative;display:flex;align-items:center;gap:10px;padding:11px 4px;border-bottom:1px solid var(--line);cursor:pointer}
+.wllogo{flex:0 0 38px;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;font-size:13px}
+.wlfl{position:absolute;left:-6px;top:12px;width:5px;height:32px;border-radius:2px}
+.wln{flex:1;min-width:0;display:flex;flex-direction:column}.wln b{font-size:16px}.wln span{font-size:12px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wlsp{flex:0 0 64px}.wlp{display:flex;flex-direction:column;align-items:flex-end;white-space:nowrap}.wlp b{font-size:16px}.wlp span{font-size:12px}
+@media(max-width:380px){.wlsp{display:none}}
 /* ===== VIX ===== */
 .vxc{display:flex;gap:12px;align-items:center;cursor:pointer;padding:12px 14px}
 /* ===== mini grafik kartalari (v10.3) ===== */
@@ -232,7 +250,7 @@ nav button{min-width:0;font-size:10.5px}nav button .lb{max-width:100%;overflow:h
 </head>
 <body>
 <header>
-  <div class="brand"><div class="logo" style="display:flex;align-items:center;gap:5px"><img src="data:image/svg+xml;base64,PHN2ZyBpZD0iQSIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImJnQSIgY3g9IjcwJSIgY3k9IjE4JSIgcj0iOTUlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzZjFmODYiLz48c3RvcCBvZmZzZXQ9Ii41NSIgc3RvcC1jb2xvcj0iIzE0MTEyYyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzBhMGIxMiIvPjwvcmFkaWFsR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ0EiIHgxPSIwIiB5MT0iMSIgeDI9IjEiIHkyPSIwIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM1ZjhiZmYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNjNThjZmYiLz48L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGQiIHgxPSIwIiB5MT0iMSIgeDI9IjEiIHkyPSIwIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmNWE2MjMiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmUyOGYiLz48L2xpbmVhckdyYWRpZW50Pgo8ZmlsdGVyIGlkPSJnbG93IiB4PSItMzAlIiB5PSItMzAlIiB3aWR0aD0iMTYwJSIgaGVpZ2h0PSIxNjAlIj48ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIxOCIgcmVzdWx0PSJiIi8+PGZlTWVyZ2U+PGZlTWVyZ2VOb2RlIGluPSJiIi8+PGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+PC9mZU1lcmdlPjwvZmlsdGVyPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAyNCIgaGVpZ2h0PSIxMDI0IiBmaWxsPSJ1cmwoI2JnQSkiLz48Y2lyY2xlIGN4PSI1MTIiIGN5PSI1MTIiIHI9IjQwNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dBKSIgc3Ryb2tlLXdpZHRoPSIxMiIgb3BhY2l0eT0iLjQiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzggMCkiIGZpbHRlcj0idXJsKCNnbG93KSI+PHBhdGggZD0iTTM4MCA3OTAgVjI0MCBINTc1IEExNzUgMTc1IDAgMCAxIDU3NSA1OTAgSDM4MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dBKSIgc3Ryb2tlLXdpZHRoPSIxMDQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8cG9seWxpbmUgcG9pbnRzPSI0NzAsNTI1IDUzNSw0NTIgNTkyLDQ5MCA2ODAsMzcyIiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMzYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8cGF0aCBkPSJNNjI4IDM2MiBMNzEyIDM0NiBMNjk3IDQzMCBaIiBmaWxsPSJ1cmwoI2dvbGQpIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMTAiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L2c+PC9zdmc+" alt="" style="width:24px;height:24px;border-radius:7px">Penny<b>Finance</b></div><div style="display:flex;align-items:center;gap:8px"><select id="lang" class="langsel notr"></select></div></div>
+  <div class="brand"><div class="logo" style="display:flex;align-items:center;gap:5px"><img src="data:image/svg+xml;base64,PHN2ZyBpZD0iQSIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImJnQSIgY3g9IjcwJSIgY3k9IjE4JSIgcj0iOTUlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzZjFmODYiLz48c3RvcCBvZmZzZXQ9Ii41NSIgc3RvcC1jb2xvcj0iIzE0MTEyYyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzBhMGIxMiIvPjwvcmFkaWFsR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ0EiIHgxPSIwIiB5MT0iMSIgeDI9IjEiIHkyPSIwIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM1ZjhiZmYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNjNThjZmYiLz48L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGQiIHgxPSIwIiB5MT0iMSIgeDI9IjEiIHkyPSIwIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmNWE2MjMiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmUyOGYiLz48L2xpbmVhckdyYWRpZW50Pgo8ZmlsdGVyIGlkPSJnbG93IiB4PSItMzAlIiB5PSItMzAlIiB3aWR0aD0iMTYwJSIgaGVpZ2h0PSIxNjAlIj48ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIxOCIgcmVzdWx0PSJiIi8+PGZlTWVyZ2U+PGZlTWVyZ2VOb2RlIGluPSJiIi8+PGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+PC9mZU1lcmdlPjwvZmlsdGVyPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAyNCIgaGVpZ2h0PSIxMDI0IiBmaWxsPSJ1cmwoI2JnQSkiLz48Y2lyY2xlIGN4PSI1MTIiIGN5PSI1MTIiIHI9IjQwNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dBKSIgc3Ryb2tlLXdpZHRoPSIxMiIgb3BhY2l0eT0iLjQiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzggMCkiIGZpbHRlcj0idXJsKCNnbG93KSI+PHBhdGggZD0iTTM4MCA3OTAgVjI0MCBINTc1IEExNzUgMTc1IDAgMCAxIDU3NSA1OTAgSDM4MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dBKSIgc3Ryb2tlLXdpZHRoPSIxMDQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8cG9seWxpbmUgcG9pbnRzPSI0NzAsNTI1IDUzNSw0NTIgNTkyLDQ5MCA2ODAsMzcyIiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMzYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8cGF0aCBkPSJNNjI4IDM2MiBMNzEyIDM0NiBMNjk3IDQzMCBaIiBmaWxsPSJ1cmwoI2dvbGQpIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMTAiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L2c+PC9zdmc+" alt="" style="width:24px;height:24px;border-radius:7px">Penny<b>Finance</b></div><div style="display:flex;align-items:center;gap:8px"><button id="wlbtn" class="wlbtn" title="Watchlist">⭐</button><select id="lang" class="langsel notr"></select></div></div>
   <div class="search">🔎<input id="q" placeholder="Tiker qidirish: AAPL, PLUG…" autocomplete="off" autocapitalize="characters"></div>
 </header>
 <div class="mrow"><div class="mstate" id="mstate"></div><div class="upd notr" id="upd"></div></div><div class="strip" id="strip"></div>
@@ -571,7 +589,7 @@ function ownView(b,H,live,sym){
   <div class="pfc-host"></div>
   <h2>${TA("ta")}</h2><div class="card pfc"><img class="pfb" src="${PFLOGO}" alt=""><div class="seg" id="tf" style="margin-right:44px"><button data-tf="d" class="on">${TA("day")}</button><button data-tf="w">${TA("week")}</button></div><div id="tabox"></div></div>`;
   const x=document.createElement("div");x.innerHTML=h;b.appendChild(x);
-  try{x.querySelector(".pfc-host")._chart=new PFChart(x.querySelector(".pfc-host"),{sym:sym||"",tier:CTIER,base:H,fetcher:chartFetch})}catch(e){console.error(e)}
+  try{x.querySelector(".pfc-host")._chart=new PFChart(x.querySelector(".pfc-host"),{sym:sym||"",tier:CTIER,base:H,fetcher:chartFetch,sigs:(D.signals||[]).filter(x=>x.t===sym)})}catch(e){console.error(e)}
   const tab=x.querySelector("#tabox");const setTF=tf=>{try{tab.innerHTML=H.c.length>=30?taHtml(tf==="w"?toWeekly(H):H):`<div class="mut">Texnik tahlil uchun kamida 30 kunlik ma'lumot kerak.</div>`}catch(e){tab.innerHTML=`<div class="mut">Texnik tahlil hisoblanmadi.</div>`}x.querySelectorAll("#tf button").forEach(z=>z.classList.toggle("on",z.dataset.tf===tf))};
   setTF("d");x.querySelectorAll("#tf button").forEach(e=>e.onclick=()=>setTF(e.dataset.tf));
 }
@@ -594,14 +612,14 @@ function relayFetch(t,iv,extra){return new Promise(res=>{if(CTOPIC.startsWith("_
       if(kind==="p")txt=all;else{const bin=Uint8Array.from(atob(all),c=>c.charCodeAt(0));txt=await new Response(new Blob([bin]).stream().pipeThrough(new DecompressionStream("deflate"))).text()}
       const j=JSON.parse(txt);if(j.err)RELERR="manba: "+j.err;fin(j)}}catch(x){RELERR="o'qishda xato: "+String(x).slice(0,60);fin(null)}};
   // javob kanali tasodifiy va bir martalik — shuning uchun since=all xavfsiz va telefon soatiga bog'liq emas
-  try{es=new EventSource("https://ntfy.sh/"+rt+"/sse?since=all");es.onopen=send;es.onmessage=e=>{try{handle(JSON.parse(e.data))}catch(x){}}}catch(e){}
-  later(send,1200);
+  try{es=new EventSource("https://ntfy.sh/"+rt+"/sse?since=all");es.onmessage=e=>{try{handle(JSON.parse(e.data))}catch(x){}}}catch(e){}
+  send();   // since=all — javob kanali bir martalik, shuning uchun kutmasdan darhol so'raymiz
   const poll=async()=>{if(done)return;try{const r=await fetch("https://ntfy.sh/"+rt+"/json?poll=1&since=all",{cache:"no-store"});const tx=await r.text();for(const ln of tx.split("\n")){if(!ln.trim())continue;try{await handle(JSON.parse(ln))}catch(x){}}}catch(e){}};
-  [3000,5500,8000,11000,14000,18000,22000,26000,30500].forEach(ms=>later(poll,ms));})}
+  [1300,2100,2900,3800,4800,6000,7500,9500,12000,15000,19000,23000,27000,30500].forEach(ms=>later(poll,ms));})}
 async function relayGet(t,iv){RELERR="";let j=await relayFetch(t,iv);if(!j&&!/^manba|eski/.test(RELERR)){RELERR="";j=await relayFetch(t,iv)}return j}
-const CFI={};function chartFetch(sym,iv){const kk=sym+"|"+iv;if(CFI[kk])return CFI[kk];CFI[kk]=chartFetch0(sym,iv).finally(()=>{delete CFI[kk]});return CFI[kk]}
-async function chartFetch0(sym,iv){const k="pf_g_"+sym+"_"+iv,ttl=["5m","15m","1h"].includes(iv)?3*60e3:30*60e3;
-  try{const c=JSON.parse(localStorage.getItem(k)||"null");if(c&&Date.now()-c._ts<ttl)return c}catch(e){}
+const CFI={};function chartFetch(sym,iv,force){const kk=sym+"|"+iv+(force?"!":"");if(CFI[kk])return CFI[kk];CFI[kk]=chartFetch0(sym,iv,force).finally(()=>{delete CFI[kk]});return CFI[kk]}
+async function chartFetch0(sym,iv,force){const k="pf_g_"+sym+"_"+iv,ttl=["5m","15m","1h"].includes(iv)?3*60e3:30*60e3;
+  if(!force)try{const c=JSON.parse(localStorage.getItem(k)||"null");if(c&&Date.now()-c._ts<ttl)return c}catch(e){}
   const j=await relayGet(sym,iv);const g=j&&j.g;if(g&&g.c&&g.c.length){g._ts=Date.now();try{localStorage.setItem(k,JSON.stringify(g))}catch(e){try{Object.keys(localStorage).filter(x=>x.startsWith("pf_g_")).forEach(x=>localStorage.removeItem(x))}catch(_){}}}return g||null}
 function yhist(t){
   const c=hcGet(t);if(c)return Promise.resolve(c);if(HINF[t])return HINF[t];
@@ -698,6 +716,68 @@ function lzRun(){while(LZN<2&&LZQ.length){const el=LZQ.shift();if(!el.isConnecte
     else{const z=el.querySelector(".plz-s");if(z)z.textContent=""}}).catch(()=>{}).finally(()=>{LZN--;lzRun()})}}
 const LZO=typeof IntersectionObserver!=="undefined"?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){LZO.unobserve(e.target);if(!LZQ.some(x=>x.dataset.lz===e.target.dataset.lz))LZQ.push(e.target);lzRun()}}),{rootMargin:"200px"}):null;
 let LZT=null;new MutationObserver(()=>{clearTimeout(LZT);LZT=setTimeout(()=>{if(!LZO)return;document.querySelectorAll(".plazy:not([data-ob])").forEach(e=>{e.dataset.ob=1;LZO.observe(e)})},120)}).observe(document.body,{childList:true,subtree:true});
+// ===================== ⭐ WATCHLIST (har bir mijozning o'z ro'yxatlari) =====================
+const WLK="pf_wl2",WQK="pf_wq";let WL=null,WQ={},WLED=false,WLT=null;
+const WLNAME={"^GSPC":"S&P 500","^IXIC":"Nasdaq Composite","^DJI":"Dow Jones 30","^NDX":"Nasdaq 100","^RUT":"Russell 2000","^VIX":"VIX qo'rquv indeksi","BTC-USD":"Bitcoin","ETH-USD":"Ethereum","GC=F":"Oltin","CL=F":"Neft","DX-Y.NYB":"Dollar indeksi"};
+const WLFLAG={r:"#ea3943",g:"#16c784",b:"#4f8cff",o:"#f5a623",p:"#a477ff"},WLFN={r:"Qizil",g:"Yashil",b:"Ko'k",o:"To'q sariq",p:"Binafsha"};
+function askText(title,def,cb,danger){let m=document.getElementById("askm");if(!m){m=document.createElement("div");m.id="askm";document.body.appendChild(m)}
+  m.innerHTML=`<div class="pfc-sbg"></div><div class="askbox"><b>${esc(title)}</b>${def===null?"":`<input id="askin" value="${esc(def||"")}" maxlength="30">`}<div class="askbt"><button id="askno">Bekor</button><button id="askok" class="${danger?"dang":""}">${danger?"O'chirish":"OK"}</button></div></div>`;
+  m.style.display="block";const inp=m.querySelector("#askin");if(inp)setTimeout(()=>{inp.focus();inp.select()},50);const close=()=>m.style.display="none";
+  m.querySelector(".pfc-sbg").onclick=close;m.querySelector("#askno").onclick=close;m.querySelector("#askok").onclick=()=>{const v=inp?inp.value.trim():true;close();if(v)cb(v)};if(inp)inp.onkeydown=e=>{if(e.key==="Enter")m.querySelector("#askok").click()}}
+function wlDefault(){return {cur:"w1",col:{},flags:{},lists:[{id:"w1",name:"Watchlist",items:["###Indekslar","^GSPC","^IXIC","^DJI","^VIX","###Aksiyalar","AAPL","TSLA","NVDA","###Kripto","BTC-USD"]}]}}
+function wlCS(){try{return tg&&tg.CloudStorage&&tg.isVersionAtLeast&&tg.isVersionAtLeast("6.9")?tg.CloudStorage:null}catch(e){return null}}
+function wlLoad(){if(WL)return;try{WL=JSON.parse(localStorage.getItem(WLK)||"null")}catch(e){}if(!WL||!WL.lists)WL=wlDefault();WL.col=WL.col||{};WL.flags=WL.flags||{};
+  try{WQ=JSON.parse(localStorage.getItem(WQK)||"{}")||{}}catch(e){WQ={}}
+  const cs=wlCS();if(cs)try{cs.getItem(WLK,(e,v)=>{if(e||!v)return;try{const x=JSON.parse(v);if(x&&x.lists&&(x.t||0)>(WL.t||0)){WL=x;WL.col=WL.col||{};WL.flags=WL.flags||{};localStorage.setItem(WLK,v);if(document.querySelector(".wlv"))wlRender()}}catch(_){}})}catch(e){}}
+function wlSave(){WL.t=Date.now();const v=JSON.stringify(WL);try{localStorage.setItem(WLK,v)}catch(e){}const cs=wlCS();if(cs&&v.length<4000)try{cs.setItem(WLK,v,()=>{})}catch(e){}}
+function wlCur(){wlLoad();if(String(WL.cur).startsWith("f:"))return null;return WL.lists.find(l=>l.id===WL.cur)||WL.lists[0]}
+function wlAll(){wlLoad();const S=new Set();WL.lists.forEach(l=>l.items.forEach(x=>{if(!x.startsWith("###"))S.add(x)}));Object.keys(WL.flags).forEach(x=>S.add(x));return [...S]}
+function wlHas(sym){return wlAll().includes(sym)}
+function wlToggle(sym){wlLoad();const L=wlCur()||WL.lists[0];if(wlHas(sym)){WL.lists.forEach(l=>l.items=l.items.filter(x=>x!==sym));delete WL.flags[sym]}else L.items.push(sym);wlSave();return wlHas(sym)}
+function wlQ(sym){const q=WQ[sym];const m=(D&&D.markets||[]).find(x=>x.s===sym);if(m)return {p:m.p,c:m.c,pc:m.pc,sp:m.sp,n:m.n};const sq=D&&qOf(sym);
+  if(q&&(!sq||(q.t||0)>Date.now()-120000))return q;if(sq)return {p:sq.p,c:sq.c,sp:sq.sp,n:""};return q||null}
+async function wlFetch(force){const all=wlAll();const need=all.filter(s=>{const q=WQ[s];return force||!q||Date.now()-(q.t||0)>60000});if(!need.length)return;
+  for(let i=0;i<need.length;i+=40){const j=await relayFetch("W","w",{w:need.slice(i,i+40).join(",")});if(j&&j.q){const now=Date.now();for(const k in j.q){WQ[k]=Object.assign(j.q[k],{t:now})}}}
+  try{localStorage.setItem(WQK,JSON.stringify(WQ))}catch(e){}if(document.querySelector(".wlv"))wlRows()}
+function wlColor(s){let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))%360;return `hsl(${h},55%,45%)`}
+function wlLogo(s){const L=s.replace(/^\^/,"").replace(/[-=].*$/,"");return `<div class="wllogo" style="background:${wlColor(s)}">${esc(L.slice(0,s.startsWith("^")?3:1))}</div>`}
+function openWatchlist(){wlLoad();const b=detailShell("⭐ Watchlist","Mening ro'yxatlarim");const w=document.createElement("div");w.className="wlv";b.appendChild(w);wlRender();wlFetch();
+  clearInterval(WLT);WLT=setInterval(()=>{if(!document.querySelector(".wlv")){clearInterval(WLT);return}if(!document.hidden)wlFetch()},60000)}
+function wlRender(){const w=document.querySelector(".wlv");if(!w)return;const fl=Object.keys(WLFLAG).filter(c=>Object.values(WL.flags).includes(c));
+  w.innerHTML=`<div class="wltabs notr">${WL.lists.map(l=>`<button data-wl="${esc(l.id)}" class="${WL.cur===l.id?"on":""}">${esc(l.name)}</button>`).join("")}${fl.map(c=>`<button data-wl="f:${c}" class="${WL.cur==="f:"+c?"on":""}"><i class="wlflag" style="background:${WLFLAG[c]}"></i>${WLFN[c]}</button>`).join("")}<button data-wladd="1">＋ Ro'yxat</button></div>
+  <div class="wlbar"><div class="csrch">＋<input id="wlq" placeholder="Tiker qo'shish: AAPL, NXXT, BTC-USD…" autocomplete="off" autocapitalize="characters"></div><button class="cinf ${WLED?"on":""}" id="wled">${WLED?"✓ Tayyor":"✏️"}</button></div>
+  <div class="csg notr" id="wlsg"></div>${WLED&&wlCur()?`<div class="wledbar"><button id="wlsec">＋ Bo'lim</button><button id="wlren">✏️ Nomini o'zgartirish</button>${WL.lists.length>1?`<button id="wldel" style="color:#ea3943">🗑 Ro'yxatni o'chirish</button>`:""}</div>`:""}
+  <div id="wlrows"></div><div class="disc">Narxlar ~1 daqiqada yangilanadi. ⭐ ro'yxat Telegram hisobingizda saqlanadi — boshqa telefonda ham ko'rinadi. Bayroqcha 🚩 bilan rangli ro'yxatlar tuziladi.</div>`;
+  w.querySelectorAll("[data-wl]").forEach(e=>e.onclick=()=>{WL.cur=e.dataset.wl;wlSave();wlRender()});
+  w.querySelector("[data-wladd]").onclick=()=>askText("Yangi ro'yxat nomi","Ro'yxat "+(WL.lists.length+1),n=>{const id="w"+Date.now().toString(36);WL.lists.push({id,name:n.slice(0,30),items:[]});WL.cur=id;wlSave();wlRender()});
+  w.querySelector("#wled").onclick=()=>{WLED=!WLED;wlRender()};
+  const sec=w.querySelector("#wlsec");if(sec)sec.onclick=()=>askText("Bo'lim nomi (masalan: Penny, Halol)","",n=>{wlCur().items.push("###"+n.slice(0,30));wlSave();wlRender()});
+  const ren=w.querySelector("#wlren");if(ren)ren.onclick=()=>{const L=wlCur();askText("Ro'yxat nomi",L.name,n=>{L.name=n.slice(0,30);wlSave();wlRender()})};
+  const del=w.querySelector("#wldel");if(del)del.onclick=()=>{const L=wlCur();askText("«"+L.name+"» ro'yxati o'chirilsinmi?",null,()=>{WL.lists=WL.lists.filter(x=>x!==L);WL.cur=WL.lists[0].id;wlSave();wlRender()},true)};
+  const qi=w.querySelector("#wlq"),sg=w.querySelector("#wlsg");
+  const add=v=>{v=String(v||"").toUpperCase().replace(/^\$/,"").trim();if(!/^[A-Z0-9.\-=^]{1,12}$/.test(v))return;let L=wlCur();if(!L){WL.cur=WL.lists[0].id;L=WL.lists[0]}if(!L.items.includes(v))L.items.push(v);qi.value="";sg.innerHTML="";wlSave();wlRender();wlFetch()};
+  qi.oninput=()=>{const v=qi.value.trim();if(!v){sg.innerHTML="";return}if(!SYMS)loadSyms().then(()=>qi.oninput());let L=symMatch(v.replace(/^\$/,""),6);const u=v.toUpperCase();if(/^[A-Z^][A-Z0-9.\-=^]{0,11}$/.test(u)&&!L.some(x=>x[0]===u))L.unshift([u,""]);
+    sg.innerHTML=L.map(x=>`<div class="sg" data-g="${esc(x[0])}"><div class="sgi">${esc(x[0][0])}</div><div style="flex:1;min-width:0"><div class="sgt">${esc(x[0])}</div><div class="sgn">${esc(x[1]||"")}</div></div><b style="color:var(--acc)">＋</b></div>`).join("");sg.querySelectorAll("[data-g]").forEach(e=>e.onclick=()=>add(e.dataset.g))};
+  qi.onkeydown=e=>{if(e.key==="Enter"){const f=sg.querySelector("[data-g]");add(f?f.dataset.g:qi.value)}};
+  wlRows()}
+function wlRows(){const box=document.getElementById("wlrows");if(!box)return;let items;const cur=WL.cur;
+  if(String(cur).startsWith("f:")){const c=cur.slice(2);items=Object.keys(WL.flags).filter(k=>WL.flags[k]===c)}else items=(wlCur()||{items:[]}).items;
+  if(!items.length){box.innerHTML=`<div class="empty">Ro'yxat bo'sh. Yuqoridagi maydonga tiker yozib qo'shing.</div>`;return}
+  let h="",sec=null,hidden=false;const L=wlCur();
+  items.forEach((x,ix)=>{if(x.startsWith("###")){sec=x;hidden=!!WL.col[(L&&L.id)+x];h+=`<div class="wlsec" data-sec="${esc(x)}"><span>${hidden?"›":"⌄"}</span> ${esc(x.slice(3))}${WLED?`<em><button data-up="${ix}">↑</button><button data-dn="${ix}">↓</button><button data-rm="${ix}">✕</button></em>`:""}</div>`;return}
+    if(hidden)return;const q=wlQ(x)||{},nm=WLNAME[x]||q.n||(D&&D.markets||[]).find(m=>m.s===x)?.n||"",fl=WL.flags[x];const ch=q.p!=null&&q.pc?q.p-q.pc:null;
+    h+=`<div class="wlrow" data-s="${esc(x)}">${fl?`<i class="wlfl" style="background:${WLFLAG[fl]}"></i>`:""}${wlLogo(x)}<div class="wln"><b class="notr">${esc(x.replace(/^\^/,""))}</b><span class="notr">${esc(nm)}</span></div>
+     <div class="wlsp">${q.sp&&q.sp.length>1?spark(q.sp,64,26,q.pc):""}</div><div class="wlp notr"><b>${q.p!=null?fmtP(q.p):"…"}</b><span class="${cls(q.c)}">${ch!=null?(ch>=0?"+":"")+ch.toFixed(Math.abs(ch)<1?3:2)+" ":""}${q.c!=null?pct(q.c):""}</span></div>
+     ${WLED?`<em class="wled"><button data-fl="${esc(x)}">🚩</button>${L?`<button data-up="${ix}">↑</button><button data-dn="${ix}">↓</button><button data-rm="${ix}">✕</button>`:""}</em>`:""}</div>`});
+  box.innerHTML=h;
+  box.querySelectorAll(".wlrow").forEach(e=>e.onclick=ev=>{if(ev.target.closest("button"))return;const s=e.dataset.s;if(s.startsWith("^")||/[=]|-USD$/.test(s))openMarket(s,WLNAME[s]||s);else openDetail(s)});
+  box.querySelectorAll(".wlsec").forEach(e=>e.onclick=ev=>{if(ev.target.closest("button")||!L)return;const k=L.id+e.dataset.sec;WL.col[k]=!WL.col[k];wlSave();wlRows()});
+  const mv=(i,d)=>{const A=L.items,j=i+d;if(j<0||j>=A.length)return;[A[i],A[j]]=[A[j],A[i]];wlSave();wlRows()};
+  box.querySelectorAll("[data-up]").forEach(b=>b.onclick=()=>mv(+b.dataset.up,-1));box.querySelectorAll("[data-dn]").forEach(b=>b.onclick=()=>mv(+b.dataset.dn,1));
+  box.querySelectorAll("[data-rm]").forEach(b=>b.onclick=()=>{L.items.splice(+b.dataset.rm,1);wlSave();wlRows()});
+  box.querySelectorAll("[data-fl]").forEach(b=>b.onclick=()=>{const s=b.dataset.fl,K=Object.keys(WLFLAG),c=WL.flags[s],n=c?K[K.indexOf(c)+1]:K[0];if(n)WL.flags[s]=n;else delete WL.flags[s];wlSave();wlRender()})}
+function wlStar(sym){const on=wlHas(sym);return `<button class="wlstar ${on?"on":""}" data-star="${esc(sym)}" title="Watchlist">${on?"★":"☆"}</button>`}
+function wlBindStar(root){(root||document).querySelectorAll("[data-star]").forEach(b=>b.onclick=e=>{e.stopPropagation();const on=wlToggle(b.dataset.star);b.textContent=on?"★":"☆";b.classList.toggle("on",on);toast(on?"⭐ Watchlist'ga qo'shildi":"Watchlist'dan olib tashlandi")})}
 // ===================== 📊 GRAFIK BO'LIMI (alohida, to'liq ekran) =====================
 let CSYM="";try{CSYM=localStorage.getItem("pf_csym")||""}catch(e){}
 function chartTab(m){
@@ -727,10 +807,10 @@ function mountChart(sym){const host=$("#chost");if(!host)return;CSYM=sym;
   const head=(d)=>{const el=$("#chd");if(!el||CSYM!==sym)return;const c=d&&d.c||[];const last=mk?mk.p:q?q.p:c[c.length-1];
     let ch=mk?mk.c:q?q.c:null;if(ch==null&&d&&!d.intra&&c.length>1)ch=(c[c.length-1]/c[c.length-2]-1)*100;
     const nm=(mk&&mk.n)||(H0&&H0.n)||(d&&d.n)||"";
-    el.innerHTML=`<div class="chd1"><b>${esc(sym)}</b>${nm&&nm!==sym?`<span class="mut">${esc(nm)}</span>`:""}</div><div class="chd2"><span class="chp">${last==null?"":fmtP(last)}</span>${ch==null?"":`<b class="${cls(ch)}">${pct(ch)}</b>`}<button class="cinf" id="cinf">ℹ️ Batafsil</button></div>`;
+    el.innerHTML=`<div class="chd1"><b>${esc(sym)}</b>${nm&&nm!==sym?`<span class="mut">${esc(nm)}</span>`:""}</div><div class="chd2"><span class="chp">${last==null?"":fmtP(last)}</span>${ch==null?"":`<b class="${cls(ch)}">${pct(ch)}</b>`}${wlStar(sym)}<button class="cinf" id="cinf">ℹ️ Batafsil</button></div>`;wlBindStar(el);
     const bi=$("#cinf");if(bi)bi.onclick=()=>openDetail(sym)};
   head(H0);host.innerHTML="";
-  try{const ch=new PFChart(host,{sym,tier:CTIER,base:H0&&H0.c&&H0.c.length>5?H0:null,fetcher:chartFetch});ch.onData=d=>head(d);host._chart=ch;if(ch.D)head(ch.D)}catch(e){console.error(e);host.innerHTML=`<div class="empty">Grafik ochilmadi: ${esc(String(e).slice(0,80))}</div>`}}
+  try{const ch=new PFChart(host,{sym,tier:CTIER,base:H0&&H0.c&&H0.c.length>5?H0:null,fetcher:chartFetch,sigs:(D.signals||[]).filter(x=>x.t===sym)});ch.onData=d=>head(d);host._chart=ch;if(ch.D)head(ch.D)}catch(e){console.error(e);host.innerHTML=`<div class="empty">Grafik ochilmadi: ${esc(String(e).slice(0,80))}</div>`}}
 // ---- tikerlar ro'yxati (qidiruv takliflari) ----
 let SYMS=null,SYMP=null;
 function loadSyms(){if(SYMS)return Promise.resolve(SYMS);if(SYMP)return SYMP;
@@ -742,7 +822,7 @@ function symMatch(q,n){q=q.toUpperCase();const ql=q.toLowerCase();const a=[],b=[
   a.sort((x,y)=>x[0].length-y[0].length);return a.concat(b).slice(0,n)}
 let PFT=null;function prefetch(t){clearTimeout(PFT);PFT=setTimeout(()=>{if(!(D.hist&&D.hist[t]))yhist(t);getFund()},250)}
 function detailShell(name,sym){
-  const d=$("#detail");d.innerHTML=`<div class="top"><button class="back">←</button><div><div class="tk notr">${esc(name||sym)}</div><div class="mut notr" style="font-size:12px">${esc(sym)}</div></div></div><div style="padding:0 16px" id="symbody"></div>`;
+  const d=$("#detail");const star=sym&&/^[A-Z0-9.\-=^]{1,12}$/.test(sym)?wlStar(sym):"";d.innerHTML=`<div class="top"><button class="back">←</button><div style="flex:1;min-width:0"><div class="tk notr">${esc(name||sym)}</div><div class="mut notr" style="font-size:12px">${esc(sym)}</div></div>${star}</div><div style="padding:0 16px" id="symbody"></div>`;if(star)wlBindStar(d);
   d.style.display="block";d.scrollTop=0;d.querySelector(".back").onclick=goBack;if(tg&&tg.BackButton){tg.BackButton.offClick(goBack);tg.BackButton.show();tg.BackButton.onClick(goBack)}
   return $("#symbody")}
 function tvView(b,sym,isIndex){const w=document.createElement("div");w.className="card";w.style.textAlign="center";
@@ -969,7 +1049,9 @@ function openProfile(uid){PT="pubs";pushPage(keep=>{const X=V();const U=X.users[
   <div class="mut joined"><b style="color:var(--tx)">PF</b> ${CX("joined")} <span class="notr">${esc(dfmt(U.joined||0,true))}</span>${U.u?` · <span class="notr">@${esc(U.u)}</span>`:""}</div>
   ${soc?`<div class="socs">${soc}</div>`:""}
   ${uid===MEID?`<button class="followbtn ing" id="editp">${CX("edit")}</button>`:MEID?`<button class="followbtn ${f?"ing":""}" data-fl="${esc(uid)}">${f?CX("fing"):CX("fbtn")}</button>`:""}</div>
-  <div class="tabs2" style="margin-top:20px"><button data-pt="pubs" class="${PT==="pubs"?"on":""}">${CX("pubs")}</button><button data-pt="media" class="${PT==="media"?"on":""}">${CX("media")}</button></div>`;
+  <div class="tabs2" style="margin-top:20px"><button data-pt="pubs" class="${PT==="pubs"?"on":""}">${CX("pubs")}</button><button data-pt="media" class="${PT==="media"?"on":""}">${CX("media")}</button>${uid===MEID?`<button data-pt="wl" class="${PT==="wl"?"on":""}">⭐ Watchlist</button>`:""}</div>`;
+  if(PT==="wl"&&uid===MEID){h+=`<div class="wlv"></div>`;g.innerHTML=h;bindCom(g);wlLoad();wlRender();wlFetch();
+    g.querySelectorAll("[data-pt]").forEach(e=>e.onclick=()=>{PT=e.dataset.pt;STACK[STACK.length-1].fn(true)});const ep=g.querySelector("#editp");if(ep)ep.onclick=openEditProfile;return}
   if(PT==="media"){const M=[];posts.forEach(p=>{const v=vidUrl(p);if(v)M.push([p.id,"v",v]);imgList(p).forEach(u=>M.push([p.id,"i",u]))});
     h+=M.length?`<div class="mgrid">${M.map(m=>`<div class="mcell" data-open="${esc(m[0])}">${m[1]==="v"?`<video src="${esc(m[2])}" muted playsinline preload="metadata"></video><span>▶</span>`:`<img src="${esc(m[2])}" loading="lazy">`}</div>`).join("")}</div>`:`<div class="empty">—</div>`}
   else h+=(posts.length?posts.map(p=>postCard(p,X)).join(""):`<div class="empty">${CX("empty")}</div>`);
@@ -1193,26 +1275,34 @@ class PFChart{
   const S=pfcLoad("pf_chart",{});this.iv=S.iv||"1d";this.type=S.type||"candle";this.log=!!S.log;this.showVol=S.vol!==false;
   this.inds=(S.inds||[{k:"ema",p:{len:20},c:"#f5a623"},{k:"ema",p:{len:50},c:"#4f8cff"}]).slice(0,this.limit);
   this.draws=pfcLoad("pf_draw_"+this.sym,[]);this.tool=null;this.pend=null;this.cross=null;this.D=null;this.cache={};
+  this.showSig=pfcLoad("pf_sig",true);this.sigs=o.sigs||[];this.cmp=null;this.meas=null;this.alerts=pfcLoad("pf_al_"+this.sym,[]);
+  this.live=setInterval(()=>this.refresh(),60000);
   this.build();this.setData(this.base?this.fromBase(this.base):null,"1d");if(this.iv!=="1d"||!this.base)this.loadIv(this.iv);}
  fromBase(H){if(!H||!H.c)return null;const t=H.t||H.d.map(d=>Math.floor(Date.parse(d+"T14:30:00Z")/1000));return {t,o:H.o.slice(),h:H.h.slice(),l:H.l.slice(),c:H.c.slice(),v:(H.v||[]).slice(),intra:false}}
  save(){pfcSave("pf_chart",{iv:this.iv,type:this.type,log:this.log,vol:this.showVol,inds:this.inds.map(x=>({k:x.k,p:x.p,c:x.c,src:x.src,nm:x.nm}))})}
  build(){const h=this.host;h.classList.add("pfc-wrap");
   h.innerHTML=`<div class="pfc-bar notr"><div class="pfc-ivs">${PFC_IVS.map(x=>`<button data-iv="${x[0]}">${x[1]}</button>`).join("")}</div>
    <div class="pfc-tools"><select class="pfc-type"><option value="candle">🕯 Sham</option><option value="ha">🕯 Heikin-Ashi</option><option value="bar">┤ Bar</option><option value="line">📈 Chiziq</option><option value="area">⛰ Maydon</option></select>
-   <button class="pfc-ind">ƒx <span class="pfc-cnt"></span></button><button class="pfc-t" data-t="h" title="Gorizontal chiziq">―</button><button class="pfc-t" data-t="tl" title="Trend chizig'i">╱</button><button class="pfc-t" data-t="clr" title="Chizmalarni o'chirish">🧹</button>
+   <button class="pfc-ind">ƒx <span class="pfc-cnt"></span></button><button class="pfc-t" data-t="h" title="Gorizontal chiziq">―</button><button class="pfc-t" data-t="tl" title="Trend chizig'i">╱</button>
+   <button class="pfc-t" data-t="fib" title="Fibonachchi darajalari">φ</button><button class="pfc-t" data-t="rect" title="To'rtburchak (zona)">▭</button><button class="pfc-t" data-t="ms" title="O'lchash: % va kunlar">📏</button><button class="pfc-t" data-t="al" title="Narx ogohlantirishi (botga xabar)">🔔</button>
+   <button class="pfc-sg" title="Bot signallari grafikda">📡</button><button class="pfc-cmp" title="Boshqa aksiya bilan taqqoslash">⇄</button><button class="pfc-t" data-t="clr" title="Chizmalarni o'chirish">🧹</button>
    <button class="pfc-log" title="Logarifmik shkala">log</button><button class="pfc-fs" title="To'liq ekran">⛶</button></div></div>
    <div class="pfc-stage"><canvas></canvas><div class="pfc-leg notr"></div><div class="pfc-msg notr"></div><button class="pfc-home notr" title="Oxirgi shamga qaytish">⟫</button></div>`;
   this.cv=h.querySelector("canvas");this.ctx=this.cv.getContext("2d");this.stage=h.querySelector(".pfc-stage");this.leg=h.querySelector(".pfc-leg");this.msg=h.querySelector(".pfc-msg");
   h.querySelectorAll("[data-iv]").forEach(b=>b.onclick=()=>this.loadIv(b.dataset.iv));
   const ty=h.querySelector(".pfc-type");ty.value=this.type;ty.onchange=()=>{this.type=ty.value;this.save();this.draw()};
   h.querySelector(".pfc-ind").onclick=()=>this.indMenu();
-  h.querySelectorAll(".pfc-t").forEach(b=>b.onclick=()=>{const t=b.dataset.t;if(t==="clr"){this.draws=[];pfcSave("pf_draw_"+this.sym,[]);this.tool=null;this.draw();this.syncBar();return}this.tool=this.tool===t?null:t;this.pend=null;this.syncBar();this.note(this.tool==="h"?"Narx darajasini bosing":this.tool==="tl"?"Ikki nuqtani bosing":"")});
+  h.querySelectorAll(".pfc-t").forEach(b=>b.onclick=()=>{const t=b.dataset.t;if(t==="clr"){this.draws=[];this.meas=null;pfcSave("pf_draw_"+this.sym,[]);this.tool=null;this.draw();this.syncBar();return}this.tool=this.tool===t?null:t;this.pend=null;this.syncBar();
+    this.note({h:"Narx darajasini bosing",tl:"Ikki nuqtani bosing",fib:"Fibonachchi: pastki va yuqori nuqtani bosing",rect:"Zona: ikki burchakni bosing",ms:"O'lchash: boshlanish va tugash nuqtasini bosing",al:"🔔 Ogohlantirish narxini bosing"}[this.tool]||"")});
+  h.querySelector(".pfc-sg").onclick=()=>{this.showSig=!this.showSig;pfcSave("pf_sig",this.showSig);this.syncBar();this.draw()};
+  h.querySelector(".pfc-cmp").onclick=()=>this.cmpMenu();
   h.querySelector(".pfc-log").onclick=()=>{this.log=!this.log;this.save();this.syncBar();this.draw()};
   h.querySelector(".pfc-fs").onclick=()=>this.fullscreen();
   h.querySelector(".pfc-home").onclick=()=>{if(!this.D)return;this.end=this.D.c.length-1+3;this.draw()};
   this.bind();new ResizeObserver(()=>this.draw()).observe(this.stage);this.syncBar()}
  syncBar(){const h=this.host;h.querySelectorAll("[data-iv]").forEach(b=>b.classList.toggle("on",b.dataset.iv===this.iv));
   h.querySelectorAll(".pfc-t").forEach(b=>b.classList.toggle("on",b.dataset.t===this.tool));h.querySelector(".pfc-log").classList.toggle("on",this.log);
+  const sg=h.querySelector(".pfc-sg");if(sg){sg.classList.toggle("on",!!this.showSig);sg.style.display=this.sigs.length?"":"none"}const cm=h.querySelector(".pfc-cmp");if(cm)cm.classList.toggle("on",!!this.cmp);
   h.querySelector(".pfc-cnt").textContent=`${this.inds.length}/${this.limit}`}
  note(t){this.msg.textContent=t||"";this.msg.style.display=t?"block":"none"}
  async loadIv(iv){this.iv=iv;this.save();this.syncBar();
@@ -1221,7 +1311,7 @@ class PFChart{
   this.note("⏳ "+PFC_IVNAME[iv]+" ma'lumotlari yuklanmoqda…");
   const g=this.fetcher?await this.fetcher(this.sym,iv):null;
   if(this.iv!==iv)return;
-  if(g&&g.c&&g.c.length>5){const d={t:g.t,o:g.o,h:g.h,l:g.l,c:g.c,v:g.v||[],intra:["5m","15m","1h"].includes(iv)};this.cache[iv]=d;this.setData(d,iv);this.note("")}
+  if(g&&g.c&&g.c.length>5){const d={t:g.t,o:g.o,h:g.h,l:g.l,c:g.c,v:g.v||[],intra:["5m","15m","1h"].includes(iv)};this.cache[iv]=d;this.setData(d,iv);this.note("");if(this.cmp)this.loadCmp(this.cmp.sym)}
   else if(iv==="1d"&&this.base){this.setData(this.fromBase(this.base),iv);this.note("")}
   else{this.note("⚠️ "+PFC_IVNAME[iv]+" ma'lumoti olinmadi. Boshqa oraliqni tanlang yoki keyinroq urinib ko'ring.")}}
  setData(d,iv){if(!d){this.note("⏳ Yuklanmoqda…");return}this.D=d;this.n0=d.c.length;this.nvis=Math.min(this.n0+3,iv==="1d"?130:iv==="1wk"?104:iv==="1mo"?120:100);this.end=this.n0-1+3;this.calc();this.draw();if(this.onData)try{this.onData(d,iv)}catch(e){}}
@@ -1230,6 +1320,33 @@ class PFChart{
  fullscreen(){const on=!this.host.classList.contains("pfc-full");this.host.classList.toggle("pfc-full",on);document.body.classList.toggle("pfc-lock",on);
   try{if(on&&window.Telegram&&Telegram.WebApp&&Telegram.WebApp.requestFullscreen)Telegram.WebApp.requestFullscreen();else if(!on&&Telegram.WebApp.exitFullscreen&&Telegram.WebApp.isFullscreen)Telegram.WebApp.exitFullscreen()}catch(e){}
   this.host.querySelector(".pfc-fs").textContent=on?"✕":"⛶";setTimeout(()=>this.draw(),60)}
+ // ---------- jonli yangilanish ----------
+ async refresh(){if(!this.host.isConnected){clearInterval(this.live);return}if(document.hidden||!this.fetcher||!this.D||this.busyR)return;
+  const intra=["5m","15m","1h"].includes(this.iv);if(!intra&&this._rt&&Date.now()-this._rt<300000)return;this._rt=Date.now();this.busyR=true;
+  try{const iv=this.iv,g=await this.fetcher(this.sym,iv,true);if(g&&g.c&&g.c.length>5&&this.iv===iv){const atEnd=this.end>=this.D.c.length-1;const d={t:g.t,o:g.o,h:g.h,l:g.l,c:g.c,v:g.v||[],intra};
+    const add=d.c.length-this.D.c.length;this.cache[iv]=d;this.D=d;this.n0=d.c.length;if(atEnd)this.end+=Math.max(0,add);this.calc();this.draw();if(this.onData)try{this.onData(d,iv)}catch(e){}}}catch(e){}
+  this.busyR=false}
+ // ---------- taqqoslash ----------
+ cmpMenu(){const s=this.sheet(`<div class="pfc-sh-h"><b>⇄ Taqqoslash</b><button class="pfc-cl">✕</button></div>
+   <div class="mut" style="font-size:13px;margin-bottom:8px">Boshqa aksiya/indeks grafigini shu grafik ustiga % o'zgarish bo'yicha qo'yadi.</div>
+   <input class="pfc-q" id="cmpq" placeholder="Tiker: SPY, QQQ, AAPL, BTC-USD…" autocapitalize="characters">
+   <div class="cchips">${["SPY","QQQ","IWM","^VIX","BTC-USD","GC=F"].map(x=>`<button class="cchip" data-c="${x}">${x}</button>`).join("")}${this.cmp?`<button class="cchip" data-c="">✕ Olib tashlash</button>`:""}</div>`);
+  s.querySelector(".pfc-cl").onclick=()=>s.style.display="none";const go=v=>{s.style.display="none";v=String(v||"").toUpperCase().trim();if(!v){this.cmp=null;this.syncBar();this.draw();return}this.loadCmp(v)};
+  s.querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>go(b.dataset.c));const q=s.querySelector("#cmpq");q.onkeydown=e=>{if(e.key==="Enter")go(q.value)};setTimeout(()=>q.focus(),50)}
+ async loadCmp(sym){if(!this.fetcher)return;this.note("⏳ "+sym+" yuklanmoqda…");const g=await this.fetcher(sym,this.iv);this.note("");
+  if(g&&g.c&&g.c.length>5){this.cmp={sym,t:g.t,c:g.c};this.syncBar();this.draw()}else alertBox(sym+" ma'lumoti olinmadi")}
+ cmpIdx(t){const T=this.cmp.t;let a=0,b=T.length-1;if(t<=T[0])return 0;if(t>=T[b])return b;while(b-a>1){const m=(a+b)>>1;T[m]<=t?a=m:b=m}return a}
+ // ---------- narx ogohlantirishi ----------
+ alertAsk(price){const last=this.D.c[this.D.c.length-1],dir=price>=last?"up":"dn",p=+price.toPrecision(price<10?4:6);
+  const s=this.sheet(`<div class="pfc-sh-h"><b>🔔 Narx ogohlantirishi</b><button class="pfc-cl">✕</button></div>
+   <div style="font-size:15px;line-height:1.6"><b class="notr">${esc(this.sym)}</b> narxi <b class="notr">${p}</b> ${dir==="up"?"dan yuqoriga chiqsa 📈":"dan pastga tushsa 📉"} — bot Telegram'da sizga xabar yuboradi.<br><span class="mut">Hozirgi narx: ${this.fmt(last,last<10?3:2)}</span></div>
+   <input class="pfc-q" id="aln" placeholder="Izoh (ixtiyoriy): masalan «sotish nuqtasi»" maxlength="60">
+   <button class="btn" id="alok" style="width:100%;margin-top:10px">🔔 Ogohlantirish qo'yish</button>`);
+  s.querySelector(".pfc-cl").onclick=()=>s.style.display="none";
+  s.querySelector("#alok").onclick=async()=>{const note=s.querySelector("#aln").value.trim();s.style.display="none";
+   try{if(typeof seal!=="function"||String(CTOPIC).startsWith("__"))throw new Error("ilova eski");const a={t:"alert",sym:this.sym,p,dir,note,id:Date.now().toString(36)+Math.random().toString(36).slice(2,7),ts:Math.floor(Date.now()/1000)};
+    const r=await fetch("https://ntfy.sh/"+CTOPIC+"?tags=pfa",{method:"POST",body:await seal(a)});if(!r.ok)throw new Error(r.status);
+    this.alerts.push({p,dir});pfcSave("pf_al_"+this.sym,this.alerts);this.draw();(typeof toast==="function"?toast:alert)("🔔 Qo'yildi — botdan tasdiq xabari keladi")}catch(e){alertBox("Ogohlantirish yuborilmadi: "+e.message)}}}
  // ---------- geometriya ----------
  geom(){const W=this.stage.clientWidth,Hs=this.stage.clientHeight;const subs=this.out?this.out.filter(o=>o&&!o.ov).length+(this.showVol&&false?1:0):0;
   const AX=Math.max(54,this.axW||54),TB=22;const subH=Math.min(110,Math.max(70,(Hs-TB)*0.18));const mainH=Math.max(120,Hs-TB-subs*subH);
@@ -1246,6 +1363,7 @@ class PFChart{
   // main y range
   let lo=Infinity,hi=-Infinity;for(let i=i0;i<=i1;i++){if(D.l[i]<lo)lo=D.l[i];if(D.h[i]>hi)hi=D.h[i]}
   (this.out||[]).forEach(o=>{if(!o||!o.ov)return;[...(o.r.L||[]),...(o.r.P||[])].forEach(L=>{for(let i=i0;i<=i1;i++){const v=L.v[i];if(v==null||isNaN(v))continue;if(v<lo)lo=v;if(v>hi)hi=v}})});
+  if(this.cmp){const C=this.cmp,k=D.c[i0]/C.c[this.cmpIdx(D.t[i0])];for(let i=i0;i<=i1;i++){const v=C.c[this.cmpIdx(D.t[i])]*k;if(isFinite(v)){if(v<lo)lo=v;if(v>hi)hi=v}}}
   if(!isFinite(lo)){lo=0;hi=1}const pad=(hi-lo)*0.06||hi*0.02||1;lo-=pad+(this.showVol?(hi-lo)*0.16:0);hi+=pad;if(this.log&&lo<=0)lo=hi*0.01;
   const fy=this.log?(v=>{const a=Math.log(lo),b=Math.log(hi);return 6+(b-Math.log(Math.max(v,1e-9)))/(b-a)*(g.mainH-12)}):(v=>6+(hi-v)/(hi-lo)*(g.mainH-12));
   this.fy=fy;this.g=g;this.lohi=[lo,hi];
@@ -1272,6 +1390,11 @@ class PFChart{
     x.beginPath();x.moveTo(Math.round(xx)+.5,fy(D.h[i]));x.lineTo(Math.round(xx)+.5,fy(D.l[i]));x.stroke();const y1=fy(Math.max(D.o[i],D.c[i])),y2=fy(Math.min(D.o[i],D.c[i]));x.fillRect(xx-cw/2,y1,cw,Math.max(1,y2-y1))}
   // overlay indikatorlar
   (this.out||[]).forEach((o,k)=>{if(!o||!o.ov)return;this.lines(x,g,o.r.L||[],i0,i1,fy);(o.r.P||[]).forEach(P=>{x.fillStyle=P.c;for(let i=i0;i<=i1;i++){const v=P.v[i];if(v==null||isNaN(v))continue;x.beginPath();x.arc(this.xi(i,g),fy(v),Math.max(1.5,Math.min(3,bw*0.2)),0,7);x.fill()}});this.shapes(x,g,o.r.SH,i0,i1,D,fy)});
+  // taqqoslash chizig'i
+  if(this.cmp){const C=this.cmp,j0=this.cmpIdx(D.t[i0]),base=C.c[j0],k=D.c[i0]/base;x.strokeStyle="#ff9f43";x.lineWidth=1.8;x.beginPath();let pen=false;
+    for(let i=i0;i<=i1;i++){const j=this.cmpIdx(D.t[i]);const v=C.c[j]*k;if(!isFinite(v)){pen=false;continue}const xx=this.xi(i,g),yy=fy(v);pen?x.lineTo(xx,yy):x.moveTo(xx,yy);pen=true}x.stroke()}
+  // bot signallari
+  if(this.showSig&&this.sigs.length)this.sigDraw(x,g,D,fy,T,i0,i1);
   // chizmalar
   this.drawings(x,g,D,fy,T);
   x.restore();
@@ -1307,8 +1430,22 @@ class PFChart{
   this.panes.push({top,h,k,fy})}
  drawings(x,g,D,fy,T){const n=D.t.length;const ti=t=>{let a=0,b=n-1;if(t<=D.t[0])return 0;if(t>=D.t[b])return b+(t-D.t[b])/((D.t[b]-D.t[b-1])||1);while(b-a>1){const m=(a+b)>>1;D.t[m]<=t?a=m:b=m}return a+(t-D.t[a])/((D.t[b]-D.t[a])||1)};
   x.lineWidth=1.5;this.draws.forEach(d=>{x.strokeStyle=d.c||"#fab005";if(d.k==="h"){const y=fy(d.p);x.beginPath();x.moveTo(0,y);x.lineTo(g.pw,y);x.stroke();x.fillStyle=d.c||"#fab005";x.fillRect(g.pw,y-8,g.AX,16);x.fillStyle="#111";x.textAlign="left";x.fillText(this.fmt(d.p,d.p<10?3:2),g.pw+6,y)}
-   else if(d.k==="tl"){const x1=this.xi(ti(d.t1),g),x2=this.xi(ti(d.t2),g),y1=fy(d.p1),y2=fy(d.p2);const sl=(y2-y1)/((x2-x1)||1);x.beginPath();x.moveTo(x1,y1);x.lineTo(g.pw,y1+sl*(g.pw-x1));x.stroke();[[x1,y1],[x2,y2]].forEach(([a,b])=>{x.beginPath();x.arc(a,b,3,0,7);x.fillStyle=d.c||"#fab005";x.fill()})}});
+   else if(d.k==="tl"){const x1=this.xi(ti(d.t1),g),x2=this.xi(ti(d.t2),g),y1=fy(d.p1),y2=fy(d.p2);const sl=(y2-y1)/((x2-x1)||1);x.beginPath();x.moveTo(x1,y1);x.lineTo(g.pw,y1+sl*(g.pw-x1));x.stroke();[[x1,y1],[x2,y2]].forEach(([a,b])=>{x.beginPath();x.arc(a,b,3,0,7);x.fillStyle=d.c||"#fab005";x.fill()})}
+   else if(d.k==="fib"){const x1=this.xi(ti(d.t1),g),x2=Math.max(x1,this.xi(ti(d.t2),g));const LV=[[0,"#8b93a7"],[.236,"#ea3943"],[.382,"#f5a623"],[.5,"#16c784"],[.618,"#4f8cff"],[.786,"#a477ff"],[1,"#8b93a7"]];
+    LV.forEach(([f,c],k)=>{const v=d.p2-(d.p2-d.p1)*f,y=fy(v);if(k<LV.length-1){const v2=d.p2-(d.p2-d.p1)*LV[k+1][0];x.fillStyle=c+"14";x.fillRect(Math.min(x1,x2),Math.min(y,fy(v2)),g.pw-Math.min(x1,x2),Math.abs(fy(v2)-y))}x.strokeStyle=c;x.lineWidth=1;x.beginPath();x.moveTo(Math.min(x1,x2),y);x.lineTo(g.pw,y);x.stroke();x.fillStyle=c;x.textAlign="left";x.fillText(f+" ("+this.fmt(v,v<10?3:2)+")",Math.min(x1,x2)+4,y-6)});x.lineWidth=1.5}
+   else if(d.k==="rect"){const x1=this.xi(ti(d.t1),g),x2=this.xi(ti(d.t2),g),y1=fy(d.p1),y2=fy(d.p2);x.fillStyle="rgba(79,140,255,.13)";x.fillRect(Math.min(x1,x2),Math.min(y1,y2),Math.abs(x2-x1),Math.abs(y2-y1));x.strokeStyle="#4f8cff";x.strokeRect(Math.min(x1,x2),Math.min(y1,y2),Math.abs(x2-x1),Math.abs(y2-y1))}});
+  (this.alerts||[]).forEach(a=>{const y=fy(a.p);if(y<0||y>g.mainH)return;x.strokeStyle="#ff9f43";x.setLineDash([2,4]);x.beginPath();x.moveTo(0,y);x.lineTo(g.pw,y);x.stroke();x.setLineDash([]);x.fillStyle="#ff9f43";x.fillRect(g.pw,y-8,g.AX,16);x.fillStyle="#111";x.textAlign="left";x.fillText("🔔"+this.fmt(a.p,a.p<10?3:2),g.pw+3,y)});
+  if(this.meas){const m=this.meas,x1=this.xi(ti(m.t1),g),x2=this.xi(ti(m.t2),g),y1=fy(m.p1),y2=fy(m.p2),up=m.p2>=m.p1;x.fillStyle=up?"rgba(22,199,132,.16)":"rgba(234,57,67,.16)";x.fillRect(Math.min(x1,x2),Math.min(y1,y2),Math.abs(x2-x1),Math.abs(y2-y1));
+    const pc=(m.p2/m.p1-1)*100,bars=Math.round(ti(m.t2)-ti(m.t1));const s=`${up?"+":""}${(m.p2-m.p1).toFixed(m.p1<10?3:2)} (${up?"+":""}${pc.toFixed(2)}%) · ${Math.abs(bars)} sham`;x.font="bold 12px Inter,system-ui";const w=x.measureText(s).width+14;const bx=Math.min(Math.max(4,(x1+x2)/2-w/2),g.pw-w-4),by=Math.max(4,Math.min(y1,y2)-26);
+    x.fillStyle=up?"#16c784":"#ea3943";x.fillRect(bx,by,w,20);x.fillStyle="#fff";x.textAlign="left";x.fillText(s,bx+7,by+10);x.font="11px Inter,system-ui,sans-serif"}
   if(this.pend&&this.cross){const p=this.pend;x.setLineDash([4,3]);x.strokeStyle="#fab005";x.beginPath();x.moveTo(this.xi(ti(p.t),g),fy(p.p));x.lineTo(this.cross.x,this.cross.y);x.stroke();x.setLineDash([])}}
+ sigDraw(x,g,D,fy,T,i0,i1){const n=D.t.length,bw=g.pw/this.nvis;const day=t=>new Date(t*1000).toISOString().slice(0,10);
+  const idxOf=ds=>{if(!ds)return -1;const tt=Date.parse(ds+"T20:00:00Z")/1000;for(let i=0;i<n;i++)if(D.t[i]>=tt-86400*(D.intra?0.6:3)&&day(D.t[i]+9*3600)>=ds)return i;return -1};
+  x.font="bold 10px Inter,system-ui";x.textAlign="center";
+  this.sigs.forEach(s=>{const ie=idxOf(String(s.entry_date||"").slice(0,10));if(ie>=i0-1&&ie<=i1+1&&ie>=0){const xx=this.xi(ie,g),yy=fy(D.l[ie])+14;x.fillStyle="#16c784";x.beginPath();x.moveTo(xx,yy-8);x.lineTo(xx-6,yy+2);x.lineTo(xx+6,yy+2);x.closePath();x.fill();x.fillText("BUY",xx,yy+12)}
+   const ic=s.status!=="open"?idxOf(String(s.closed_date||"").slice(0,10)):-1;if(ic>=i0&&ic<=i1){const pn=s.pnl!=null?s.pnl:s.pnl_pct;const xx=this.xi(ic,g),yy=fy(D.h[ic])-14,w=(pn||0)>=0;x.fillStyle=w?"#16c784":"#ea3943";x.beginPath();x.moveTo(xx,yy+8);x.lineTo(xx-6,yy-2);x.lineTo(xx+6,yy-2);x.closePath();x.fill();x.fillText((w?"+":"")+(pn??"")+"%",xx,yy-8)}
+   if(s.status==="open"&&ie>=0){const x0=Math.max(0,this.xi(Math.max(ie,i0),g));[["TP",s.target,"#16c784"],["IN",s.entry,"#4f8cff"],["SL",s.stop,"#ea3943"]].forEach(([lb,v,c])=>{if(!v)return;const y=fy(v);if(y<0||y>g.mainH)return;x.strokeStyle=c;x.setLineDash([6,4]);x.lineWidth=1.3;x.beginPath();x.moveTo(x0,y);x.lineTo(g.pw,y);x.stroke();x.setLineDash([]);x.fillStyle=c;x.textAlign="left";x.fillText(lb+" "+this.fmt(v,v<10?3:2),x0+4,y-5);x.textAlign="center"})}});
+  x.font="11px Inter,system-ui,sans-serif"}
  crosshair(x,g,D,T,dec){const c=this.cross;const i=Math.max(0,Math.min(D.c.length-1,this.ix(c.x,g)));const xx=this.xi(i,g);x.strokeStyle=T.cross;x.setLineDash([4,4]);x.lineWidth=1;
   x.beginPath();x.moveTo(xx,0);x.lineTo(xx,g.H-g.TB);x.stroke();if(c.y<g.mainH){x.beginPath();x.moveTo(0,c.y);x.lineTo(g.pw,c.y);x.stroke()}x.setLineDash([]);
   if(c.y<g.mainH){const v=this.yv(c.y);x.fillStyle="#444b5a";x.fillRect(g.pw,c.y-9,g.AX,18);x.fillStyle="#fff";x.textAlign="left";x.fillText(this.fmt(v,dec),g.pw+6,c.y)}
@@ -1321,7 +1458,9 @@ class PFChart{
    const vals=[...(o.r.L||[]),...(o.r.H||[])].slice(0,3).map(L=>`<i style="color:${L.c||"#f5a623"}">${this.fmt(L.v[i],Math.abs(L.v[i])<10?2:Math.abs(L.v[i])>1e5?0:2)}</i>`).join(" ");
    const row=`<div class="pfc-li" data-k="${k}"><span>${esc(nm)}${pr?" "+esc(pr):""}</span> ${o.err?`<i style="color:#ea3943">⚠ ${esc(o.err.slice(0,40))}</i>`:vals} <button data-x="${k}">✕</button></div>`;
    if(o.ov)h+=row;else{const p=(this.panes||[]).find(p=>p.k===k);if(p)h+=`<div class="pfc-pl" style="top:${p.top+2}px">${row}</div>`}});
-  this.leg.innerHTML=h;this.leg.querySelectorAll("[data-x]").forEach(b=>b.onclick=e=>{e.stopPropagation();this.inds.splice(+b.dataset.x,1);this.save();this.calc();this.syncBar();this.draw()});
+  if(this.cmp){const C=this.cmp,j=this.cmpIdx(R.t[i]),j0=this.cmpIdx(R.t[Math.max(0,Math.floor(this.end-this.nvis))]);const pc=(C.c[j]/C.c[j0]-1)*100,mp=(R.c[i]/R.c[Math.max(0,Math.floor(this.end-this.nvis))]-1)*100;
+    h+=`<div class="pfc-li"><span style="color:#ff9f43">⇄ ${esc(C.sym)}</span> <i style="color:#ff9f43">${pc>=0?"+":""}${pc.toFixed(2)}%</i> <span class="mut">vs ${esc(this.sym)} ${mp>=0?"+":""}${mp.toFixed(2)}%</span> <button data-cx="1">✕</button></div>`}
+  this.leg.innerHTML=h;const cx_=this.leg.querySelector("[data-cx]");if(cx_)cx_.onclick=e=>{e.stopPropagation();this.cmp=null;this.syncBar();this.draw()};this.leg.querySelectorAll("[data-x]").forEach(b=>b.onclick=e=>{e.stopPropagation();this.inds.splice(+b.dataset.x,1);this.save();this.calc();this.syncBar();this.draw()});
   this.leg.querySelectorAll(".pfc-li").forEach(r=>r.onclick=()=>this.indEdit(+r.dataset.k))}
  // ---------- boshqaruv ----------
  bind(){const cv=this.cv,P=new Map();let pan=null,pinch=null,moved=false,downT=0;
@@ -1341,8 +1480,12 @@ class PFChart{
  tap(p,pt){if(!this.D)return;const g=this.geom();
   if(this.tool&&p.y<g.mainH){const i=Math.max(0,Math.min(this.D.c.length-1,this.ix(p.x,g))),price=this.yv(p.y);
    if(this.tool==="h"){this.draws.push({k:"h",p:+price.toPrecision(6)});this.tool=null}
-   else if(this.tool==="tl"){if(!this.pend){this.pend={t:this.D.t[i],p:price};this.cross=p;this.note("Ikkinchi nuqtani bosing");this.draw();return}this.draws.push({k:"tl",t1:this.pend.t,p1:this.pend.p,t2:this.D.t[i],p2:price});this.pend=null;this.tool=null}
+   else if(this.tool==="al"){this.tool=null;this.syncBar();this.note("");this.alertAsk(price);return}
+   else if(["tl","fib","rect","ms"].includes(this.tool)){if(!this.pend){this.pend={t:this.D.t[i],p:price};this.cross=p;this.note("Ikkinchi nuqtani bosing");this.draw();return}
+    const o={k:this.tool,t1:this.pend.t,p1:this.pend.p,t2:this.D.t[i],p2:price};this.pend=null;const tl=this.tool;this.tool=null;
+    if(tl==="ms"){this.meas=o;this.note("");this.syncBar();this.cross=null;this.draw();return}this.draws.push(o)}
    pfcSave("pf_draw_"+this.sym,this.draws);this.note("");this.syncBar();this.cross=null;this.draw();return}
+  if(this.meas){this.meas=null;this.draw();return}
   if(pt!=="mouse"){this.cross=this.cross?null:p;this.draw()}}
  // ---------- indikator menyusi ----------
  sheet(html){let s=document.getElementById("pfc-sheet");if(!s){s=document.createElement("div");s.id="pfc-sheet";document.body.appendChild(s)}
@@ -1407,6 +1550,7 @@ document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{TAB=b.dataset.
 $("#q").oninput=e=>{Q=e.target.value.trim();if(D)render()};
 $("#q").onkeydown=e=>{if(e.key==="Enter"&&Q){e.target.blur();const f=document.querySelector(".sg.first");openDetail(f?f.dataset.sym:Q.toUpperCase().replace(/^\$/,""))}};
 $("#q").onfocus=()=>{loadSyms()};
+{const wb=document.getElementById("wlbtn");if(wb)wb.onclick=openWatchlist}
 load();setInterval(()=>{if($("#detail").style.display!=="block")load()},120000);
 </script>
 </body>
