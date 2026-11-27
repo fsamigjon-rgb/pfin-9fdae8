@@ -405,7 +405,7 @@ const NT=x=>(LANG==="uz"&&x.tu)?x.tu:(x.tr&&x.tr[LANG])?x.tr[LANG]:x.t;   // tay
 const NC=x=>((LANG==="uz"&&x.tu)||(x.tr&&x.tr[LANG]))?"notr":"";            // tayyor tarjimani qayta o'girmaslik
 let NEWSN=15;
 function tkChip(t){const q=wlQ(t)||{};return `<span class="tkc notr" data-tk="${esc(t)}">${esc(t.replace(/^\^/,""))}${q.c!=null?` <b class="${cls(q.c)}">${pct(q.c)}</b>`:""}</span>`}
-function nMeta(x){return `<div class="meta"><span class="notr">${esc(x.src)}</span> · ${ago(x.ts)}${x.ai&&LANG==="uz"?' · <span class="notr">🤖 AI</span>':""}${(x.tk||[]).length?`<span class="tks">${x.tk.map(tkChip).join("")}</span>`:""}</div>`}
+function nMeta(x){return `<div class="meta">${ago(x.ts)}${x.ai&&LANG==="uz"?' · <span class="notr">🤖 AI</span>':""}${(x.tk||[]).length?`<span class="tks">${x.tk.map(tkChip).join("")}</span>`:""}</div>`}
 function nImg(u,cl,hero){return u?`<div class="nimg ${cl||""}"><img src="${esc(u)}" ${hero?'fetchpriority="high"':'loading="lazy"'} decoding="async" onerror="this.parentNode.remove()"></div>`:""}
 function newsTab(){
   const N0=D.news||[];if(!N0.length)return '<div class="empty">Yangiliklar yuklanmoqda…</div>';
@@ -413,11 +413,11 @@ function newsTab(){
   const a=N[0];let h=`<div class="hero" data-n="${idx.get(a)}">${a.ii||a.i?`<div class="nimg hb">${a.v?'<i class="play">▶</i>':""}<img src="${esc(a.ii||a.i)}" fetchpriority="high" decoding="async" onerror="this.parentNode.remove()"></div>`:""}<div class="t ${NC(a)}">${esc(NT(a))}</div>${nMeta(a)}</div>`;
   const sub=N.slice(1,3);if(sub.length)h+=`<ul class="nsub">${sub.map(x=>`<li data-n="${idx.get(x)}" class="${NC(x)}">${esc(NT(x))}</li>`).join("")}</ul>`;
   const top=N.slice(3,9);if(top.length)h+=`<h2 class="nh">📰 Asosiy yangiliklar</h2>`+top.map(x=>`<div class="news nl" data-n="${idx.get(x)}">${nImg(x.i)}<div class="nb"><div class="t ${NC(x)}">${esc(NT(x))}</div>${nMeta(x)}</div></div>`).join("");
-  if(V.length)h+=`<h2 class="nh">🎬 Videolar</h2><div class="vrow">${V.slice(0,10).map(x=>`<div class="vcard" data-n="${idx.get(x)}"><div class="nimg vb"><i class="play">▶</i><img src="${esc(x.ii||x.i)}" loading="lazy" decoding="async" onerror="this.remove()"></div><div class="t ${NC(x)}">${esc(NT(x))}</div><div class="meta"><span class="notr">${esc(x.src)}</span> · ${ago(x.ts)}</div></div>`).join("")}</div>`;
+  if(V.length)h+=`<h2 class="nh">🎬 Videolar</h2><div class="vrow">${V.slice(0,10).map(x=>`<div class="vcard" data-n="${idx.get(x)}"><div class="nimg vb"><i class="play">▶</i><img src="${esc(x.ii||x.i)}" loading="lazy" decoding="async" onerror="this.remove()"></div><div class="t ${NC(x)}">${esc(NT(x))}</div><div class="meta">${ago(x.ts)}</div></div>`).join("")}</div>`;
   const more=N.slice(9);if(more.length){h+=`<h2 class="nh">🗞 Ko'proq yangiliklar</h2>`+more.slice(0,NEWSN).map(x=>`<div class="news nl" data-n="${idx.get(x)}">${nImg(x.i)}<div class="nb"><div class="t ${NC(x)}">${esc(NT(x))}</div>${nMeta(x)}</div></div>`).join("");
     if(more.length>NEWSN)h+=`<button class="nmore" onclick="NEWSN+=15;render()">Ko'proq ko'rsatish (${more.length-NEWSN}) ↓</button>`}
   setTimeout(newsChipFill,50);
-  return h+`<div class="disc">Yangiliklar manbasi: Yahoo Finance. O'zbekcha tarjima va qisqa mazmun — AI.</div>`;
+  return h+`<div class="disc">O'zbekcha tarjima va qisqa mazmun — AI.</div>`;
 }
 let NCF=0;async function newsChipFill(){document.querySelectorAll(".tkc[data-tk]").forEach(e=>{if(!e._b){e._b=1;e.onclick=ev=>{ev.stopPropagation();const s=e.dataset.tk;if(s.startsWith("^")||/[=]|-USD$/.test(s))openMarket(s,s);else openDetail(s)}}});
   const need=[...new Set([...document.querySelectorAll(".tkc[data-tk]")].map(e=>e.dataset.tk))].filter(t=>{const q=wlQ(t);return !q||q.c==null});
@@ -506,14 +506,14 @@ function openArticle(i){
   const x=(D.news||[])[i];if(!x)return;
   const uz=(LANG==="uz"&&x.tu)||(x.tr&&x.tr[LANG]);
   const body=LANG==="uz"?(x.su||x.d||""):(x.su||x.d||"");      // boshqa tillarda o'zbekcha xulosa brauzerda o'giriladi
-  let h=`<div class="top"><button class="back">←</button><div class="mut" style="font-size:13px"><span class="notr">${esc(x.src)}</span> · ${ago(x.ts)}</div></div><div class="art" style="padding:0 16px">`;
+  let h=`<div class="top"><button class="back">←</button><div class="mut" style="font-size:13px">${ago(x.ts)}</div></div><div class="art" style="padding:0 16px">`;
   h+=`<h1 class="${uz?"notr":""}">${esc(NT(x))}</h1>`;
   if(x.ii||x.i)h+=`<div class="nimg ab ${x.v?"isv":""}" ${x.v?'id="vplay"':""}>${x.v?'<i class="play">▶</i>':""}<img src="${esc(x.ii||x.i)}" decoding="async" onerror="this.parentNode.remove()"></div>`;
   if(x.v)h+=`<button class="btn" id="vbtn" style="width:100%;margin:6px 0 10px">▶ Videoni ko'rish</button>`;
   if((x.tk||[]).length)h+=`<div class="tks" style="margin:4px 0 10px">${x.tk.map(tkChip).join("")}</div>`;
   h+=body?`<div class="sum ${LANG==="uz"&&x.su?"notr":""}">${esc(body).replace(/\n/g,"<br>")}</div>`:`<div class="sum mut">Qisqa mazmun hali tayyorlanmoqda — bir necha daqiqadan keyin qayta oching.</div>`;
   if(x.ai)h+=`<div class="mut" style="font-size:12px">🤖 Mazmun AI tomonidan o'zbekchaga o'girilib, qisqartirildi.</div>`;
-  h+=`<div class="disc">Manba: <span class="notr">${esc(x.src)}</span> · <a href="#" id="src" style="color:var(--acc2)">asl maqola</a></div></div>`;
+  h+=`<div class="disc"><a href="#" id="src" style="color:var(--mut)">asl maqola ↗</a></div></div>`;
   const d=$("#detail");d.innerHTML=h;d.style.display="block";d.scrollTop=0;
   d.querySelector(".back").onclick=closeDetail;if(tg&&tg.BackButton){tg.BackButton.show();tg.BackButton.onClick(closeDetail)}
   $("#src").onclick=e=>{e.preventDefault();openLink(x.l)};
