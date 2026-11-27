@@ -203,6 +203,27 @@ body.pfc-lock{overflow:hidden}
 .tl .bar2 select{flex:1}.btn{background:var(--acc);color:#fff;border:0;border-radius:12px;padding:12px;font-size:15px;font-weight:700;width:100%}
 .btn2{background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:16px}
 .out{min-height:110px;white-space:pre-wrap;font-size:16px;line-height:1.45}
+/* ===== v12 ===== */
+:root{--fz:1}body.fzon #main,body.fzon #detail{zoom:var(--fz)}body.fzon .pfc-host,body.fzon .pfc-wrap{zoom:calc(1/var(--fz))}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}.mtile{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;text-align:left;color:var(--tx);display:flex;flex-direction:column;gap:3px}
+.mtile .mi{font-size:26px}.mtile b{font-size:15px}.mtile .mut{font-size:12px}
+.htiles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:2px 0 14px}.htile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 2px;color:var(--tx);font-size:11.5px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:4px}.htile span{font-size:22px}
+.sgbtn{display:flex;gap:8px;margin-top:10px;align-items:center}.sgbtn button{flex:1;background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:10px;padding:8px 4px;font-size:13px;font-weight:700}
+.secwarn{color:#ea3943;font-weight:800;font-size:12px}.secb{border-color:#ea394366}.secrow{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer}.secrow:last-child{border-bottom:0}.seci{font-size:20px}
+.calday{font-weight:800;margin:14px 2px 4px;color:var(--acc2)}.calrow{display:flex;gap:10px;align-items:center;padding:10px 4px;border-bottom:1px solid var(--line);cursor:pointer}.calbell{background:none;border:0;font-size:20px;opacity:.6}.calbell.on{opacity:1}
+.inp{background:var(--card2);border:1px solid var(--line);color:var(--tx);border-radius:10px;padding:10px;font-size:15px;width:100%;min-width:0}.fl2{display:block;font-size:12px;color:var(--mut);margin:10px 0 4px}
+.fxc{display:flex;justify-content:space-between;font-size:14px}.calcres{display:grid;grid-template-columns:1fr 1fr;gap:10px}.calcres div{background:var(--card2);border-radius:12px;padding:10px;display:flex;flex-direction:column}.calcres b{font-size:18px}.calcres i{font-style:normal;font-size:12px;color:var(--mut)}
+.pphead{display:grid;grid-template-columns:1fr 1fr;gap:10px}.pphead div{display:flex;flex-direction:column}.pphead b{font-size:19px}.pphead i{font-style:normal;font-size:11px;color:var(--mut)}
+.lbrow{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer}.lbrow:last-child{border-bottom:0}.lbrow.mine{background:var(--card2);margin:0 -12px;padding:10px 12px}.lbn{width:26px;text-align:center;font-weight:800}
+.tab{background:linear-gradient(90deg,#f5c518,#f59e0b);color:#111;border-radius:6px;padding:1px 6px;font-size:10.5px;font-weight:800;white-space:nowrap}
+.pvote{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0 2px;font-size:13px;position:relative;padding-bottom:6px}.pvote button{background:var(--card2);border:1px solid var(--line);color:var(--tx);border-radius:16px;padding:5px 12px;font-size:13px;font-weight:700}
+.pvote button.on{background:#16c78433;border-color:#16c784}.pvote button.on.dn{background:#ea394333;border-color:#ea3943}.vbar{position:absolute;left:0;right:0;bottom:0;height:3px;background:#ea394355;border-radius:2px;overflow:hidden}.vbar i{display:block;height:100%;background:#16c784}
+.pvote.done{color:var(--mut)}.pwho{display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin:8px 0 2px;font-size:13px;font-weight:700}.prstat{margin:10px 0 0;font-size:14px}
+.jrf{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.lrbar{height:8px;background:var(--card2);border-radius:4px;margin-top:8px;overflow:hidden}.lrbar span{display:block;height:100%;background:linear-gradient(90deg,var(--acc),#16c784)}
+.lrrow{display:flex;gap:12px;align-items:center;padding:12px 4px;border-bottom:1px solid var(--line);cursor:pointer}.lrn{width:32px;height:32px;border-radius:50%;background:var(--card2);display:grid;place-items:center;font-weight:800}.lrn.ok{background:#16c784;color:#fff}
+.lrtxt p{margin:0 0 10px;line-height:1.55;font-size:15px}.lropt{display:block;width:100%;text-align:left;background:var(--card2);border:1px solid var(--line);color:var(--tx);border-radius:10px;padding:10px;margin-top:8px;font-size:14px}.lropt.ok{border-color:#16c784;background:#16c78422}.lropt.no{border-color:#ea3943;background:#ea394322}.lrfb{font-size:13px;margin-top:6px}
+.reflink{background:var(--card2);border:1px dashed var(--acc2);border-radius:10px;padding:10px;font-size:13px;word-break:break-all;margin-top:8px}
 /* ===== WATCHLIST ===== */
 #askm{display:none;position:fixed;inset:0;z-index:300}#askm .pfc-sbg{position:absolute;inset:0;background:rgba(0,0,0,.5)}#askm .askbox{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);width:min(340px,88vw);background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:12px}
 #askm input{background:var(--card2);border:1px solid var(--line);color:var(--tx);border-radius:10px;padding:11px;font-size:16px}.askbt{display:flex;gap:8px;justify-content:flex-end}.askbt button{background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:10px;padding:9px 16px;font-weight:700}#askok{background:var(--acc);color:#fff;border-color:var(--acc)}#askok.dang{background:#ea3943;border-color:#ea3943}
@@ -261,7 +282,7 @@ nav button{min-width:0;font-size:10.5px}nav button .lb{max-width:100%;overflow:h
 </head>
 <body>
 <header>
-  <div class="brand"><div class="logo" style="display:flex;align-items:center;gap:5px"><img src="data:image/svg+xml;base64,PHN2ZyBpZD0iQSIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImJnQSIgY3g9IjcwJSIgY3k9IjE4JSIgcj0iOTUlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzZjFmODYiLz48c3RvcCBvZmZzZXQ9Ii41NSIgc3RvcC1jb2xvcj0iIzE0MTEyYyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzBhMGIxMiIvPjwvcmFkaWFsR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ0EiIHgxPSIwIiB5MT0iMSIgeDI9IjEiIHkyPSIwIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM1ZjhiZmYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNjNThjZmYiLz48L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGQiIHgxPSIwIiB5MT0iMSIgeDI9IjEiIHkyPSIwIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmNWE2MjMiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmUyOGYiLz48L2xpbmVhckdyYWRpZW50Pgo8ZmlsdGVyIGlkPSJnbG93IiB4PSItMzAlIiB5PSItMzAlIiB3aWR0aD0iMTYwJSIgaGVpZ2h0PSIxNjAlIj48ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIxOCIgcmVzdWx0PSJiIi8+PGZlTWVyZ2U+PGZlTWVyZ2VOb2RlIGluPSJiIi8+PGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+PC9mZU1lcmdlPjwvZmlsdGVyPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAyNCIgaGVpZ2h0PSIxMDI0IiBmaWxsPSJ1cmwoI2JnQSkiLz48Y2lyY2xlIGN4PSI1MTIiIGN5PSI1MTIiIHI9IjQwNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dBKSIgc3Ryb2tlLXdpZHRoPSIxMiIgb3BhY2l0eT0iLjQiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzggMCkiIGZpbHRlcj0idXJsKCNnbG93KSI+PHBhdGggZD0iTTM4MCA3OTAgVjI0MCBINTc1IEExNzUgMTc1IDAgMCAxIDU3NSA1OTAgSDM4MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dBKSIgc3Ryb2tlLXdpZHRoPSIxMDQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8cG9seWxpbmUgcG9pbnRzPSI0NzAsNTI1IDUzNSw0NTIgNTkyLDQ5MCA2ODAsMzcyIiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMzYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8cGF0aCBkPSJNNjI4IDM2MiBMNzEyIDM0NiBMNjk3IDQzMCBaIiBmaWxsPSJ1cmwoI2dvbGQpIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMTAiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L2c+PC9zdmc+" alt="" style="width:24px;height:24px;border-radius:7px">Penny<b>Finance</b></div><div style="display:flex;align-items:center;gap:8px"><button id="wlbtn" class="wlbtn" title="Watchlist">⭐</button><select id="lang" class="langsel notr"></select></div></div>
+  <div class="brand"><div class="logo" style="display:flex;align-items:center;gap:5px"><img src="data:image/svg+xml;base64,PHN2ZyBpZD0iQSIgdmlld0JveD0iMCAwIDEwMjQgMTAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cmFkaWFsR3JhZGllbnQgaWQ9ImJnQSIgY3g9IjcwJSIgY3k9IjE4JSIgcj0iOTUlIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMzZjFmODYiLz48c3RvcCBvZmZzZXQ9Ii41NSIgc3RvcC1jb2xvcj0iIzE0MTEyYyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzBhMGIxMiIvPjwvcmFkaWFsR3JhZGllbnQ+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ0EiIHgxPSIwIiB5MT0iMSIgeDI9IjEiIHkyPSIwIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiM1ZjhiZmYiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNjNThjZmYiLz48L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9ImdvbGQiIHgxPSIwIiB5MT0iMSIgeDI9IjEiIHkyPSIwIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNmNWE2MjMiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmUyOGYiLz48L2xpbmVhckdyYWRpZW50Pgo8ZmlsdGVyIGlkPSJnbG93IiB4PSItMzAlIiB5PSItMzAlIiB3aWR0aD0iMTYwJSIgaGVpZ2h0PSIxNjAlIj48ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIxOCIgcmVzdWx0PSJiIi8+PGZlTWVyZ2U+PGZlTWVyZ2VOb2RlIGluPSJiIi8+PGZlTWVyZ2VOb2RlIGluPSJTb3VyY2VHcmFwaGljIi8+PC9mZU1lcmdlPjwvZmlsdGVyPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAyNCIgaGVpZ2h0PSIxMDI0IiBmaWxsPSJ1cmwoI2JnQSkiLz48Y2lyY2xlIGN4PSI1MTIiIGN5PSI1MTIiIHI9IjQwNSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dBKSIgc3Ryb2tlLXdpZHRoPSIxMiIgb3BhY2l0eT0iLjQiLz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzggMCkiIGZpbHRlcj0idXJsKCNnbG93KSI+PHBhdGggZD0iTTM4MCA3OTAgVjI0MCBINTc1IEExNzUgMTc1IDAgMCAxIDU3NSA1OTAgSDM4MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI2dBKSIgc3Ryb2tlLXdpZHRoPSIxMDQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8cG9seWxpbmUgcG9pbnRzPSI0NzAsNTI1IDUzNSw0NTIgNTkyLDQ5MCA2ODAsMzcyIiBmaWxsPSJub25lIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMzYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8cGF0aCBkPSJNNjI4IDM2MiBMNzEyIDM0NiBMNjk3IDQzMCBaIiBmaWxsPSJ1cmwoI2dvbGQpIiBzdHJva2U9InVybCgjZ29sZCkiIHN0cm9rZS13aWR0aD0iMTAiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz48L2c+PC9zdmc+" alt="" style="width:24px;height:24px;border-radius:7px">Penny<b>Finance</b></div><div style="display:flex;align-items:center;gap:8px"><button id="mnbtn" class="wlbtn" title="Menyu" style="color:var(--tx)">☰</button><button id="wlbtn" class="wlbtn" title="Watchlist">⭐</button><select id="lang" class="langsel notr"></select></div></div>
   <div class="search">🔎<input id="q" placeholder="Tiker qidirish: AAPL, PLUG…" autocomplete="off" autocapitalize="characters"></div>
 </header>
 <div class="mrow"><div class="mstate" id="mstate"></div><div class="upd notr" id="upd"></div></div><div class="strip" id="strip"></div>
@@ -338,10 +359,11 @@ function sigCard(s){
   const res=s.status==="open"?pct(s.price?(s.price/s.entry-1)*100:null):pct(s.pnl);
   const rc=s.status==="open"?cls(s.price-s.entry):cls(s.pnl);
   return `<div class="card sig" data-t="${esc(s.t)}"><div class="row"><div><div class="tk">${esc(s.t)}</div><div class="mut" style="font-size:12px">${esc(s.entry_date)}${s.closed_date?" → "+esc(s.closed_date):""}</div></div>
-  <div><div class="px">${money(p)}</div><div class="${rc}" style="text-align:right;font-weight:700">${res} <span class="mut" style="font-weight:400;font-size:11px">${s.status==="open"?"kirishdan":"natija"}</span></div></div></div>
+  <div><div class="px">${money(p)}</div>${som(p)?`<div class="mut notr" style="text-align:right;font-size:11px">≈ ${som(p)}</div>`:""}<div class="${rc}" style="text-align:right;font-weight:700">${res} <span class="mut" style="font-weight:400;font-size:11px">${s.status==="open"?"kirishdan":"natija"}</span></div></div></div>
   ${(s.sp&&s.sp.length>1)||spOf(s.t)?`<div class="sgspk">${spark((s.sp&&s.sp.length>1)?s.sp:spOf(s.t),320,46,null,"fl")}</div>`:""}
   <div class="badges"><span class="b kind">${esc(s.kind_name||s.kind)}</span><span class="b st-${s.status==="open"?"open":s.pnl>0?"win":"loss"}">${STN[s.status]||s.status}${s.partial?" · 💰1-qism":""}</span>${s.halal?`<span class="b notr ${HB[s.halal]||""}">☪️ ${esc(T(s.halal))}</span>`:""}</div>
-  <div class="lvl"><div class="bar"><span class="dot" style="left:${pos}%"></span></div><div class="lv"><span>🛑 ${money(lo)}</span><span>Kirish ${money(s.entry)}</span><span>🎯 ${money(hi)}</span></div></div></div>`;
+  <div class="lvl"><div class="bar"><span class="dot" style="left:${pos}%"></span></div><div class="lv"><span>🛑 ${money(lo)}</span><span>Kirish ${money(s.entry)}</span><span>🎯 ${money(hi)}</span></div></div>
+  ${s.status==="open"?`<div class="sgbtn"><button data-calc="${esc(s.t)}">🧮 Lot hisoblash</button><button data-ptq="${esc(s.t)}" data-k="${esc(s.kind||"")}">📝 Virtual ochish</button>${secOf(s.t).length?`<span class="secwarn">⚠️ SEC</span>`:""}</div>`:""}</div>`;
 }
 function render(){
   if(!D){load();return}
@@ -368,7 +390,7 @@ function render(){
     r.sort((a,b)=>((a[MS.k]??-1e9)>(b[MS.k]??-1e9)?1:-1)*MS.d);
     h+=vixCard()+mktOverview();
     h+=`<h2>Barcha aksiyalar</h2><div class="seg"><button data-mf="all" class="${MF==="all"?"on":""}">Hammasi</button><button data-mf="halal" class="${MF==="halal"?"on":""}">☪️ Halol</button><button data-mf="penny" class="${MF==="penny"?"on":""}">🪙 ≤ $5</button></div>`+quoteTable(r.slice(0,150));
-  }else if(TAB==="home"){h+=vixCard()+homeMovers()+newsTab()}
+  }else if(TAB==="home"){h+=vixCard()+homeTiles()+homeMovers()+newsTab()}
   else if(TAB==="com"){m.innerHTML=comTab();bindCom(m);return}
 
   else{const L=(D.halal||[]).filter(x=>x.v===HF);
@@ -817,6 +839,212 @@ function wlRows(){const box=document.getElementById("wlrows");if(!box)return;let
   box.querySelectorAll("[data-fl]").forEach(b=>b.onclick=()=>{const s=b.dataset.fl,K=Object.keys(WLFLAG),c=WL.flags[s],n=c?K[K.indexOf(c)+1]:K[0];if(n)WL.flags[s]=n;else delete WL.flags[s];wlSave();wlRender()})}
 function wlStar(sym){const on=wlHas(sym);return `<button class="wlstar ${on?"on":""}" data-star="${esc(sym)}" title="Watchlist">${on?"★":"☆"}</button>`}
 function wlBindStar(root){(root||document).querySelectorAll("[data-star]").forEach(b=>b.onclick=e=>{e.stopPropagation();const on=wlToggle(b.dataset.star);b.textContent=on?"★":"☆";b.classList.toggle("on",on);toast(on?"⭐ Watchlist'ga qo'shildi":"Watchlist'dan olib tashlandi")})}
+// ===================== v12: MENYU va YANGI BO'LIMLAR =====================
+async function sendAct(a){a=Object.assign({id:Date.now().toString(36)+Math.random().toString(36).slice(2,7),ts:Math.floor(Date.now()/1000)},a);
+  if(typeof seal!=="function"||String(CTOPIC).startsWith("__"))throw new Error("ilova eski — botga /webapp update yuboring");
+  const r=await fetch("https://ntfy.sh/"+CTOPIC+"?tags=pfa",{method:"POST",body:await seal(a)});if(!r.ok)throw new Error("HTTP "+r.status);return a}
+function nf(v,d){return v==null||!isFinite(v)?"—":Number(v).toLocaleString("ru-RU",{maximumFractionDigits:d==null?0:d}).replace(/,/g,".")}
+function som(usd){const r=D&&D.fx&&D.fx.uzs;return r&&usd!=null?nf(usd*r)+" so'm":""}
+function won(usd){const r=D&&D.fx&&D.fx.krw;return r&&usd!=null?"₩"+nf(usd*r):""}
+function usdS(v){return v==null?"—":(v>=0?"+":"−")+"$"+nf(Math.abs(v),2)}
+function bigN(v){if(v==null)return "—";const a=Math.abs(v);return a>=1e12?(v/1e12).toFixed(2)+"T":a>=1e9?(v/1e9).toFixed(2)+"B":a>=1e6?(v/1e6).toFixed(1)+"M":a>=1e3?(v/1e3).toFixed(0)+"K":String(Math.round(v))}
+function page(title,sub){return detailShell(title,sub||"")}
+const MENU=[["scan","🌅","Skaner","Premarket va kun yetakchilari"],["cal","📅","Kalendar","Hisobotlar va IPO"],["sec","⚠️","SEC ogohlantirish","Offering, reverse split"],["paper","🏆","Musobaqa","Virtual savdo va reyting"],
+  ["calc","🧮","Kalkulyator","So'mda lot hisoblash"],["jr","📒","Savdo kundaligi","Xatolaringizni toping"],["learn","🎓","O'quv markazi","Darslar va testlar"],["ref","🎁","Do'st taklif qilish","+7 kun bepul"],
+  ["wl","⭐","Watchlist","Mening ro'yxatlarim"],["vix","😨","VIX","Qo'rquv indeksi"],["look","🎨","Ko'rinish","Tema va shrift"]];
+function openTool(k){({scan:openScan,cal:openCal,sec:openSec,paper:openPaper,calc:()=>openCalc(),jr:openJournal,learn:openLearn,ref:openRef,wl:openWatchlist,vix:openVix,look:openLook}[k]||(()=>{}))()}
+function openMenu(){const b=page("☰ Menyu","Barcha bo'limlar");const w=document.createElement("div");
+  w.innerHTML=`<div class="mgrid">${MENU.map(m=>`<button class="mtile" data-tool="${m[0]}"><span class="mi">${m[1]}</span><b>${m[2]}</b><span class="mut">${m[3]}</span></button>`).join("")}</div>
+  <div class="disc">PennyFinance — AQSh aksiyalari bo'yicha signal va tahlil. ⚠️ Daromad kafolati emas.</div>`;b.appendChild(w);
+  w.querySelectorAll("[data-tool]").forEach(e=>e.onclick=()=>openTool(e.dataset.tool))}
+function homeTiles(){const K=["scan","cal","paper","calc","sec","jr","learn","ref"];return `<div class="htiles">${K.map(k=>{const m=MENU.find(x=>x[0]===k);return `<button class="htile" data-tool="${k}"><span>${m[1]}</span>${m[2]}</button>`}).join("")}</div>`}
+// ---------- 🎨 Ko'rinish: tema va shrift ----------
+function applyLook(){let th="auto",fz=1;try{th=localStorage.getItem("pf_theme")||"auto";fz=+localStorage.getItem("pf_fz")||1}catch(e){}
+  const el=document.documentElement;if(th==="auto"){if(tg&&tg.colorScheme==="light")el.dataset.theme="light";else delete el.dataset.theme}else if(th==="light")el.dataset.theme="light";else delete el.dataset.theme;
+  el.style.setProperty("--fz",fz);document.body.classList.toggle("fzon",fz!==1)}
+function openLook(){const b=page("🎨 Ko'rinish","Tema va shrift o'lchami");const w=document.createElement("div");
+  const th=localStorage.getItem("pf_theme")||"auto",fz=+localStorage.getItem("pf_fz")||1;
+  w.innerHTML=`<h2>Tema</h2><div class="seg">${[["auto","📱 Telegram bo'yicha"],["dark","🌙 Qorong'u"],["light","☀️ Yorug'"]].map(x=>`<button data-th="${x[0]}" class="${th===x[0]?"on":""}">${x[1]}</button>`).join("")}</div>
+  <h2>Shrift o'lchami</h2><div class="seg">${[[1,"A"],[1.1,"A+"],[1.2,"A++"],[1.32,"A+++"]].map(x=>`<button data-fz="${x[0]}" class="${fz===x[0]?"on":""}" style="font-size:${13*x[0]}px">${x[1]}</button>`).join("")}</div>
+  <div class="card" style="margin-top:14px"><b>Namuna matn</b><div style="margin-top:6px">AAPL signali: kirish $255.10, nishon $270, stop $248. Ko'zingizga qulay o'lchamni tanlang.</div></div>
+  <div class="disc">Sozlama shu qurilmada saqlanadi. Grafik o'lchami o'zgarmaydi (u ekranga moslashadi).</div>`;b.appendChild(w);
+  w.querySelectorAll("[data-th]").forEach(e=>e.onclick=()=>{localStorage.setItem("pf_theme",e.dataset.th);applyLook();w.querySelectorAll("[data-th]").forEach(x=>x.classList.toggle("on",x===e))});
+  w.querySelectorAll("[data-fz]").forEach(e=>e.onclick=()=>{localStorage.setItem("pf_fz",e.dataset.fz);applyLook();w.querySelectorAll("[data-fz]").forEach(x=>x.classList.toggle("on",x===e))})}
+// ---------- 🌅 Skaner ----------
+let SCT=null;
+function openScan(){const S=D.scan;const b=page("🌅 Skaner","Penny aksiyalar: $0.05–$30");const w=document.createElement("div");b.appendChild(w);
+  if(!S){w.innerHTML=`<div class="empty">Skaner ma'lumoti hali yo'q — bot 3–5 daqiqada yig'adi.</div>`;return}
+  const SES={pre:"🌅 Premarket ochiq (bozorgacha)",reg:"🟢 Bozor ochiq",post:"🌙 Post-market (bozordan keyin)",closed:"⚫ Bozor yopiq — oxirgi ma'lumot"};
+  if(!SCT)SCT=S.ses==="pre"?"pre":S.ses==="post"?"post":"day";
+  const TABS=[["pre","🌅 Premarket"],["day","📈 O'sganlar"],["lose","📉 Tushganlar"],["vol","🔥 G'ayrioddiy hajm"],["post","🌙 Post-market"]];
+  const L=S[SCT]||[];
+  w.innerHTML=`<div class="mut" style="font-size:13px;margin-bottom:8px">${SES[S.ses]||""} · yangilangan ${ago(S.ts)}</div><div class="cchips">${TABS.map(t=>`<button class="cchip ${SCT===t[0]?"on":""}" data-sc="${t[0]}">${t[1]}</button>`).join("")}</div>
+  ${L.length?`<div class="card" style="padding:4px 10px"><table class="qt"><tr><th>Tiker</th><th>Narx</th><th>%</th><th>Hajm×</th><th>Float</th></tr>${L.map(r=>`<tr class="q" data-t="${esc(r.t)}"><td><b class="notr">${esc(r.t)}</b><div class="mut notr" style="font-size:11px;max-width:110px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(r.n||"")}</div></td><td class="notr">${money(r.p)}</td><td class="${cls(r.c)} notr"><b>${pct(r.c)}</b></td><td class="notr">${r.rv!=null?r.rv+"×":"—"}</td><td class="notr">${bigN(r.fl)}</td></tr>`).join("")}</table></div>`:`<div class="empty">Bu bo'limda hozircha ma'lumot yo'q.</div>`}
+  <div class="disc">Hajm× — bugungi hajm o'rtacha (3 oylik) hajmdan necha barobar ko'p. Kichik float (aylanmadagi aksiya) + katta hajm = keskin harakat ehtimoli. ⚠️ Daromad kafolati emas.</div>`;
+  w.querySelectorAll("[data-sc]").forEach(e=>e.onclick=()=>{SCT=e.dataset.sc;closeDetail();openScan()});
+  w.querySelectorAll("tr[data-t]").forEach(e=>e.onclick=()=>openDetail(e.dataset.t))}
+// ---------- 📅 Kalendar ----------
+let CALT="earn",CALF="all";
+const WDZ=["Yakshanba","Dushanba","Seshanba","Chorshanba","Payshanba","Juma","Shanba"];
+function dayLab(d){const x=new Date(d+"T12:00:00");const t=new Date();t.setHours(12,0,0,0);const df=Math.round((x-t)/864e5);return `${WDZ[x.getDay()]}, ${d.slice(8,10)}.${d.slice(5,7)}${df===0?" · bugun":df===1?" · ertaga":""}`}
+function openCal(){const K=D.cal;const b=page("📅 Kalendar","Kelgusi 14 kun");const w=document.createElement("div");b.appendChild(w);
+  if(!K){w.innerHTML=`<div class="empty">Kalendar ma'lumoti hali yo'q — bot yig'yapti.</div>`;return}
+  let rem={};try{rem=JSON.parse(localStorage.getItem("pf_erem")||"{}")}catch(e){}
+  let h=`<div class="seg"><button data-ct="earn" class="${CALT==="earn"?"on":""}">📊 Hisobotlar</button><button data-ct="ipo" class="${CALT==="ipo"?"on":""}">🆕 IPO</button></div>`;
+  if(CALT==="earn"){const L=(K.earn||[]).filter(x=>CALF==="all"||x.u);h+=`<div class="cchips"><button class="cchip ${CALF==="all"?"on":""}" data-cf="all">Hammasi</button><button class="cchip ${CALF==="my"?"on":""}" data-cf="my">📡 Skaner/signal aksiyalari</button></div>`;
+    let last="";L.forEach(x=>{if(x.d!==last){last=x.d;h+=`<div class="calday">${dayLab(x.d)}</div>`}
+      const k=x.t+"|"+x.d;h+=`<div class="calrow" data-t="${esc(x.t)}"><div class="wllogo" style="background:${wlColor(x.t)};flex-basis:34px;width:34px;height:34px;font-size:12px">${esc(x.t[0])}</div><div style="flex:1;min-width:0"><b class="notr">${esc(x.t)}</b>${x.u?' <span class="b kind" style="font-size:10px">📡</span>':""}<div class="mut" style="font-size:12px">${x.h==="bmo"?"🌅 bozor ochilishidan oldin":x.h==="amc"?"🌙 bozor yopilgach":"⏰ vaqti noma'lum"} · EPS kutilma: <span class="notr">${x.e!=null?x.e:"—"}</span>${x.r?` · tushum: <span class="notr">$${bigN(x.r)}</span>`:""}</div></div><button class="calbell ${rem[k]?"on":""}" data-rem="${esc(k)}">${rem[k]?"🔔":"🔕"}</button></div>`});
+    if(!L.length)h+=`<div class="empty">Ro'yxat bo'sh.</div>`}
+  else{const L=K.ipo||[];let last="";L.forEach(x=>{if(x.d!==last){last=x.d;h+=`<div class="calday">${dayLab(x.d)}</div>`}h+=`<div class="calrow"><div style="flex:1"><b class="notr">${esc(x.t||"—")}</b> <span class="notr">${esc(x.n)}</span><div class="mut notr" style="font-size:12px">${esc(x.x)} · ${esc(String(x.p||"narx —"))} · ${esc(x.s)}</div></div></div>`});if(!L.length)h+=`<div class="empty">Yaqin kunlarda IPO yo'q.</div>`}
+  h+=`<div class="disc">🔕/🔔 — hisobotdan bir kun oldin va hisobot kuni botdan eslatma. Manba: Finnhub. ⚠️ Sanalar o'zgarishi mumkin.</div>`;w.innerHTML=h;
+  w.querySelectorAll("[data-ct]").forEach(e=>e.onclick=()=>{CALT=e.dataset.ct;closeDetail();openCal()});w.querySelectorAll("[data-cf]").forEach(e=>e.onclick=()=>{CALF=e.dataset.cf;closeDetail();openCal()});
+  w.querySelectorAll(".calrow[data-t]").forEach(e=>e.onclick=ev=>{if(ev.target.closest("button"))return;openDetail(e.dataset.t)});
+  w.querySelectorAll("[data-rem]").forEach(e=>e.onclick=async ev=>{ev.stopPropagation();const [sym,date]=e.dataset.rem.split("|");try{await sendAct({t:"alert",kind:"earn",sym,date});rem[e.dataset.rem]=1;localStorage.setItem("pf_erem",JSON.stringify(rem));e.textContent="🔔";e.classList.add("on");toast("🔔 Eslatma qo'yildi — botdan tasdiq keladi")}catch(x){alertBox("Yuborilmadi: "+x.message)}})}
+// ---------- ⚠️ SEC ----------
+const SECK={off:["🔴","Offering — yangi aksiya chiqarish (suyultirish)"],reg:["🟠","S-1/S-3 ro'yxatdan o'tkazish (kelajakda offering)"],rs:["🟠","Teskari bo'linish (reverse split)"],dl:["⚠️","Birjadan chiqarish xavfi"],eq:["🟠","Aksiya sotildi/berildi (8-K 3.02)"]};
+let SECF="all";
+function secOf(t){return (D.sec||[]).filter(x=>x.t===t)}
+function secRow(x){const k=SECK[x.k]||["•",x.k];return `<div class="secrow" data-u="${esc(x.u)}"><span class="seci">${k[0]}</span><div style="flex:1;min-width:0"><b class="notr">${esc(x.t)}</b> <span class="mut notr" style="font-size:12px">${esc(x.f)} · ${esc(x.d)}</span><div style="font-size:13px">${esc(k[1])}</div></div><span class="mut">↗</span></div>`}
+function openSec(){const b=page("⚠️ SEC ogohlantirishlari","Oxirgi 14 kun");const w=document.createElement("div");b.appendChild(w);
+  const my=new Set([...wlAll(),...(D.signals||[]).filter(s=>s.status==="open").map(s=>s.t)]);const L=(D.sec||[]).filter(x=>SECF==="all"||my.has(x.t));
+  w.innerHTML=`<div class="cchips"><button class="cchip ${SECF==="all"?"on":""}" data-sf="all">Hammasi</button><button class="cchip ${SECF==="my"?"on":""}" data-sf="my">⭐ Mening ro'yxatim + ochiq signallar</button></div>
+  ${L.length?`<div class="card" style="padding:2px 12px">${L.map(secRow).join("")}</div>`:`<div class="empty">Hozircha ogohlantirish yo'q 👍</div>`}
+  <div class="disc">Bot skanerdagi penny aksiyalar va ochiq signallar bo'yicha SEC EDGAR hujjatlarini har 30 daqiqada tekshiradi. Ochiq signal bo'yicha offering chiqsa, botda darhol xabar keladi. Hujjatni ochish uchun qatorni bosing.</div>`;
+  w.querySelectorAll("[data-sf]").forEach(e=>e.onclick=()=>{SECF=e.dataset.sf;closeDetail();openSec()});w.querySelectorAll("[data-u]").forEach(e=>e.onclick=()=>openLink(e.dataset.u))}
+function secBanner(t){const L=secOf(t);if(!L.length)return "";return `<div class="card secb"><b>⚠️ SEC ogohlantirishi</b>${L.slice(0,3).map(secRow).join("")}</div>`}
+// ---------- 🧮 Kalkulyator (so'm / $ / ₩) ----------
+function calcLot(bal,cur,riskp,e,st){const fx=cur==="uzs"?(D.fx&&D.fx.uzs):cur==="krw"?(D.fx&&D.fx.krw):1;if(!fx||!bal||!e)return null;const usd=bal/fx;const rps=e-(st||0);
+  let q=st&&rps>0?Math.floor(usd*riskp/100/rps):Math.floor(usd/e);q=Math.max(0,Math.min(q,Math.floor(usd/e)));return {usd,q,cost:q*e,risk:st?q*Math.max(0,e-st):null}}
+function openCalc(sig){const b=page("🧮 Lot kalkulyatori","Bugun qancha bilan ochish mumkin?");const w=document.createElement("div");b.appendChild(w);
+  let st={bal:"",cur:"uzs",risk:2};try{st=Object.assign(st,JSON.parse(localStorage.getItem("pf_calc")||"{}"))}catch(e){}
+  const fx=D.fx||{};const S=sig||(D.signals||[]).find(s=>s.status==="open")||{};
+  w.innerHTML=`<div class="card fxc"><div>💵 1 $ = <b class="notr">${fx.uzs?nf(fx.uzs,2)+" so'm":"—"}</b> <span class="mut notr" style="font-size:11px">${esc(fx.src||"")}</span></div><div>₩ <b class="notr">${fx.krw?nf(fx.krw,1):"—"}</b></div></div>
+  <div class="card"><label class="fl2">Balansingiz</label><div style="display:flex;gap:8px"><input id="cbal" class="inp" inputmode="decimal" placeholder="masalan 5 000 000" value="${esc(st.bal)}"><select id="ccur" class="inp" style="flex:0 0 96px">${[["uzs","so'm"],["usd","$"],["krw","₩"]].map(x=>`<option value="${x[0]}" ${st.cur===x[0]?"selected":""}>${x[1]}</option>`).join("")}</select></div>
+  <label class="fl2">Bitta savdoda xavf (balansdan %)</label><div class="seg" id="crisk">${[1,2,3,5].map(r=>`<button data-r="${r}" class="${st.risk==r?"on":""}">${r}%</button>`).join("")}</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px"><div><label class="fl2">Kirish $</label><input id="ce" class="inp" inputmode="decimal" value="${S.entry||""}"></div><div><label class="fl2">Stop $</label><input id="cs" class="inp" inputmode="decimal" value="${S.stop||""}"></div><div><label class="fl2">Nishon $</label><input id="ct" class="inp" inputmode="decimal" value="${S.target||""}"></div></div>
+  <div id="cout" style="margin-top:12px"></div></div><h2>📡 Ochiq signallar — sizning balansingizga</h2><div id="csigs"></div>
+  <div class="disc">Hisob: xavf summasi = balans × xavf%. Aksiya soni = xavf summasi ÷ (kirish − stop), lekin balansdan oshmaydi. Kurs: O'zbekiston Markaziy banki. ⚠️ Daromad kafolati emas.</div>`;
+  const $$=id=>w.querySelector(id);const num=v=>parseFloat(String(v).replace(/\s/g,"").replace(",","."));
+  const calc=()=>{st.bal=$$("#cbal").value;st.cur=$$("#ccur").value;try{localStorage.setItem("pf_calc",JSON.stringify(st))}catch(e){}
+    const e=num($$("#ce").value),s_=num($$("#cs").value),t=num($$("#ct").value),bal=num(st.bal);const r=calcLot(bal,st.cur,st.risk,e,s_);
+    const o=$$("#cout");if(!r){o.innerHTML=`<div class="mut">Balans va kirish narxini kiriting.</div>`}else{const prof=t?r.q*(t-e):null;
+      o.innerHTML=`<div class="calcres"><div><span class="mut">Olish mumkin</span><b>${nf(r.q)} ta aksiya</b></div><div><span class="mut">Kerakli mablag'</span><b>$${nf(r.cost,2)}</b><i>${som(r.cost)}${won(r.cost)?" · "+won(r.cost):""}</i></div>
+      ${r.risk!=null?`<div><span class="mut">Stop bo'lsa zarar</span><b class="dn">−$${nf(r.risk,2)}</b><i>${som(r.risk)}</i></div>`:""}${prof!=null?`<div><span class="mut">Nishonga yetsa foyda</span><b class="up">+$${nf(prof,2)}</b><i>${som(prof)}</i></div>`:""}
+      ${r.risk&&prof?`<div><span class="mut">Foyda/xavf nisbati</span><b>1 : ${(prof/r.risk).toFixed(1)}</b></div>`:""}</div>`}
+    const L=(D.signals||[]).filter(x=>x.status==="open");$$("#csigs").innerHTML=L.length&&bal?`<div class="card" style="padding:4px 10px"><table class="qt"><tr><th>Signal</th><th>Kirish</th><th>Soni</th><th>Mablag'</th></tr>${L.map(x=>{const q=calcLot(bal,st.cur,st.risk,x.entry,x.stop)||{};return `<tr class="q" data-cs="${esc(x.t)}"><td><b class="notr">${esc(x.t)}</b></td><td class="notr">${money(x.entry)}</td><td class="notr">${nf(q.q)}</td><td class="notr">$${nf(q.cost,0)}<div class="mut" style="font-size:11px">${som(q.cost)}</div></td></tr>`}).join("")}</table></div>`:`<div class="mut" style="font-size:13px">Balansni kiriting — har bir ochiq signal uchun lot hisoblanadi.</div>`;
+    w.querySelectorAll("[data-cs]").forEach(e=>e.onclick=()=>{const x=L.find(z=>z.t===e.dataset.cs);$$("#ce").value=x.entry;$$("#cs").value=x.stop||"";$$("#ct").value=x.target||"";calc();w.scrollIntoView()})};
+  ["#cbal","#ccur","#ce","#cs","#ct"].forEach(id=>{$$(id).oninput=calc;$$(id).onchange=calc});
+  w.querySelectorAll("[data-r]").forEach(e=>e.onclick=()=>{st.risk=+e.dataset.r;w.querySelectorAll("[data-r]").forEach(x=>x.classList.toggle("on",x===e));calc()});calc()}
+// ---------- 🏆 Virtual savdo musobaqasi ----------
+let PPT="me";
+function boardRows(){return (C&&C.board&&C.board.rows)||[]}
+function uName(uid){const U=C&&C.users&&C.users[uid];return U?(U.n||U.u||uid):(uid===MEID?"Siz":"Treyder "+String(uid).slice(-4))}
+function openPaper(){if(!C){loadC().then(()=>{if(C){closeDetail();openPaper()}})}
+  const b=page("🏆 Virtual savdo musobaqasi","$10 000 virtual pul · haqiqiy narxlar");const w=document.createElement("div");b.appendChild(w);
+  const R=boardRows(),me=R.find(r=>r.uid===MEID);let pend=[];try{pend=JSON.parse(localStorage.getItem("pf_ppend")||"[]").filter(x=>Date.now()-x.ts<15*60e3)}catch(e){}
+  const tabs=[["me","💼 Mening hisobim"],["wk","📅 Hafta reytingi"],["all","🏅 Umumiy"],["win","👑 G'oliblar"]];
+  let h=`<div class="cchips">${tabs.map(t=>`<button class="cchip ${PPT===t[0]?"on":""}" data-pp="${t[0]}">${t[1]}</button>`).join("")}</div>`;
+  if(PPT==="me"){const eq=me?me.eq:10000;h+=`<div class="card pphead"><div><span class="mut">Hisob qiymati</span><b class="notr">$${nf(eq,2)}</b><i class="notr">${som(eq)}</i></div><div><span class="mut">Umumiy</span><b class="${cls(me?me.r:0)} notr">${pct(me?me.r:0)}</b></div><div><span class="mut">Shu hafta</span><b class="${cls(me?me.w:0)} notr">${pct(me?me.w:0)}</b></div><div><span class="mut">Bo'sh pul</span><b class="notr">$${nf(me?me.cash:10000,2)}</b></div></div>
+    <div class="card"><b>📝 Sotib olish</b><div style="display:flex;gap:8px;margin-top:8px"><input id="pps" class="inp" placeholder="Tiker: PLUG, AAPL…" autocapitalize="characters"><input id="ppu" class="inp" inputmode="decimal" placeholder="$ summa" style="flex:0 0 110px" value="1000"></div>
+    <div class="seg" style="margin-top:8px">${[500,1000,2500,5000].map(v=>`<button data-pu="${v}">$${nf(v)}</button>`).join("")}</div><button class="btn" id="ppbuy" style="width:100%;margin-top:10px">Sotib olish (bozor narxida)</button></div>`;
+    if(pend.length)h+=`<div class="mut" style="font-size:13px;margin:6px 2px">⏳ Yuborilgan buyruqlar: ${pend.map(x=>esc(x.txt)).join(" · ")} — tasdiq botdan keladi, hisob 10 daqiqada yangilanadi.</div>`;
+    const P=me?Object.entries(me.pos):[];h+=`<h2>Pozitsiyalar (${P.length})</h2>`+(P.length?P.map(([sym,v])=>{const cur=(wlQ(sym)||{}).p||v[2]||v[1];const pl=(cur-v[1])*v[0];return `<div class="wlrow" data-s="${esc(sym)}">${wlLogo(sym)}<div class="wln"><b class="notr">${esc(sym)}</b><span class="notr">${nf(v[0])} ta × $${v[1]}</span></div><div class="wlp notr"><b>$${nf(cur*v[0],2)}</b><span class="${cls(pl)}">${usdS(pl)} (${pct((cur/v[1]-1)*100)})</span></div><em class="wled"><button data-sell="${esc(sym)}" data-f="0.5">½</button><button data-sell="${esc(sym)}" data-f="1">Sotish</button></em></div>`}).join(""):`<div class="empty">Hali pozitsiya yo'q. Signal kartasidagi «📝 Virtual» tugmasi yoki yuqoridagi forma orqali oching.</div>`);
+    h+=`<button class="nmore" id="ppreset">↺ Hisobni qayta boshlash ($10 000)</button>`}
+  else if(PPT==="win"){const H=(C&&C.board&&C.board.hist)||[];h+=H.length?`<div class="card">${H.slice().reverse().map(x=>`<div class="lbrow"><span>👑</span><div style="flex:1"><b class="notr">${esc(uName(x.uid))}</b><div class="mut notr" style="font-size:12px">${esc(x.wk)}</div></div><b class="up notr">${pct(x.w)}</b></div>`).join("")}</div>`:`<div class="empty">Birinchi hafta g'olibi dushanba kuni e'lon qilinadi.</div>`}
+  else{const key=PPT==="wk"?"w":"r";const L=R.filter(r=>r.n>0).slice().sort((a,b)=>b[key]-a[key]).slice(0,50);
+    h+=L.length?`<div class="card" style="padding:4px 12px">${L.map((r,i)=>{const U=(C&&C.users&&C.users[r.uid])||{};return `<div class="lbrow ${r.uid===MEID?"mine":""}" data-uid="${esc(r.uid)}"><span class="lbn">${i<3?["🥇","🥈","🥉"][i]:i+1}</span>${avatar(U,r.uid,34)}<div style="flex:1;min-width:0"><b class="notr">${esc(uName(r.uid))}</b> ${U.ta?'<span class="tab">🏅 Top analyst</span>':""}<div class="mut notr" style="font-size:12px">$${nf(r.eq,0)} · ${r.n} savdo</div></div><b class="${cls(r[key])} notr">${pct(r[key])}</b></div>`}).join("")}</div>`:`<div class="empty">Reyting hali bo'sh — birinchi bo'ling!</div>`;
+    h+=`<div class="disc">Hafta reytingi har dushanba 00:00 (Koreya vaqti) noldan boshlanadi. G'olib e'lon qilinadi. Reyting har 10 daqiqada yangilanadi.</div>`}
+  w.innerHTML=h;
+  w.querySelectorAll("[data-pp]").forEach(e=>e.onclick=()=>{PPT=e.dataset.pp;closeDetail();openPaper()});
+  w.querySelectorAll("[data-pu]").forEach(e=>e.onclick=()=>{w.querySelector("#ppu").value=e.dataset.pu});
+  w.querySelectorAll(".lbrow[data-uid]").forEach(e=>e.onclick=()=>openProfile(e.dataset.uid));
+  w.querySelectorAll(".wlrow[data-s]").forEach(e=>e.onclick=ev=>{if(!ev.target.closest("button"))openDetail(e.dataset.s)});
+  const pp=(a,txt)=>sendAct(a).then(()=>{pend.push({ts:Date.now(),txt});localStorage.setItem("pf_ppend",JSON.stringify(pend));toast("📝 Yuborildi — tasdiq botdan keladi");closeDetail();openPaper()}).catch(x=>alertBox("Yuborilmadi: "+x.message));
+  const bb=w.querySelector("#ppbuy");if(bb)bb.onclick=()=>{const sym=w.querySelector("#pps").value.trim().toUpperCase(),usd=parseFloat(w.querySelector("#ppu").value);if(!/^[A-Z0-9.\-=^]{1,12}$/.test(sym)||!(usd>0))return alertBox("Tiker va summani kiriting");pp({t:"pt",op:"buy",sym,usd},`${sym} $${usd}`)};
+  w.querySelectorAll("[data-sell]").forEach(e=>e.onclick=()=>pp({t:"pt",op:"sell",sym:e.dataset.sell,frac:+e.dataset.f},`${e.dataset.sell} sotish`));
+  const rs=w.querySelector("#ppreset");if(rs)rs.onclick=()=>askText("Virtual hisob $10 000 dan qayta boshlansinmi?",null,()=>pp({t:"pt",op:"reset"},"qayta boshlash"),true)}
+function paperQuick(sym,kind){if(!canWrite())return alertBox("Bu funksiya obunachilar uchun");askText(`📝 ${sym} — virtual sotib olish summasi ($)`,"1000",v=>{const usd=parseFloat(v);if(!(usd>0))return;sendAct({t:"pt",op:"buy",sym,usd,sig:kind||""}).then(()=>{let pend=[];try{pend=JSON.parse(localStorage.getItem("pf_ppend")||"[]")}catch(e){}pend.push({ts:Date.now(),txt:`${sym} $${usd}`});localStorage.setItem("pf_ppend",JSON.stringify(pend));toast("📝 Virtual buyruq yuborildi — tasdiq botdan keladi")}).catch(x=>alertBox("Yuborilmadi: "+x.message))})}
+// ---------- 📒 Savdo kundaligi (shaxsiy, Telegram hisobida saqlanadi) ----------
+let JR=null;
+function jrLoad(cb){if(JR){cb&&cb();return}try{JR=JSON.parse(localStorage.getItem("pf_jr")||"[]")}catch(e){JR=[]}cb&&cb();
+  const cs=wlCS();if(!cs)return;try{cs.getItem("pf_jr_n",(e,n)=>{n=+n||0;if(e||!n)return;const keys=Array.from({length:n},(_,i)=>"pf_jr_"+i);cs.getItems(keys,(e2,v)=>{if(e2||!v)return;try{const L=JSON.parse(keys.map(k=>v[k]||"").join(""));if(Array.isArray(L)&&L.length>=JR.length){JR=L;localStorage.setItem("pf_jr",JSON.stringify(JR));if(document.querySelector(".jrv"))jrRender()}}catch(_){}})})}catch(e){}}
+function jrSave(){const v=JSON.stringify(JR);try{localStorage.setItem("pf_jr",v)}catch(e){}const cs=wlCS();if(!cs)return;const parts=v.match(/[\s\S]{1,3800}/g)||[""];try{parts.forEach((p,i)=>cs.setItem("pf_jr_"+i,p,()=>{}));cs.setItem("pf_jr_n",String(parts.length),()=>{})}catch(e){}}
+function jrPL(x){if(x.ex==null||x.ex==="")return null;const d=x.side==="S"?-1:1;return (x.ex-x.en)*x.q*d}
+function jrStats(){const L=JR.filter(x=>jrPL(x)!=null);const W=L.filter(x=>jrPL(x)>0),Lo=L.filter(x=>jrPL(x)<=0);const sum=a=>a.reduce((s,x)=>s+jrPL(x),0);
+  const hold=x=>x.d2&&x.d?Math.max(0,(new Date(x.d2)-new Date(x.d))/864e5):null;const avg=a=>a.length?a.reduce((s,v)=>s+v,0)/a.length:null;
+  const by={};L.forEach(x=>{const k=x.tag||"Boshqa";by[k]=by[k]||[];by[k].push(jrPL(x))});
+  return {n:L.length,open:JR.length-L.length,win:L.length?W.length/L.length*100:0,pl:sum(L),aw:W.length?sum(W)/W.length:0,al:Lo.length?sum(Lo)/Lo.length:0,pf:Lo.length&&sum(Lo)?Math.abs(sum(W)/sum(Lo)):null,
+    hw:avg(W.map(hold).filter(v=>v!=null)),hl:avg(Lo.map(hold).filter(v=>v!=null)),by,best:L.slice().sort((a,b)=>jrPL(b)-jrPL(a))[0],worst:L.slice().sort((a,b)=>jrPL(a)-jrPL(b))[0],
+    emo:["😀","😐","😟"].map(e=>{const a=L.filter(x=>x.emo===e);return [e,a.length,a.length?a.filter(x=>jrPL(x)>0).length/a.length*100:0]})}}
+function jrInsights(S){const T=[];if(S.n<5)return ["Kamida 5 ta yopilgan savdo kiriting — shunda xulosalar aniqroq bo'ladi."];
+  if(S.al&&S.aw&&Math.abs(S.al)>S.aw)T.push(`⚠️ O'rtacha zarar ($${nf(Math.abs(S.al),2)}) o'rtacha foydadan ($${nf(S.aw,2)}) katta — stopni qat'iyroq qo'ying yoki foydani tezroq kesmang.`);
+  if(S.hl!=null&&S.hw!=null&&S.hl>S.hw*1.5)T.push(`⚠️ Zararli savdolarni ${S.hl.toFixed(1)} kun, foydalilarini ${S.hw.toFixed(1)} kun ushlayapsiz — zararni «kutib ko'rish» odati bor.`);
+  if(S.win<40)T.push(`📉 G'alaba ${S.win.toFixed(0)}% — kirish nuqtalarini filtrlang (faqat kuchli setuplar).`);else if(S.win>=55)T.push(`✅ G'alaba darajasi yaxshi (${S.win.toFixed(0)}%).`);
+  Object.entries(S.by).forEach(([k,a])=>{if(a.length>=3){const s=a.reduce((x,y)=>x+y,0);if(s<0)T.push(`❌ «${k}» setupi bo'yicha jami ${s>=0?"+":""}$${nf(s,2)} (${a.length} savdo) — undan voz kechishni o'ylab ko'ring.`);else T.push(`✅ «${k}» eng foydali setuplardan: +$${nf(s,2)}.`)}});
+  const bad=S.emo.find(e=>e[0]==="😟"&&e[1]>=3&&e[2]<35);if(bad)T.push(`😟 Xavotirli kayfiyatda ochilgan savdolarning faqat ${bad[2].toFixed(0)}% foydali — bunday kunlarda savdo qilmang.`);
+  if(S.pf!=null)T.push(`Profit faktor: ${S.pf.toFixed(2)} ${S.pf>=1.5?"(yaxshi)":S.pf>=1?"(o'rtacha)":"(zararli — strategiyani qayta ko'ring)"}.`);return T}
+function openJournal(){jrLoad();const b=page("📒 Savdo kundaligi","Faqat sizga ko'rinadi");const w=document.createElement("div");w.className="jrv";b.appendChild(w);jrRender()}
+function jrRender(){const w=document.querySelector(".jrv");if(!w)return;const S=jrStats();
+  w.innerHTML=`<div class="card pphead"><div><span class="mut">Jami natija</span><b class="${cls(S.pl)} notr">${usdS(S.pl)}</b><i class="notr">${som(S.pl)}</i></div><div><span class="mut">G'alaba</span><b class="notr">${S.win.toFixed(0)}%</b></div><div><span class="mut">Yopilgan</span><b class="notr">${S.n}</b></div><div><span class="mut">Ochiq</span><b class="notr">${S.open}</b></div></div>
+  <div class="card"><b>➕ Savdo qo'shish</b><div class="jrf"><input id="js" class="inp" placeholder="Tiker" autocapitalize="characters"><select id="jside" class="inp"><option value="L">📈 Long</option><option value="S">📉 Short</option></select>
+  <input id="jq" class="inp" inputmode="decimal" placeholder="Soni"><input id="jen" class="inp" inputmode="decimal" placeholder="Kirish $"><input id="jex" class="inp" inputmode="decimal" placeholder="Chiqish $ (bo'sh=ochiq)">
+  <input id="jd" class="inp" type="date" value="${new Date().toISOString().slice(0,10)}"><select id="jtag" class="inp">${["Bot signali","Breakout","Trend","V-qaytish","Yangilik","Premarket","Boshqa"].map(t=>`<option>${t}</option>`).join("")}</select>
+  <select id="jemo" class="inp"><option value="😀">😀 Ishonchli</option><option value="😐" selected>😐 Oddiy</option><option value="😟">😟 Xavotirli</option></select></div>
+  <input id="jn" class="inp" placeholder="Izoh: nega kirdim, nima o'rgandim" style="margin-top:8px"><button class="btn" id="jadd" style="width:100%;margin-top:10px">Saqlash</button></div>
+  <h2>💡 Tavsiyalar</h2><div class="card">${jrInsights(S).map(t=>`<div style="padding:5px 0">${esc(t)}</div>`).join("")}<button class="nmore" id="jai">🤖 AI chuqur tahlil (javob botga keladi)</button></div>
+  <h2>Savdolar</h2>${JR.length?JR.slice().reverse().map(x=>{const pl=jrPL(x);return `<div class="wlrow">${wlLogo(x.s)}<div class="wln"><b class="notr">${esc(x.s)} ${x.side==="S"?"📉":"📈"} ${esc(x.emo||"")}</b><span class="notr">${esc(x.d||"")} · ${nf(x.q)} × $${x.en}${x.ex!=null&&x.ex!==""?" → $"+x.ex:" · ochiq"} · ${esc(x.tag||"")}</span>${x.n?`<span>${esc(x.n)}</span>`:""}</div><div class="wlp notr">${pl!=null?`<b class="${cls(pl)}">${usdS(pl)}</b>`:`<button class="cinf" data-jc="${esc(x.id)}">Yopish</button>`}<button class="cinf" data-jd="${esc(x.id)}" style="margin-top:4px">✕</button></div></div>`}).join(""):`<div class="empty">Hali savdo yo'q.</div>`}
+  <div class="disc">Kundalik Telegram hisobingizda saqlanadi (boshqa qurilmada ham ko'rinadi), hech kim ko'rmaydi. AI tahlil uchun faqat statistika va oxirgi 30 savdo yuboriladi.</div>`;
+  const $$=s=>w.querySelector(s),num=v=>parseFloat(String(v).replace(",","."));
+  $$("#jadd").onclick=()=>{const s=$$("#js").value.trim().toUpperCase(),q=num($$("#jq").value),en=num($$("#jen").value),exv=$$("#jex").value.trim();if(!s||!(q>0)||!(en>0))return alertBox("Tiker, soni va kirish narxini kiriting");
+    JR.push({id:Date.now().toString(36),s,side:$$("#jside").value,q,en,ex:exv?num(exv):null,d:$$("#jd").value,d2:exv?new Date().toISOString().slice(0,10):null,tag:$$("#jtag").value,emo:$$("#jemo").value,n:$$("#jn").value.trim().slice(0,140)});jrSave();jrRender()};
+  w.querySelectorAll("[data-jd]").forEach(e=>e.onclick=()=>askText("Savdo o'chirilsinmi?",null,()=>{JR=JR.filter(x=>x.id!==e.dataset.jd);jrSave();jrRender()},true));
+  w.querySelectorAll("[data-jc]").forEach(e=>e.onclick=()=>askText("Chiqish narxi ($)","",v=>{const x=JR.find(z=>z.id===e.dataset.jc);x.ex=num(v);x.d2=new Date().toISOString().slice(0,10);jrSave();jrRender()}));
+  $$("#jai").onclick=()=>{if(S.n<3)return alertBox("Kamida 3 ta yopilgan savdo kerak");const lines=JR.slice(-30).map(x=>`${x.d} ${x.s} ${x.side} q=${x.q} en=${x.en} ex=${x.ex??"ochiq"} pl=${jrPL(x)==null?"-":jrPL(x).toFixed(2)} tag=${x.tag} kayfiyat=${x.emo} izoh=${x.n||""}`);
+    const txt=`Statistika: ${S.n} yopilgan, g'alaba ${S.win.toFixed(0)}%, jami ${S.pl.toFixed(2)}$, o'rt foyda ${S.aw.toFixed(2)}, o'rt zarar ${S.al.toFixed(2)}, PF ${S.pf?S.pf.toFixed(2):"-"}, ushlash: foydali ${S.hw?S.hw.toFixed(1):"-"} kun, zararli ${S.hl?S.hl.toFixed(1):"-"} kun.\n`+lines.join("\n");
+    sendAct({t:"jai",txt:txt.slice(0,3500)}).then(()=>toast("🤖 Yuborildi — AI tahlil 1 daqiqada botga keladi")).catch(x=>alertBox("Yuborilmadi: "+x.message))}}
+// ---------- 🎓 O'quv markazi ----------
+const LESSONS=[
+ ["Aksiya va birja nima?","Aksiya — kompaniyaning kichik ulushi. Aksiya sotib olsangiz, kompaniyaning qisman egasiga aylanasiz.\nAQShdagi asosiy birjalar — NYSE va NASDAQ. Ular odatda AQSh vaqti bilan 9:30–16:00 ochiq (Koreya vaqti bilan taxminan 23:30–06:00, qishki vaqtda bir soat kech).\nBozor ochilishidan oldingi savdo — «premarket», yopilgandan keyingisi — «post-market» deyiladi. Bu vaqtlarda savdo kam, narx keskin sakrashi mumkin.\nNarx talab va taklifdan shakllanadi: sotib oluvchi ko'p bo'lsa narx ko'tariladi, sotuvchi ko'p bo'lsa tushadi.",
+  [["Aksiya nima?",["Kompaniyaning qarzi","Kompaniyaning ulushi","Bank depoziti"],1],["NASDAQ nima?",["AQSh birjasi","Kriptovalyuta","Bank"],0],["Premarket qachon bo'ladi?",["Bozor yopilgandan keyin","Bozor ochilishidan oldin","Dam olish kunlari"],1]]],
+ ["Penny aksiyalar: imkoniyat va xavf","Penny aksiya — odatda $5 dan arzon, kichik kompaniyalar aksiyasi. Ular bir kunda 20–100% o'sishi ham, shuncha tushishi ham mumkin.\nAsosiy xavflar: kam hajm (sotmoqchi bo'lsangiz xaridor topilmasligi), yangi aksiya chiqarish (offering) natijasida narx tushishi, manipulyatsiya («pump and dump»).\nQoida: penny aksiyaga kapitalning faqat kichik qismini qo'ying va har doim stop-loss ishlating.\nYangiliksiz, sababsiz keskin o'sgan aksiyaga kech kirish — eng ko'p uchraydigan xato.",
+  [["Penny aksiya odatda qancha turadi?",["$5 dan arzon","$100 dan qimmat","Faqat $1"],0],["Penny aksiyadagi katta xavflardan biri?",["Dividend","Offering (suyultirish)","Indeksga kirish"],1],["Penny aksiyaga qancha pul qo'yish oqilona?",["Butun kapitalni","Kapitalning kichik qismini","Qarz olib"],1]]],
+ ["Sham grafigini o'qish","Har bir sham ma'lum vaqtdagi 4 narxni ko'rsatadi: ochilish, eng yuqori, eng past va yopilish.\nYashil sham — yopilish ochilishdan yuqori (narx o'sgan). Qizil sham — yopilish past (narx tushgan).\nShamning tanasi ochilish va yopilish orasini, ingichka «soyalar» esa eng yuqori va eng past narxni ko'rsatadi.\nUzun pastki soya — sotuvchilar bosgan, lekin xaridorlar narxni qaytarib olgan degani (ko'pincha qaytish belgisi).",
+  [["Yashil sham nimani bildiradi?",["Narx tushgan","Narx o'sgan","Savdo bo'lmagan"],1],["Sham nechta narxni ko'rsatadi?",["2","4","1"],1],["Uzun pastki soya ko'pincha nimani bildiradi?",["Xaridorlar narxni qaytargan","Kompaniya bankrot","Hech narsa"],0]]],
+ ["Stop-loss va take-profit","Stop-loss — narx shu darajaga tushsa, zararni cheklash uchun sotish nuqtasi. Take-profit (nishon) — foydani olish nuqtasi.\nBot signallarida har doim kirish, nishon va stop beriladi. Stopni oldindan qo'yish hissiyotga berilib zararni kattalashtirishdan saqlaydi.\nStopni zarar ko'rganda «pastroqqa surish» — eng xavfli odat.\nFoyda/xavf nisbati kamida 1:2 bo'lishi tavsiya etiladi: $1 xavfga $2 foyda.",
+  [["Stop-loss nima uchun kerak?",["Foydani oshirish","Zararni cheklash","Soliq to'lash"],1],["Tavsiya etiladigan foyda/xavf nisbati?",["1:2 va undan yuqori","1:0.5","Muhim emas"],0],["Narx stopga yaqinlashganda nima qilmaslik kerak?",["Stopni pastga surish","Rejaga amal qilish","Pozitsiyani kuzatish"],0]]],
+ ["Pozitsiya hajmi: 1–2% qoidasi","Professional treyderlar bitta savdoda kapitalning 1–2% idan ko'p xavf qilmaydi.\nMisol: balans 10 000 000 so'm, xavf 2% = 200 000 so'm. Kirish $2.00, stop $1.80 bo'lsa, bir aksiyadagi xavf $0.20. Shunda aksiya soni = xavf summasi ÷ 0.20.\nIlovadagi 🧮 Kalkulyator buni so'mda avtomatik hisoblaydi.\nShu qoida bilan 10 ta ketma-ket zarar ham kapitalni yo'q qilmaydi.",
+  [["Bitta savdoda tavsiya etiladigan xavf?",["10–20%","1–2%","50%"],1],["Aksiya soni qanday hisoblanadi?",["Xavf summasi ÷ (kirish − stop)","Balans × 2","Tasodifiy"],0],["Bu qoidaning foydasi?",["Ketma-ket zararda ham kapital saqlanadi","Har doim foyda","Soliqdan ozod"],0]]],
+ ["Hajm va nisbiy hajm","Hajm (volume) — kun davomida qancha aksiya sotilgani.\nNisbiy hajm — bugungi hajm o'rtacha hajmdan necha barobar ko'p. Skanerdagi «Hajm×» shu.\nNarx katta hajm bilan o'ssa — harakat kuchli va ishonchli. Kichik hajmdagi o'sish tez so'nishi mumkin.\nKichik float (aylanmadagi aksiya kam) va katta nisbiy hajm birga kelsa, narx keskin harakatlanadi.",
+  [["Nisbiy hajm 5× nimani bildiradi?",["Bugun o'rtachadan 5 barobar ko'p savdo","Narx 5% o'sgan","5 ta savdo bo'lgan"],0],["Qaysi o'sish ishonchliroq?",["Katta hajm bilan","Hajmsiz","Kechasi"],0],["Kichik float + katta hajm?",["Keskin harakat ehtimoli","Hech narsa","Bankrot"],0]]],
+ ["RSI va MACD — oddiy tilda","RSI (0–100) — narx qanchalik tez o'sgan yoki tushganini o'lchaydi. 70 dan yuqori — «haddan tashqari sotib olingan», 30 dan past — «haddan tashqari sotilgan».\nMACD — ikki o'rtacha chiziq farqi. MACD chizig'i signal chizig'ini pastdan kesib o'tsa — o'sish belgisi, yuqoridan kesib o'tsa — pasayish belgisi.\nIndikatorlar kafolat emas, ular faqat ehtimolni ko'rsatadi. Bitta indikatorga emas, bir nechta belgiga tayaning.\nGrafik bo'limida ƒx tugmasi orqali ularni qo'shishingiz mumkin.",
+  [["RSI 75 nimani bildiradi?",["Haddan tashqari sotib olingan","Haddan tashqari sotilgan","Neytral"],0],["MACD signal chizig'ini pastdan kesib o'tsa?",["O'sish belgisi","Pasayish belgisi","Hech narsa"],0],["Indikatorlar…",["100% kafolat","Faqat ehtimol ko'rsatadi","Kerak emas"],1]]],
+ ["Offering, suyultirish va teskari bo'linish","Offering — kompaniya pul yig'ish uchun yangi aksiya chiqaradi. Aksiyalar soni ko'payadi, har bir aksiyaning ulushi kamayadi — bu «suyultirish». Narx ko'pincha tushadi.\nSEC hujjatlari: S-1/S-3 — aksiyani ro'yxatdan o'tkazish (kelajakdagi offeringga tayyorgarlik), 424B — offering amalga oshmoqda.\nTeskari bo'linish (reverse split) — masalan 1:10, 10 ta aksiya 1 taga aylanadi. Odatda birjada qolish uchun qilinadi va keyin narx tez-tez tushadi.\nIlovadagi ⚠️ SEC ogohlantirishlari bo'limi bularni avtomatik kuzatadi.",
+  [["Offering odatda narxga qanday ta'sir qiladi?",["Ko'pincha tushiradi","Har doim oshiradi","Ta'sir qilmaydi"],0],["424B hujjati nimani bildiradi?",["Offering amalga oshmoqda","Dividend","Bankrotlik"],0],["Teskari bo'linish 1:10 da 100 ta aksiya nechta bo'ladi?",["1000","10","100"],1]]],
+ ["Halol investitsiya asoslari","Islomiy moliyada asosiy faoliyati harom bo'lgan (alkogol, qimor, foizli bank, cho'chqa mahsulotlari va h.k.) kompaniyalar aksiyasi olinmaydi.\nMoliyaviy mezonlar ham bor: odatda qarz va foizli daromad ma'lum chegaradan (ko'pincha taxminan 30% atrofida) oshmasligi kerak.\nAgar kompaniya daromadining kichik qismi shubhali bo'lsa, shu ulushga to'g'ri keladigan foyda «poklanadi» — sadaqa qilinadi.\nIlovadagi ☪️ Halol bo'limi har aksiya uchun HALOL / SHUBHALI / HAROM bahosini ko'rsatadi. Aniq hukm uchun ulamolarga murojaat qiling.",
+  [["Qaysi kompaniya aksiyasi halol hisoblanmaydi?",["Texnologiya kompaniyasi","Foizli bank","Oziq-ovqat kompaniyasi"],1],["Qarz chegarasi odatda qancha atrofida?",["Taxminan 30%","90%","Chegara yo'q"],0],["Foydani poklash nima?",["Shubhali ulushni sadaqa qilish","Soliq to'lash","Aksiyani sotish"],0]]],
+ ["PennyFinance signallaridan to'g'ri foydalanish","Signal — tayyor savdo g'oyasi: kirish narxi, nishon va stop. Bu kafolat emas, ehtimolli imkoniyat.\nTo'g'ri foydalanish: 1) kalkulyator bilan lot hajmini hisoblang, 2) stopni darhol qo'ying, 3) narx kirishdan ancha uzoqlashgan bo'lsa quvlamang, 4) natijani kundalikka yozing.\nVIX qo'rquv indeksi yuqori bo'lsa, pozitsiyani kichraytiring. SEC ogohlantirishi chiqsa, ehtiyot bo'ling.\nAvval 🏆 virtual musobaqada mashq qilib ko'ring — haqiqiy pul xavf ostida emas.",
+  [["Signal nima?",["Kafolatlangan foyda","Ehtimolli savdo g'oyasi","Bank mahsuloti"],1],["Narx kirishdan ancha ko'tarilib ketgan bo'lsa?",["Quvlamaslik","Ikki barobar olish","Stopni olib tashlash"],0],["VIX yuqori bo'lsa?",["Pozitsiyani kichraytirish","Kattalashtirish","Farqi yo'q"],0]]]];
+function lrDone(){try{return JSON.parse(localStorage.getItem("pf_learn")||"{}")}catch(e){return {}}}
+function openLearn(){const b=page("🎓 O'quv markazi","10 dars · har biri 3 ta savol");const w=document.createElement("div");b.appendChild(w);const dn=lrDone();const n=Object.keys(dn).length;
+  w.innerHTML=`<div class="card"><b>${n===LESSONS.length?"🎓 Tabriklaymiz! Barcha darslarni tugatdingiz":"Jarayon: "+n+" / "+LESSONS.length}</b><div class="lrbar"><span style="width:${n/LESSONS.length*100}%"></span></div></div>
+  ${LESSONS.map((l,i)=>`<div class="lrrow" data-l="${i}"><span class="lrn ${dn[i]?"ok":""}">${dn[i]?"✓":i+1}</span><div style="flex:1"><b>${esc(l[0])}</b><div class="mut" style="font-size:12px">${dn[i]?"O'tildi":"3 ta savol"}</div></div><span class="mut">›</span></div>`).join("")}
+  <div class="disc">Darslar ta'lim uchun, moliyaviy maslahat emas.</div>`;w.querySelectorAll("[data-l]").forEach(e=>e.onclick=()=>openLesson(+e.dataset.l))}
+function openLesson(i){const L=LESSONS[i];const b=page("🎓 "+(i+1)+"-dars",L[0]);const w=document.createElement("div");b.appendChild(w);const ans={};
+  w.innerHTML=`<div class="card lrtxt">${L[1].split("\n").map(p=>`<p>${esc(p)}</p>`).join("")}</div><h2>✍️ Test</h2>${L[2].map((q,qi)=>`<div class="card"><b>${qi+1}. ${esc(q[0])}</b>${q[1].map((o,oi)=>`<button class="lropt" data-q="${qi}" data-o="${oi}">${esc(o)}</button>`).join("")}<div class="lrfb" id="fb${qi}"></div></div>`).join("")}
+  <div id="lrres"></div>`;
+  w.querySelectorAll(".lropt").forEach(e=>e.onclick=()=>{const qi=+e.dataset.q,oi=+e.dataset.o,ok=oi===L[2][qi][2];w.querySelectorAll(`.lropt[data-q="${qi}"]`).forEach(x=>{x.classList.remove("ok","no");if(+x.dataset.o===L[2][qi][2]&&ok)x.classList.add("ok")});e.classList.add(ok?"ok":"no");
+    w.querySelector("#fb"+qi).textContent=ok?"✅ To'g'ri!":"❌ Noto'g'ri, qayta urinib ko'ring";ans[qi]=ok;
+    if(L[2].every((_,k)=>ans[k])){const d=lrDone();d[i]=1;localStorage.setItem("pf_learn",JSON.stringify(d));w.querySelector("#lrres").innerHTML=`<div class="card" style="text-align:center"><b>🎉 Dars o'tildi!</b>${i+1<LESSONS.length?`<button class="btn" id="lrnext" style="width:100%;margin-top:10px">Keyingi dars ›</button>`:`<div style="margin-top:8px">🎓 Barcha darslar tugadi!</div>`}</div>`;const nx=w.querySelector("#lrnext");if(nx)nx.onclick=()=>{closeDetail();openLesson(i+1)}}})}
+// ---------- 🎁 Do'st taklif qilish ----------
+function openRef(){const bot=(C&&C.bot)||"mening_penny_bot";const link=`https://t.me/${bot}?start=ref_${MEID||"ID"}`;const st=(C&&C.users&&C.users[MEID]&&C.users[MEID].rf)||[0,0];
+  const b=page("🎁 Do'st taklif qilish","Har bir obuna bo'lgan do'st uchun +7 kun");const w=document.createElement("div");b.appendChild(w);
+  w.innerHTML=`<div class="card" style="text-align:center"><div style="font-size:44px">🎁</div><b style="font-size:18px">Do'stlaringizni taklif qiling — bepul kun oling</b>
+  <div class="mut" style="margin:8px 0">• Do'stingiz havola orqali kirsa — bepul paketiga <b>+7 kun</b><br>• Do'stingiz pullik obuna bo'lsa — sizga <b>+7 kun bepul</b></div>
+  <div class="reflink notr" id="rl">${esc(link)}</div><div style="display:flex;gap:8px;margin-top:10px"><button class="btn" id="rcp" style="flex:1">📋 Nusxalash</button><button class="btn" id="rsh" style="flex:1">✈️ Ulashish</button></div></div>
+  <div class="card pphead"><div><span class="mut">Taklif qilganlar</span><b class="notr">${st[0]}</b></div><div><span class="mut">Obuna bo'lganlar</span><b class="notr">${st[1]}</b></div><div><span class="mut">Olingan bonus</span><b class="notr">${st[1]*7} kun</b></div></div>
+  <div class="disc">Statistika har 10 daqiqada yangilanadi. Botda /referal buyrug'i ham shu havolani beradi.</div>`;
+  w.querySelector("#rcp").onclick=()=>{try{navigator.clipboard.writeText(link).then(()=>toast("📋 Nusxalandi"))}catch(e){alertBox(link)}};
+  w.querySelector("#rsh").onclick=()=>{const u="https://t.me/share/url?url="+encodeURIComponent(link)+"&text="+encodeURIComponent("📈 PennyFinance — AQSh aksiyalari bo'yicha signallar, halol filtr, VIX va AI tahlil. Shu havola orqali kirsangiz bepul paketga +7 kun qo'shiladi!");if(tg&&tg.openTelegramLink)tg.openTelegramLink(u);else openLink(u)}}
 // ===================== 📊 GRAFIK BO'LIMI (alohida, to'liq ekran) =====================
 let CSYM="";try{CSYM=localStorage.getItem("pf_csym")||""}catch(e){}
 function chartTab(m){
@@ -861,7 +1089,7 @@ function symMatch(q,n){q=q.toUpperCase();const ql=q.toLowerCase();const a=[],b=[
   a.sort((x,y)=>x[0].length-y[0].length);return a.concat(b).slice(0,n)}
 let PFT=null;function prefetch(t){clearTimeout(PFT);PFT=setTimeout(()=>{if(!(D.hist&&D.hist[t]))yhist(t);getFund()},250)}
 function detailShell(name,sym){
-  const d=$("#detail");const star=sym&&/^[A-Z0-9.\-=^]{1,12}$/.test(sym)?wlStar(sym):"";d.innerHTML=`<div class="top"><button class="back">←</button><div style="flex:1;min-width:0"><div class="tk notr">${esc(name||sym)}</div><div class="mut notr" style="font-size:12px">${esc(sym)}</div></div>${star}</div><div style="padding:0 16px" id="symbody"></div>`;if(star)wlBindStar(d);
+  const d=$("#detail");const star=sym&&/^[A-Z0-9.\-=^]{1,12}$/.test(sym)?wlStar(sym):"";d.innerHTML=`<div class="top"><button class="back">←</button><div style="flex:1;min-width:0"><div class="tk notr">${esc(name||sym)}</div><div class="mut notr" style="font-size:12px">${esc(sym)}</div></div>${star}</div><div style="padding:0 16px" id="symbody"></div>`;if(star)wlBindStar(d);if(sym&&secOf(sym).length){const sb=d.querySelector("#symbody");if(sb){sb.insertAdjacentHTML("afterbegin",secBanner(sym));sb.querySelectorAll(".secrow[data-u]").forEach(e=>e.onclick=()=>openLink(e.dataset.u))}}
   d.style.display="block";d.scrollTop=0;d.querySelector(".back").onclick=goBack;if(tg&&tg.BackButton){tg.BackButton.offClick(goBack);tg.BackButton.show();tg.BackButton.onClick(goBack)}
   return $("#symbody")}
 function tvView(b,sym,isIndex){const w=document.createElement("div");w.className="card";w.style.textAlign="center";
@@ -952,6 +1180,7 @@ function V(){ // server holati + hali yetib kelmagan o'z harakatlarim
     if(a.t==="post")X.posts.unshift({id:"tmp-"+a.id,uid:me,ts:a.ts,sym:a.sym,tf:a.tf,dir:a.dir,title:a.title,text:a.text,entry:a.entry,tp:a.tp,sl:a.sl,rk:[],cm:[],pend:true,limg:a._img||"",limgs:a._imgs||[],lvid:a._vid||""});
     else if(a.t==="del")X.posts=X.posts.filter(x=>x.id!==a.pid);
     else if(a.t==="rk"&&p){const i=p.rk.indexOf(me);i>=0?p.rk.splice(i,1):p.rk.push(me)}
+    else if(a.t==="vote"&&p){p.vt=p.vt||{};if(p.vt[me]===a.d)delete p.vt[me];else p.vt[me]=a.d}
     else if(a.t==="cm"&&p)p.cm.push({id:"tmp-"+a.id,uid:me,ts:a.ts,text:a.text,pend:true});
     else if(a.t==="dcm"&&p)p.cm=p.cm.filter(c=>c.id!==a.cid);
     else if(a.t==="pick"&&p)p.ed=!p.ed;
@@ -993,7 +1222,8 @@ function avatar(U,uid,sz){sz=sz||46;if(uid==="bot")return `<div class="av" style
   if(AV)return `<img class="av" src="${esc(AV)}" style="width:${sz}px;height:${sz}px" loading="lazy" onerror="this.outerHTML='<div class=&quot;av&quot; style=&quot;width:${sz}px;height:${sz}px;background:#3a8f72&quot;>${esc(((U&&U.n)||"?")[0].toUpperCase())}</div>'">`;
   const n=(U&&U.n)||"?";let h=0;for(const c of String(uid))h=(h*31+c.charCodeAt(0))%360;
   return `<div class="av notr" style="width:${sz}px;height:${sz}px;font-size:${sz*.42}px;background:hsl(${h},45%,42%)">${esc(n[0].toUpperCase())}</div>`}
-function badge(U){const b=U&&U.b;return b==="official"?`<span class="prem" style="background:var(--acc2);color:#fff">✓ RASMIY</span>`:b==="admin"?`<span class="prem">ADMIN</span>`:b==="pro"?`<span class="prem">PRO</span>`:b==="premium"?`<span class="prem">PREMIUM</span>`:""}
+function badge(U){return badge0(U)+(U&&U.ta?` <span class="tab">🏅 Top analyst</span>`:"")}
+function badge0(U){const b=U&&U.b;return b==="official"?`<span class="prem" style="background:var(--acc2);color:#fff">✓ RASMIY</span>`:b==="admin"?`<span class="prem">ADMIN</span>`:b==="pro"?`<span class="prem">PRO</span>`:b==="premium"?`<span class="prem">PREMIUM</span>`:""}
 function dirB(p){return p.dir==="long"?`<span class="dirb dl">${CX("long")}</span>`:p.dir==="short"?`<span class="dirb ds">${CX("short")}</span>`:`<span class="dirb dn0">${CX("neu")}</span>`}
 function imgUrl(p){return p.limg||(p.img?(RAWB+p.img):"")}
 function imgList(p){return (p.limgs&&p.limgs.length)?p.limgs:(p.imgs||[]).map(x=>RAWB+x).concat(!(p.imgs&&p.imgs.length)&&p.img?[RAWB+p.img]:[])}
@@ -1021,8 +1251,13 @@ function tchip(p){return `<div class="tchip notr" data-sym="${esc(p.sym)}"><i>${
 function postCard(p,X){const U=X.users[p.uid]||{n:"?"};const mine=MEID&&p.rk.includes(MEID);const im=imgUrl(p);
   return `<div class="pc" data-pid="${esc(p.id)}"><div class="ph" data-uid="${esc(p.uid)}">${avatar(U,p.uid)}<div style="min-width:0"><div class="pn"><span class="notr">${esc(U.n)}</span> ${dirB(p)}${p.ed?' <span title="Editors pick">⭐</span>':""}</div><div class="pdate">${when(p.ts)}${p.pend?" · "+CX("sending"):""}</div></div></div>
   ${mediaHtml(p,false)}
-  <div class="ptitle" data-open="${esc(p.id)}">${esc(p.title)}</div>
+  <div class="ptitle" data-open="${esc(p.id)}">${esc(p.title)}</div>${voteHtml(p,X)}
   <div class="pact"><button class="pill ${mine?"on":""}" data-rk="${esc(p.id)}">🚀 <span class="notr">${p.rk.length}</span></button><button class="pill0" data-open="${esc(p.id)}">💬 <span class="notr">${p.cm.length}</span></button><button class="pill0" data-menu="${esc(p.id)}">•••</button></div></div>`}
+function voteHtml(p,X){if(p.uid!=="bot")return "";
+  if(p.who&&p.who.length){const W=p.who.slice(0,8);return `<div class="pwho">🎯 To'g'ri bashorat qilganlar: ${W.map(u=>`<span data-uid="${esc(u)}" title="${esc((X.users[u]||{}).n||"")}">${avatar(X.users[u]||{n:"?"},u,24)}</span>`).join("")}${p.who.length>8?` <b>+${p.who.length-8}</b>`:""}</div>`}
+  if(!p.sid||"res" in p)return "";const vt=p.vt||{},up=Object.values(vt).filter(v=>v==="u").length,dn=Object.values(vt).filter(v=>v==="d").length,my=vt[MEID];
+  if(p.scored)return `<div class="pvote done">Natija: ${p.won==="u"?"📈 nishonga yetdi":"📉 yetmadi"} · 📈 ${up} · 📉 ${dn}</div>`;
+  const tot=up+dn||1;return `<div class="pvote"><span class="mut">Nishonga yetadimi?</span><button class="${my==="u"?"on":""}" data-vote="${esc(p.id)}" data-d="u">📈 Ha <b class="notr">${up}</b></button><button class="${my==="d"?"on dn":""}" data-vote="${esc(p.id)}" data-d="d">📉 Yo'q <b class="notr">${dn}</b></button><i class="vbar"><i style="width:${up/tot*100}%"></i></i></div>`}
 function rankYou(X){const fw=new Set(((X.users[MEID]||{}).fw)||[]);const now=Date.now()/1000;
   return X.posts.slice().sort((a,b)=>{const sc=p=>(1+p.rk.length*2+p.cm.length*3+(p.ed?8:0)+(fw.has(p.uid)?5:0)+(p.pend?50:0))/Math.pow((now-p.ts)/3600+2,1.25);return sc(b)-sc(a)})}
 function sugUsers(X,n){return Object.entries(X.users).filter(([k])=>k!==MEID).map(([k,U])=>[k,U,X.posts.filter(p=>p.uid===k).length,(U.fol||[]).length]).filter(x=>x[2]>0).sort((a,b)=>b[3]*3+b[2]-(a[3]*3+a[2])).slice(0,n)}
@@ -1047,6 +1282,7 @@ function bindCom(root){root=root||document;
   root.querySelectorAll("[data-rk]").forEach(e=>e.onclick=ev=>{ev.stopPropagation();if(e.dataset.rk.startsWith("tmp-"))return;act({t:"rk",pid:e.dataset.rk})});
   root.querySelectorAll("[data-menu]").forEach(e=>e.onclick=ev=>{ev.stopPropagation();postMenu(e.dataset.menu)});
   root.querySelectorAll("[data-fl]").forEach(e=>e.onclick=ev=>{ev.stopPropagation();act({t:"fl",uid:e.dataset.fl})});
+  root.querySelectorAll("[data-vote]").forEach(e=>e.onclick=ev=>{ev.stopPropagation();if(!canWrite())return alertBox("Bashorat faqat obunachilar uchun");act({t:"vote",pid:e.dataset.vote,d:e.dataset.d})});
   root.querySelectorAll(".tchip[data-sym]").forEach(e=>e.onclick=ev=>{ev.stopPropagation();openDetail(e.dataset.sym)});
   const f=root.querySelector("#fab");if(f)f.onclick=openCompose;
   const s=root.querySelector("#csrch");if(s)s.onclick=openComSearch;
@@ -1082,6 +1318,7 @@ function openPost(pid){pushPage(keep=>{const X=V();const p=X.posts.find(x=>x.id=
   g.querySelector("#cmsend").onclick=async()=>{const v=g.querySelector("#cmin").value.trim();if(!v)return;if(p.pend){toast(CX("sending"));return}g.querySelector("#cmin").value="";document.activeElement.blur();await act({t:"cm",pid:p.id,text:v.slice(0,600)})};
  },true)}
 // ---- profil ----
+document.addEventListener("click",e=>{const t=e.target.closest("[data-tool2]");if(t){e.stopPropagation();openTool(t.dataset.tool2)}},true);
 function openProfile(uid){PT="pubs";pushPage(keep=>{const X=V();const U=X.users[uid];const g=pageShell(CX("prof"),keep);
   if(!U){g.innerHTML=`<div class="empty">—</div>`;return}
   const me=X.users[MEID]||{};const f=(me.fw||[]).includes(uid);const posts=X.posts.filter(p=>p.uid===uid).sort((a,b)=>b.ts-a.ts);
@@ -1090,6 +1327,8 @@ function openProfile(uid){PT="pubs";pushPage(keep=>{const X=V();const U=X.users[
   const CVu=U.lcv||(U.cv?RAWB+U.cv:"");
   let h=`<div class="prof" style="padding-top:0;overflow:hidden"><div class="cover" ${CVu?`style="background-image:url('${esc(CVu)}')"`:""}></div><div style="display:flex;gap:18px;align-items:flex-end;margin-top:-48px"><div class="avring">${avatar(U,uid,104)}</div><div style="min-width:0"><div style="font-size:24px;font-weight:800;line-height:1.2"><span class="notr">${esc(U.n)}</span> ${badge(U)}</div>
   <div class="stats"><div data-ul="fol"><span class="mut">${CX("fol")}</span><b class="notr">${(U.fol||[]).length}</b></div><div data-ul="fw"><span class="mut">${CX("fw")}</span><b class="notr">${(U.fw||[]).length}</b></div><div><span class="mut">${CX("ideas")}</span><b class="notr">${posts.length}</b></div></div></div></div>
+  ${U.pr&&U.pr.n?`<div class="prstat">🎯 Bashorat: <b class="notr">${U.pr.ok}/${U.pr.n}</b> to'g'ri (<b class="notr">${Math.round(U.pr.ok/U.pr.n*100)}%</b>)${(()=>{const r=boardRows().find(z=>z.uid===uid);return r?` · 🏆 Virtual: <b class="${cls(r.r)} notr">${pct(r.r)}</b>`:""})()}</div>`:""}
+  ${uid===MEID?`<div class="cchips"><button class="cchip" data-tool2="ref">🎁 Do'st taklif qilish</button><button class="cchip" data-tool2="paper">🏆 Musobaqa</button><button class="cchip" data-tool2="jr">📒 Kundalik</button><button class="cchip" data-tool2="learn">🎓 Darslar</button></div>`:""}
   ${U.bio?`<div class="bio">${esc(U.bio)}</div>`:""}
   <div class="mut joined"><b style="color:var(--tx)">PF</b> ${CX("joined")} <span class="notr">${esc(dfmt(U.joined||0,true))}</span>${U.u?` · <span class="notr">@${esc(U.u)}</span>`:""}</div>
   ${soc?`<div class="socs">${soc}</div>`:""}
@@ -1588,6 +1827,9 @@ function bind(){
   document.querySelectorAll("[data-hf]").forEach(e=>e.onclick=()=>{HF=e.dataset.hf;render()});
   document.querySelectorAll("[data-gl]").forEach(e=>e.onclick=()=>{GL=e.dataset.gl;render()});
   document.querySelectorAll("#main [data-vix]").forEach(e=>e.onclick=openVix);
+  document.querySelectorAll("#main [data-tool]").forEach(e=>e.onclick=ev=>{ev.stopPropagation();openTool(e.dataset.tool)});
+  document.querySelectorAll("#main [data-calc]").forEach(e=>e.onclick=ev=>{ev.stopPropagation();openCalc((D.signals||[]).find(x=>x.t===e.dataset.calc&&x.status==="open"))});
+  document.querySelectorAll("#main [data-ptq]").forEach(e=>e.onclick=ev=>{ev.stopPropagation();paperQuick(e.dataset.ptq,e.dataset.k)});
   document.querySelectorAll("#main [data-mk]").forEach(e=>e.onclick=()=>openMarket(e.dataset.mk,e.dataset.mn));
   document.querySelectorAll("th[data-k]").forEach(e=>e.onclick=()=>{const k=e.dataset.k;MS={k,d:MS.k===k?-MS.d:(k==="t"?1:-1)};render()});
 }
@@ -1595,7 +1837,8 @@ document.querySelectorAll("nav button").forEach(b=>b.onclick=()=>{TAB=b.dataset.
 $("#q").oninput=e=>{Q=e.target.value.trim();if(D)render()};
 $("#q").onkeydown=e=>{if(e.key==="Enter"&&Q){e.target.blur();const f=document.querySelector(".sg.first");openDetail(f?f.dataset.sym:Q.toUpperCase().replace(/^\$/,""))}};
 $("#q").onfocus=()=>{loadSyms()};
-{const wb=document.getElementById("wlbtn");if(wb)wb.onclick=openWatchlist}
+{const wb=document.getElementById("wlbtn");if(wb)wb.onclick=openWatchlist;const mb=document.getElementById("mnbtn");if(mb)mb.onclick=openMenu}
+try{applyLook()}catch(e){}
 load();setInterval(()=>{if($("#detail").style.display!=="block")load()},120000);
 </script>
 </body>
