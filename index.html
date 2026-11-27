@@ -207,7 +207,8 @@ body.pfc-lock{overflow:hidden}
 :root{--fz:1}body.fzon #main,body.fzon #detail{zoom:var(--fz)}body.fzon .pfc-host,body.fzon .pfc-wrap{zoom:calc(1/var(--fz))}
 .mgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}.mtile{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;text-align:left;color:var(--tx);display:flex;flex-direction:column;gap:3px}
 .mtile .mi{font-size:26px}.mtile b{font-size:15px}.mtile .mut{font-size:12px}
-.htiles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:2px 0 14px}.htile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 2px;color:var(--tx);font-size:11.5px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:4px}.htile span{font-size:22px}
+.htiles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:2px 0 14px}.htile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 2px;color:var(--tx);font-size:11.5px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:4px}.htile .ico,.mtile .ico{filter:drop-shadow(0 4px 10px rgba(0,0,0,.35));margin-bottom:4px}.htile .htl{font-size:11.5px;line-height:1.2;text-align:center;min-height:28px;display:flex;align-items:center}
+.htile{padding:12px 2px 8px;background:linear-gradient(180deg,var(--card),var(--card2))}.mtile{background:linear-gradient(180deg,var(--card),var(--card2))}
 .sgbtn{display:flex;gap:8px;margin-top:10px;align-items:center}.sgbtn button{flex:1;background:var(--card2);color:var(--tx);border:1px solid var(--line);border-radius:10px;padding:8px 4px;font-size:13px;font-weight:700}
 .secwarn{color:#ea3943;font-weight:800;font-size:12px}.secb{border-color:#ea394366}.secrow{display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer}.secrow:last-child{border-bottom:0}.seci{font-size:20px}
 .calday{font-weight:800;margin:14px 2px 4px;color:var(--acc2)}.calrow{display:flex;gap:10px;align-items:center;padding:10px 4px;border-bottom:1px solid var(--line);cursor:pointer}.calbell{background:none;border:0;font-size:20px;opacity:.6}.calbell.on{opacity:1}
@@ -852,12 +853,27 @@ function page(title,sub){return detailShell(title,sub||"")}
 const MENU=[["scan","🌅","Skaner","Premarket va kun yetakchilari"],["cal","📅","Kalendar","Hisobotlar va IPO"],["sec","⚠️","SEC ogohlantirish","Offering, reverse split"],["paper","🏆","Musobaqa","Virtual savdo va reyting"],
   ["calc","🧮","Kalkulyator","So'mda lot hisoblash"],["jr","📒","Savdo kundaligi","Xatolaringizni toping"],["learn","🎓","O'quv markazi","Darslar va testlar"],["ref","🎁","Do'st taklif qilish","+7 kun bepul"],
   ["wl","⭐","Watchlist","Mening ro'yxatlarim"],["vix","😨","VIX","Qo'rquv indeksi"],["look","🎨","Ko'rinish","Tema va shrift"]];
+// ---- professional ikonlar (emoji o'rniga): gradient fon + oq chiziqli belgi ----
+const ICO={
+ scan:["#ff8a00","#e52e71",'<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12l6-6"/><circle cx="12" cy="12" r="1.2" fill="#fff"/>'],
+ cal:["#3a7bfd","#5b2be0",'<rect x="3.5" y="5" width="17" height="15.5" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="M8 14h2M12 14h2M16 14h0.5M8 17.5h2M12 17.5h2"/>'],
+ paper:["#f7b733","#fc4a1a",'<path d="M8 4h8v5a4 4 0 0 1-8 0V4z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4"/><path d="M12 13v4M8.5 20h7M10 17h4"/>'],
+ calc:["#11998e","#38ef7d",'<rect x="5" y="3" width="14" height="18" rx="3"/><rect x="8" y="6" width="8" height="3.5" rx="1"/><path d="M8.5 13h.01M12 13h.01M15.5 13h.01M8.5 16.5h.01M12 16.5h.01M15.5 16.5h.01" stroke-width="2.6"/>'],
+ sec:["#ff416c","#b5179e",'<path d="M12 3l7.5 3v5.5c0 4.6-3.2 8-7.5 9.5-4.3-1.5-7.5-4.9-7.5-9.5V6L12 3z"/><path d="M12 8v5"/><path d="M12 16.3h.01" stroke-width="2.8"/>'],
+ jr:["#f2994a","#c0392b",'<path d="M6 3.5h10.5a2 2 0 0 1 2 2V20.5H7.5A1.5 1.5 0 0 1 6 19V3.5z"/><path d="M6 17.5h12.5M9.5 8h5.5M9.5 11.5h4"/>'],
+ learn:["#8e2de2","#4a00e0",'<path d="M2.5 9.5L12 5l9.5 4.5L12 14 2.5 9.5z"/><path d="M6.5 11.5v4c0 1.4 2.5 3 5.5 3s5.5-1.6 5.5-3v-4M21.5 9.5v5"/>'],
+ ref:["#ee0979","#ff6a00",'<rect x="3.5" y="8.5" width="17" height="4" rx="1"/><path d="M5 12.5v8h14v-8M12 8.5v12"/><path d="M12 8.5c-1.5-3.5-5.5-4-5.5-1.5S10 8.5 12 8.5zM12 8.5c1.5-3.5 5.5-4 5.5-1.5S14 8.5 12 8.5z"/>'],
+ wl:["#f9d423","#f83600",'<path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9L12 3.5z"/>'],
+ vix:["#00c6ff","#0072ff",'<path d="M4 16a8 8 0 0 1 16 0"/><path d="M12 16l4-5"/><circle cx="12" cy="16" r="1.4" fill="#fff"/><path d="M6.5 16h1M16.5 16h1M12 9v1"/>'],
+ look:["#606c88","#3f4c6b",'<circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 0 0 17z" fill="#fff" fill-opacity=".9"/>']};
+function ico(k,sz){const I=ICO[k];if(!I)return "";const id="ig"+k+(sz||44);sz=sz||44;
+  return `<svg class="ico" width="${sz}" height="${sz}" viewBox="0 0 48 48"><defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${I[0]}"/><stop offset="1" stop-color="${I[1]}"/></linearGradient></defs><rect width="48" height="48" rx="14" fill="url(#${id})"/><rect width="48" height="24" rx="14" fill="#fff" fill-opacity=".10"/><g transform="translate(9.6 9.6) scale(1.2)" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${I[2]}</g></svg>`}
 function openTool(k){({scan:openScan,cal:openCal,sec:openSec,paper:openPaper,calc:()=>openCalc(),jr:openJournal,learn:openLearn,ref:openRef,wl:openWatchlist,vix:openVix,look:openLook}[k]||(()=>{}))()}
 function openMenu(){const b=page("☰ Menyu","Barcha bo'limlar");const w=document.createElement("div");
-  w.innerHTML=`<div class="mgrid">${MENU.map(m=>`<button class="mtile" data-tool="${m[0]}"><span class="mi">${m[1]}</span><b>${m[2]}</b><span class="mut">${m[3]}</span></button>`).join("")}</div>
+  w.innerHTML=`<div class="mgrid">${MENU.map(m=>`<button class="mtile" data-tool="${m[0]}">${ico(m[0],46)}<b>${m[2]}</b><span class="mut">${m[3]}</span></button>`).join("")}</div>
   <div class="disc">PennyFinance — AQSh aksiyalari bo'yicha signal va tahlil. ⚠️ Daromad kafolati emas.</div>`;b.appendChild(w);
   w.querySelectorAll("[data-tool]").forEach(e=>e.onclick=()=>openTool(e.dataset.tool))}
-function homeTiles(){const K=["scan","cal","paper","calc","sec","jr","learn","ref"];return `<div class="htiles">${K.map(k=>{const m=MENU.find(x=>x[0]===k);return `<button class="htile" data-tool="${k}"><span>${m[1]}</span>${m[2]}</button>`}).join("")}</div>`}
+function homeTiles(){const K=["scan","cal","paper","calc","sec","jr","learn","ref"];return `<div class="htiles">${K.map(k=>{const m=MENU.find(x=>x[0]===k);return `<button class="htile" data-tool="${k}">${ico(k,42)}<span class="htl">${m[2]}</span></button>`}).join("")}</div>`}
 // ---------- 🎨 Ko'rinish: tema va shrift ----------
 function applyLook(){let th="auto",fz=1;try{th=localStorage.getItem("pf_theme")||"auto";fz=+localStorage.getItem("pf_fz")||1}catch(e){}
   const el=document.documentElement;if(th==="auto"){if(tg&&tg.colorScheme==="light")el.dataset.theme="light";else delete el.dataset.theme}else if(th==="light")el.dataset.theme="light";else delete el.dataset.theme;
